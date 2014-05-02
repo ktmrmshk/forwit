@@ -1,0 +1,715 @@
+@charset "utf-8";
+/*-----------------------------
+reset
+------------------------------*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+html {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+q, blockquote {
+  quotes: none;
+}
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+a img {
+  border: none;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+  display: block;
+}
+
+/*-----------------------------
+global
+------------------------------*/
+/*-----------------------------
+layout
+------------------------------*/
+html {
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  background: #ccc;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  color: #222;
+  font-size: 14px;
+  font-family: Verdana, "游ゴシック", YuGothic, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif;
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+  z-index: auto;
+}
+
+#wrapper {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background: #eee;
+}
+
+#container {
+  width: 960px;
+  margin: 0 auto;
+  padding: 15px 0 20px;
+}
+
+#bottom {
+  clear: both;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background: #ccc;
+}
+
+/*-----------------------------
+content wrapper
+------------------------------*/
+/*1column layout----------------------*/
+.content_wrapper_wide {
+  margin-top: 8px;
+}
+.content_wrapper_wide .main_content_wrapper {
+  background: #fff;
+  padding: 18px;
+  border: 1px solid #dcdcdc;
+}
+.content_wrapper_wide .sub_content_wrapper {
+  margin-top: 4px;
+  background: #F6F6F6;
+  padding: 18px;
+}
+.content_wrapper_wide .sub_content_wrapper:hover {
+  background: #fff;
+}
+
+/*2column layout(user page)----------------------*/
+.content_wrapper {
+  margin-top: 8px;
+}
+.content_wrapper .main_content_wrapper {
+  width: 810px;
+}
+.content_wrapper .main_content_wrapper .inner_content_wrapper {
+  background: #fff;
+  border: 1px solid #dcdcdc;
+  padding: 18px;
+  margin-top: -1px;
+}
+.content_wrapper .sub_content_wrapper {
+  background: #F6F6F6;
+  padding: 18px;
+  width: 110px;
+}
+
+/*-----------------------------
+common
+------------------------------*/
+/*リンク----------------------*/
+a {
+  color: #222;
+  text-decoration: none;
+}
+a:visited {
+  color: #aaa;
+}
+a:hover {
+  color: #f78000;
+}
+
+/*文字選択----------------------*/
+::-moz-selection {
+  background: #0090e7;
+  color: #fff;
+  text-shadow: none;
+}
+
+::selection {
+  background: #0090e7;
+  color: #fff;
+  text-shadow: none;
+}
+
+/*headline----------------------*/
+h1, h2 {
+  border-bottom: 1px solid navy;
+  color: navy;
+  font-family: "Times New Roman", "游明朝", YuMincho, "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "HG明朝E", "ＭＳ Ｐ明朝", "ＭＳ 明朝", serif;
+  font-weight: bold;
+  font-size: 17px;
+  height: 29px;
+  margin-bottom: 14px;
+}
+
+/*-----------------------------
+テーブル
+------------------------------*/
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-size: 12px;
+}
+table thead tr {
+  background: #f5f5f5;
+}
+table th {
+  padding: 4px 2px;
+}
+table td {
+  padding: 2px 1px;
+  border-bottom: 1px dotted #ccc;
+  line-height: 1.7;
+}
+table td a {
+  font-size: 14px;
+}
+table .td_center {
+  text-align: center;
+}
+table td span {
+  font-size: 11px;
+}
+
+.table_5rows tr:nth-child(5n) {
+  border-bottom: 1px solid #bbb;
+}
+.table_5rows tr:nth-child(5n) td {
+  padding-bottom: 6px;
+}
+.table_5rows tr:nth-child(5n + 1) td {
+  padding-top: 6px;
+}
+
+/*-----------------------------
+フロート・フロート解除
+------------------------------*/
+.clearfix:after {
+  display: block;
+  visibility: hidden;
+  clear: both;
+  height: 0;
+  content: ".";
+}
+
+.clearfix {
+  display: block;
+}
+
+* html .clearfix {
+  zoom: 100%;
+}
+
+* + html .clearfix {
+  zoom: 100%;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+/*-----------------------------
+フォーム
+------------------------------*/
+/*input(text)----------------------*/
+input {
+  height: 20px;
+  margin: 0;
+  padding: 3px;
+  font-family: Verdana, "游ゴシック", YuGothic, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif;
+  font-size: 13px;
+  border: 1px solid #222;
+}
+
+input:focus {
+  outline: none;
+  box-shadow: 0px 0px 4px #0117a2;
+}
+
+/*textarea----------------------*/
+textarea {
+  padding: 3px;
+  margin: 0;
+  font-family: Verdana, "游ゴシック", YuGothic, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif;
+  line-height: 1.4;
+}
+
+textarea:focus {
+  outline: none;
+  box-shadow: 0px 0px 4px #0117a2;
+}
+
+/*button----------------------*/
+button {
+  height: 23px;
+  line-height: 17px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  font-size: 13px;
+  text-align: center;
+  background: navy;
+  border: 1px solid navy;
+  color: #fff;
+  cursor: pointer;
+}
+button:hover {
+  background: #f78000;
+  border: 1px solid #f78000;
+}
+
+.trans_btn {
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+/*-----------------------------
+list
+------------------------------*/
+ul {
+  list-style: none;
+}
+
+/*リスト（科学系ニュース・トピックス）----------------------*/
+.list li {
+  list-style-type: none;
+  margin: 4px 0 0;
+  padding: 0 0 0 10px;
+  background: url(../img/bg_icon_dot.gif) no-repeat left 7px;
+}
+
+/*動画リスト----------------------*/
+.movie li {
+  float: left;
+  display: block;
+  font-size: 13px;
+  line-height: 1.2;
+}
+.movie li a:hover img {
+  filter: alpha(opacity=65);
+  -moz-opacity: 0.65;
+  opacity: 0.65;
+}
+
+/*動画リスト(4カラム)*/
+.movie_4column li {
+  width: 214px;
+  margin-right: 21px;
+}
+.movie_4column li img {
+  width: 214px;
+  height: 120px;
+}
+
+.movie_4column li:nth-child(4n) {
+  margin-right: 0;
+}
+
+/*ユーザーリスト----------------------*/
+.user li {
+  float: left;
+  line-height: 1.2;
+  font-size: 9px;
+}
+.user li img {
+  display: block;
+  margin-bottom: 3px;
+}
+.user li a:hover img {
+  filter: alpha(opacity=65);
+  -moz-opacity: 0.65;
+  opacity: 0.65;
+}
+
+/*-----------------------------
+ページネーション
+------------------------------*/
+.horizontal_nav_wrapper ul {
+  display: table;
+}
+.horizontal_nav_wrapper ul li {
+  display: table-cell;
+}
+.horizontal_nav_wrapper .pagination {
+  font-size: 12px;
+  width: 120px;
+}
+.horizontal_nav_wrapper .pagination li a {
+  display: block;
+  text-align: center;
+  font-size: 11px;
+  width: 22px;
+  height: 16px;
+  margin: 0 3px;
+  line-height: 16px;
+  background: #fff;
+  border: 1px solid #bbb;
+}
+.horizontal_nav_wrapper .pagination li a:hover {
+  background: #f78000;
+  color: #fff;
+}
+.horizontal_nav_wrapper .pagination .current a,
+.horizontal_nav_wrapper .pagination .current a:visited {
+  background: #bbb;
+  color: #fff;
+}
+.horizontal_nav_wrapper .pagination .current a:hover {
+  background: #f78000;
+}
+.horizontal_nav_wrapper .pagination_prev_next {
+  font-size: 12px;
+  width: 70px;
+  margin-left: 5px;
+  margin-bottom: 0.5em;
+}
+.horizontal_nav_wrapper .pagination_prev_next li a {
+  float: left;
+  width: 27px;
+  height: 16px;
+  line-height: 16px;
+  text-indent: 110%;
+  white-space: nowrap;
+  overflow: hidden;
+  margin-left: 6px;
+  border: 1px solid #bbb;
+  border-radius: 3px;
+  background-color: #fff;
+  background-image: url(../img/nav.png);
+  background-repeat: no-repeat;
+}
+.horizontal_nav_wrapper .pagination_prev_next li a:hover {
+  background-color: #f78000;
+  color: #fff;
+}
+.horizontal_nav_wrapper .pagination_prev_next .prev {
+  background-position: 8px 3px;
+}
+.horizontal_nav_wrapper .pagination_prev_next .prev:hover {
+  background-position: 8px -17px;
+}
+.horizontal_nav_wrapper .pagination_prev_next .next {
+  text-align: right;
+  background-position: -14px 3px;
+}
+.horizontal_nav_wrapper .pagination_prev_next .next:hover {
+  background-position: -14px -17px;
+}
+
+.nav_bottom {
+  margin: 0.6em 0 0;
+}
+
+/*ページネーション付きヘッダー----------------------*/
+.nav_header {
+  border-bottom: 1px solid navy;
+  height: 29px;
+  margin-bottom: 14px;
+}
+.nav_header h1 {
+  display: inline;
+  height: auto;
+  margin-bottom: 0;
+  border: none;
+}
+.nav_header .count {
+  display: inline;
+  padding: 0;
+  margin: 0;
+  border: none;
+  line-height: 17px;
+}
+.nav_header .horizontal_nav_wrapper {
+  margin: 0;
+}
+
+.nav_header > div.right,
+.movie_nav_wrapper {
+  width: 195px;
+}
+
+.nav_header > div.left {
+  width: 430px;
+}
+
+/*-----------------------------
+計00名、計00動画の文字
+------------------------------*/
+.count {
+  padding: 0.5em 0;
+  margin: 1.5em 0;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  font-size: 11px;
+}
+
+/*-----------------------------
+button(<a><span>など)
+------------------------------*/
+.blue_btn,
+.blue_btn:visited {
+  display: inline-block;
+  text-align: center;
+  border-radius: 3px;
+  cursor: pointer;
+  background: navy;
+  border: 1px solid navy;
+  color: #fff;
+  text-decoration: none;
+}
+.blue_btn:hover,
+.blue_btn:visited:hover {
+  background: #f78000;
+  border: 1px solid #f78000;
+  color: #fff;
+  text-decoration: none;
+}
+
+.gray_btn {
+  background: #aaa;
+  border: 1px solid #aaa;
+  border-radius: 3px;
+}
+.gray_btn:hover {
+  background: #f78000;
+  border: 1px solid #f78000;
+}
+
+.mini_btn {
+  display: inline-block;
+  width: 30px;
+  height: 18px;
+  margin: 0 auto;
+  padding: 0;
+  font-size: 11px;
+  line-height: 18px;
+}
+
+/*js*/
+.mini_btn_clicked {
+  color: navy;
+  background: #eee;
+  border: 1px solid #ccc;
+}
+.mini_btn_clicked span {
+  font-size: 15px;
+  line-height: 17px;
+  font-weight: bold;
+}
+.mini_btn_clicked:hover {
+  color: #fff;
+  background: #f78000;
+  border: 1px solid #f78000;
+}
+
+/*-----------------------------
+menu
+
+memberlist
+movielist
+login member pages
+------------------------------*/
+.menu li a,
+.menu li a:visited {
+  display: block;
+  float: left;
+  font-family: "Times New Roman", "游明朝", YuMincho, "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "HG明朝E", "ＭＳ Ｐ明朝", "ＭＳ 明朝", serif;
+  font-size: 15px;
+  font-weight: bold;
+  background: #dcdcdc;
+  background: #F6F6F6;
+  padding: 4px 20px;
+  margin: 0 4px 0 0;
+  border: 1px solid #F6F6F6;
+  color: #666;
+  -webkit-transition: background 0.3s ease;
+  -moz-transition: background 0.3s ease;
+  transition: background 0.3s ease;
+}
+.menu li a:hover,
+.menu li a:visited:hover {
+  background: #bbb;
+  border: 1px solid #bbb;
+  color: #fff;
+}
+.menu li.current a,
+.menu li.current a:hover,
+.menu li.current a:visited {
+  padding: 5px 20px;
+  background: #fff;
+  margin: -1px 4px 0 0;
+  border: 1px solid #dcdcdc;
+  border-bottom: 1px solid #fff;
+  color: #222;
+}
+
+/*-----------------------------
+header
+------------------------------*/
+header {
+  background: #fff;
+}
+header .logo {
+  float: left;
+  margin: 8px 0 8px 20px;
+  line-height: 0;
+}
+header .search {
+  float: left;
+  margin: 9px 0 0 20px;
+}
+header .search input {
+  float: left;
+  font-size: 11px;
+  height: 15px;
+  width: 300px;
+}
+header .search button {
+  float: left;
+  letter-spacing: 0.5em;
+  padding: 0 0.5em 0 1em;
+  border: 1px solid #222;
+  background: #222;
+  border-left: none;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+header .search button:hover {
+  background: #0117a2;
+  box-shadow: 0px 0px 5px #0117a2;
+}
+header .link {
+  float: right;
+  margin: 6px 12px 0 0;
+  padding: 0;
+}
+header .link a,
+header .link a:visited {
+  display: inline-block;
+  padding: 6px 8px;
+  margin: 0 0 0 8px;
+  font-size: 12px;
+  color: #222;
+  -webkit-transition: background 0.3s ease;
+  -moz-transition: background 0.3s ease;
+  transition: background 0.3s ease;
+}
+header .link a:hover,
+header .link a:visited:hover {
+  background: #eee;
+  color: #222;
+}
+
+/*-----------------------------
+footer
+------------------------------*/
+footer {
+  clear: both;
+  width: 960px;
+  display: block;
+  margin: 0 auto;
+  background: #ccc;
+  line-height: 1.75;
+}
+footer .link {
+  text-align: right;
+  font-size: 12px;
+  margin: 0;
+  padding: 15px 0 15px;
+}
+footer .link a,
+footer .link a:visited {
+  color: #222;
+  margin: 0 0 0 1.5em;
+}
+footer .link a:hover,
+footer .link a:visited:hover {
+  color: #fff;
+}
+footer .copyright {
+  text-align: center;
+  font-size: 11px;
+  margin: 0;
+  padding: 15px 0;
+  background: url(../img/bg_footer_midline.gif) no-repeat top center;
+}
+
+/*-----------------------------
+to top
+------------------------------*/
+.up {
+  width: 45px;
+  height: 45px;
+  background: url(../img/up.png) no-repeat 0 0;
+  filter: alpha(opacity=70);
+  -moz-opacity: 0.7;
+  opacity: 0.7;
+}
+.up:hover {
+  filter: alpha(opacity=100);
+  -moz-opacity: 1;
+  opacity: 1;
+}
+
+/*-----------------------------
+pages
+------------------------------*/
+/*
+@import "_index";
+
+@import "_searchresult";
+
+@import "_thesis";
+
+@import "_list";
+
+@import "_edit";
+
+@import "_user";
+*/

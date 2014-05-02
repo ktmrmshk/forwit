@@ -1,0 +1,39 @@
+@charset "utf-8";
+
+/*-----------------------------
+reset
+------------------------------*/
+
+@import "compass/reset";
+
+/*-----------------------------
+global
+------------------------------*/
+
+@import "_define";
+
+@import "_layout";
+
+@import "_common";
+
+@import "_header";
+
+@import "_footer";
+
+/*-----------------------------
+pages
+------------------------------*/
+
+/*
+@import "_index";
+
+@import "_searchresult";
+
+@import "_thesis";
+
+@import "_list";
+
+@import "_edit";
+
+@import "_user";
+*/

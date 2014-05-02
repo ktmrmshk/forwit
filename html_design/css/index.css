@@ -1,0 +1,31 @@
+/*-----------------------------
+top
+------------------------------*/
+h1 {
+  border: none;
+  height: auto;
+}
+
+main {
+  margin-top: 8px;
+}
+
+.content {
+  padding: 16px 18px;
+  background: #fff;
+}
+
+.news,
+.pickup {
+  width: 442px;
+}
+
+.pickup_movie {
+  margin-top: 4px;
+}
+.pickup_movie h2 {
+  margin-bottom: 0;
+}
+.pickup_movie .movie_4column li {
+  padding-top: 20px;
+}

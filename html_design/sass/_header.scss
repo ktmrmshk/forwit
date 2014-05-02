@@ -1,0 +1,57 @@
+/*-----------------------------
+header
+------------------------------*/
+
+header {
+	background: #fff;
+	.logo {
+		float: left; 
+		margin: 8px 0 8px 20px; 
+		line-height: 0;
+	}
+	.search {
+		float: left; 
+		margin: 9px 0 0 20px; 
+		input{
+			float:left;
+			font-size:11px;
+			height: 15px; 
+			width:300px;
+		}
+		button{
+			float:left;
+			letter-spacing:0.5em;
+			padding:0 0.5em 0 1em;
+			border: 1px solid #222;
+			background:#222;
+			border-left:none;
+			-webkit-transition: all 0.3s ease;
+			-moz-transition: all 0.3s ease;
+			transition:all 0.3s ease;
+			&:hover{
+				background:$navy2;
+				box-shadow:0px 0px 5px $navy2;
+			}		
+		}
+	}
+	.link {
+		float: right; 
+		margin: 6px 12px 0 0; 
+		padding: 0;
+		a,
+		a:visited {
+			display:inline-block; 
+			padding:6px 8px; 
+			margin: 0 0 0 8px; 
+			font-size: 12px; 
+			color:#222;
+			-webkit-transition: background 0.3s ease;
+			-moz-transition: background 0.3s ease;
+			transition: background 0.3s ease;
+			&:hover{
+				background:#eee;
+				color:#222;
+			}
+		}
+	}
+}

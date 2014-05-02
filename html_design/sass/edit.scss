@@ -1,0 +1,470 @@
+@import "_define";
+
+/*-----------------------------
+編集関連 edit
+
+edit edit-research setting
+------------------------------*/
+
+.form_wrapper{
+	width:590px;
+	padding:18px;
+	margin:0 auto;
+}
+.mini_btn{
+	height:24px;
+	line-height:24px;
+	font-size:12px;
+	padding:0 1em;
+	width:auto;
+}
+main{
+	h2{
+		border:none;
+		letter-spacing:-0.1em;
+		height:auto;
+		margin-bottom:8px;
+	}
+	input{
+		display:block;
+		width:400px;
+		margin:0;
+		border:1px solid #aaa;
+	}
+	input::-webkit-input-placeholder{
+		line-height:14px;
+		color: #bbb;
+	}
+	input::-moz-placeholder{
+		line-height:14px;
+		color: #bbb;
+	}
+	input:-moz-placeholder{
+		line-height:14px;
+		color: #bbb;
+	}
+	input:-ms-placeholder{
+		line-height:14px;
+		color: #bbb;
+	}
+	p{
+		color:$navy;
+		font-weight:bold;
+		margin-bottom:14px;
+	}	
+}
+textarea{
+	font-size:13px;
+	border:1px solid #aaa;
+	width:100%;
+	height:200px;
+}		
+
+
+/*setting*/
+main.setting{
+	.input_wrapper{
+		margin-bottom:14px;
+		display:inline-block;
+		position:relative;
+	}		
+	input{
+		display:inline-block;
+	}
+	label{
+		width:170px;
+		display:inline-block;
+	}
+	.float_wrapper{
+		margin-bottom:70px;
+		.left{
+			width:100px;
+			img{
+				width:100px;
+				height:100px;
+			}
+			button{
+				width:100%;
+				padding:0;
+			}
+		}
+		.right{
+			width:472px;
+			fieldset{
+				label{
+					width:50px;
+					display:inline-block;						
+				}
+			}
+			.p_name{
+				input{
+					width:160px;
+				}
+				.name_wrapper{
+					margin-left:14px;
+				}
+			}
+			.gakubu{
+				margin-left:55px;
+				label{
+					width:120px;
+				}
+				.label_gakubu{
+					width:65px;
+				}
+				input{
+					width:auto;
+					margin-right:5px;
+					border:none;
+					padding:0;
+				}
+			}
+		}
+	}
+	
+	.bunya{
+		width:166px;
+		margin-bottom:0;
+		label{
+			display:inline;
+			float:left;
+		}
+		input{
+			float:right;
+			margin-bottom:14px;
+			width:104px;
+		}
+	}
+	.p_email,
+	.p_pass{
+		margin-bottom:70px;
+	}
+		
+	.dl_wrapper{
+		margin-bottom:14px;
+		dt{
+			display:inline-block;
+			width:170px;
+		}
+		dd{
+			display:inline-block;
+		}
+	}
+}
+/*end setting*/
+
+/*edit*/
+main.edit{
+	fieldset{
+		margin-bottom:70px;
+	}	
+	.input_wrapper{
+		margin-bottom:14px;
+		display:block;
+		h2{
+			display:inline;
+			line-height:24px;
+		}
+		label{
+			width:5em;
+			display:inline-block;
+		}
+		input,
+		button{
+			display:inline-block;
+		}
+	}
+	.nav_header{
+		border:none;
+		margin-bottom:0;
+		> .left{
+			width:350px;
+		}
+		> .right{
+			width:195px;
+			.horizontal_nav_wrapper {
+				.pagination{
+					width:120px;
+				}
+				.pagination_prev_next{
+					width:70px;
+				}
+			}
+		}
+	}
+	table{
+		width:100%;
+		.col_btn{
+			width:20%;
+		}
+		.col_no{
+			width:2%
+		}
+		td{
+			font-size:14px;
+			padding:4px 1px;
+		}
+		.td_center{
+			font-size:12px;
+		}
+		.mini_btn{
+			width:auto;
+			padding:0 0.3em;
+		}
+	}
+}
+
+/*edit research*/
+main.edit_research{
+	fieldset{
+		margin-bottom:70px;
+	}
+	fieldset.title{
+		margin-bottom:30px;
+	}
+	.detail{
+		width:100%;
+		.left{
+			width:45%;
+		}
+		.right{
+			width:55%;
+			table{
+				width:100%;
+				tr,
+				td,
+				th{
+					border:none;
+					background:none;
+					padding:0 2px 14px;
+				}
+				th{
+					padding-bottom:0;
+					font-size:12px;
+				}
+			}
+		}
+		fieldset{
+			margin-bottom:30px;
+		}
+		dt{
+			display:inline-block;
+			width:80px;
+			label{
+				font-size:14px;
+			}
+		}
+		dd{
+			display:inline-block;
+			margin-bottom:14px;
+		}
+		dd:before{
+			content:"";
+		}
+		input{
+			width:120px;
+			display:inline;
+		}
+		.t_info{
+			padding-top:16px;
+		}
+	}
+	label,
+	legend{
+		font-size:16px;
+		font-weight:bold;
+		font-family:$mincho;
+		color:$navy;
+		line-height:30px;
+	}
+	.input_wrapper{
+		label{
+			display:inline-block;
+			width:80px;
+		}
+		input{
+			display:inline-block;
+		}
+		button{
+			display:inline-block;
+		}
+	}
+	.add_btn{
+		background:transparentize($navy, 0.6);
+		border:0;
+		&:hover{
+			background:$orange;
+		}
+	}
+
+	.attachment,
+	.youtube{
+		.file_wrapper{
+			border-bottom:1px solid #ccc;
+			margin-bottom:14px;			
+		}
+		.input_wrapper{
+			margin:8px 0;
+			label{
+				display:inline-block;
+				font-family:$gothic;
+				font-weight:normal;
+				font-size:14px;
+				color:#333;
+				width:60px;
+			}
+		}
+
+	}
+	.youtube{
+		.reload{
+			display:inline-block;
+			width:72px;
+			height:26px;
+			line-height:26px;		
+		}
+		.youtube_area{
+			margin-top:14px;
+			width:480px;
+			height:360px;
+			background:#ccc;
+			color:#fff;
+			iframe{
+				width:480px;
+				height:360px;
+			}
+		}
+		
+		.help{
+			width:20px;
+			height:20px;
+			line-height:20px;
+			border-radius:50%;
+			border:0;
+			background:#0090e7;
+			display:inline-block;
+		}
+		.help_wrapper{
+			margin:7px 0;
+			p{
+				font-weight:normal;
+				color:#333;
+			}
+		}
+		.help_area{
+			display:none;
+			position: relative;		
+			padding:4px;
+			width:400px;
+			height:348px;
+			background:#0090e7;
+			box-shadow:0 0 3px #ccc;
+			margin-top:10px;
+			border-radius:3px;
+		}
+		.help_area:after {
+			bottom: 100%;
+			left: 347px;
+			border: solid transparent;
+			content: " ";
+			height: 0;
+			width: 0;
+			position: absolute;
+			pointer-events: none;
+			border-color: rgba(0, 0, 0, 0);
+			border-bottom-color: #0090e7;
+			border-width: 8px;
+			margin-left: -8px;
+		}
+	}
+}
+
+/*upload*/
+.fileUpload {
+	display:inline-block;
+	position: relative;
+	overflow: hidden;
+	width:80px;
+	height:26px;
+	line-height:26px;
+	span{
+		font-size:12px;
+	}
+}
+.upload {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 0;
+	padding: 0;
+	font-size: 20px;
+	cursor: pointer;
+	opacity: 0;
+	filter: alpha(opacity=0);
+	border:none;
+	width:80px;
+	height:26px;
+	line-height:26px;
+}
+.filename{
+	font-size:12px;
+}
+
+/*submit*/
+#buttons{
+	div{
+		width:240px;
+		margin:0 0 0 auto;
+	}
+	button{
+		float:left;
+		display:block;
+		width:100px;
+		height:40px;
+		line-height:40px;
+		margin:0 10px;
+		-webkit-transition: all 0.3s ease;
+		-moz-transition: all 0.3s ease;
+		transition:all 0.3s ease;
+		&:hover{
+			box-shadow:0 0 4px $orange;
+		}
+	}
+}
+
+/*validate error*/
+input.error:focus{
+	outline:none;
+	box-shadow:0 0 4px $orange;
+}	
+label.error{
+	width:auto;
+	min-width:13em;
+	display:block;
+	padding:0 4px;
+	height:24px;
+	line-height:24px;
+	font-size:12px;
+	color:#fff;
+	position:absolute;
+	top:33px;
+	left:70px;
+	background:$orange;
+	border-radius:3px;
+	z-index:1000;
+}
+
+label.error:after {
+	bottom: 100%;
+	left: 20%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+	border-color: rgba(0, 0, 0, 0);
+	border-bottom-color: $orange;
+	border-width: 6px;
+	margin-left: -6px;
+}

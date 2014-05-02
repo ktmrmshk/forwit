@@ -1,0 +1,141 @@
+@import "_define";
+
+/*-----------------------------
+論文ページ thesis
+------------------------------*/
+
+.main_content_wrapper{
+	padding-top:12px;
+}
+.thesis{
+	.left{
+		width:480px;
+	}
+	.right{
+		width:408px;
+	}
+	.back_btn{
+		display:block;
+		width:40px;
+		line-height:18px;
+		height:18px;
+		text-align:center;
+		font-size:11px;
+		border-radius:3px 3px 3px 3px;
+		cursor:pointer;
+		margin-bottom:10px;
+	}
+	.mini_btn{
+		width:40px;
+		margin-right:5px;
+	}
+	h1{
+		line-height:1.2;
+		border:none;
+		color:#222;
+		font-weight:bold;
+		font-size:18px;
+		display:inline-block;
+		max-width:430px;
+		height:auto;
+		min-height:29px;
+	}
+}
+
+
+.t_attachment{
+	font-size:13px;
+	padding-top:20px;
+	h2{
+		font-size:1em;
+		height:24px;
+		margin-bottom:10px;
+	}
+	li a{
+		display:block;
+		width:30%;
+		float:left;
+		margin: 2px 0 0;
+		padding: 0 0 0 10px;
+		background: url(../img/bg_icon_dot.gif) no-repeat left 7px;	
+	}
+}
+
+.t_info{
+	font-size:13px;
+	padding:20px 0;
+	dl{
+		line-height:2;
+	}
+	dt{
+		float:left;
+		display:inline-block;
+		width:6em;
+		color:$navy;
+		font-family:$mincho;
+		font-weight:bold;
+		line-height:1.6;
+	}
+	dd{
+		line-height:1.6;
+	}
+	dd:before{
+		content:":";
+	}
+}
+
+.t_author{
+	table{
+		font-size:13px;
+		width:100%;
+		th{
+			font-size:12px;
+		}
+		.author{
+			width:90px;
+		}
+		td a{
+			font-size:13px;
+		}
+		tr:nth-child(5n){
+			border-bottom:1px dotted #ccc;
+		td{
+			padding-bottom:1px;
+			}
+		}
+		tr:nth-child(5n + 1){
+			td{
+				padding-top:1px;
+			}
+		}
+	}
+}
+
+.checked_user{
+	li{
+		width:74px;
+		margin-right:20px;
+		img{
+			width:74px;
+			height:74px;
+		}
+	}
+	li:nth-child(10n){
+		margin-right:0;
+	}
+}
+
+.login_wrapper{
+	p{
+		display:inline;
+	}
+	.login_btn{
+		width:160px;
+		height:26px;
+		line-height:26px;
+		margin-right:14px;
+		&:hover{
+			box-shadow:0 0 3px $orange;
+		}
+	}
+}

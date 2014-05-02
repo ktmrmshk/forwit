@@ -1,0 +1,71 @@
+@import "_define";
+
+/*-----------------------------
+検索結果 search-result
+------------------------------*/
+/*table----------------------*/
+#sResult{
+	width:100%;
+	.col_icon{
+		width:3.5%;
+	}
+	.col_no{
+		width:5%;
+	}
+	.col_date{
+		width:10%;
+	}
+	.col_memo,
+	.col_quote{
+		width:8%;
+	}
+	.col_btn{
+		width:8%;
+	}
+	td{
+		text-align:center;
+	}
+	td a{
+		display:block;
+		text-align:left;
+	}
+	.td_right{
+		text-align:right;
+	}
+	.gray_btn{
+		padding:0.1em 0.5em;
+		background:#ddd;
+		&:hover{
+			background:$orange;
+			color:#fff;
+			box-shadow:none;
+		}
+	}
+	.mini_btn{
+		text-align:center;
+		width:30px;
+	}
+	
+	/*js sort table*/
+	th.header{
+		background:url(../js/tablesorter/bg.gif) no-repeat right center;
+		cursor:pointer;
+		padding:0 0 0 10px;
+	}
+	th.headerSortUp { 
+		background:#ccc url(../js/tablesorter/desc.gif) no-repeat right center;
+	} 
+	th.headerSortDown { 
+		background:#ccc url(../js/tablesorter/asc.gif) no-repeat right center;
+	} 
+}
+
+/*ログイン時の検索結果----------------------*/
+/*table----------------------*/
+.login{
+	#sResult{
+		.col_icon{
+			width:2%;
+		}
+	}
+}

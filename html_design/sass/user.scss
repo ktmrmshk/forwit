@@ -1,0 +1,437 @@
+@import "_define";
+
+/*-----------------------------
+ユーザーページ 
+login/account-name
+login/other
+------------------------------*/
+
+/*profile----------------------*/
+
+.sub_content_wrapper{
+	.account-name{
+		border:none;
+		color:#222;
+		font-family:$gothic;
+		font-weight:normal;
+		text-align:center;
+		font-size:15px;
+		margin-top:3px;
+		margin-bottom:0;
+		height:auto;
+	}
+	img{
+		display:block;
+		margin:0 auto;
+	}
+	.whoami{
+		font-size:12px;
+		dt{
+			display:block;
+			border-bottom:1px solid #ccc;
+			margin:1em 0 0.3em;
+			color:#aaa;
+		}
+	}
+	
+	.status{
+		font-size:11px;
+		margin:4em 0 0;
+		dt{
+			float:left;}
+		dd{
+			margin-left:0.5em;
+			display:inline-block;
+		}
+	}
+}
+
+/*content_menu----------------------*/
+
+.content_menu{
+	.type{
+		font-size:16px;
+		font-weight:bold;
+		span{
+			display:inline-block;
+			width:15px;
+		}
+		li {
+			display:block;
+			margin-bottom:0.5em;
+			a{
+				color:#bbb;
+				img{
+					vertical-align:baseline;
+					filter:alpha(opacity=30);
+					-moz-opacity: 0.3;
+					opacity:0.3;
+				}
+				&:hover{
+					color:#222;
+					img{
+						filter:alpha(opacity=100);
+						-moz-opacity: 1;
+						opacity:1;				
+					}
+				}
+			}
+		}
+		.current a{
+			color:$navy;
+			img{
+				filter:alpha(opacity=100);
+				-moz-opacity: 1;
+				opacity:1;
+			}
+		}
+	}
+	.edit_btn{
+		width:100%;
+		height:30px;
+		line-height:30px;
+	}
+}
+
+/*content_menu----------------------*/
+
+table{
+		width:100%;
+		font-size:12px;
+		td a{
+			font-size:14px;
+		}
+		.col_icon{
+			width:3%;
+		}
+		.col_no{
+			width:3%;
+		}
+		.col_date{
+			width:12%;
+		}
+		.col_memo,
+		.col_quote{
+			width:7%;
+		}
+		.td_center{
+			img{
+				vertical-align:middle;
+			}
+		}
+		.td_right{
+			text-align:right;
+		}
+		
+		/*js*/
+		.col_mine{
+			width:5%;
+		}
+		.col_delete{
+			width:5%;
+		}
+		.col_quote{
+			width:7%;
+		}
+	}
+
+/*動画リスト(3カラム) ユーザーページ top*/
+.movie_3column{
+	li { 
+		width: 240px; 
+		margin-right:22px;
+		padding-top:20px;
+		img{
+			width: 240px; 
+			height:135px;		
+		}
+	}
+	li:nth-of-type(3n){
+		margin-right:0;
+	}	
+}
+
+/*動画リスト(3カラム) ユーザーページ*/
+.movie_3column_narrow{
+	li { 
+		width: 220px; 
+		margin-right:20px;
+		padding-top:20px;
+		img{
+			width: 220px; 
+			height:124px;		
+		}
+	}
+	li:nth-of-type(3n){
+		margin-right:0;
+	}	
+}
+
+/*button----------------------*/
+
+/*js*/
+.delete_btn{
+	width:40px;
+	border-radius:3px 3px 0 0;
+	span{
+		font-size:15px;
+		font-weight:bold;
+		line-height:18px;
+	}
+}
+
+/*top(mypage)----------------------*/
+
+#top{
+	.inner_content_wrapper{
+		.clearfix{		
+			.left{
+			width:442px;
+			}
+			.right{
+				width:300px;
+				.similer{
+					.header_wrapper{
+						border-bottom:1px solid $navy;
+						height:29px;
+						margin-bottom:20px;
+						h1{
+							display:inline-block;
+							border:none;
+						}
+						.reload{
+							@include image-replace;
+							display:inline-block;
+							background:url(../img/reload.png) no-repeat 5px -35px;
+							width:30px;
+							height:29px;
+							float:right;
+							&:hover{
+								background:url(../img/reload.png) no-repeat 5px 5px;
+							}
+						}
+					}
+					.user{
+						li{
+							width:84px;
+							margin:0 24px 12px 0;
+							img{
+								width:84px;
+								height:84px;
+							}
+						}
+						li:nth-child(3n){
+							margin-right:0;
+						}	
+					}
+				}
+			}
+			section{
+				margin-bottom:20px;
+			}
+		}
+
+		.pickup_movie{
+			h1{
+				margin-bottom:0;
+			}
+		}
+	}
+}
+
+/*研究内容・研究メモ----------------------*/
+
+#research,
+#memo{
+	.content_menu{
+		width:50px;
+	}
+	.main_content{
+		width:700px;
+	}
+	.r_movie{
+		.nav_header{
+			margin-bottom:0;
+		}
+	}
+}
+
+/*研究内容----------------------*/
+	
+#research{
+	.r_content{
+		margin-bottom:40px;
+	}
+	.r_headline{
+		border-bottom:1px solid $navy;
+		height:29px;	
+		margin-bottom:0.5em;
+		h1{
+			display:inline;
+			font-size:17px;
+			border:none;
+		}
+		a{
+			display:inline-block;
+			width:5em;
+			border:1px solid #ccc;
+			text-align:center;
+			font-size:12px;
+			line-height:1.2;
+			vertical-align:text-top;
+			margin-left:4px;
+		}
+	}
+	.r_attachment{
+		margin:1em 0;
+		font-size:13px;
+		dt{
+			float:left;
+			width:5em;
+			color:$navy;
+			font-family:$mincho;
+			font-weight:bold;
+		}
+		.mini_btn{
+			margin-left:0.5em;
+			padding:0 0.5em;
+			height:16px;
+			line-height:16px;
+		}
+	}
+}
+
+#memo{
+	table{
+		.mine_btn{
+			background:#999;
+			border:1px solid #999;
+			cursor:pointer;
+			text-align:center;
+			border-radius:3px;
+			color:#fff;
+			font-size:11px;
+			display:inline-block;
+			&:hover{
+				background:$orange;
+				border:1px solid $orange;
+			}
+		}
+		.delete_btn{
+			width:24px;
+			border-radius:3px;
+			span{
+				line-height:17px;
+			}
+			
+		}
+	}
+}
+
+/*ウォッチ----------------------*/
+
+#watch{
+	.content_menu{
+		width:112px;
+	}
+	.main_content{
+		width:630px;
+	}
+	
+	.user{
+		li{
+			width:100px;
+			margin-right:30px;
+			font-size:11px;
+			img{
+				width:100px;
+				height:100px;
+			}
+			.belong{
+				margin-top:0.3em;
+				border-top:1px solid #dcdcdc;
+				padding:0.3em 0 2em;
+				display:block;
+			}
+		}
+		li:nth-child(5n){
+			margin-right:0;
+		}
+	}
+	.type li a{
+		letter-spacing:-0.1em
+	}
+	.edit_btn{
+		width:50px;
+	}
+}
+
+/*他のユーザー----------------------*/
+.other{
+	table{
+		.col_btn{
+			width:7%;
+		}
+	}	
+	.watch_btn{
+		width:100%;
+		margin:10px 0;
+		display:block;
+		font-size:13px;
+		height:30px;
+		line-height:28px;
+		&:hover{
+			box-shadow:0 0 3px $orange;
+		}
+	}
+	
+	/*js*/
+	.watch_btn_clicked{
+		background:#ddd;
+		border:1px solid #ccc;
+		span{
+			font-size:15px;
+			font-weight:bold;
+			line-height:12px;			
+			color:$navy;
+			font-family:$gothic;
+		}
+		&:hover{
+			background:$orange;
+			border:1px solid $orange;
+			color:#fff;
+		}
+	}
+	
+	/*js*/
+	.mini_btn_clicked{
+		span{
+			font-size:15px;
+			line-height:17px;
+			font-weight:bold ;
+		}
+		color:$navy;
+		background:#eee; 
+		border:1px solid #ccc;
+			&:hover{
+				color:#fff;
+				background:$orange;
+				border:1px solid $orange ;
+			}
+	}
+
+	.movie{
+		.mini_btn{
+			width:40px;
+			border-radius:3px 3px 0 0;
+		}
+	}
+	
+	.user{
+		.mini_btn{
+			width:60px;
+			border-radius:3px 3px 0 0;
+		}
+	}
+}
+

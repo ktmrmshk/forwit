@@ -1,0 +1,64 @@
+/*-----------------------------
+検索結果 search-result
+------------------------------*/
+/*table----------------------*/
+#sResult {
+  width: 100%;
+  /*js sort table*/
+}
+#sResult .col_icon {
+  width: 3.5%;
+}
+#sResult .col_no {
+  width: 5%;
+}
+#sResult .col_date {
+  width: 10%;
+}
+#sResult .col_memo,
+#sResult .col_quote {
+  width: 8%;
+}
+#sResult .col_btn {
+  width: 8%;
+}
+#sResult td {
+  text-align: center;
+}
+#sResult td a {
+  display: block;
+  text-align: left;
+}
+#sResult .td_right {
+  text-align: right;
+}
+#sResult .gray_btn {
+  padding: 0.1em 0.5em;
+  background: #ddd;
+}
+#sResult .gray_btn:hover {
+  background: #f78000;
+  color: #fff;
+  box-shadow: none;
+}
+#sResult .mini_btn {
+  text-align: center;
+  width: 30px;
+}
+#sResult th.header {
+  background: url(../js/tablesorter/bg.gif) no-repeat right center;
+  cursor: pointer;
+  padding: 0 0 0 10px;
+}
+#sResult th.headerSortUp {
+  background: #cccccc url(../js/tablesorter/desc.gif) no-repeat right center;
+}
+#sResult th.headerSortDown {
+  background: #cccccc url(../js/tablesorter/asc.gif) no-repeat right center;
+}
+
+/*ログイン時の検索結果----------------------*/
+/*table----------------------*/
+.login #sResult .col_icon {
+  width: 2%;
+}

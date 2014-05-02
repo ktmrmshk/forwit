@@ -1,0 +1,30 @@
+@import "_define";
+
+/*-----------------------------
+top
+------------------------------*/
+
+h1{
+	border:none;
+	height:auto;
+}
+main{
+	margin-top:8px;
+}
+.content{
+	padding:16px 18px;
+	background:#fff;
+}
+.news,
+.pickup{
+	width:442px;
+}
+.pickup_movie{
+	margin-top:4px;
+	h2{
+		margin-bottom:0;
+	}
+	.movie_4column li{		
+		padding-top:20px;
+	}
+}

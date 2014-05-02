@@ -1,0 +1,14 @@
+@mixin image-replace{
+	text-indent:110%;
+	white-space:nowrap;
+	overflow:hidden;
+}
+
+$gothic:Verdana, "游ゴシック", YuGothic, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif;
+//$gothic:"メイリオ", Meiryo, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", sans-serif;
+$mincho: "Times New Roman", "游明朝", YuMincho, "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "HG明朝E","ＭＳ Ｐ明朝","ＭＳ 明朝", serif;
+//$mincho:"HG明朝E","ＭＳ Ｐ明朝","ＭＳ 明朝", serif;
+//"ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN",
+$navy:#000080;
+$navy2:#0117a2;
+$orange:#f78000;

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>論文編集 | ForWit</title>
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=1000, maximum-scale=1.0, user-scalable=yes">
+		
+		<link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon" />
+		<link rel="stylesheet" href="../css/style.css">
+		<link rel="stylesheet" href="../css/edit.css">
+		<!--[if lt IE 9]><script src="http://html5shiv-printshiv.googlecode.com/svn/trunk/html5shiv-printshiv.js"></script><![endif]-->
+	</head>
+	
+	<body id="edit">
+	
+		<!-- wrapper -->
+		<div id="wrapper">
+		
+			<!-- container -->
+			<div id="container">
+			
+				<!-- header -->
+				<header class="clearfix">
+				
+					<!-- logo -->
+					<a class="logo" href="account-name/index.html">
+						<img src="../img/logo.jpg" alt="ForWit" width="83" height="24" />
+					</a>
+					
+					<!-- search -->
+					<div class="search">
+						<form action="" id="search-box">
+							<div>
+								<input type="text" name="q" size="57" class="input" />
+								<button type="submit" name="sa" value="検索">検索</button>
+							</div>
+						</form>
+					</div>
+					
+					<!-- links -->
+					<p class="link">
+						<a href="memberlist.html">登録者一覧</a>
+						<a href="setting.html">設定変更</a>
+						<a href="../index.html">ログアウト</a>
+					</p>
+					
+				</header>
+				<!-- end header -->
+				
+				<!-- content_wrapper_wide -->
+				<div class="content_wrapper_wide">
+				
+				<!-- main -->
+				<main class="edit_research">
+				
+					<section class="main_content_wrapper">
+						<h1>論文編集</h1>
+						
+						<form id="edit-research-box" method="post">
+						
+							<div class="form_wrapper">
+							
+								<fieldset class="title">
+									<div class="input_wrapper clearfix">
+										<label>タイトル</label>
+										<input type="text" name="title" value="エタノールを用いたロケットエンジンの燃焼特性" />
+									</div>
+								</fieldset>
+									
+								<div class="detail clearfix">
+
+									<fieldset class="left t_info">
+										<dl>
+											<dt><label>投稿学会</label></dt>
+											<dd><input type="text" name="gakkai" value="□□□□□□□□□□□□" /></dd>
+											<dt><label>発行年月日</label></dt>
+											<dd><input type="text" name="date" value="□□□□□□□□□□□□" /></dd>
+											<dt><label>キーワード</label></dt>
+											<dd><input type="text" name="keywords" value="□□□□□□□□□□□□" /></dd>
+										</dl>
+									</fieldset>
+			
+									<fieldset class="right t_author">
+										<table>
+											<thead>
+												<tr>
+													<th>&nbsp;</th>
+													<th class="author">著者</th>
+													<th>所属</th>
+												</tr>
+											</thead>
+											<tr id="author_0">
+												<td><button type="button" name="a_del_0" class="mini_btn gray_btn">削除</button></td>
+												<td><input type="text" name="a_name_0" value="山田 太郎" /></td>
+												<td><input type="text" name="a_belong_0" value="□□□□□□□□□□□□" /></td>
+											</tr>													
+											<tr id="author_1">
+												<td><button type="button" name="a_del_1" class="mini_btn gray_btn">削除</button></td>
+												<td><input type="text" name="a_name_1" value="山村　花子" /></td>
+												<td><input type="text" name="a_belong_1" value="□□□□□□□□□□□□" /></td>
+											</tr>							
+											<tr id="author_2">
+												<td><button type="button" name="a_del_2" class="mini_btn gray_btn">削除</button></td>
+												<td><input type="text" name="a_name_2" value="永井　満" /></td>
+												<td><input type="text" name="a_belong_2" value="□□□□□□□□□□□□" /></td>
+											</tr>
+										</table>
+										<button type="button" id="addAuthor" name="add_author" class="blue_btn mini_btn add_btn">著者を追加</button>
+									</fieldset>
+								</div>
+									
+									
+								<fieldset>
+									<legend>解説</legend>
+									<textarea name="exposition">無毒で常温貯蔵可能な液体推進剤として亜酸化窒素(N_2O)/エタノールの組合せに着目し,それによる扱い易い液体推進系の実証研究を進めている.当面の目標として大気吸い込み式極超音速推進系の飛行試験に用いる加速用ロケットエンジンへの適用を目指しているが,その低温環境順応性を活かす衛星・探査機搭載推進系への応用も視</textarea>
+								</fieldset>
+								
+								<fieldset class="attachment">
+									<legend>添付資料</legend>
+										<div id="file_0" class="file_wrapper">
+										
+											<div class="input_wrapper">
+												<button type="button" name="at_del_0" class="mini_btn gray_btn">削除</button>
+												<label>タイトル</label>
+												<input type="text" name="at_filetitle_0" placeholder="タイトルを入力してください" value="アブストラクト" />
+											</div>
+											
+											<div class="input_wrapper">
+												<div class="blue_btn fileUpload">
+													<span>資料を変更</span>
+													<input type="file" name="at_upbtn_0" class="upload" />
+												</div>
+												<span class="at_filename_0 filename">選択されていません</span>
+											</div>
+											
+										</div>
+										
+										<div id="file_1" class="file_wrapper">
+										
+											<div class="input_wrapper">
+												<button type="button" name="at_del_1" class="mini_btn gray_btn">削除</button>
+												<label>タイトル</label>
+												<input type="text" name="at_filetitle_1" placeholder="タイトルを入力してください" />
+											</div>
+											
+											<div class="input_wrapper">
+												<div class="blue_btn fileUpload">
+													<span>資料を追加</span>
+													<input type="file" name="at_upbtn_1" class="upload" />
+												</div>
+												<span class="at_filename_1 filename">選択されていません</span>
+											</div>
+											
+										</div>
+									
+									<button type="button" id="addFile" name="add_file" class="blue_btn mini_btn add_btn">資料を追加</button>
+								</fieldset>
+											
+								<fieldset class="youtube">
+									<legend>動画</legend>
+									<div class="help_wrapper">
+										<p>Youtubeの「埋め込みコード」を入力してください。<button type="button" id="help" name="up_movie" class="help">?</button></p>
+										<div class="help_area">
+											<img src="../img/youtube-ss.jpg" alt="Youtube「埋め込みコード」" width="400" height="348">
+										</div>
+									</div>
+
+									<div class="input_wrapper">
+										<button type="button" name="v_del_0" class="mini_btn gray_btn">削除</button>
+										<input type="text" id="uploadMovieURL_0" name="v_name_0" value='<iframe width="420" height="315" src="//www.youtube.com/embed/udbb-7TZXPs?rel=0" frameborder="0" allowfullscreen></iframe>' placeholder="Youtube動画URL" />
+										<button type="button" id="uploadMovie_0" name="v_up_0" class="blue_btn mini_btn reload">更新</button>
+										<div id="youtube_area_0" class="youtube_area">ここに動画が表示されます</div>						
+									</div>
+									<button type="button" name="add_movie" class="blue_btn mini_btn add_btn">動画を追加</button>
+
+								</fieldset>
+								
+								<div id="buttons">
+									<div class="clearfix">
+										<button type="reset" name="reset" class="gray_btn">キャンセル</button>
+										<button type="submit" name="submit" class="blue_btn">保存する</button>
+									</div>
+								</div>
+								
+							</div>
+
+						</form>
+						
+					</section>
+					
+				</main>
+				<!-- end main -->
+				
+				</div>
+				<!-- content_wrapper_wide -->
+			
+			</div>
+			<!-- end container -->
+		
+		</div>
+		<!-- end wrapper -->
+		
+		<!-- bottom -->
+		<div id="bottom" class="clearfix">
+		
+			<!-- footer -->
+			<footer class="clearfix">
+				<p class="link"><a href="../about.html">ForWitとは？</a><a href="../contact.html">お問い合わせ</a></p>
+				<p class="copyright">Copyright &copy; 2014 ForWit All rights reserved.</p>
+			</footer>
+			<!-- footer -->
+		
+		</div>
+		<!-- bottom -->
+		
+		<!-- javascript -->
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script type="text/javascript" src="../js/jquery.heightLine.js"></script>
+		<script type="text/javascript" src="../js/scrolltopcontrol.js"></script>
+		
+		<!-- for form validation -->
+		<script type="text/javascript" src="../js/validation/jquery.validate.min.js"></script>
+		<script type="text/javascript" src="../js/validation/messages_ja.js"></script>
+		<script>
+			$(function () {
+			/*placeholder for IE*/
+			  var supportsInputAttribute = function (attr) {
+			    var input = document.createElement('input');
+			    return attr in input;
+			  };
+			  if (!supportsInputAttribute('placeholder')) {
+			    $('[placeholder]').each(function () {
+			      var
+			        input = $(this),
+			        placeholderText = input.attr('placeholder'),
+			        placeholderColor = '#bbb',
+			        defaultColor = input.css('color');
+			      input.
+			        focus(function () {
+			          if (input.val() === placeholderText) {
+			            input.val('').css('color', defaultColor);
+			          }
+			        }).
+			        blur(function () {
+			          if (input.val() === '') {
+			            input.val(placeholderText).css('color', placeholderColor);
+			          } else if (input.val() === placeholderText) {
+			            input.css('color', placeholderColor);
+			          }
+			        }).
+			        blur().
+			        parents('form').
+			          submit(function () {
+			            if (input.val() === placeholderText) {
+			              input.val('');
+			            }
+			          });
+			    });
+			  }
+			  
+			  /*upload file*/
+			  $(".fileUpload .upload").change(function(){
+			  		var fileNameTxt = $(this).val(),
+			  			fileName = $(this).parent('div').next('span');
+			  		$(fileName).text(fileNameTxt);
+			  })
+
+			  /*youtube*/
+			  function updateMovie(){
+			  		var movieURL = $("#uploadMovieURL_0").val();
+			  		/*どんなサイズを指定していても、valueは480×360に変更しています*/
+			  		movieURL = movieURL.replace(/width=\"[0-9]+\"/,'width="480"').replace(/height=\"[0-9]+\"/,'height="360"');
+			  		$("#uploadMovieURL_0").val(movieURL).submit();
+			  		
+			  		if(movieURL){
+				  		$(".youtube_area").html(movieURL);
+				  	} else{
+					  	$(".youtube_area").html("ここに動画が表示されます");
+				  	}
+			  }
+			  
+			  updateMovie();
+			  
+			  $("#uploadMovie_0").click(function(){
+				 $("#uploadMovieURL_0").submit();
+				 updateMovie();
+			  })
+			  
+			  /*help*/
+			  $(".help").click(function(){$(".help_area").slideToggle();})
+			  
+			});
+		</script>
+	</body>
+</html>

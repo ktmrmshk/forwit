@@ -1,0 +1,447 @@
+/*-----------------------------
+編集関連 edit
+
+edit edit-research setting
+------------------------------*/
+.form_wrapper {
+  width: 590px;
+  padding: 18px;
+  margin: 0 auto;
+}
+
+.mini_btn {
+  height: 24px;
+  line-height: 24px;
+  font-size: 12px;
+  padding: 0 1em;
+  width: auto;
+}
+
+main h2 {
+  border: none;
+  letter-spacing: -0.1em;
+  height: auto;
+  margin-bottom: 8px;
+}
+main input {
+  display: block;
+  width: 400px;
+  margin: 0;
+  border: 1px solid #aaa;
+}
+main input::-webkit-input-placeholder {
+  line-height: 14px;
+  color: #bbb;
+}
+main input::-moz-placeholder {
+  line-height: 14px;
+  color: #bbb;
+}
+main input:-moz-placeholder {
+  line-height: 14px;
+  color: #bbb;
+}
+main input:-ms-placeholder {
+  line-height: 14px;
+  color: #bbb;
+}
+main p {
+  color: navy;
+  font-weight: bold;
+  margin-bottom: 14px;
+}
+
+textarea {
+  font-size: 13px;
+  border: 1px solid #aaa;
+  width: 100%;
+  height: 200px;
+}
+
+/*setting*/
+main.setting .input_wrapper {
+  margin-bottom: 14px;
+  display: inline-block;
+  position: relative;
+}
+main.setting input {
+  display: inline-block;
+}
+main.setting label {
+  width: 170px;
+  display: inline-block;
+}
+main.setting .float_wrapper {
+  margin-bottom: 70px;
+}
+main.setting .float_wrapper .left {
+  width: 100px;
+}
+main.setting .float_wrapper .left img {
+  width: 100px;
+  height: 100px;
+}
+main.setting .float_wrapper .left button {
+  width: 100%;
+  padding: 0;
+}
+main.setting .float_wrapper .right {
+  width: 472px;
+}
+main.setting .float_wrapper .right fieldset label {
+  width: 50px;
+  display: inline-block;
+}
+main.setting .float_wrapper .right .p_name input {
+  width: 160px;
+}
+main.setting .float_wrapper .right .p_name .name_wrapper {
+  margin-left: 14px;
+}
+main.setting .float_wrapper .right .gakubu {
+  margin-left: 55px;
+}
+main.setting .float_wrapper .right .gakubu label {
+  width: 120px;
+}
+main.setting .float_wrapper .right .gakubu .label_gakubu {
+  width: 65px;
+}
+main.setting .float_wrapper .right .gakubu input {
+  width: auto;
+  margin-right: 5px;
+  border: none;
+  padding: 0;
+}
+main.setting .bunya {
+  width: 166px;
+  margin-bottom: 0;
+}
+main.setting .bunya label {
+  display: inline;
+  float: left;
+}
+main.setting .bunya input {
+  float: right;
+  margin-bottom: 14px;
+  width: 104px;
+}
+main.setting .p_email,
+main.setting .p_pass {
+  margin-bottom: 70px;
+}
+main.setting .dl_wrapper {
+  margin-bottom: 14px;
+}
+main.setting .dl_wrapper dt {
+  display: inline-block;
+  width: 170px;
+}
+main.setting .dl_wrapper dd {
+  display: inline-block;
+}
+
+/*end setting*/
+/*edit*/
+main.edit fieldset {
+  margin-bottom: 70px;
+}
+main.edit .input_wrapper {
+  margin-bottom: 14px;
+  display: block;
+}
+main.edit .input_wrapper h2 {
+  display: inline;
+  line-height: 24px;
+}
+main.edit .input_wrapper label {
+  width: 5em;
+  display: inline-block;
+}
+main.edit .input_wrapper input,
+main.edit .input_wrapper button {
+  display: inline-block;
+}
+main.edit .nav_header {
+  border: none;
+  margin-bottom: 0;
+}
+main.edit .nav_header > .left {
+  width: 350px;
+}
+main.edit .nav_header > .right {
+  width: 195px;
+}
+main.edit .nav_header > .right .horizontal_nav_wrapper .pagination {
+  width: 120px;
+}
+main.edit .nav_header > .right .horizontal_nav_wrapper .pagination_prev_next {
+  width: 70px;
+}
+main.edit table {
+  width: 100%;
+}
+main.edit table .col_btn {
+  width: 20%;
+}
+main.edit table .col_no {
+  width: 2%;
+}
+main.edit table td {
+  font-size: 14px;
+  padding: 4px 1px;
+}
+main.edit table .td_center {
+  font-size: 12px;
+}
+main.edit table .mini_btn {
+  width: auto;
+  padding: 0 0.3em;
+}
+
+/*edit research*/
+main.edit_research fieldset {
+  margin-bottom: 70px;
+}
+main.edit_research fieldset.title {
+  margin-bottom: 30px;
+}
+main.edit_research .detail {
+  width: 100%;
+}
+main.edit_research .detail .left {
+  width: 45%;
+}
+main.edit_research .detail .right {
+  width: 55%;
+}
+main.edit_research .detail .right table {
+  width: 100%;
+}
+main.edit_research .detail .right table tr,
+main.edit_research .detail .right table td,
+main.edit_research .detail .right table th {
+  border: none;
+  background: none;
+  padding: 0 2px 14px;
+}
+main.edit_research .detail .right table th {
+  padding-bottom: 0;
+  font-size: 12px;
+}
+main.edit_research .detail fieldset {
+  margin-bottom: 30px;
+}
+main.edit_research .detail dt {
+  display: inline-block;
+  width: 80px;
+}
+main.edit_research .detail dt label {
+  font-size: 14px;
+}
+main.edit_research .detail dd {
+  display: inline-block;
+  margin-bottom: 14px;
+}
+main.edit_research .detail dd:before {
+  content: "";
+}
+main.edit_research .detail input {
+  width: 120px;
+  display: inline;
+}
+main.edit_research .detail .t_info {
+  padding-top: 16px;
+}
+main.edit_research label,
+main.edit_research legend {
+  font-size: 16px;
+  font-weight: bold;
+  font-family: "Times New Roman", "游明朝", YuMincho, "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "HG明朝E", "ＭＳ Ｐ明朝", "ＭＳ 明朝", serif;
+  color: navy;
+  line-height: 30px;
+}
+main.edit_research .input_wrapper label {
+  display: inline-block;
+  width: 80px;
+}
+main.edit_research .input_wrapper input {
+  display: inline-block;
+}
+main.edit_research .input_wrapper button {
+  display: inline-block;
+}
+main.edit_research .add_btn {
+  background: rgba(0, 0, 128, 0.4);
+  border: 0;
+}
+main.edit_research .add_btn:hover {
+  background: #f78000;
+}
+main.edit_research .attachment .file_wrapper,
+main.edit_research .youtube .file_wrapper {
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 14px;
+}
+main.edit_research .attachment .input_wrapper,
+main.edit_research .youtube .input_wrapper {
+  margin: 8px 0;
+}
+main.edit_research .attachment .input_wrapper label,
+main.edit_research .youtube .input_wrapper label {
+  display: inline-block;
+  font-family: Verdana, "游ゴシック", YuGothic, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif;
+  font-weight: normal;
+  font-size: 14px;
+  color: #333;
+  width: 60px;
+}
+main.edit_research .youtube .reload {
+  display: inline-block;
+  width: 72px;
+  height: 26px;
+  line-height: 26px;
+}
+main.edit_research .youtube .youtube_area {
+  margin-top: 14px;
+  width: 480px;
+  height: 360px;
+  background: #ccc;
+  color: #fff;
+}
+main.edit_research .youtube .youtube_area iframe {
+  width: 480px;
+  height: 360px;
+}
+main.edit_research .youtube .help {
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  border-radius: 50%;
+  border: 0;
+  background: #0090e7;
+  display: inline-block;
+}
+main.edit_research .youtube .help_wrapper {
+  margin: 7px 0;
+}
+main.edit_research .youtube .help_wrapper p {
+  font-weight: normal;
+  color: #333;
+}
+main.edit_research .youtube .help_area {
+  display: none;
+  position: relative;
+  padding: 4px;
+  width: 400px;
+  height: 348px;
+  background: #0090e7;
+  box-shadow: 0 0 3px #ccc;
+  margin-top: 10px;
+  border-radius: 3px;
+}
+main.edit_research .youtube .help_area:after {
+  bottom: 100%;
+  left: 347px;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-color: rgba(0, 0, 0, 0);
+  border-bottom-color: #0090e7;
+  border-width: 8px;
+  margin-left: -8px;
+}
+
+/*upload*/
+.fileUpload {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  width: 80px;
+  height: 26px;
+  line-height: 26px;
+}
+.fileUpload span {
+  font-size: 12px;
+}
+
+.upload {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  cursor: pointer;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  border: none;
+  width: 80px;
+  height: 26px;
+  line-height: 26px;
+}
+
+.filename {
+  font-size: 12px;
+}
+
+/*submit*/
+#buttons div {
+  width: 240px;
+  margin: 0 0 0 auto;
+}
+#buttons button {
+  float: left;
+  display: block;
+  width: 100px;
+  height: 40px;
+  line-height: 40px;
+  margin: 0 10px;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+#buttons button:hover {
+  box-shadow: 0 0 4px #f78000;
+}
+
+/*validate error*/
+input.error:focus {
+  outline: none;
+  box-shadow: 0 0 4px #f78000;
+}
+
+label.error {
+  width: auto;
+  min-width: 13em;
+  display: block;
+  padding: 0 4px;
+  height: 24px;
+  line-height: 24px;
+  font-size: 12px;
+  color: #fff;
+  position: absolute;
+  top: 33px;
+  left: 70px;
+  background: #f78000;
+  border-radius: 3px;
+  z-index: 1000;
+}
+
+label.error:after {
+  bottom: 100%;
+  left: 20%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-color: rgba(0, 0, 0, 0);
+  border-bottom-color: #f78000;
+  border-width: 6px;
+  margin-left: -6px;
+}
