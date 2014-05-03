@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>検索結果 | ForWit</title>
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=1000, maximum-scale=1.0, user-scalable=yes">
+		
+		<link rel="shortcut icon" href="{{STATIC_URL}}img/favicon.ico" type="image/x-icon" />
+		<link rel="stylesheet" href="{{STATIC_URL}}css/style.css">
+		<link rel="stylesheet" href="{{STATIC_URL}}css/searchresult.css">
+		<!--[if lt IE 9]><script src="http://html5shiv-printshiv.googlecode.com/svn/trunk/html5shiv-printshiv.js"></script><![endif]-->
+	</head>
+	
+	<body id="result">
+	
+		<!-- wrapper -->
+		<div id="wrapper">
+		
+			<!-- container -->
+			<div id="container">
+			
+				<!-- header -->
+				<header class="clearfix">
+				
+					<!-- logo -->
+					<a class="logo" href="index.html">
+						<img src="{{STATIC_URL}}img/logo.jpg" alt="ForWit" width="83" height="24" />
+					</a>
+					
+					<!-- search -->
+					<div class="search">
+						<form action="" id="search-box" method="post">{% csrf_token %}
+							<div>
+								<input type="text" name="q" size="57" class="input" />
+								<button type="submit" name="sa" value="検索">検索</button>
+							</div>
+						</form>
+					</div>
+					
+					<!-- links -->
+					<p class="link">
+						<a href="login.html">ログイン</a>
+					</p>
+					
+				</header>
+				<!-- end header -->
+
+				<!-- main -->
+				<main class="content_wrapper_wide">
+				
+					<section class="main_content_wrapper">
+
+						<div class="clearfix nav_header">
+							<div class="left">
+								<h1>検索結果</h1>
+								<p class="count">124件中 21〜40件を表示</p>
+							</div>
+							<div class="right">
+								<div class="horizontal_nav_wrapper clearfix">
+									<ul class="right pagination_prev_next">
+										<li><a class="prev" href="#">&lt;前</a></li>
+										<li><a class="next" href="#">次&gt;</a></li>
+									</ul>
+									<ul class="right pagination">
+										<li><a href="#">1</a></li>
+										<li class="current"><a href="#">4</a></li>
+										<li><a href="#">7</a></li>
+										<li><a href="#">10</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						
+						<table id="sResult" class="table_5rows">
+							<colgroup class="col_icon" span="1">
+							<colgroup class="col_no" span="1">
+							<colgroup class="col_title" span="1">
+							<colgroup class="col_date" span="1">
+							<colgroup class="col_quote" span="1">
+							<colgroup class="col_memo" span="1">
+							<thead>
+								<tr>
+									<th>&nbsp;</th>
+									<th>No.</th>
+									<th class="td_center">タイトル</th>
+									<th>発行年月</th>
+									<th>メモ数</th>
+									<th>引用数</th>
+								</tr>
+							</thead>
+							<!-- <tr>
+								<td class="td_right"><img src="{{STATIC_URL}}img/icon_ronbun.png" alt="論文" width="11" height="13"></td>
+								<td>21</td>
+								<td><a href="login/thesis.html">上死点近傍燃料噴射による予混合型ディーゼル燃焼の排気改善</a></td>
+								<td>1989年09月</td>
+								<td>10<span>メモ</span></td>
+								<td>11<span>回</span></td>
+							</tr> -->
+							{% for pub in publist %}
+							<tr>
+								<td class="td_right"><img src="{{STATIC_URL}}img/icon_ronbun.png" alt="論文" width="11" height="13"></td>
+								<td>21</td>
+								<td><a href="{{ pub.id }}">{{ pub.title }}</a></td>
+								<td>{{pub.prism_publicationdate}}</td>
+								<td>10<span>メモ</span></td>
+								<td>11<span>回</span></td>
+							</tr>
+							{% endfor %}
+						</table>
+
+						<div class="horizontal_nav_wrapper nav_bottom clearfix">
+							<ul class="right pagination_prev_next">
+								<li><a class="prev" href="#">&lt;前</a></li>
+								<li><a class="next" href="#">次&gt;</a></li>
+							</ul>
+							<ul class="right pagination">
+								<li><a href="#">1</a></li>
+								<li class="current"><a href="#">4</a></li>
+								<li><a href="#">7</a></li>
+								<li><a href="#">10</a></li>
+							</ul>
+						</div>
+					
+					</section>
+					
+				</main>
+				<!-- end main -->
+
+			</div>
+			<!-- end container -->
+		
+		</div>
+		<!-- end wrapper -->
+		
+		<!-- bottom -->
+		<div id="bottom" class="clearfix">
+		
+			<!-- footer -->
+			<footer class="clearfix">
+				<p class="link"><a href="about.html">ForWitとは？</a><a href="contact.html">お問い合わせ</a></p>
+				<p class="copyright">Copyright &copy; 2014 ForWit All rights reserved.</p>
+			</footer>
+			<!-- footer -->
+		
+		</div>
+		<!-- bottom -->
+		
+		<!-- javascript -->
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script type="text/javascript" src="{{STATIC_URL}}js/jquery.heightLine.js"></script>
+		<script type="text/javascript" src="{{STATIC_URL}}js/scrolltopcontrol.js"></script>
+		<script type="text/javascript" src="{{STATIC_URL}}js/tablesorter/jquery.tablesorter.min.js"></script>
+		<script>
+			$(function(){
+				/*table sort - http://tablesorter.com/docs/ - */
+				$("#sResult").tablesorter({
+					headers: { 0: { sorter: false}, 2: {sorter:false} }
+				});
+			})
+		</script>
+	</body>
+</html>
