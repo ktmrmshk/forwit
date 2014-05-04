@@ -139,22 +139,38 @@
 							{% endfor %}
 						</table>
 
-						<div class="horizontal_nav_wrapper nav_bottom clearfix">
-							<ul class="right pagination_prev_next">
-								<li><a class="prev" href="{{q_for_navi}}&page={{page|add:"-1"}}">&lt;前</a></li>
-								<li><a class="next" href="{{q_for_navi}}&page={{page|add:"1"}}">次&gt;</a></li>
-							</ul>
-							<ul class="right pagination">
-								<!-- <li><a href="{{q_for_navi}}&page=1">1</a></li>
-								<li class="current"><a href="{{q_for_navi}}&page=4">4</a></li>
-								<li><a href="#">7</a></li>
-								<li><a href="#">10</a></li> -->
-								<li><a href="{{q_for_navi}}&page=1">1</a></li>
-								<li class="current"><a href="">{{page}}</a></li>
-								<li><a href="{{q_for_navi}}&page={{page|add:"3"}}">{{page|add:"3"}}</a></li>
-								<li><a href="{{q_for_navi}}&page={{lastpage}}">{{lastpage}}</a></li>					
-							</ul>
-						</div>
+								<div class="horizontal_nav_wrapper clearfix">
+									<ul class="right pagination_prev_next">
+								{% ifequal before "f" %}
+									<li><a class="prev" href="">&lt;前</a></li>
+								{% else %}
+									<li><a class="prev" href="{{q_for_navi}}&page={{page|add:"-1"}}">&lt;前</a></li>
+								{% endifequal %}
+						
+								{% ifequal next "f" %}
+									<li><a class="next" href="">次&gt;</a></li>
+								{% else %}
+									<li><a class="next" href="{{q_for_navi}}&page={{page|add:"1"}}">次&gt;</a></li>
+								{% endifequal %}
+								
+									</ul>
+									<ul class="right pagination">
+										{% for pl in pagelist %}
+											{% ifequal pl page %}
+												<li class="current"><a href="">{{pl}}</a></li>
+											{% else %}
+												<li><a href="{{q_for_navi}}&page={{pl}}">{{pl}}</a></li>
+											{% endifequal %}
+										{% endfor %}
+										
+										<!-- {% ifnotequal page "1" %}
+										<li><a href="{{q_for_navi}}&page=1">1</a></li>
+										{% endifnotequal %}
+										<li class="current"><a href="">{{page}}</a></li>
+										<li><a href="{{q_for_navi}}&page={{page|add:"3"}}">{{page|add:"3"}}</a></li>
+										<li><a href="{{q_for_navi}}&page={{lastpage}}">{{lastpage}}</a></li>		 -->
+									</ul>
+								</div>
 					
 					</section>
 					
