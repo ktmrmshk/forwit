@@ -32,10 +32,12 @@
 					
 					<!-- search -->
 					<div class="search">
-						<form action="" id="search-box" method="post">{% csrf_token %}
+						<form action="" id="search-box" method="get">
+							{# {% csrf_token %} #}
 							<div>
 								<input type="text" name="q" size="57" class="input" />
-								<button type="submit" name="sa" value="検索">検索</button>
+								<button type="submit" name="sa" value="search">検索</button>
+								<input type="hidden" name="page" value="0" />
 							</div>
 						</form>
 					</div>
@@ -56,19 +58,25 @@
 						<div class="clearfix nav_header">
 							<div class="left">
 								<h1>検索結果</h1>
-								<p class="count">124件中 21〜40件を表示</p>
+								<p class="count">
+									{% if cnt_ret %}
+										{{ cnt_ret }}
+									{% else %}
+										0
+									{% endif %}
+									件中 21〜40件を表示</p>
 							</div>
 							<div class="right">
 								<div class="horizontal_nav_wrapper clearfix">
 									<ul class="right pagination_prev_next">
-										<li><a class="prev" href="#">&lt;前</a></li>
-										<li><a class="next" href="#">次&gt;</a></li>
+								<li><a class="prev" href="{{q_for_navi}}&page={{page|add:"-1"}}">&lt;前</a></li>
+								<li><a class="next" href="{{q_for_navi}}&page={{page|add:"1"}}">次&gt;</a></li>
 									</ul>
 									<ul class="right pagination">
-										<li><a href="#">1</a></li>
-										<li class="current"><a href="#">4</a></li>
-										<li><a href="#">7</a></li>
-										<li><a href="#">10</a></li>
+										<li><a href="{{q_for_navi}}&page=1">1</a></li>
+										<li class="current"><a href="">{{page}}</a></li>
+										<li><a href="{{q_for_navi}}&page={{page|add:"3"}}">{{page|add:"3"}}</a></li>
+										<li><a href="{{q_for_navi}}&page={{page|add:"5"}}">{{page|add:"5"}}</a></li>		
 									</ul>
 								</div>
 							</div>
@@ -103,7 +111,7 @@
 							<tr>
 								<td class="td_right"><img src="{{STATIC_URL}}img/icon_ronbun.png" alt="論文" width="11" height="13"></td>
 								<td>21</td>
-								<td><a href="{{ pub.id }}">{{ pub.title }}</a></td>
+								<td><a href="{{ pub.link }}">{{ pub.title }}</a></td>
 								<td>{{pub.prism_publicationdate}}</td>
 								<td>10<span>メモ</span></td>
 								<td>11<span>回</span></td>
@@ -113,14 +121,18 @@
 
 						<div class="horizontal_nav_wrapper nav_bottom clearfix">
 							<ul class="right pagination_prev_next">
-								<li><a class="prev" href="#">&lt;前</a></li>
-								<li><a class="next" href="#">次&gt;</a></li>
+								<li><a class="prev" href="{{q_for_navi}}&page={{page|add:"-1"}}">&lt;前</a></li>
+								<li><a class="next" href="{{q_for_navi}}&page={{page|add:"1"}}">次&gt;</a></li>
 							</ul>
 							<ul class="right pagination">
-								<li><a href="#">1</a></li>
-								<li class="current"><a href="#">4</a></li>
+								<!-- <li><a href="{{q_for_navi}}&page=1">1</a></li>
+								<li class="current"><a href="{{q_for_navi}}&page=4">4</a></li>
 								<li><a href="#">7</a></li>
-								<li><a href="#">10</a></li>
+								<li><a href="#">10</a></li> -->
+								<li><a href="{{q_for_navi}}&page=1">1</a></li>
+								<li class="current"><a href="">{{page}}</a></li>
+								<li><a href="{{q_for_navi}}&page={{page|add:"3"}}">{{page|add:"3"}}</a></li>
+								<li><a href="{{q_for_navi}}&page={{page|add:"5"}}">{{page|add:"5"}}</a></li>					
 							</ul>
 						</div>
 					

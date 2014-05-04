@@ -1,7 +1,9 @@
 import feedparser as fp
 import urllib
+import re
 
 CINII_URL = 'http://ci.nii.ac.jp/opensearch/search?'
+LINK_PREFIX = 'http://ci.nii.ac.jp/naid/'
 
 class Publist(object):
     def __init__(self):
@@ -10,13 +12,15 @@ class Publist(object):
         self.dat = None
         self.author =''
         self.q=''
-    def setparam(self, q='', author='', fmt='atom', count=200):
+        self.cnt_ret=0
+    def setparam(self, q='', author='', fmt='atom', count=200, start=0):
         if author != '':
             self.author = author
         if q != '':
             self.q = q
         self.fmt = fmt
         self.count = count
+        self.start = start
         self.query = {}
         if self.q != '':
             self.query['q'] = self.q.encode('utf-8')
@@ -24,14 +28,18 @@ class Publist(object):
             self.query['author'] = self.author.encode('utf-8')
         self.query['format'] = self.fmt
         self.query['count'] = self.count
+        self.query['start'] = self.start
         
+        #DEBUG
         print urllib.urlencode(self.query)
         self.url = CINII_URL + urllib.urlencode(self.query)
     def get(self):
         self.dat = fp.parse(self.url)
+        self.cnt_ret = int(self.dat['feed']['opensearch_totalresults'])
     def loadfile(self, filename):
         self.filename = filename
         self.dat = fp.parse(filename)
+        self.cnt_ret = int(self.dat['feed']['opensearch_totalresults'])
     def print_authors(self, authors):
         for a in authors:
             self.res += a.name + u', '
@@ -49,7 +57,10 @@ class Publist(object):
         print self.res
     def parse_dat(self, entry):
         ret = {}
-        ret['id'] = entry.id
+        m = re.search(r'http://.+/([0-9]+)', entry.id)
+        ret['id'] = int( m.group(1) )
+        #ret['id'] = entry.id
+        ret['link'] = entry.id
         ret['title'] = entry.get('title', 'No Title')
         ret['authors'] = entry.get('authors', 'N/A')
         ret['publisher'] = entry.get('publisher', 'N/A')
@@ -90,10 +101,11 @@ if __name__ == '__main__':
         pub = Publist()
         pub.loadfile(filename)
         pub.parse_dat_all()
-        pub.show()
+        #pub.show()
+        print pub.res[0]['id']
+        return pub
     
-    main_from_file('appid.atom')
-        
+    pub = main_from_file('appid.atom')    
 
 # d = fp.parse('kekka.atom')
 
