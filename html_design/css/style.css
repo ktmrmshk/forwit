@@ -178,8 +178,8 @@ h1, h2 {
   font-family: "Times New Roman", "游明朝", YuMincho, "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "HG明朝E", "ＭＳ Ｐ明朝", "ＭＳ 明朝", serif;
   font-weight: bold;
   font-size: 17px;
-  height: 29px;
-  margin-bottom: 14px;
+  height: 24px;
+  margin-bottom: 5px;
 }
 
 /*-----------------------------
@@ -465,16 +465,17 @@ ul {
   line-height: 17px;
 }
 .nav_header .horizontal_nav_wrapper {
-  margin: 0;
+  width:250px;
+  margin:5px 0px 0px 0px;
 }
 
 .nav_header > div.right,
 .movie_nav_wrapper {
-  width: 195px;
+  width: 250px;
 }
 
 .nav_header > div.left {
-  width: 430px;
+  width: 350px;
 }
 
 /*-----------------------------
