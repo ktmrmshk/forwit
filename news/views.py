@@ -13,7 +13,8 @@ def test_search(request):
     if request.method == 'POST':
         print request.POST['q']
         pub = cinii.Publist()
-        pub.setparam(request.POST['q'])
+        pub.q = request.POST['q']
+        pub.setparam()
         pub.get()
         publist = pub.parse_dat_all()
         return render(request, 'tmp_search-result.html', {'publist': publist[:20]})

@@ -8,14 +8,24 @@ class Publist(object):
         self.url = ''
         self.res = u''
         self.dat = None
-    def setparam(self, author, fmt='atom', count=200):
-        self.author = author
+        self.author =''
+        self.q=''
+    def setparam(self, q='', author='', fmt='atom', count=200):
+        if author != '':
+            self.author = author
+        if q != '':
+            self.q = q
         self.fmt = fmt
         self.count = count
         self.query = {}
-        self.query['author'] = self.author.encode('utf-8')
+        if self.q != '':
+            self.query['q'] = self.q.encode('utf-8')
+        if self.author != '':
+            self.query['author'] = self.author.encode('utf-8')
         self.query['format'] = self.fmt
         self.query['count'] = self.count
+        
+        print urllib.urlencode(self.query)
         self.url = CINII_URL + urllib.urlencode(self.query)
     def get(self):
         self.dat = fp.parse(self.url)
@@ -40,15 +50,15 @@ class Publist(object):
     def parse_dat(self, entry):
         ret = {}
         ret['id'] = entry.id
-        ret['title'] = entry.title
-        ret['authors'] = entry.authors
-        ret['publisher'] = entry.get('publisher', '')
-        ret['prism_publicationname'] = entry.get('prism_publicationname', '')
-        ret['prism_volume'] = entry.get('prism_volume', '')
-        ret['prism_number'] = entry.get('prism_number', '')
-        ret['prism_pagerange'] = entry.get('prism_pagerange', '')
-        ret['prism_publicationdate'] = entry.get('prism_publicationdate', '')
-        ret['prism_issn'] = entry.get('prism_issn', '')
+        ret['title'] = entry.get('title', 'No Title')
+        ret['authors'] = entry.get('authors', 'N/A')
+        ret['publisher'] = entry.get('publisher', 'N/A')
+        ret['prism_publicationname'] = entry.get('prism_publicationname', 'N/A')
+        ret['prism_volume'] = entry.get('prism_volume', 'N/A')
+        ret['prism_number'] = entry.get('prism_number', 'N/A')
+        ret['prism_pagerange'] = entry.get('prism_pagerange', 'N/A')
+        ret['prism_publicationdate'] = entry.get('prism_publicationdate', 'N/A')
+        ret['prism_issn'] = entry.get('prism_issn', 'N/A')
         
         return ret
     def parse_dat_all(self):
