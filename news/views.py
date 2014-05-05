@@ -1,11 +1,14 @@
 from django.shortcuts import render
+from django.http import HttpResponse
 import urllib
-from news.models  import News
+from news.models  import News, Publication
 import cinii
+import json
 
 # Create your views here.
 def test_news(request):
-    news = News.objects.all()
+    #news = News.objects.all()
+    news = News.objects.filter(published=True)
     return render(request, 'tmp_index.html', {'news': news})
 
 
@@ -77,3 +80,33 @@ def test_search(request):
                         'pagelist' : pagelist, 'next':next, 'before':before })
 
     return render(request, 'tmp_search-result.html')
+
+def test_getpub(request):
+    pub=cinii.Publist()
+    pub.setparam(author='masahiko kitamura', count=3)
+    pub.get()
+    ret = pub.parse_dat_all()
+    for p in ret:
+        try:
+            plist = Publication.objects.get(id=p['id'])
+            print 'entry is already exists'
+            continue
+        except:
+            plist = Publication(id=p['id'])
+            plist.link = p['link']
+            plist.title = p['title']
+            plist.authors = p['authors']
+            plist.publisher = p['publisher']
+            plist.publicationname = p['prism_publicationname'] 
+            plist.volume = p['prism_volume']
+            plist.number = p['prism_number']
+            plist.pagerange = p['prism_pagerange']
+            plist.publicationdate = p['prism_publicationdate']
+            plist.issn = p['prism_issn']
+            plist.save()
+            
+    
+    return HttpResponse(json.dumps(ret))
+    
+    
+    

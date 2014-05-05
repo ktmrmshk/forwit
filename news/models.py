@@ -28,3 +28,6 @@ class Publication(models.Model):
     
     author = models.ManyToManyField(User, blank=True, null=True)
     
+    def __unicode__(self):
+        return self.title[:10]#, self.id#, self.title[:10].encode('utf-8')
+    
