@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>ニュース | ForWit</title>
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=1000, maximum-scale=1.0, user-scalable=yes">
+		
+		<link rel="shortcut icon" href="{{STATIC_URL}}img/favicon.ico" type="image/x-icon" />
+		<link rel="stylesheet" href="{{STATIC_URL}}css/style.css">
+		<link rel="stylesheet" href="{{STATIC_URL}}css/user.css">
+		<!--[if lt IE 9]><script src="http://html5shiv-printshiv.googlecode.com/svn/trunk/html5shiv-printshiv.js"></script><![endif]-->
+	</head>
+	
+	<body id="top">
+	
+		<!-- wrapper -->
+		<div id="wrapper">
+		
+			<!-- container -->
+			<div id="container">
+			
+				<!-- header -->
+				<header class="clearfix">
+				
+					<!-- logo -->
+					<a class="logo" href="index.html">
+						<img src="{{STATIC_URL}}img/logo.jpg" alt="ForWit" width="83" height="24" />
+					</a>
+					
+					<!-- search -->
+					<div class="search">
+						<form action="" id="search-box">
+							<div>
+								<input type="text" name="q" size="57" class="input" />
+								<button type="submit" name="sa" value="検索">検索</button>
+							</div>
+						</form>
+					</div>
+					
+					<!-- links -->
+					<p class="link">
+						<a href="../memberlist.html">登録者一覧</a>
+						<a href="../setting.html">設定変更</a>
+						<a href="../../index.html">ログアウト</a>
+					</p>
+					
+				</header>
+				<!-- end header -->
+				
+				<!-- content_wrapper -->
+				<div class="content_wrapper clearfix">
+				
+					<!-- sub_content (profile) -->
+					<section class="sub_content_wrapper left">
+					
+						<!-- <img src="{{STATIC_URL}}img/dummy/user-main.jpg" alt="{{user.last_name}} {{user.first_name}}" width="110" height="110"> -->
+						<img src="{{ user.userprofile.facephoto.url }}" alt="{{user.last_name}} {{user.first_name}}" width="110" height="110">
+						<h1 class="account-name">{{user.last_name}} {{user.first_name}}</h1>
+						
+						<dl class="whoami">
+							<dt>所属</dt>
+							<dd>{{user.userprofile.job}}</dd>
+							<dd>ふぉーうぃっと</dd>
+							<dt>役職</dt>
+							<dd>{{user.userprofile.title}}</dd>
+							<dt>分野</dt>
+							<dd>{{user.userprofile.interesting1}}</dd>
+							<dd>{{user.userprofile.interesting2}}</dd>
+							<dd>{{user.userprofile.interesting3}}</dd>
+							<dt>出身</dt>
+							<dd>{{user.userprofile.school1}}<br />
+								{{user.userprofile.school_dept}}<br />
+								{{user.userprofile.qualification}}<br />
+								{{user.userprofile.school_project}}</dd>
+						</dl>
+						
+						<dl class="status">
+							<dt>研究論文</dt>
+							<dd>( {{ user.publication_set.all | length }} 件)</dd>
+							<dt>研究メモ</dt>
+							<dd>( {{ user.likepub.pub.all | length }} 件)</dd>
+							<dt>ウォッチ</dt>
+							<dd>( {{ user.follower.members.all | length }} 名)</dd>
+							<dt>ウォッチャー</dt>
+							<dd>( {{ user.followed.all | length }} 名)</dd>
+						</dl>
+						
+					</section>
+					<!-- end sub content (profile) -->
+					
+					<!-- main content -->
+					<div class="main_content_wrapper right">
+					
+						<!-- menu -->
+						<nav>
+							<ul class="menu clearfix">
+								<li class="current"><a href="index.html">ニュース</a></li>
+								<li><a href="research.html">研究内容</a></li>
+								<li><a href="memo.html">研究メモ</a></li>
+								<li><a href="watch.html">ウォッチ</a></li>
+							</ul>
+						</nav>
+						
+						<!-- main -->
+						<main class="inner_content_wrapper">	
+												
+							<div class="clearfix">
+							
+								<!-- right -->
+								<div class="right">
+									<!-- お知らせ -->
+									<section class="whatsnew heightline">
+										<h1><img src="{{STATIC_URL}}img/h_whatsnew.png" alt="お知らせ" width="188" height="27"></h1>
+										<ul class="list">
+											<li><a href="../other/index.html">井上さんがあなたをウォッチしました。</a></li>
+											<li><a href="../other/index.html">清水さんが論文を編集しました。</a></li>
+											<li><a href="../other/index.html">長谷川さんがあなたの論文をメモしました。</a></li>
+										</ul>
+									</section>
+									<!-- ウォッチが似ている人 -->
+									<section class="similer">
+										<div class="header_wrapper clearfix">
+											<h1><img src="{{STATIC_URL}}img/h_similer.png" alt="ウォッチが似ている人" width="188" height="27"></h1>
+											<a class="reload" href="">リロード</a>
+										</div>
+										<ul class="user clearfix">
+											<li><a href="../other/index.html"><img src="../../img/dummy/user1.jpg" alt="中央エンジニア" width="74" height="74">中央エンジニア</a></li>
+											<li><a href="../other/index.html"><img src="../../img/dummy/user2.jpg" alt="オールプレジデント" width="74" height="74">オールプレジデント</a></li>
+											<li><a href="../other/index.html"><img src="../../img/dummy/user3.jpg" alt="京都大学" width="74" height="74">京都大学</a></li>
+											<li><a href="../other/index.html"><img src="../../img/dummy/user4.jpg" alt="清水製作所" width="74" height="74">清水製作所</a></li>
+											<li><a href="../other/index.html"><img src="../../img/dummy/user5.jpg" alt="日本大学" width="74" height="74">日本大学</a></li>
+											<li><a href="../other/index.html"><img src="../../img/dummy/user6.jpg" alt="公務員" width="74" height="74">公務員</a></li>
+										</ul>
+									</section>
+								</div>
+								<!-- end right-->
+								
+								<!-- left-->
+								<div class="left">
+									<!--科学系ニュース -->
+									<section class="news heightline">
+										<h1><img src="{{STATIC_URL}}img/h_news.png" alt="科学系ニュース" width="188" height="27"></h1>
+										<ul class="list">
+											<li><a href="../../news.html">薬物をテストするための実験用人間器官 「Homo Minutus」開発プ</a></li>
+											<li><a href="../../news.html">STAPのプロトコルを追う香港の教授、その予兆をとらえる</a></li>
+											<li><a href="../../news.html">宇宙飛行士の心臓、球体に近く変形していたことが確認される</a></li>
+											<li><a href="../../news.html">STAP細胞問題の最終調査報告発表、小保方氏は不服申し立ての構え</a></li>
+											<li><a href="../../news.html">「子供の長時間のテレビ視聴は発達に悪影響」</a></li>
+										</ul>
+									</section>
+									<!-- ピックアップ論文 -->
+									<section class="pickup">
+										<h1><img src="{{STATIC_URL}}img/h_pickup.png" alt="ピックアップ論文" width="188" height="27"></h1>
+										<ul class="list">
+											<li><a href="../thesis.html">上死点近傍燃料噴射による予混合型ディーゼル燃焼の排気改善</a></li>
+											<li><a href="../thesis.html">光線情報による3次元実空間の効率的記述へ向けた光線空間射影法</a></li>
+											<li><a href="../thesis.html">iPS細胞を用いた心臓病の病態解明と再生医療への応用</a></li>
+											<li><a href="../thesis.html">超電導限流器の電力系統安定度向上効果に関する考察</a></li>
+											<li><a href="../thesis.html">LHC実験 : テラスケール物理の成果と展望</a></li>
+											<li><a href="../thesis.html">上死点近傍燃料噴射による予混合型ディーゼル燃焼の排気改善</a></li>
+											<li><a href="../thesis.html">光線情報による3次元実空間の効率的記述へ向けた光線空間射影法</a></li>
+											<li><a href="../thesis.html">iPS細胞を用いた心臓病の病態解明と再生医療への応用</a></li>
+											<li><a href="../thesis.html">超電導限流器の電力系統安定度向上効果に関する考察</a></li>
+											<li><a href="../thesis.html">LHC実験 : テラスケール物理の成果と展望</a></li>	
+										</ul>
+									</section>
+								</div>
+								<!-- end left -->
+								
+							</div>
+							<!-- end clearfix -->
+						
+							<!-- ピックアップ動画 -->
+							<section class="pickup_movie">
+								<h1><img src="{{STATIC_URL}}img/h_movie.png" alt="ピックアップ動画" width="188" height="27"></h1>
+								<ul class="movie movie_3column clearfix">
+									<li><a href="../thesis-movie.html"><dl><dt><img src="../../img/dummy/img_dummy_movie_001.jpg" alt="ロケットエンジンの燃焼試験" width="224" height="126"></dt><dd>ロケットエンジンの燃焼試験</dd></dl></a></li>
+									<li><a href="../thesis-movie.html"><dl><dt><img src="../../img/dummy/img_dummy_movie_002.jpg" alt="バーチャルキャラクターが実世界で動きまわる、実在感のある" width="224" height="126"></dt><dd>バーチャルキャラクターが実世界で動きまわる、実在感のある</dd></dl></a></li>
+									<li><a href="../thesis-movie.html"><dl><dt><img src="../../img/dummy/img_dummy_movie_003.jpg" alt="ヒッグス粒子の発見" width="224" height="126"></dt><dd>ヒッグス粒子の発見</dd></dl></a></li>
+									<li><a href="../thesis-movie.html"><dl><dt><img src="../../img/dummy/img_dummy_movie_004.jpg" alt="iPS細胞の今後の展望" width="224" height="126"></dt><dd>iPS細胞の今後の展望</dd></dl></a></li>
+									<li><a href="../thesis-movie.html"><dl><dt><img src="../../img/dummy/img_dummy_movie_005.jpg" alt="神経細胞の層構造が高度な情報処理を実現" width="224" height="126"></dt><dd>神経細胞の層構造が高度な情報処理を実現</dd></dl></a></li>
+									<li><a href="../thesis-movie.html"><dl><dt><img src="../../img/dummy/img_dummy_movie_006.jpg" alt="核融合における適正値について" width="224" height="126"></dt><dd>核融合における適正値について</dd></dl></a></li>
+								</ul>
+							</section>
+					
+						</main>
+						<!-- end inner_content wrapper -->
+						
+					</div>
+					<!-- end main_content -->
+
+				</div>
+				<!-- end content_wrapper -->
+
+			</div>
+			<!-- end container -->
+		
+		</div>
+		<!-- end wrapper -->
+		
+		<!-- bottom -->
+		<div id="bottom" class="clearfix">
+		
+			<!-- footer -->
+			<footer class="clearfix">
+				<p class="link"><a href="../../about.html">ForWitとは？</a><a href="../../contact.html">お問い合わせ</a></p>
+				<p class="copyright">Copyright &copy; 2014 ForWit All rights reserved.</p>
+			</footer>
+			<!-- footer -->
+		
+		</div>
+		<!-- bottom -->
+		
+		<!-- javascript -->
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script type="text/javascript" src="{{STATIC_URL}}js/jquery.heightLine.js"></script>
+		<script type="text/javascript" src="{{STATIC_URL}}js/scrolltopcontrol.js"></script>
+		<script>
+			$(function(){
+				$(".heightline").heightLine();
+				$(".movie li").heightLine();
+				$(".user li").heightLine();
+				
+				var profileHeight = $(".sub_content_wrapper").outerHeight(),
+					mainHeight = $(".main_content_wrapper").outerHeight(),
+					differ = profileHeight - mainHeight,
+					profilePadding =  parseInt($(".sub_content_wrapper").css("padding-bottom")),
+					mainPadding =  parseInt($(".inne_content_wrapper").css("padding-bottom")) + 3; //border + minus margin
+
+				if(differ > 0){
+					$(".main_content_wrapper").css("padding-bottom", mainPadding + Math.abs(differ) + "px");
+				}else{
+					$(".sub_content_wrapper").css("padding-bottom", profilePadding + Math.abs(differ) + "px");
+				}
+			});
+		</script>
+	</body>
+</html>

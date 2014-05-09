@@ -108,5 +108,11 @@ def test_getpub(request):
     
     return HttpResponse(json.dumps(ret))
     
+def test_userpage(request):
+    return render(request, 'login/account-name/tmp_index.html')
+    
+def test_watch(request):
+    return render(request, 'login/account-name/tmp_watch.html') 
+    
     
     
