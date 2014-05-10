@@ -115,7 +115,13 @@
 										<ul class="user clearfix">
 											<!-- <li><a href="../other/index.html"><img src="../../img/dummy/user1.jpg" alt="temp" width="74" height="74">中央エンジニア<span class="belong">所属</span></a></li> -->
 											{% for w in user.follower.members.all %}
-											<li><a href="../other/index.html"><img src="{{ w.userprofile.facephoto.url }}" alt="{{w.last_name}} {{w.first_name}}" width="74" height="74">{{w.last_name}} {{w.first_name}}<span class="belong">{{w.userprofile.job}}</span></a></li>
+											<li><a href="../other/index.html">
+											{% if w.userprofile.facephoto %}
+											<img src="{{ w.userprofile.facephoto.url }}" alt="{{w.last_name}} {{w.first_name}}" width="74" height="74">{{w.last_name}} {{w.first_name}}
+											{% else %}
+											<img src="dummy.jpg" alt="{{w.last_name}} {{w.first_name}}" width="74" height="74">{{w.last_name}} {{w.first_name}}
+											{% endif %}
+											<span class="belong">{{w.userprofile.job}}</span></a></li>
 											{% endfor%}
 										</ul>
 											
