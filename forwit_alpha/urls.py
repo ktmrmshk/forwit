@@ -18,5 +18,6 @@ urlpatterns = patterns('',
     url(r'^test_upload/', 'news.test_views.upload_file'),
     url(r'^test_userpage/', 'news.views.test_userpage'),
     url(r'^test_watch/', 'news.views.test_watch'),
-    
+    url(r'^pub/(?P<pubid>\d+)/$', 'news.views.pubpage'),
+
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

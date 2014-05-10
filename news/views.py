@@ -83,7 +83,7 @@ def test_search(request):
 
 def test_getpub(request):
     pub=cinii.Publist()
-    pub.setparam(author='masahiko kitamura', count=3)
+    pub.setparam(author='%s %s' % (request.user.last_name, request.user.first_name), count=30)
     pub.get()
     ret = pub.parse_dat_all()
     for p in ret:
@@ -105,8 +105,8 @@ def test_getpub(request):
             plist.issn = p['prism_issn']
             plist.save()
             
-    
-    return HttpResponse(json.dumps(ret))
+    return HttpResponse('%s pubs were found' % len(ret) )
+#     return HttpResponse(json.dumps(ret))
     
 def test_userpage(request):
     return render(request, 'login/account-name/tmp_index.html')
@@ -114,5 +114,12 @@ def test_userpage(request):
 def test_watch(request):
     return render(request, 'login/account-name/tmp_watch.html') 
     
-    
+def pubpage(request, pubid):
+    try:
+        pub = Publication.objects.get(id=pubid)
+        #json.loads(a2.replace("u'", "'").replace("'", '"'))
+        authors = json.loads(pub.authors.replace("u'", "'").replace("'", '"'))
+        return render(request, 'tmp_thesis.html', {'pub':pub, 'authors': authors})
+    except:
+        return HttpResponse('pubid=%s is not found' % pubid )
     
