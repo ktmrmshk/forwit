@@ -120,6 +120,6 @@ def pubpage(request, pubid):
         #json.loads(a2.replace("u'", "'").replace("'", '"'))
         authors = json.loads(pub.authors.replace("u'", "'").replace("'", '"'))
         return render(request, 'tmp_thesis.html', {'pub':pub, 'authors': authors})
+        #return render(request, 'login/tmp_thesis.html', {'pub':pub, 'authors': authors})
     except:
         return HttpResponse('pubid=%s is not found' % pubid )
-    

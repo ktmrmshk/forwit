@@ -31,6 +31,9 @@ class Publication(models.Model):
     def __unicode__(self):
         return self.title[:10]#, self.id#, self.title[:10].encode('utf-8')
 
+class PublicationDetail(models.Model):
+    pass
+
 def upload_to(instance, filename):
     return 'images/%s/%s' %( instance.user.id, filename)
 class UserProfile(models.Model):

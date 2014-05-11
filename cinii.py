@@ -84,7 +84,9 @@ class Publist(object):
             self.print_entry(e)
     def show(self):
         print self.res#.encode('utf-8')
-
+    
+    def get_rdf(self):
+        pass
 
 
 
