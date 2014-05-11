@@ -1,0 +1,85 @@
+<main class="main_content_wrapper">
+	
+	<!-- 論文 -->
+	<section class="thesis clearfix">
+	
+		<!-- 戻るボタン -->
+		<p><a class="back_btn" href="">&laquo; 戻る</a></p>
+		
+		<div class="left">
+		
+			<!--論文メイン-->
+			<div class="t_main">
+				<!--タイトル-->
+				<h1>{{ pub.title }}</h1>
+				<!-- 解説 -->
+				<div class="t_exposition">
+					<h2>アブストラクト</h2>
+					<p>無毒で常温貯蔵可能な液体推進剤として亜酸化窒素(N_2O)/エタノールの組合せに着目し,それによる扱い易い液体推進系の実証研究を進めている.当面の目標として大気吸い込み式極超音速推進系の飛行試験に用いる加速用ロケットエンジンへの適用を目指しているが,その低温環境順応性を活かす衛星・探査機搭載推進系への応用も視</p>
+					<h2>解説</h2>
+					<p>まだありません。 解説を書く。</p>
+		
+				</div>									
+			</div>
+			
+			<!-- 添付資料 -->
+			<div class="t_attachment">
+				<h2>添付資料</h2>
+				<ul class="clearfix">
+				<li><a href="#">アブストラクト</a></li>
+				<li><a href="#">発表スライド</a></li>
+				<li><a href="#">論文</a></li>
+				<li><a href="#">補足説明</a></li>
+				<li><a href="#">写真</a></li>
+				<li><a href="#">グラフ</a></li>
+				</ul>
+			</div>
+			
+		</div>
+		<!-- end left-->		
+		
+		<div class="right">
+				
+			<!-- 情報 -->
+			<div class="t_info">
+				<dl>
+					<dt>投稿学会</dt>
+					<dd>{{pub.publisher}}/{{pub.publicationname}}</dd>
+					<dt>発行年月日</dt>
+					<dd>{{pub.publicationdate}}</dd>							
+					<dt>キーワード</dt>
+					<dd>□□□□□□□□□□□□</dd>	
+				</dl>
+			</div>
+			
+			<!-- 著者 -->
+			<div class="t_author">
+				<table>
+					<thead>
+						<tr>
+							<th class="author">著者</th>
+							<th>所属</th>
+						</tr>
+					</thead>
+					<!-- <tr>
+						<td><a href="login/other/index.html">山田　太郎</a></td>
+						<td>□□□□□□□□□□□□</td>
+					</tr>													 -->
+					{% for a in authors %}
+					<tr>
+						<td>{{a.name}}</td>
+						<td>□□□□□□□□□□□□</td>
+					</tr>
+					{% endfor%}
+					
+				</table>
+			</div>
+			
+		</div>
+		<!-- end right -->
+		
+	</section>
+	<!-- end 論文 -->
+
+</main>
+<!-- end main -->

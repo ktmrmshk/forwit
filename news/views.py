@@ -114,6 +114,9 @@ def test_userpage(request):
 def test_watch(request):
     return render(request, 'login/account-name/tmp_watch.html') 
     
+    
+def make_youtube_url(videoid, width=480, height=360):
+    return '<iframe width="%d" height="%d" src="//www.youtube.com/embed/%s" frameborder="0" allowfullscreen></iframe>' % (width, height, videoid)
 def pubpage(request, pubid):
     try:
         pub = Publication.objects.get(id=pubid)
@@ -123,7 +126,8 @@ def pubpage(request, pubid):
             return render(request, 'tmp_thesis.html', {'pub':pub, 'authors': authors})
         else:
             video = pub.video_set.all()[0]
-            return render(request, 'login/tmp_thesis-movie.html', {'pub':pub, 'authors': authors, 'video': video})
+            video_url = make_youtube_url(video.video_id)
+            return render(request, 'login/tmp_thesis-movie.html', {'pub':pub, 'authors': authors, 'video_url': video_url})
 
         
     except:
