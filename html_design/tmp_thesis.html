@@ -60,7 +60,7 @@
 						<div class="clearfix nav_header">
 							<div class="left">
 								<h1>メモ人数</h1>
-								<p class="count">合計80名</p>
+								<p class="count">合計 {{pub.likepub_set.all | length}} 名</p>
 							</div>
 							
 							{% if user.is_authenticated %}
@@ -85,8 +85,9 @@
 						<div class="user checked_user">
 							<ul class="clearfix">
 								<!-- <li><a href="other/index.html"><img src="../img/dummy/user1.jpg" alt="temp" width="74" height="74">中央エンジニア</a></li> -->
-								<li><a href="other/index.html"><img src="../img/dummy/user2.jpg" alt="temp" width="74" height="74">オールプレジデント</a></li>
-
+								{% for lp in pub.likepub_set.all %}
+								<li><a href="other/index.html"><img src="{{ lp.user.userprofile.facephoto.url }}" alt="{{lp.user.last_name}} {{lp.user.first_name}}" width="74" height="74">{{lp.user.last_name}} {{lp.user.first_name}}</a></li>
+								{% endfor %}
 							</ul>
 						</div>
 						{% else %}

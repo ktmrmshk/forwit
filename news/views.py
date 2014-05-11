@@ -119,7 +119,12 @@ def pubpage(request, pubid):
         pub = Publication.objects.get(id=pubid)
         #json.loads(a2.replace("u'", "'").replace("'", '"'))
         authors = json.loads(pub.authors.replace("u'", "'").replace("'", '"'))
-        return render(request, 'tmp_thesis.html', {'pub':pub, 'authors': authors})
-        #return render(request, 'login/tmp_thesis.html', {'pub':pub, 'authors': authors})
+        if pub.video_set.all() == []:
+            return render(request, 'tmp_thesis.html', {'pub':pub, 'authors': authors})
+        else:
+            video = pub.video_set.all()[0]
+            return render(request, 'login/tmp_thesis-movie.html', {'pub':pub, 'authors': authors, 'video': video})
+
+        
     except:
         return HttpResponse('pubid=%s is not found' % pubid )

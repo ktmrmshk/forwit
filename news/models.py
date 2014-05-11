@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
+from django.conf import settings
 
 class News(models.Model):
     title = models.CharField(max_length=128)
@@ -48,7 +49,7 @@ class UserProfile(models.Model):
     interesting2 = models.CharField(max_length=64, default='ResearchArea2')
     interesting3 = models.CharField(max_length=64, default='ResearchArea3')
     
-    facephoto = models.ImageField(upload_to=upload_to, blank=True, null=True)
+    facephoto = models.ImageField(upload_to=upload_to, blank=True, null=True, default='settings.MEDIA_ROOT/logos/anonymous.jpg')
     
     def __unicode__(self):
         return '%s, %s' % (self.user.username, self.title)
@@ -67,7 +68,8 @@ class Video(models.Model):
     title = models.CharField(max_length=128)
     comment = models.TextField(max_length=1024)
     updated = models.DateTimeField(auto_now=True)
-    
+    #url = models.URLField(blank=True, default='')
+    emburl = models.CharField(max_length=512, blank=True, default='')
     def __unicode__(self):
         return '%s, %s' % (self.title, self.video_id)
     
