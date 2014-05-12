@@ -167,6 +167,8 @@ def pubpage(request, pubid):
 def my_userpage(request):    
     return userpage(request, request.user.username)
 def userpage(request, username):
+    if not request.user.is_authenticated():
+        return HttpResponse('Log-in is required. Please log-in')
     try:
         u = User.objects.get(username__exact=username)
         return render(request, 'login/account-name/tmp_index.html', {'u':u, 'currentpage':'news'} )
@@ -177,6 +179,8 @@ def userpage(request, username):
 def my_research(request):
     return research(request, request.user.username)
 def research(request, username):
+    if not request.user.is_authenticated():
+        return HttpResponse('Log-in is required. Please log-in')
     try:
         u = User.objects.get(username__exact=username)
         return render(request, 'login/account-name/tmp_research.html', {'u':u, 'currentpage':'research'} )
@@ -186,6 +190,8 @@ def research(request, username):
 def my_researchvideo(request):
     return researchvideo(request, request.user.username)
 def researchvideo(request, username):
+    if not request.user.is_authenticated():
+        return HttpResponse('Log-in is required. Please log-in')
     try:
         u = User.objects.get(username__exact=username)
         return render(request, 'login/account-name/tmp_research-movie.html', {'u':u, 'currentpage':'research-video'} )
@@ -195,6 +201,8 @@ def researchvideo(request, username):
 def my_memopage(request):
     return memopage(request, request.user.username)
 def memopage(request, username):
+    if not request.user.is_authenticated():
+        return HttpResponse('Log-in is required. Please log-in')
     try:
         u = User.objects.get(username__exact=username)
         return render(request, 'login/account-name/tmp_memo.html', {'u':u, 'currentpage':'memo'} )
@@ -204,6 +212,8 @@ def memopage(request, username):
 def my_memovideopage(request):
     return memovideopage(request, request.user.username)
 def memovideopage(request, username):
+    if not request.user.is_authenticated():
+        return HttpResponse('Log-in is required. Please log-in')   
     try:
         u = User.objects.get(username__exact=username)
         return render(request, 'login/account-name/tmp_memo-movie.html', {'u':u, 'currentpage':'memo-video'} )
@@ -213,6 +223,8 @@ def memovideopage(request, username):
 def my_watchingpage(request):
     return watchingpage(request, request.user.username)
 def watchingpage(request, username):
+    if not request.user.is_authenticated():
+        return HttpResponse('Log-in is required. Please log-in')
     try:
         u = User.objects.get(username__exact=username)
         return render(request, 'login/account-name/tmp_watch.html', {'u':u, 'currentpage':'watching'} )
@@ -223,6 +235,8 @@ def watchingpage(request, username):
 def my_watchedpage(request):
     return watchedpage(request, request.user.username)
 def watchedpage(request, username):
+    if not request.user.is_authenticated():
+        return HttpResponse('Log-in is required. Please log-in')
     try:
         u = User.objects.get(username__exact=username)
         return render(request, 'login/account-name/tmp_watcher.html', {'u':u, 'currentpage':'watched'} )
