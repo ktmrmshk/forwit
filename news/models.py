@@ -59,19 +59,24 @@ class Follower(models.Model):
     members = models.ManyToManyField(User, related_name='followed', blank=True, null=True)
     def __unicode__(self):
         return '%s' % self.user.username
-    
+
+class VideoManager(models.Manager):
+    def get_video_image(self):
+        return 'http://img.youtube.com/vi/%s/0.jpg' % self.video_id
+        
 class Video(models.Model):
     owner = models.ManyToManyField(User, blank=True, null=True, default=None)
     pub = models.ManyToManyField(Publication, blank=True, null=True)
     videosite = models.CharField(max_length=64, default='youtube')
     video_id = models.CharField(max_length=64)
-    title = models.CharField(max_length=128)
-    comment = models.TextField(max_length=1024)
+    title = models.CharField(max_length=128, blank=True, default='')
+    comment = models.TextField(max_length=1024, blank=True, default='')
     updated = models.DateTimeField(auto_now=True)
     #url = models.URLField(blank=True, default='')
     emburl = models.CharField(max_length=512, blank=True, default='')
     def __unicode__(self):
         return '%s, %s' % (self.title, self.video_id)
+    objects = VideoManager()
     
 #for "MEMO"
 class LikePub(models.Model):  

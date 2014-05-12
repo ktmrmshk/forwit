@@ -25,6 +25,9 @@ urlpatterns = patterns('',
     url(r'^u/$', 'news.views.my_userpage'),
     url(r'^u/(?P<username>\w+)$', 'news.views.userpage'),
     
+    url(r'^memo/$', 'news.views.my_memopage'),
     url(r'^memo/(?P<username>\w+)$', 'news.views.memopage'),
+    url(r'^memo-video/$', 'news.views.my_memovideopage'),
+    url(r'^memo-video/(?P<username>\w+)$', 'news.views.memovideopage'),
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

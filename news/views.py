@@ -170,7 +170,9 @@ def pubpage(request, pubid):
     except:
         print sys.exc_info()[0], sys.exc_info()[1]
         return HttpResponse('pubid=%s is not found' % pubid )
-    
+
+def my_memopage(request):
+    return memopage(request, request.user.username)
 def memopage(request, username):
     try:
         u = User.objects.get(username__exact=username)
@@ -178,7 +180,14 @@ def memopage(request, username):
     except:
         return HttpResponse('username=%s was not found' % username)
     
-    
+def my_memovideopage(request):
+    return memovideopage(request, request.user.username)
+def memovideopage(request, username):
+    try:
+        u = User.objects.get(username__exact=username)
+        return render(request, 'login/account-name/tmp_memo-movie.html', {'u':u} )
+    except:
+        return HttpResponse('username=%s was not found' % username)
     
     
     
