@@ -20,6 +20,8 @@ urlpatterns = patterns('',
     url(r'^test_watch/', 'news.views.test_watch'),
     
     
+    url(r'^$', 'news.views.toppage'),
+    
     url(r'^pub/(?P<pubid>\d+)/$', 'news.views.pubpage'),
     
     url(r'^u/$', 'news.views.my_userpage'),

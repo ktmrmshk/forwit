@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 import urllib
-from news.models  import News, Publication
+from news.models  import News, Publication, Video
 import cinii
 import json
 import sys
@@ -144,6 +144,14 @@ def test_userpage(request):
 def test_watch(request):
     return render(request, 'login/account-name/tmp_watch.html') 
     
+    
+    
+def toppage(request):
+    #news = News.objects.all()
+    news = News.objects.filter(published=True).order_by('?')[:5]
+    pub = Publication.objects.order_by('?')[:5]
+    video = Video.objects.order_by('?')[:8]
+    return render(request, 'tmp_index.html', {'news': news, 'pub':pub, 'video': video})
     
 def make_youtube_url(videoid, width=480, height=360):
     return '<iframe width="%d" height="%d" src="//www.youtube.com/embed/%s" frameborder="0" allowfullscreen></iframe>' % (width, height, videoid)

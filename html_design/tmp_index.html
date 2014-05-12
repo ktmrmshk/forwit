@@ -43,7 +43,6 @@
 							<h2><img src="{{STATIC_URL}}img/h_news.png" alt="科学系ニュース" title="" width="188" height="27"></h2>
 							<ul class="list">
 								<!-- <li><a href="news.html">薬物をテストするための実験用人間器官 「Homo Minutus」開発プ</a></li> -->
-								
 								{% for n in news %}
 								<li><a href="{{ n.source }}"> {{n.title}} </a></li>
 								{% endfor %}
@@ -54,11 +53,10 @@
 						<section class="content pickup right heightline">
 							<h2><img src="{{STATIC_URL}}img/h_pickup.png" alt="ピックアップ論文" title="" width="188" height="27"></h2>
 							<ul class="list">
-								<li><a href="thesis.html">上死点近傍燃料噴射による予混合型ディーゼル燃焼の排気改善</a></li>
-								<li><a href="thesis.html">光線情報による3次元実空間の効率的記述へ向けた光線空間射影法</a></li>
-								<li><a href="thesis.html">iPS細胞を用いた心臓病の病態解明と再生医療への応用</a></li>
-								<li><a href="thesis.html">超電導限流器の電力系統安定度向上効果に関する考察</a></li>
-								<li><a href="thesis.html">LHC実験 : テラスケール物理の成果と展望</a></li>
+								<!-- <li><a href="thesis.html">上死点近傍燃料噴射による予混合型ディーゼル燃焼の排気改善</a></li> -->
+								{% for p in pub %}
+								<li><a href="/pub/{{p.id}}">{{ p.title }}</a></li>
+								{% endfor %}
 							</ul>
 						</section>
 					
@@ -68,14 +66,10 @@
 					<section class="content pickup_movie">
 						<h2><img src="{{STATIC_URL}}img/h_movie.png" alt="ピックアップ動画" title="" width="188" height="27"></h2>
 						<ul class="movie movie_4column clearfix">
-							<li><a href="thesis-movie.html"><dl><dt><img src="img/dummy/img_dummy_movie_001.jpg" alt="ロケットエンジンの燃焼試験" width="214" height="120"></dt><dd>ロケットエンジンの燃焼試験</dd></dl></a></li>
-							<li><a href="thesis-movie.html"><dl><dt><img src="img/dummy/img_dummy_movie_002.jpg" alt="バーチャルキャラクターが実世界で動きまわる、実在感のある" width="214" height="120"></dt><dd>バーチャルキャラクターが実世界で動きまわる、実在感のある</dd></dl></a></li>
-							<li><a href="thesis-movie.html"><dl><dt><img src="img/dummy/img_dummy_movie_003.jpg" alt="ヒッグス粒子の発見" width="214" height="120"></dt><dd>ヒッグス粒子の発見</dd></dl></a></li>
-							<li><a href="thesis-movie.html"><dl><dt><img src="img/dummy/img_dummy_movie_004.jpg" alt="iPS細胞の今後の展望" width="214" height="120"></dt><dd>iPS細胞の今後の展望</dd></dl></a></li>
-							<li><a href="thesis-movie.html"><dl><dt><img src="img/dummy/img_dummy_movie_005.jpg" alt="神経細胞の層構造が高度な情報処理を実現" width="214" height="120"></dt><dd>神経細胞の層構造が高度な情報処理を実現</dd></dl></a></li>
-							<li><a href="thesis-movie.html"><dl><dt><img src="img/dummy/img_dummy_movie_006.jpg" alt="核融合における適正値について" width="214" height="120"></dt><dd>核融合における適正値について</dd></dl></a></li>
-							<li><a href="thesis-movie.html"><dl><dt><img src="img/dummy/img_dummy_movie_007.jpg" alt="エタノールの燃焼試験" width="214" height="120"></dt><dd>エタノールの燃焼試験</dd></dl></a></li>
-							<li><a href="thesis-movie.html"><dl><dt><img src="img/dummy/img_dummy_movie_008.jpg" alt="浮上式鉄道用超電導磁石の電磁加振に伴う発熱現象" width="214" height="120"></dt><dd>浮上式鉄道用超電導磁石の電磁加振に伴う発熱現象</dd></dl></a></li>
+							<!-- <li><a href="thesis-movie.html"><dl><dt><img src="img/dummy/img_dummy_movie_001.jpg" alt="ロケットエンジンの燃焼試験" width="214" height="120"></dt><dd>ロケットエンジンの燃焼試験</dd></dl></a></li> -->
+							{% for v in video %}
+							<li><a href="/pub/{{ v.pub.all.0.id }}"><dl><dt><img src="http://img.youtube.com/vi/{{ v.video_id }}/0.jpg" alt="{{ v.title }}" width="214" height="120"></dt><dd>{{ v.title }}</dd></dl></a></li>
+							{% endfor %}
 						</ul>
 					</section>
 					
