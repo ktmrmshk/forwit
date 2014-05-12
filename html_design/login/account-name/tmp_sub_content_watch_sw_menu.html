@@ -1,4 +1,4 @@
-{# optargs: u, username, currentpage=news, research, memo, memo-video, watching or watched #}
+{# optargs: u, username, currentpage=news, research, research-video, memo, memo-video, watching or watched #}
 <ul class="type">
 	{% ifequal u.username user.username %}
 	<li {% ifequal currentpage "watching" %}class="current"{% endifequal%}><a href="/watching/"><span><img src="{{STATIC_URL}}img/icon_watch.png" alt="ウォッチ" width="13" height="13"></span>ウォッチ</a></li>

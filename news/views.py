@@ -172,7 +172,25 @@ def userpage(request, username):
         return render(request, 'login/account-name/tmp_index.html', {'u':u, 'currentpage':'news'} )
     except:
         return HttpResponse('username=%s was not found' % username)
-    
+
+
+def my_research(request):
+    return research(request, request.user.username)
+def research(request, username):
+    try:
+        u = User.objects.get(username__exact=username)
+        return render(request, 'login/account-name/tmp_research.html', {'u':u, 'currentpage':'research'} )
+    except:
+        return HttpResponse('username=%s was not found' % username)
+
+def my_researchvideo(request):
+    return researchvideo(request, request.user.username)
+def researchvideo(request, username):
+    try:
+        u = User.objects.get(username__exact=username)
+        return render(request, 'login/account-name/tmp_research-movie.html', {'u':u, 'currentpage':'research-video'} )
+    except:
+        return HttpResponse('username=%s was not found' % username)
 
 def my_memopage(request):
     return memopage(request, request.user.username)
