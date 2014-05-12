@@ -1,9 +1,28 @@
 /*-----------------------------
 top
 ------------------------------*/
-h1 {
+.logo {
   border: none;
   height: auto;
+  margin-bottom: 0;
+}
+
+h2 {
+  background-image: url(../img/header_icons.png);
+  background-repeat: no-repeat;
+  padding-left: 30px;
+}
+
+.news h2 {
+  background-position: 0 0;
+}
+
+.pickup h2 {
+  background-position: 0 -50px;
+}
+
+.pickup_movie h2 {
+  background-position: 0 -100px;
 }
 
 main {

@@ -68,7 +68,7 @@ main.setting input {
   display: inline-block;
 }
 main.setting label {
-  width: 170px;
+  width: 150px;
   display: inline-block;
 }
 main.setting .float_wrapper {
@@ -103,15 +103,22 @@ main.setting .float_wrapper .right .gakubu {
 }
 main.setting .float_wrapper .right .gakubu label {
   width: 120px;
+  vertical-align : middle;
+  /*line-height: 16px;*/
 }
 main.setting .float_wrapper .right .gakubu .label_gakubu {
   width: 65px;
 }
 main.setting .float_wrapper .right .gakubu input {
   width: auto;
-  margin-right: 5px;
+  margin-right: 3px;
   border: none;
   padding: 0;
+  vertical-align : middle;
+/*  display: inline-block;
+  width: 16px;
+  height: 16px;
+  line-height: 16px;*/
 }
 main.setting .bunya {
   width: 166px;
@@ -128,6 +135,7 @@ main.setting .bunya input {
 }
 main.setting .p_email,
 main.setting .p_pass {
+  margin-left: 20px;
   margin-bottom: 70px;
 }
 main.setting .dl_wrapper {
@@ -167,10 +175,10 @@ main.edit .nav_header {
   margin-bottom: 0;
 }
 main.edit .nav_header > .left {
-  width: 350px;
+  width: 360px;
 }
 main.edit .nav_header > .right {
-  width: 195px;
+  width: 230px;
 }
 main.edit .nav_header > .right .horizontal_nav_wrapper .pagination {
   width: 120px;
@@ -196,7 +204,7 @@ main.edit table .td_center {
 }
 main.edit table .mini_btn {
   width: auto;
-  padding: 0 0.3em;
+  padding: 0 0.2em;
 }
 
 /*edit research*/
@@ -300,7 +308,7 @@ main.edit_research .youtube .reload {
   display: inline-block;
   width: 72px;
   height: 26px;
-  line-height: 26px;
+  line-height: 1;
 }
 main.edit_research .youtube .youtube_area {
   margin-top: 14px;
@@ -360,12 +368,14 @@ main.edit_research .youtube .help_area:after {
   display: inline-block;
   position: relative;
   overflow: hidden;
+  margin-right: 10px;
   width: 80px;
   height: 26px;
   line-height: 26px;
 }
 .fileUpload span {
   font-size: 12px;
+  line-height: 26px;
 }
 
 .upload {
@@ -386,6 +396,10 @@ main.edit_research .youtube .help_area:after {
 
 .filename {
   font-size: 12px;
+  display: inline-block;
+height: 26px;
+  line-height: 26px;
+  vertical-align: top;
 }
 
 /*submit*/
@@ -398,7 +412,6 @@ main.edit_research .youtube .help_area:after {
   display: block;
   width: 100px;
   height: 40px;
-  line-height: 40px;
   margin: 0 10px;
   -webkit-transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;
@@ -444,4 +457,10 @@ label.error:after {
   border-bottom-color: #f78000;
   border-width: 6px;
   margin-left: -6px;
+}
+
+.mini_btn,
+.blue_btn,
+button {
+  line-height: 1;
 }

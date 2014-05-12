@@ -82,9 +82,11 @@ login/other
   width: 100%;
   height: 30px;
   line-height: 30px;
+  padding: 0;
+  margin: 0;
 }
 
-/*content_menu----------------------*/
+/*table----------------------*/
 table {
   width: 100%;
   font-size: 12px;
@@ -163,6 +165,26 @@ table .col_quote {
 }
 
 /*top(mypage)----------------------*/
+#top .inner_content_wrapper h1 {
+  background-image: url(../img/header_icons.png);
+  background-repeat: no-repeat;
+  padding-left: 30px;
+}
+#top .inner_content_wrapper .whatsnew h1 {
+  background-position: 0 -150px;
+}
+#top .inner_content_wrapper .similer h1 {
+  background-position: 0 -200px;
+}
+#top .inner_content_wrapper .news h1 {
+  background-position: 0 0;
+}
+#top .inner_content_wrapper .pickup h1 {
+  background-position: 0 -50px;
+}
+#top .inner_content_wrapper .pickup_movie h1 {
+  background-position: 0 -100px;
+}
 #top .inner_content_wrapper .clearfix .left {
   width: 442px;
 }
@@ -229,7 +251,7 @@ table .col_quote {
 }
 #research .r_headline {
   border-bottom: 1px solid navy;
-  height: 29px;
+  height: 25px;
   margin-bottom: 0.5em;
 }
 #research .r_headline h1 {
@@ -265,6 +287,10 @@ table .col_quote {
   line-height: 16px;
 }
 
+#memo table .mine,
+#memo table .delete {
+  vertical-align: middle;
+}
 #memo table .mine_btn {
   background: #999;
   border: 1px solid #999;
@@ -273,6 +299,9 @@ table .col_quote {
   border-radius: 3px;
   color: #fff;
   font-size: 11px;
+  line-height: 12px;
+  height: auto;
+  padding: 3px 0 3px;
   display: inline-block;
 }
 #memo table .mine_btn:hover {
@@ -281,10 +310,14 @@ table .col_quote {
 }
 #memo table .delete_btn {
   width: 24px;
+  height: 18px;
   border-radius: 3px;
+  display: inline-block;
 }
 #memo table .delete_btn span {
-  line-height: 17px;
+  height: 16px;
+  line-height: 16px;
+  overflow: hidden;
 }
 
 /*ウォッチ----------------------*/
