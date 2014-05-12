@@ -29,5 +29,11 @@ urlpatterns = patterns('',
     url(r'^memo/(?P<username>\w+)$', 'news.views.memopage'),
     url(r'^memo-video/$', 'news.views.my_memovideopage'),
     url(r'^memo-video/(?P<username>\w+)$', 'news.views.memovideopage'),
+    
+    url(r'^watching/$', 'news.views.my_watchingpage'),
+    url(r'^watching/(?P<username>\w+)$', 'news.views.watchingpage'),
+    
+    url(r'^watched/$', 'news.views.my_watchedpage'),
+    url(r'^watched/(?P<username>\w+)$', 'news.views.watchedpage'),
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

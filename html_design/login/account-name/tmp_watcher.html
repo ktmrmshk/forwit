@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>ウォッチ | ForWit</title>
+		<title>ウォッチャー | ForWit</title>
 		<meta name="description" content="">
 		<meta name="keywords" content="">
 		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
@@ -78,11 +78,11 @@
 								<!-- メニュー -->
 								<div class="content_menu left">
 									<ul class="type">
-										<li class="current"><a href="watch.html"><span><img src="{{STATIC_URL}}img/icon_watch.png" alt="ウォッチ" width="13" height="13"></span>ウォッチ</a></li>
-										<li><a href="watcher.html"><span><img src="{{STATIC_URL}}img/icon_watcher.png" alt="ウォッチャー" width="12" height="13"></span>ウォッチャー</a></li>
+										<li><a href="watch.html"><span><img src="{{STATIC_URL}}img/icon_watch.png" alt="ウォッチ" width="13" height="13"></span>ウォッチ</a></li>
+										<li class="current"><a href="watcher.html"><span><img src="{{STATIC_URL}}img/icon_watcher.png" alt="ウォッチャー" width="12" height="13"></span>ウォッチャー</a></li>
 									</ul>
 								
-									<p class="count">計{{ user.follower.members.all | length }}名</p>
+									<p class="count">計{{ user.followed.all | length }}名</p>
 									<p><span class="blue_btn edit_btn">編集</span></p>
 								</div>
 								<!-- end left, content menu-->
@@ -94,7 +94,7 @@
 									
 										<div class="clearfix nav_header">
 											<div class="left">
-												<h1>ウォッチ</h1>
+												<h1>ウォッチャー</h1>
 											</div>
 											<div class="right">
 												<div class="horizontal_nav_wrapper clearfix">
@@ -114,14 +114,14 @@
 															
 										<ul class="user clearfix">
 											<!-- <li><a href="../other/index.html"><img src="../../img/dummy/user1.jpg" alt="temp" width="74" height="74">中央エンジニア<span class="belong">所属</span></a></li> -->
-											{% for w in user.follower.members.all %}
-											<li><a href="/u/{{w.username}}">
-											{% if w.userprofile.facephoto %}
-											<img src="{{ w.userprofile.facephoto.url }}" alt="{{w.last_name}} {{w.first_name}}" width="74" height="74">{{w.last_name}} {{w.first_name}}
+											{% for f in user.followed.all %}
+											<li><a href="/u/{{f.user.username}}">
+											{% if f.user.userprofile.facephoto %}
+											<img src="{{ f.user.userprofile.facephoto.url }}" alt="{{f.user.last_name}} {{f.user.first_name}}" width="74" height="74">{{f.user.last_name}} {{f.user.first_name}}
 											{% else %}
-											<img src="dummy.jpg" alt="{{w.last_name}} {{w.first_name}}" width="74" height="74">{{w.last_name}} {{w.first_name}}
+											<img src="dummy.jpg" alt="{{f.user.last_name}} {{f.user.first_name}}" width="74" height="74">{{f.user.last_name}} {{f.user.first_name}}
 											{% endif %}
-											<span class="belong">{{w.userprofile.job}}</span></a></li>
+											<span class="belong">{{f.user.userprofile.job}}</span></a></li>
 											{% endfor%}
 										</ul>
 											

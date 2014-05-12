@@ -189,5 +189,25 @@ def memovideopage(request, username):
     except:
         return HttpResponse('username=%s was not found' % username)
     
-    
-    
+def my_watchingpage(request):
+    return watchingpage(request, request.user.username)
+def watchingpage(request, username):
+    try:
+        u = User.objects.get(username__exact=username)
+        return render(request, 'login/account-name/tmp_watch.html', {'u':u} )
+    except:
+        return HttpResponse('username=%s was not found' % username)    
+    return render(request, 'login/account-name/tmp_watch.html') 
+
+def my_watchedpage(request):
+    return watchedpage(request, request.user.username)
+def watchedpage(request, username):
+    try:
+        u = User.objects.get(username__exact=username)
+        return render(request, 'login/account-name/tmp_watcher.html', {'u':u} )
+    except:
+        return HttpResponse('username=%s was not found' % username)    
+    return render(request, 'login/account-name/tmp_watcher.html') 
+
+
+
