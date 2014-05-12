@@ -139,15 +139,7 @@ def test_userpage(request):
     #return render(request, 'login/account-name/tmp_index.html', {'u':request.user})
     return userpage(request, request.user.username)
 
-def my_userpage(request):    
-    return userpage(request, request.user.username)
-def userpage(request, username):
-    try:
-        u = User.objects.get(username__exact=username)
-        return render(request, 'login/account-name/tmp_index.html', {'u':u} )
-    except:
-        return HttpResponse('username=%s was not found' % username)
-    
+
     
 def test_watch(request):
     return render(request, 'login/account-name/tmp_watch.html') 
@@ -171,12 +163,23 @@ def pubpage(request, pubid):
         print sys.exc_info()[0], sys.exc_info()[1]
         return HttpResponse('pubid=%s is not found' % pubid )
 
+
+def my_userpage(request):    
+    return userpage(request, request.user.username)
+def userpage(request, username):
+    try:
+        u = User.objects.get(username__exact=username)
+        return render(request, 'login/account-name/tmp_index.html', {'u':u, 'currentpage':'news'} )
+    except:
+        return HttpResponse('username=%s was not found' % username)
+    
+
 def my_memopage(request):
     return memopage(request, request.user.username)
 def memopage(request, username):
     try:
         u = User.objects.get(username__exact=username)
-        return render(request, 'login/account-name/tmp_memo.html', {'u':u} )
+        return render(request, 'login/account-name/tmp_memo.html', {'u':u, 'currentpage':'memo'} )
     except:
         return HttpResponse('username=%s was not found' % username)
     
@@ -185,7 +188,7 @@ def my_memovideopage(request):
 def memovideopage(request, username):
     try:
         u = User.objects.get(username__exact=username)
-        return render(request, 'login/account-name/tmp_memo-movie.html', {'u':u} )
+        return render(request, 'login/account-name/tmp_memo-movie.html', {'u':u, 'currentpage':'memo'} )
     except:
         return HttpResponse('username=%s was not found' % username)
     
@@ -194,7 +197,7 @@ def my_watchingpage(request):
 def watchingpage(request, username):
     try:
         u = User.objects.get(username__exact=username)
-        return render(request, 'login/account-name/tmp_watch.html', {'u':u} )
+        return render(request, 'login/account-name/tmp_watch.html', {'u':u, 'currentpage':'watch'} )
     except:
         return HttpResponse('username=%s was not found' % username)    
     return render(request, 'login/account-name/tmp_watch.html') 
@@ -204,7 +207,7 @@ def my_watchedpage(request):
 def watchedpage(request, username):
     try:
         u = User.objects.get(username__exact=username)
-        return render(request, 'login/account-name/tmp_watcher.html', {'u':u} )
+        return render(request, 'login/account-name/tmp_watcher.html', {'u':u, 'currentpage':'watch'} )
     except:
         return HttpResponse('username=%s was not found' % username)    
     return render(request, 'login/account-name/tmp_watcher.html') 
