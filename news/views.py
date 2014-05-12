@@ -4,6 +4,8 @@ import urllib
 from news.models  import News, Publication
 import cinii
 import json
+import sys
+
 
 # Create your views here.
 def test_news(request):
@@ -39,6 +41,9 @@ def test_search(request):
         pub.setparam(count=20, start=start)
         pub.get()
         publist = pub.parse_dat_all()
+        # INGEST to DB!!!
+        ingest_publist(publist)
+        
         lastpage=(pub.cnt_ret-1)/20 + 1
         pagelist=[]
         next='t'
@@ -81,12 +86,8 @@ def test_search(request):
 
     return render(request, 'tmp_search-result.html')
 
-def test_getpub(request):
-    pub=cinii.Publist()
-    pub.setparam(author='%s %s' % (request.user.last_name, request.user.first_name), count=30)
-    pub.get()
-    ret = pub.parse_dat_all()
-    for p in ret:
+def ingest_publist(publist):
+    for p in publist:
         try:
             plist = Publication.objects.get(id=p['id'])
             print 'entry is already exists'
@@ -105,6 +106,31 @@ def test_getpub(request):
             plist.issn = p['prism_issn']
             plist.save()
             
+def test_getpub(request):
+    pub=cinii.Publist()
+    pub.setparam(author='%s %s' % (request.user.last_name, request.user.first_name), count=30)
+    pub.get()
+    ret = pub.parse_dat_all()
+#     for p in ret:
+#         try:
+#             plist = Publication.objects.get(id=p['id'])
+#             print 'entry is already exists'
+#             continue
+#         except:
+#             plist = Publication(id=p['id'])
+#             plist.link = p['link']
+#             plist.title = p['title']
+#             plist.authors = p['authors']
+#             plist.publisher = p['publisher']
+#             plist.publicationname = p['prism_publicationname'] 
+#             plist.volume = p['prism_volume']
+#             plist.number = p['prism_number']
+#             plist.pagerange = p['prism_pagerange']
+#             plist.publicationdate = p['prism_publicationdate']
+#             plist.issn = p['prism_issn']
+#             plist.save()
+    ingest_publist(ret)
+            
     return HttpResponse('%s pubs were found' % len(ret) )
 #     return HttpResponse(json.dumps(ret))
     
@@ -122,13 +148,13 @@ def pubpage(request, pubid):
         pub = Publication.objects.get(id=pubid)
         #json.loads(a2.replace("u'", "'").replace("'", '"'))
         authors = json.loads(pub.authors.replace("u'", "'").replace("'", '"'))
-        if pub.video_set.all() == []:
+        try:
+            if pub.video_set.all() != []:
+                video = pub.video_set.all()[0]
+                video_url = make_youtube_url(video.video_id)
+                return render(request, 'login/tmp_thesis-movie.html', {'pub':pub, 'authors': authors, 'video_url': video_url})
+        except:
             return render(request, 'tmp_thesis.html', {'pub':pub, 'authors': authors})
-        else:
-            video = pub.video_set.all()[0]
-            video_url = make_youtube_url(video.video_id)
-            return render(request, 'login/tmp_thesis-movie.html', {'pub':pub, 'authors': authors, 'video_url': video_url})
-
-        
     except:
+        print sys.exc_info()[0], sys.exc_info()[1]
         return HttpResponse('pubid=%s is not found' % pubid )
