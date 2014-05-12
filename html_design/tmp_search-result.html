@@ -31,16 +31,7 @@
 					</a>
 					
 					<!-- search -->
-					<div class="search">
-						<form action="" id="search-box" method="get">
-							{# {% csrf_token %} #}
-							<div>
-								<input type="text" name="q" size="57" class="input" />
-								<button type="submit" name="sa" value="search">検索</button>
-								<!-- <input type="hidden" name="page" value="0" /> -->
-							</div>
-						</form>
-					</div>
+					{% include "tmp_sub_content_widget_search.html" %}
 					
 					<!-- links -->
 					<p class="link">
@@ -133,7 +124,7 @@
 								<td>21</td>
 								<td><a href="/pub/{{ pub.id }}/{# {{ pub.link }} #}">{{ pub.title }}</a></td>
 								<td>{{pub.prism_publicationdate}}</td>
-								<td>10<span>メモ</span></td>
+								<td>{{ pub.likepub_set.all | length }}<span>メモ</span></td>
 								<td>11<span>回</span></td>
 							</tr>
 							{% endfor %}

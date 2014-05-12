@@ -31,14 +31,7 @@
 					</a>
 					
 					<!-- search -->
-					<div class="search">
-						<form action="" id="search-box">
-							<div>
-								<input type="text" name="q" size="57" class="input" />
-								<button type="submit" name="sa" value="検索">検索</button>
-							</div>
-						</form>
-					</div>
+					{% include "tmp_sub_content_widget_search.html" %}>
 					
 					<!-- links -->
 					<p class="link">
@@ -81,7 +74,7 @@
 								{% include "login/account-name/tmp_sub_content_watch_sw_menu.html" %}
 								
 								
-									<p class="count">計{{ user.followed.all | length }}名</p>
+									<p class="count">計{{ u.followed.all | length }}名</p>
 									<p><span class="blue_btn edit_btn">編集</span></p>
 								</div>
 								<!-- end left, content menu-->
@@ -113,7 +106,7 @@
 															
 										<ul class="user clearfix">
 											<!-- <li><a href="../other/index.html"><img src="../../img/dummy/user1.jpg" alt="temp" width="74" height="74">中央エンジニア<span class="belong">所属</span></a></li> -->
-											{% for f in user.followed.all %}
+											{% for f in u.followed.all %}
 											<li><a href="/u/{{f.user.username}}">
 											{% if f.user.userprofile.facephoto %}
 											<img src="{{ f.user.userprofile.facephoto.url }}" alt="{{f.user.last_name}} {{f.user.first_name}}" width="74" height="74">{{f.user.last_name}} {{f.user.first_name}}
