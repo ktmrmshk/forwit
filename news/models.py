@@ -76,7 +76,13 @@ class Video(models.Model):
 #for "MEMO"
 class LikePub(models.Model):  
     user = models.OneToOneField(User)
-    pub = models.ManyToManyField(Publication)
+    pub = models.ManyToManyField(Publication, blank=True, null=True)
+    def __unicode__(self):
+        return '%s' % self.user.username
 
-
+class LikeVideo(models.Model):
+    user = models.OneToOneField(User)
+    video = models.ManyToManyField(Video, blank=True, null=True)
+    def __unicode__(self):
+        return '%s' % self.user.username
     

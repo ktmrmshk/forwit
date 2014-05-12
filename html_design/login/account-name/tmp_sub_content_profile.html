@@ -1,36 +1,36 @@
 <!-- sub_content (profile) -->
 <section class="sub_content_wrapper left">
 
-	<!-- <img src="{{STATIC_URL}}img/dummy/user-main.jpg" alt="{{user.last_name}} {{user.first_name}}" width="110" height="110"> -->
-	<img src="{{ user.userprofile.facephoto.url }}" alt="{{user.last_name}} {{user.first_name}}" width="110" height="110">
-	<h1 class="account-name">{{user.last_name}} {{user.first_name}}</h1>
+	<!-- <img src="{{STATIC_URL}}img/dummy/user-main.jpg" alt="{{u.last_name}} {{u.first_name}}" width="110" height="110"> -->
+	<img src="{{ u.userprofile.facephoto.url }}" alt="{{u.last_name}} {{u.first_name}}" width="110" height="110">
+	<h1 class="account-name">{{u.last_name}} {{u.first_name}}</h1>
 	
 	<dl class="whoami">
 		<dt>所属</dt>
-		<dd>{{user.userprofile.job}}</dd>
+		<dd>{{u.userprofile.job}}</dd>
 		<dd>ふぉーうぃっと</dd>
 		<dt>役職</dt>
-		<dd>{{user.userprofile.title}}</dd>
+		<dd>{{u.userprofile.title}}</dd>
 		<dt>分野</dt>
-		<dd>{{user.userprofile.interesting1}}</dd>
-		<dd>{{user.userprofile.interesting2}}</dd>
-		<dd>{{user.userprofile.interesting3}}</dd>
+		<dd>{{u.userprofile.interesting1}}</dd>
+		<dd>{{u.userprofile.interesting2}}</dd>
+		<dd>{{u.userprofile.interesting3}}</dd>
 		<dt>出身</dt>
-		<dd>{{user.userprofile.school1}}<br />
-			{{user.userprofile.school_dept}}<br />
-			{{user.userprofile.qualification}}<br />
-			{{user.userprofile.school_project}}</dd>
+		<dd>{{u.userprofile.school1}}<br />
+			{{u.userprofile.school_dept}}<br />
+			{{u.userprofile.qualification}}<br />
+			{{u.userprofile.school_project}}</dd>
 	</dl>
 	
 	<dl class="status">
 		<dt>研究論文</dt>
-		<dd>( {{ user.publication_set.all | length }} 件)</dd>
+		<dd>( {{ u.publication_set.all | length }} 件)</dd>
 		<dt>研究メモ</dt>
-		<dd>( {{ user.likepub.pub.all | length }} 件)</dd>
+		<dd>( {{ u.likepub.pub.all | length }} 件)</dd>
 		<dt>ウォッチ</dt>
-		<dd>( {{ user.follower.members.all | length }} 名)</dd>
+		<dd>( {{ u.follower.members.all | length }} 名)</dd>
 		<dt>ウォッチャー</dt>
-		<dd>( {{ user.followed.all | length }} 名)</dd>
+		<dd>( {{ u.followed.all | length }} 名)</dd>
 	</dl>
 	
 </section>

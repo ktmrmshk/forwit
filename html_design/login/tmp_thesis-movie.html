@@ -221,7 +221,7 @@
 						<div class="user checked_user">
 							<ul class="clearfix">
 							{% for lp in pub.likepub_set.all %}
-							<li><a href="other/index.html"><img src="{{ lp.user.userprofile.facephoto.url }}" alt="{{lp.user.last_name}} {{lp.user.first_name}}" width="74" height="74">{{lp.user.last_name}} {{lp.user.first_name}}</a></li>
+							<li><a href="/u/{{lp.user.username}}"><img src="{{ lp.user.userprofile.facephoto.url }}" alt="{{lp.user.last_name}} {{lp.user.first_name}}" width="74" height="74">{{lp.user.last_name}} {{lp.user.first_name}}</a></li>
 							{% endfor %}
 							</ul>
 						</div>

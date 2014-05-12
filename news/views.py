@@ -5,6 +5,7 @@ from news.models  import News, Publication
 import cinii
 import json
 import sys
+from django.contrib.auth.models import User 
 
 
 # Create your views here.
@@ -135,7 +136,18 @@ def test_getpub(request):
 #     return HttpResponse(json.dumps(ret))
     
 def test_userpage(request):
-    return render(request, 'login/account-name/tmp_index.html')
+    #return render(request, 'login/account-name/tmp_index.html', {'u':request.user})
+    return userpage(request, request.user.username)
+
+def my_userpage(request):    
+    return userpage(request, request.user.username)
+def userpage(request, username):
+    try:
+        u = User.objects.get(username__exact=username)
+        return render(request, 'login/account-name/tmp_index.html', {'u':u} )
+    except:
+        return HttpResponse('username=%s was not found' % username)
+    
     
 def test_watch(request):
     return render(request, 'login/account-name/tmp_watch.html') 
@@ -158,3 +170,15 @@ def pubpage(request, pubid):
     except:
         print sys.exc_info()[0], sys.exc_info()[1]
         return HttpResponse('pubid=%s is not found' % pubid )
+    
+def memopage(request, username):
+    try:
+        u = User.objects.get(username__exact=username)
+        return render(request, 'login/account-name/tmp_memo.html', {'u':u} )
+    except:
+        return HttpResponse('username=%s was not found' % username)
+    
+    
+    
+    
+    

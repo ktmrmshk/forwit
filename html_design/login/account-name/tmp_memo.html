@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>研究メモ | ForWit</title>
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=1000, maximum-scale=1.0, user-scalable=yes">
+		
+		<link rel="shortcut icon" href="{{STATIC_URL}}img/favicon.ico" type="image/x-icon" />
+		<link rel="stylesheet" href="{{STATIC_URL}}css/style.css">
+		<link rel="stylesheet" href="{{STATIC_URL}}css/user.css">
+		<!--[if lt IE 9]><script src="http://html5shiv-printshiv.googlecode.com/svn/trunk/html5shiv-printshiv.js"></script><![endif]-->
+	</head>
+	
+	<body id="memo">
+	
+		<!-- wrapper -->
+		<div id="wrapper">
+		
+			<!-- container -->
+			<div id="container">
+			
+				<!-- header -->
+				<header class="clearfix">
+				
+					<!-- logo -->
+					<a class="logo" href="index.html">
+						<img src="{{STATIC_URL}}img/logo.jpg" alt="ForWit" width="83" height="24" />
+					</a>
+					
+					<!-- search -->
+					<div class="search">
+						<form action="" id="search-box">
+							<div>
+								<input type="text" name="q" size="57" class="input" />
+								<button type="submit" name="sa" value="検索">検索</button>
+							</div>
+						</form>
+					</div>
+					
+					<!-- links -->
+					<p class="link">
+						<a href="../memberlist.html">登録者一覧</a>
+						<a href="../setting.html">設定変更</a>
+						<a href="../../index.html">ログアウト</a>
+					</p>
+					
+				</header>
+				<!-- end header -->
+				
+				<!-- content_wrapper -->
+				<div class="content_wrapper clearfix">
+				
+					<!-- sub content (profile) -->
+					{% include "login/account-name/tmp_sub_content_profile.html" %}
+					<!-- end sub content (profile) -->
+					
+					<!-- main content -->
+					<section class="main_content_wrapper right">
+					
+						<!-- menu -->
+						<nav>
+							<ul class="menu clearfix">
+								<li><a href="index.html">ニュース</a></li>
+								<li><a href="research.html">研究内容</a></li>
+								<li class="current"><a href="memo.html">研究メモ</a></li>
+								<li><a href="watch.html">ウォッチ</a></li>
+							</ul>
+						</nav>
+						
+						<!-- inner_content_wrapper -->
+						<main class="inner_content_wrapper">	
+												
+							<div class="clearfix">
+
+								<!-- メニュー -->
+								<div class="content_menu left">
+									<ul class="type">
+										<li class="current"><a href="memo.html"><span><img src="{{STATIC_URL}}img/icon_ronbun.png" alt="論文" width="11" height="13"></span>論文</a></li>
+										<li><a href="memo-movie.html"><span><img src="{{STATIC_URL}}img/icon_movie.png" alt="動画" width="13" height="13"></span>動画</a></li>
+									</ul>
+								
+									<p class="count">計 {{u.likepub.pub.all | length}} 件</p>
+									
+									<p><span class="blue_btn edit_btn">編集</span></p>
+								</div>
+								<!-- end content menu-->
+
+								<div class="main_content right">
+								
+									<!--研究メモ -->
+									<section class="r_list">
+									
+										<div class="clearfix nav_header">
+											<div class="left">
+												<h1>研究メモ</h1>
+											</div>
+											<div class="right">
+												<div class="horizontal_nav_wrapper clearfix">
+													<ul class="right pagination_prev_next">
+														<li><a class="prev" href="#">&lt;前</a></li>
+														<li><a class="next" href="#">次&gt;</a></li>
+													</ul>
+													<ul class="right pagination">
+														<li><a href="#">1</a></li>
+														<li class="current"><a href="#">4</a></li>
+														<li><a href="#">7</a></li>
+														<li><a href="#">10</a></li>
+													</ul>
+												</div>
+											</div>
+										</div>
+										
+										<table class="table_5rows">
+											<colgroup class="col_icon" span="1">
+											<colgroup class="col_no" span="1">
+											<colgroup class="col_title" span="1">
+											<colgroup class="col_date" span="1">
+											<colgroup class="col_memo" span="1">
+											<colgroup class="col_quote" span="1">
+											<thead>
+												<tr>
+													<th>&nbsp;</th>
+													<th>No.</th>
+													<th>タイトル</th>
+													<th>発行年月</th>
+													<th class="td_right">メモ数</th>
+													<th class="refferNum td_right">引用数</th>
+												</tr>
+											</thead>
+											<!-- <tr>
+												<td class="td_center"><img src="{{STATIC_URL}}img/icon_ronbun.png" alt="論文" width="11" height="13"></td>
+												<td class="td_center">1</td>
+												<td><a href="../thesis.html">上死点近傍燃料噴射による予混合型ディーゼル燃焼の排気改善</a></td>
+												<td>1989年09月</td>
+												<td class="td_right">10<span>メモ</span></td>
+												<td class="refferNum td_right">11<span>回</span></td>
+											</tr> -->
+											{% for p in u.likepub.pub.all %}
+											<tr>
+												<td class="td_center">
+													{% if p.video_set.all %}
+													<img src="{{STATIC_URL}}img/icon_movie.png" alt="動画" width="13" height="13">
+													{% else %}
+													<img src="{{STATIC_URL}}img/icon_ronbun.png" alt="論文" width="11" height="13">
+													{% endif %}
+												</td>
+												<td class="td_center">{{ forloop.counter }}</td>
+												<td><a href="/pub/{{p.id}}">{{ p.title }}</a></td>
+												<td>{{ p.publicationdate}} </td>
+												<td class="td_right">{{ p.likepub_set.all | length }}<span>メモ</span></td>
+												<td class="refferNum td_right">12<span>回</span></td>
+											</tr>
+											{% endfor %}
+										</table>
+
+											
+										<div class="horizontal_nav_wrapper nav_bottom clearfix">
+											<ul class="right pagination_prev_next">
+												<li><a class="prev" href="#">&lt;前</a></li>
+												<li><a class="next" href="#">次&gt;</a></li>
+											</ul>
+											<ul class="right pagination">
+												<li><a href="#">1</a></li>
+												<li class="current"><a href="#">4</a></li>
+												<li><a href="#">7</a></li>
+												<li><a href="#">10</a></li>
+											</ul>
+										</div>
+										
+									</section>
+									
+								</div>
+								<!-- end right -->
+							
+							</div>
+							<!-- end clearfix -->
+								
+						</main>
+						<!-- end inner_content_wrapper -->
+						
+					</section>
+					<!-- end main_content_wrapper-->
+					
+				</div>
+				<!-- end content_wrapper -->
+			
+			</div>
+			<!-- end container -->
+		
+		</div>
+		<!-- end wrapper -->
+		
+		<!-- bottom -->
+		<div id="bottom" class="clearfix">
+		
+			<!-- footer -->
+			<footer class="clearfix">
+				<p class="link"><a href="../../about.html">ForWitとは？</a><a href="../../contact.html">お問い合わせ</a></p>
+				<p class="copyright">Copyright &copy; 2014 ForWit All rights reserved.</p>
+			</footer>
+			<!-- footer -->
+		
+		</div>
+		<!-- bottom -->
+		
+		<!-- javascript -->
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script type="text/javascript" src="{{STATIC_URL}}js/jquery.heightLine.js"></script>
+		<script type="text/javascript" src="{{STATIC_URL}}js/scrolltopcontrol.js"></script>
+		<script>
+			$(function(){
+				var profileHeight = $(".sub_content_wrapper").outerHeight(),
+					mainHeight = $(".main_content_wrapper").outerHeight(),
+					differ = profileHeight - mainHeight,
+					profilePadding =  parseInt($(".sub_content_wrapper").css("padding-bottom")),
+					mainPadding =  parseInt($(".inne_content_wrapper").css("padding-bottom")) + 3; //border + minus margin
+
+				if(differ > 0){
+					$(".main_content_wrapper").css("padding-bottom", mainPadding + Math.abs(differ) + "px");
+				}else{
+					$(".sub_content_wrapper").css("padding-bottom", profilePadding + Math.abs(differ) + "px");
+				}
+				
+				/*edit*/
+				$(".edit_btn").mousedown(function(){
+					var thisTxt = $(this).text(),
+						colgroupHTML = '<colgroup class="col_mine" span="1"><colgroup class="col_delete" span="1">',
+						tdHTML = '<td class="mine"><span class="mini_btn mine_btn">本人</span></td><td class="delete"><span class="blue_btn mini_btn delete_btn"><span>×</span></span></td>';
+					if(thisTxt === "編集"){
+						$(this).css("font-size", "11px").text("編集完了");
+						$(".r_list table").prepend(colgroupHTML);
+						$(".r_list table tr").prepend(tdHTML);
+						$(".r_list table thead .delete, .r_list thead .mine").html('');
+						$(".r_list table .refferNum").hide();
+					}else{
+						$(this).css("font-size", "14px").text("編集");
+						$(".r_list .col_delete, .r_list .col_mine, .r_list .mine, .r_list .delete").remove();
+						$(".r_list table .refferNum").show();
+					}
+				});
+			});
+		</script>
+	</body>
+</html>
