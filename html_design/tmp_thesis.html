@@ -24,20 +24,12 @@
 			
 				<!-- header -->
 				<header class="clearfix">
-				
 					<!-- logo -->
-					<a class="logo" href="index.html">
-						<img src="{{STATIC_URL}}img/logo.jpg" alt="ForWit" width="83" height="24" />
-					</a>
-					
+					{% include "tmp_sub_content_widget_logo.html" %}
 					<!-- search -->
 					{% include "tmp_sub_content_widget_search.html" %}
-					
 					<!-- links -->
-					<p class="link">
-						<a href="login.html">ログイン</a>
-					</p>
-					
+					{% include "tmp_sub_content_widget_headmenu.html" %}
 				</header>
 				<!-- end header -->
 				
