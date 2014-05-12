@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>新規登録| ForWit</title>
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=1000, maximum-scale=1.0, user-scalable=yes">
+		
+		<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="css/login.css">
+		<!--[if lt IE 9]><script src="http://html5shiv-printshiv.googlecode.com/svn/trunk/html5shiv-printshiv.js"></script><![endif]-->
+	</head>
+	
+	<body id="login">
+	
+		<!-- wrapper -->
+		<div id="wrapper">
+		
+			<!-- container -->
+			<div id="container">
+			
+				<!-- header -->
+				<header class="clearfix">
+				
+					<!-- logo -->
+					<a class="logo" href="index.html">
+						<img src="img/logo.jpg" alt="ForWit" width="83" height="24" />
+					</a>
+					
+					<!-- links -->
+					<p class="link">
+						<a href="index.html">TOPへ戻る</a>
+					</p>
+					
+				</header>
+				<!-- end header -->
+				
+				<!-- content_wrapper_wide -->
+				<div class="content_wrapper_wide">
+				
+					<!-- main -->
+					<main class="main_content_wrapper">
+							<section id="login_wrapper" class="login">
+								<div class="clearfix">
+									<h1>新規登録のための情報入力</h1>
+										<div class="box_noline">
+											<p>ForWitの登録に必要な情報を入力し、利用規約に同意のうえ「確認」ボタンをクリックしてください。</p>
+										</div>
+									<div class="entry_box">
+											<div class="entry_mail">
+												<dl>
+													<dt>登録メールアドレス</dt>
+													<dd>forwit@forwit.jp</dd>
+												</dl>
+											</div>
+											<div class="entry_form">
+												<label>名前　(漢字)</label>
+												<input type="text" name="name" placeholder="山田　太郎" />
+											</div>
+											<div class="entry_form">
+												<label>所属(会社,大学など)</label>
+												<input type="text" name="syozoku" placeholder="会社名、大学名など" />
+											</div>
+											<div class="entry_form">
+												<label>パスワード</label>
+												<input type="text" name="password" placeholder="" />
+												<div class="pw_attention">
+													<p>※お好きなパスワード（半角英数記号6文字以上）をご入力ください。<br>
+														パスワードはログインの際に必要になりますので、大切に保管下さい。
+													</p>
+												</div>
+											</div>
+											<div class="entry_form">
+												<label>パスワード(確認)</label>
+												<input type="text" name="re-password" placeholder="" />
+											</div>
+										<div class="entry_agree">
+											<p>利用規約をご確認の上、同意頂けましたら「確認」ボタンを押してください。</p>
+										</div>
+
+									</div>
+										<div class="entry_agree_bt">
+											<label>
+												<input type="checkbox" name="entry_agree">利用規約に同意する。
+											</label>
+										</div>
+										<div class="entry_check">
+											<button type="submit" nema="entry_check" class="trans_btn">確 認</button>
+										</div>
+								</div>
+								
+							</section>
+						
+
+						
+					</main>
+					<!-- end main -->
+				
+				</div>
+				<!-- end content_wrapper_wide -->
+			
+			</div>
+			<!-- end container -->
+			
+		</div>
+		<!-- end wrapper -->
+		
+		<!-- bottom -->
+		<div id="bottom" class="clearfix">
+		
+			<!-- footer -->
+			<footer class="clearfix">
+				<p class="link"><a href="about.html">ForWitとは？</a><a href="contact.html">お問い合わせ</a></p>
+				<p class="copyright">Copyright &copy; 2014 ForWit All rights reserved.</p>
+			</footer>
+			<!-- end footer -->
+		
+		</div>
+		<!-- end bottom -->
+		
+		<!-- javascript -->
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script type="text/javascript" src="js/scrolltopcontrol.js"></script>
+		<script>
+			$(function(){
+				/*placeholder for IE*/
+				var supportsInputAttribute = function (attr) {
+					var input = document.createElement('input');
+					return attr in input;
+				};
+				if (!supportsInputAttribute('placeholder')) {
+					$('[placeholder]').each(function () {
+						var
+						input = $(this),
+						placeholderText = input.attr('placeholder'),
+						placeholderColor = '#bbb',
+						defaultColor = input.css('color');
+						input.
+						focus(function () {
+							if (input.val() === placeholderText) {
+								input.val('').css('color', defaultColor);
+							}
+						}).
+						blur(function () {
+							if (input.val() === '') {
+								input.val(placeholderText).css('color', placeholderColor);
+							} else if (input.val() === placeholderText) {
+								input.css('color', placeholderColor);
+							}
+						}).
+						blur().
+						parents('form').
+						submit(function () {
+							if (input.val() === placeholderText) {
+								input.val('');
+							}
+						});
+					});
+				}
+			});
+		</script>
+	</body>
+</html>

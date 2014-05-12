@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>パスワード再設定 | ForWit</title>
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=1000, maximum-scale=1.0, user-scalable=yes">
+		
+		<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="css/login.css">
+		<!--[if lt IE 9]><script src="http://html5shiv-printshiv.googlecode.com/svn/trunk/html5shiv-printshiv.js"></script><![endif]-->
+	</head>
+	
+	<body id="login">
+	
+		<!-- wrapper -->
+		<div id="wrapper">
+		
+			<!-- container -->
+			<div id="container">
+			
+				<!-- header -->
+				<header class="clearfix">
+				
+					<!-- logo -->
+					<a class="logo" href="index.html">
+						<img src="img/logo.jpg" alt="ForWit" width="83" height="24" />
+					</a>
+					
+					<!-- links -->
+					<p class="link">
+						<a href="index.html">TOPへ戻る</a>
+					</p>
+					
+				</header>
+				<!-- end header -->
+				
+				<!-- content_wrapper_wide -->
+				<div class="content_wrapper_wide">
+				
+					<!-- main -->
+					<main class="main_content_wrapper">
+					
+						<div class="clearfix">
+							<section id="login_wrapper" class="login">
+								<div class="clearfix">
+								<h1>パスワードの再設定について</h1>
+
+									<div class="box_line">
+										<p>パスワードを再設定致します。<br>
+											ご登録しているメールアドレスを入力の上、「再設定」ボタンを押してください。</p>
+									</div>
+
+									<div class="clearfix">
+										<div class="resetpw_mail">
+											<form>
+												<label class="left">登録しているメールアドレス</label>
+												<input type="text" name="resetpw_mail" placeholder="例) mail@example.com" class="left"/>
+												<button type="button" nema="resetpw_next" class="trans_btn left">再設定</button>
+										</form>
+										</div>
+									</div>
+
+									<h1>パスワードのの流れについて</h1>
+										<dl class="entry_follow">
+										<dt>【１】メールの確認</dt>
+											<dd>入力されたメールアドレスにメールが届いているかご確認ください。<br>
+													もしメールが届いていない場合は、迷惑メールフォルダなどをご確認いただくか,<br>
+													時間をおいて再度メールアドレスをお送りください。</dd>
+										<dt>【２】メール本文のURLをクリック</dt>
+											<dd>メールの本文にパスワードを再設定して頂くためのURLを記載しております。<br>
+													内容をご確認いただき、パスワード再設定用URLをクリックしアクセスしてください。</dd>
+										<dt>【３】新しいパスワードを入力し、再設定完了</dt>
+											<dd>アクセスしていただきますと、新しいパスワードの登録画面が表示されます<br>
+													新しいパスワードをご登録下さい。
+											</dd>
+										</dl>
+
+								</div>
+								
+							</section>
+						
+						</div>
+						
+					</main>
+					<!-- end main -->
+				
+				</div>
+				<!-- end content_wrapper_wide -->
+			
+			</div>
+			<!-- end container -->
+			
+		</div>
+		<!-- end wrapper -->
+		
+		<!-- bottom -->
+		<div id="bottom" class="clearfix">
+		
+			<!-- footer -->
+			<footer class="clearfix">
+				<p class="link"><a href="about.html">ForWitとは？</a><a href="contact.html">お問い合わせ</a></p>
+				<p class="copyright">Copyright &copy; 2014 ForWit All rights reserved.</p>
+			</footer>
+			<!-- end footer -->
+		
+		</div>
+		<!-- end bottom -->
+		
+		<!-- javascript -->
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script type="text/javascript" src="js/scrolltopcontrol.js"></script>
+		<script>
+			$(function(){
+				/*placeholder for IE*/
+				var supportsInputAttribute = function (attr) {
+					var input = document.createElement('input');
+					return attr in input;
+				};
+				if (!supportsInputAttribute('placeholder')) {
+					$('[placeholder]').each(function () {
+						var
+						input = $(this),
+						placeholderText = input.attr('placeholder'),
+						placeholderColor = '#bbb',
+						defaultColor = input.css('color');
+						input.
+						focus(function () {
+							if (input.val() === placeholderText) {
+								input.val('').css('color', defaultColor);
+							}
+						}).
+						blur(function () {
+							if (input.val() === '') {
+								input.val(placeholderText).css('color', placeholderColor);
+							} else if (input.val() === placeholderText) {
+								input.css('color', placeholderColor);
+							}
+						}).
+						blur().
+						parents('form').
+						submit(function () {
+							if (input.val() === placeholderText) {
+								input.val('');
+							}
+						});
+					});
+				}
+			});
+		</script>
+	</body>
+</html>

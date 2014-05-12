@@ -1,0 +1,390 @@
+/*-----------------------------
+login
+------------------------------*/
+.content_wrapper_wide {
+  background: none;
+}
+.content_wrapper_wide .main_content_wrapper {
+  background: none;
+  border: none;
+  padding: 0;
+}
+.content_wrapper_wide h1 {
+  margin-bottom: 20px;
+}
+.content_wrapper_wide h1 span {
+  font-family: Verdana, "游ゴシック", YuGothic, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif;
+  font-weight: normal;
+  font-size: 18px;
+}
+.content_wrapper_wide h2 {
+  font-size: 16px;
+  margin-bottom: 0.5em;
+  border: 0;
+  text-align: center;
+}
+
+.content_wrapper_wide button {
+  display: block;
+}
+.content_wrapper_wide label {
+  font-size: 12px;
+}
+.content_wrapper_wide input::-webkit-input-placeholder {
+  line-height: 14px;
+  color: #bbb;
+}
+.content_wrapper_wide input::-moz-placeholder {
+  line-height: 14px;
+  color: #bbb;
+}
+.content_wrapper_wide input:-moz-placeholder {
+  line-height: 14px;
+  color: #bbb;
+}
+.content_wrapper_wide input:-ms-placeholder {
+  line-height: 14px;
+  color: #bbb;
+}
+.content_wrapper_wide button {
+  width: 80px;
+  height: 30px;
+  line-height: 28px;
+  border-radius: 3px;
+}
+.content_wrapper_wide button:hover {
+  box-shadow: 0 0 3px #f78000;
+}
+.content_wrapper_wide .fb {
+  background: #315095 url(../img/fb.png) no-repeat 6px center;
+  padding: 0 0 0 28px;
+  width: 120px;
+  height: 32px;
+  line-height: 32px;
+  border: 0;
+  border-radius: 3px;
+  margin: 0 auto;
+}
+.content_wrapper_wide .fb:hover {
+  background: #315fc0 url(../img/fb.png) no-repeat 6px center;
+  border: 0;
+  box-shadow: 0 0 3px #315fc0;
+}
+
+.login {
+  width: 924px;
+  margin: 0;
+  background: #F6F6F6;
+  padding: 18px 18px 30px;
+}
+.login:hover {
+  /*background: #fff;*/
+}
+.login .clearfix {
+  width: 750px;
+  margin: 20px auto 0;
+}
+.login .mail_wrapper {
+  width: 320px;
+  border: 1px solid #ccc;
+  padding: 18px;
+  margin-left: 50px;
+}
+.login .mail_wrapper input {
+  width: 310px;
+}
+.login .fb_wrapper {
+  width: 280px;
+  padding: 18px 0;
+}
+.login .check {
+  display: inline-block;
+  width: 100%;
+  height: 20px;
+  margin: 1.2em 0;
+  font-size: 13px;
+  line-height: 20px;
+  vertical-align: middle;
+}
+.login .check input {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  vertical-align: text-top;
+  border: 0;
+  padding: 0;
+  margin-right: 4px;
+}
+.login .pw {
+  margin-top: 1em;
+}
+.login button {
+  margin: 0.6em auto 2em;
+}
+.login p {
+  text-align: center;
+}
+.login p a {
+  font-size: 12px;
+  color: #0117a2;
+}
+.login p a:hover {
+  color: #f78000;
+}
+
+.register {
+  width: 924px;
+  margin: 4px 0 0;
+  background: #f6f6f6;
+  padding: 18px;
+}
+.register:hover {
+  background: #fff;
+}
+.register .clearfix {
+  width: 750px;
+  margin: 30px auto 10px;
+}
+.register .fb_wrapper {
+  width: 280px;
+  padding: 18px 0;
+}
+.register .mail_wrapper {
+  width: 320px;
+  border: 1px solid #ccc;
+  padding: 18px;
+  margin-left: 50px;
+}
+.register .mail_wrapper input {
+  width: 216px;
+}
+.register .mail_wrapper form {
+  width: 100%;
+  margin: 0;
+}
+.register .mail_wrapper button {
+  margin-left: 4px;
+  margin-top: -1px;
+}
+.register .mail_wrapper p {
+  font-size: 12px;
+  margin-top: 1em;
+}
+
+.box_noline{
+  font-size: 14px;
+  letter-spacing: 1.5px;
+  margin-bottom: 30px;
+}
+
+.box_line{
+  width:750px;
+  padding:20px 0;
+  border: 2px solid #ccc;
+  text-align: center;
+  font-size: 16px;
+  letter-spacing: 1.5px;
+  margin-bottom: 30px;
+}
+
+
+.box_dline{
+  width:750px;
+  padding:20px 0;
+  border: 2px dotted #ccc;
+  text-align: center;
+  font-size: 16px;
+  letter-spacing: 1.5px;
+  margin-bottom: 30px;
+}
+
+.entry_follow dt {
+  font-size:16px;
+  font-weight: bold;
+  margin-top: 30px;
+}
+
+.entry_follow dd {
+  margin-left: 2em;
+  font-size:14px;
+}
+
+
+.entry_content{
+  width:500px;
+  margin-left: 100px;
+}
+
+.entry_content label{
+  width:150px;
+  display: inline-block;
+}
+
+.entry_content input{
+  width:300px;
+}
+
+.entry_box{
+  font-size: 14px;
+  font-weight: bold;
+  width: 750px;
+}
+
+.entry_mail{
+  width: 500x;
+  margin-left: 100px;
+}
+
+.entry_mail dl dt{
+  float: left;
+  width: 150;
+  clear: both;
+}
+
+.entry_mail dl dd{
+  margin-left: 12em;
+  width: 300px;
+}
+
+.entry_form{
+  width: 500px;
+  margin: 15px 0px 0px 100px;
+}
+
+.entry_form label{ 
+  font-size: 14px;
+  font-weight: bold;
+  display: inline-block;
+  width: 150px;
+}
+
+.entry_form input{
+  width: 300px;
+}
+
+.pw_attention{
+  font-size: 12px;
+  width: 450px;
+  margin-left: 135px;
+}
+
+.entry_agree {
+  width: 750px;
+  margin-top: 50px;
+  text-align: center;
+}
+
+.entry_agree_bt{
+  text-align: center;
+  margin-top: 20px;
+/*  width: 250px;*/
+}
+
+.entry_agree_bt input{
+  width: 17px;
+  height: 17px;
+  margin-right: 3px;
+  vertical-align : middle;
+}
+
+.entry_agree_bt label{
+  font-size: 16px;
+  width: 200px;
+  vertical-align: middle;
+}
+
+.entry_check button {
+  font-size: 16px;
+  width: 60px;
+  height: 30px;
+  margin-top: 30px;
+  line-height: 28px;
+  border-radius: 8px;
+}
+
+.check_box{
+  font-size: 14px;
+  font-weight: bold;
+  width: 750px;
+}
+
+.check_box_inner{
+  width: 300px;
+  margin-left: 250px;
+}
+
+.check_box_inner dl dt{
+  float: left;
+  width: 150;
+  clear: both;
+}
+
+.check_box_inner dl dd{
+  margin-left: 12em;
+  /*width: 200px;*/
+}
+
+.entry_cancel button {
+  float: left;
+  font-size: 12px;
+  width: 40px;
+  height: 30px;
+  margin: 30px 0 0 300px;
+  line-height: 28px;
+  border-radius: 3px;
+}
+
+
+.entry_finish button {
+  float: left;
+  font-size: 14px;
+  width: 100px;
+  height: 30px;
+  margin: 30px 0px 0px 30px;
+  line-height: 28px;
+  border-radius: 3px;
+}
+
+
+.entry_login button {
+  font-size: 16px;
+  width: 80px;
+  height: 40px;
+  margin-top: 30px;
+  line-height: 28px;
+  border-radius: 5px;
+}
+
+.resetpw_mail{
+  width: 750px;
+  height: 30px;
+  margin-bottom: 100px;
+}
+
+.resetpw_mail label{
+  display: inline-block;
+  margin: 0 10px 0 50px;
+  font-size: 14px;
+  line-height: 30px;
+  vertical-align: middle;
+}
+
+.resetpw_mail input{
+  width: 330px;
+  height: 22px;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.resetpw_mail button{
+  margin :0;
+  display: inline-block;
+  font-size: 12px;
+  width: 60px;
+  height: 30px;
+  border-radius: 3px;
+  line-height: 30px;
+  vertical-align: middle;
+}
+
+

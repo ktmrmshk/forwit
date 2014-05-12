@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>新規登録 | ForWit</title>
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=1000, maximum-scale=1.0, user-scalable=yes">
+		
+		<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="css/login.css">
+		<!--[if lt IE 9]><script src="http://html5shiv-printshiv.googlecode.com/svn/trunk/html5shiv-printshiv.js"></script><![endif]-->
+	</head>
+	
+	<body id="login">
+	
+		<!-- wrapper -->
+		<div id="wrapper">
+		
+			<!-- container -->
+			<div id="container">
+			
+				<!-- header -->
+				<header class="clearfix">
+				
+					<!-- logo -->
+					<a class="logo" href="index.html">
+						<img src="img/logo.jpg" alt="ForWit" width="83" height="24" />
+					</a>
+					
+					<!-- links -->
+					<p class="link">
+						<a href="index.html">TOPへ戻る</a>
+					</p>
+					
+				</header>
+				<!-- end header -->
+				
+				<!-- content_wrapper_wide -->
+				<div class="content_wrapper_wide">
+				
+					<!-- main -->
+					<main class="main_content_wrapper">
+					
+						<div class="clearfix">
+							<section id="login_wrapper" class="login">
+								<div class="clearfix">
+								<h1>新規登録手続き</h1>
+
+									<div class="box_line">
+										<p>ご入力頂いたメールアドレスに登録手続きのご案内をお送り致しました。<br>
+											案内に従いご登録をお願い致します。<br>
+											ForWitへの登録はまだ完了していませんので、ご注意下さい。</p>
+									</div>
+									<div class="clearfix">
+										<div class="left"><p>下記の件名でメールをお送りしています。</p></div>
+									</div>
+									<div class="box_dline">
+										<p>
+											【ForWit】登録手続きのご案内について
+										</p>
+									</div>
+									<h1>登録の流れについて</h1>
+										<dl class="entry_follow">
+										<dt>【１】メールの確認</dt>
+											<dd>入力されたメールアドレスにメールが届いているかご確認ください。<br>
+													もしメールが届いていない場合は、迷惑メールフォルダなどをご確認いただくか,<br>
+													時間をおいて再度メールアドレスをお送りください。</dd>
+										<dt>【２】メール本文のURLをクリック</dt>
+											<dd>メールの本文にForWitを利用いただくための登録用URLを記載しております。<br>
+													内容をご確認いただき、アカウント発行用URLをクリックしアクセスしてください。</dd>
+										<dt>【３】登録内容を入力</dt>
+											<dd>アクセスしていただきますと、ForWitの登録画面が表示されますので、必要事項をご入力ください。</dd>
+										<dt>【４】登録完了</dt>
+											<dd>登録内容を入力すると、内容をご確認をさせて頂きます。<br>
+													問題がございませんでしたら「登録完了」ボタンを押して、登録が完了致します。</dd>
+
+										</dl>
+
+								</div>
+								
+							</section>
+						
+						</div>
+						
+					</main>
+					<!-- end main -->
+				
+				</div>
+				<!-- end content_wrapper_wide -->
+			
+			</div>
+			<!-- end container -->
+			
+		</div>
+		<!-- end wrapper -->
+		
+		<!-- bottom -->
+		<div id="bottom" class="clearfix">
+		
+			<!-- footer -->
+			<footer class="clearfix">
+				<p class="link"><a href="about.html">ForWitとは？</a><a href="contact.html">お問い合わせ</a></p>
+				<p class="copyright">Copyright &copy; 2014 ForWit All rights reserved.</p>
+			</footer>
+			<!-- end footer -->
+		
+		</div>
+		<!-- end bottom -->
+		
+		<!-- javascript -->
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script type="text/javascript" src="js/scrolltopcontrol.js"></script>
+		<script>
+			$(function(){
+				/*placeholder for IE*/
+				var supportsInputAttribute = function (attr) {
+					var input = document.createElement('input');
+					return attr in input;
+				};
+				if (!supportsInputAttribute('placeholder')) {
+					$('[placeholder]').each(function () {
+						var
+						input = $(this),
+						placeholderText = input.attr('placeholder'),
+						placeholderColor = '#bbb',
+						defaultColor = input.css('color');
+						input.
+						focus(function () {
+							if (input.val() === placeholderText) {
+								input.val('').css('color', defaultColor);
+							}
+						}).
+						blur(function () {
+							if (input.val() === '') {
+								input.val(placeholderText).css('color', placeholderColor);
+							} else if (input.val() === placeholderText) {
+								input.css('color', placeholderColor);
+							}
+						}).
+						blur().
+						parents('form').
+						submit(function () {
+							if (input.val() === placeholderText) {
+								input.val('');
+							}
+						});
+					});
+				}
+			});
+		</script>
+	</body>
+</html>
