@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 import urllib
 from news.models  import News, Publication, Video
@@ -6,7 +6,7 @@ import cinii
 import json
 import sys
 from django.contrib.auth.models import User 
-
+from django.contrib.auth import logout, authenticate, login
 
 # Create your views here.
 def test_news(request):
@@ -252,5 +252,27 @@ def watchedpage(request, username):
         return HttpResponse('username=%s was not found' % username)    
     return render(request, 'login/account-name/tmp_watcher.html') 
 
+def do_logout(request):
+    if request.user.is_authenticated():
+        logout(request)
+    return redirect('/login/')
+
+def do_login(request):
+    if request.user.is_authenticated():
+        return redirect('/u/')
+    else:
+        if request.method == 'POST':
+            username = request.POST['l_username']
+            password = request.POST['l_pass']
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    return redirect('/u')
+                else:
+                    return HttpResponse('username=%s was blocked' % username)    
+            else:
+                return render(request, 'forwit-login0508/login.html', {})
+        return render(request, 'forwit-login0508/login.html', {})
 
 

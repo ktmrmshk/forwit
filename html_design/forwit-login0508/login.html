@@ -8,9 +8,9 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
 		<meta name="viewport" content="target-densitydpi=device-dpi, width=1000, maximum-scale=1.0, user-scalable=yes">
 		
-		<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
-		<link rel="stylesheet" href="css/style.css">
-		<link rel="stylesheet" href="css/login.css">
+		<link rel="shortcut icon" href="{{STATIC_URL}}forwit-login0508/img/favicon.ico" type="{{STATIC_URL}}forwit-login0508/image/x-icon" />
+		<link rel="stylesheet" href="{{STATIC_URL}}forwit-login0508/css/style.css">
+		<link rel="stylesheet" href="{{STATIC_URL}}forwit-login0508/css/login.css">
 		<!--[if lt IE 9]><script src="http://html5shiv-printshiv.googlecode.com/svn/trunk/html5shiv-printshiv.js"></script><![endif]-->
 	</head>
 	
@@ -26,13 +26,11 @@
 				<header class="clearfix">
 				
 					<!-- logo -->
-					<a class="logo" href="index.html">
-						<img src="img/logo.jpg" alt="ForWit" width="83" height="24" />
-					</a>
+					{% include "tmp_sub_content_widget_logo.html" %}
 					
 					<!-- links -->
 					<p class="link">
-						<a href="index.html">TOPへ戻る</a>
+						<a href="/">TOPへ戻る</a>
 					</p>
 					
 				</header>
@@ -50,10 +48,13 @@
 								<h1>ログイン<span>（登録済みの方）</span></h1>
 								<div class="clearfix">
 									<div class="mail_wrapper left">
-										<h2>登録したメールアドレスでログイン</h2>
-										<form id="login">
-											<label>メールアドレス</label>
-											<input type="text" name="l_mail" />
+										<!-- <h2>登録したメールアドレスでログイン</h2> -->
+										<h2>登録したforwitアカウントでログイン</h2>
+										<form id="login" method="post" >{% csrf_token %}
+											<!-- <label>メールアドレス</label>
+											<input type="text" name="l_mail" /> -->
+											<label>ユーザーネーム</label>
+											<input type="text" name="l_username" />
 											<label class="pw">パスワード</label>
 											<input type="password" name="l_pass" />
 											<label class="check"><input type="checkbox">ログイン状態を保持する</label>
@@ -117,7 +118,7 @@
 		
 		<!-- javascript -->
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-		<script type="text/javascript" src="js/scrolltopcontrol.js"></script>
+		<script type="text/javascript" src="{{STATIC_URL}}forwit-login0508/js/scrolltopcontrol.js"></script>
 		<script>
 			$(function(){
 				/*placeholder for IE*/

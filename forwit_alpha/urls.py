@@ -43,5 +43,8 @@ urlpatterns = patterns('',
     
     url(r'^watched/$', 'news.views.my_watchedpage'),
     url(r'^watched/(?P<username>\w+)$', 'news.views.watchedpage'),
+    
+    url(r'^login/$', 'news.views.do_login'),
+    url(r'^logout/$', 'news.views.do_logout'),
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
