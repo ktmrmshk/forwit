@@ -70,10 +70,11 @@
 							
 								<!-- メニュー -->
 								<div class="content_menu left">
-									<ul class="type">
+									<!-- <ul class="type">
 										<li class="current"><a href="watch.html"><span><img src="{{STATIC_URL}}img/icon_watch.png" alt="ウォッチ" width="13" height="13"></span>ウォッチ</a></li>
 										<li><a href="watcher.html"><span><img src="{{STATIC_URL}}img/icon_watcher.png" alt="ウォッチャー" width="12" height="13"></span>ウォッチャー</a></li>
-									</ul>
+									</ul> -->
+									{% include "login/account-name/tmp_sub_content_watch_sw_menu.html" %}
 								
 									<p class="count">計{{ user.follower.members.all | length }}名</p>
 									<p><span class="blue_btn edit_btn">編集</span></p>

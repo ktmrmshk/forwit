@@ -1,0 +1,11 @@
+{# optargs: u, username, currentpage=news, research, memo, memo-video, watching or watched #}
+<ul class="type">
+	{% ifequal u.username user.username %}
+	<li {% ifequal currentpage "memo" %}class="current"{% endifequal%}><a href="/memo/"><span><img src="{{STATIC_URL}}img/icon_ronbun.png" alt="論文" width="11" height="13"></span>論文</a></li>
+	<li {% ifequal currentpage "memo-video" %}class="current"{% endifequal%}><a href="/memo-video/"><span><img src="{{STATIC_URL}}img/icon_movie.png" alt="動画" width="13" height="13"></span>動画</a></li>
+	{% else %}
+	<li {% ifequal currentpage "memo" %}class="current"{% endifequal%}><a href="/memo/{{u.username}}"><span><img src="{{STATIC_URL}}img/icon_ronbun.png" alt="論文" width="11" height="13"></span>論文</a></li>
+	<li {% ifequal currentpage "memo-video" %}class="current"{% endifequal%}><a href="/memo-video/{{u.username}}"><span><img src="{{STATIC_URL}}img/icon_movie.png" alt="動画" width="13" height="13"></span>動画</a></li>	
+	{% endifequal %}
+
+</ul>
