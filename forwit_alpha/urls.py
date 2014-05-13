@@ -22,6 +22,8 @@ urlpatterns = patterns('',
     
     url(r'^$', 'news.views.toppage'),
     
+    #url(r'^news/$', 'news.views.toppage'),
+    
     url(r'^pub/(?P<pubid>\d+)/$', 'news.views.pubpage'),
     
     url(r'^u/$', 'news.views.my_userpage'),
@@ -46,5 +48,9 @@ urlpatterns = patterns('',
     
     url(r'^login/$', 'news.views.do_login'),
     url(r'^logout/$', 'news.views.do_logout'),
+    
+    url(r'^setting/$', 'news.views.usersetting'),
+    
+    url(r'^memberlist/$', 'news.views.memberlist'),
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

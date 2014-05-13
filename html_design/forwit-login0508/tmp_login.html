@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>ログイン | ForWit</title>
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=1000, maximum-scale=1.0, user-scalable=yes">
+		
+		<link rel="shortcut icon" href="{{STATIC_URL}}forwit-login0508/img/favicon.ico" type="{{STATIC_URL}}forwit-login0508/image/x-icon" />
+		<link rel="stylesheet" href="{{STATIC_URL}}forwit-login0508/css/style.css">
+		<link rel="stylesheet" href="{{STATIC_URL}}forwit-login0508/css/login.css">
+		<!--[if lt IE 9]><script src="http://html5shiv-printshiv.googlecode.com/svn/trunk/html5shiv-printshiv.js"></script><![endif]-->
+	</head>
+	
+	<body id="login">
+	
+		<!-- wrapper -->
+		<div id="wrapper">
+		
+			<!-- container -->
+			<div id="container">
+			
+				<!-- header -->
+				<header class="clearfix">
+				
+					<!-- logo -->
+					{% include "tmp_sub_content_widget_logo.html" %}
+					
+					<!-- links -->
+					<p class="link">
+						<a href="/">TOPへ戻る</a>
+					</p>
+					
+				</header>
+				<!-- end header -->
+				
+				<!-- content_wrapper_wide -->
+				<div class="content_wrapper_wide">
+				
+					<!-- main -->
+					<main class="main_content_wrapper">
+					
+						<div class="clearfix">
+							<section id="login_wrapper" class="login">
+								
+								<h1>ログイン<span>（登録済みの方）</span></h1>
+								<div class="clearfix">
+									<div class="mail_wrapper left">
+										<!-- <h2>登録したメールアドレスでログイン</h2> -->
+										<h2>登録したforwitアカウントでログイン</h2>
+										<form id="login" method="post" >{% csrf_token %}
+											<!-- <label>メールアドレス</label>
+											<input type="text" name="l_mail" /> -->
+											<label>ユーザーネーム</label>
+											<input type="text" name="l_username" />
+											<label class="pw">パスワード</label>
+											<input type="password" name="l_pass" />
+											<label class="check"><input type="checkbox">ログイン状態を保持する</label>
+											<button type="submit" nema="l_login" class="trans_btn">ログイン</button>
+										</form>
+										<p><a href="#">パスワードを忘れた方の再発行はこちら</a></p>
+									</div>
+									<div class="fb_wrapper right">
+										<h2>外部サービスを使用してログイン</h2>
+										<button type="button" class="fb">Facebook</button>
+									</div>
+								</div>
+								
+							</section>
+						
+							<section id="register_wrapper" class="register">
+								
+								<h1>新規登録</h1>
+								<div class="clearfix">
+									<div class="mail_wrapper left">
+										<h2>メールアドレスで新規登録</h2>
+										<form id="register" class="clearfix">
+											<input type="text" name="r_mail" placeholder="例) mail@example.com" class="left"/>
+											<button type="button" nema="r_next" class="trans_btn left">新規登録</button>
+										</form>
+										<p>※登録ボタンを押していただくと自動的に登録メールアドレスに本登録用の案内が届きます。そこで詳細を設定していただくことで、登録が完了致します。</p>
+									</div>
+									<div class="fb_wrapper right">
+										<h2>外部サービスを使用して新規登録</h2>
+										<button type="button" class="fb">Facebook</button>
+									</div>
+								</div>
+									
+							</section>
+						</div>
+						
+					</main>
+					<!-- end main -->
+				
+				</div>
+				<!-- end content_wrapper_wide -->
+			
+			</div>
+			<!-- end container -->
+			
+		</div>
+		<!-- end wrapper -->
+		
+		<!-- bottom -->
+		<div id="bottom" class="clearfix">
+		
+			<!-- footer -->
+			<footer class="clearfix">
+				<p class="link"><a href="about.html">ForWitとは？</a><a href="contact.html">お問い合わせ</a></p>
+				<p class="copyright">Copyright &copy; 2014 ForWit All rights reserved.</p>
+			</footer>
+			<!-- end footer -->
+		
+		</div>
+		<!-- end bottom -->
+		
+		<!-- javascript -->
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script type="text/javascript" src="{{STATIC_URL}}forwit-login0508/js/scrolltopcontrol.js"></script>
+		<script>
+			$(function(){
+				/*placeholder for IE*/
+				var supportsInputAttribute = function (attr) {
+					var input = document.createElement('input');
+					return attr in input;
+				};
+				if (!supportsInputAttribute('placeholder')) {
+					$('[placeholder]').each(function () {
+						var
+						input = $(this),
+						placeholderText = input.attr('placeholder'),
+						placeholderColor = '#bbb',
+						defaultColor = input.css('color');
+						input.
+						focus(function () {
+							if (input.val() === placeholderText) {
+								input.val('').css('color', defaultColor);
+							}
+						}).
+						blur(function () {
+							if (input.val() === '') {
+								input.val(placeholderText).css('color', placeholderColor);
+							} else if (input.val() === placeholderText) {
+								input.css('color', placeholderColor);
+							}
+						}).
+						blur().
+						parents('form').
+						submit(function () {
+							if (input.val() === placeholderText) {
+								input.val('');
+							}
+						});
+					});
+				}
+			});
+		</script>
+	</body>
+</html>

@@ -7,7 +7,7 @@ import json
 import sys
 from django.contrib.auth.models import User 
 from django.contrib.auth import logout, authenticate, login
-
+from news.models import UserProfileForm, UserForm
 # Create your views here.
 def test_news(request):
     #news = News.objects.all()
@@ -274,5 +274,32 @@ def do_login(request):
             else:
                 return render(request, 'forwit-login0508/login.html', {})
         return render(request, 'forwit-login0508/login.html', {})
+
+def usersetting(request):
+    up = request.user.userprofile
+    u = request.user
+    if request.method == 'POST':
+        uf = UserForm(request.POST, instance=u)
+        upf = UserProfileForm(request.POST, instance=up)
+        if  uf.is_valid() and upf.is_valid():
+#             u.first_name = uf.cleaned_data['first_name']
+#             u.last_name = uf.cleaned_data['last_name']
+#             up.kana_first_name = upf.cleaned_data['kana_first_name']
+#             up.kana_last_name = upf.cleaned_data['kana_last_name']
+#             
+            up.save()
+            u.save()
+            msg='saved!'
+            return render(request, 'login/tmp_setting.html', {'uf': uf, 'upf': upf, 'msg': msg})
+        else:
+            msg =  'INVAID'
+            return render(request, 'login/tmp_setting.html', {'uf': uf, 'upf': upf, 'msg': msg})
+    uf = UserForm(instance=u)
+    upf = UserProfileForm(instance=up)
+    return render(request, 'login/tmp_setting.html', {'uf': uf, 'upf': upf})
+
+def memberlist(request):
+    alluser = User.objects.all()
+    return render(request, 'login/tmp_memberlist.html', {'alluser': alluser})
 
 

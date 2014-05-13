@@ -1,4 +1,5 @@
 from django.db import models
+from django import forms
 from django.contrib.auth.models import User
 # Create your models here.
 from django.conf import settings
@@ -51,6 +52,9 @@ class UserProfile(models.Model):
     
     facephoto = models.ImageField(upload_to=upload_to, blank=True, null=True, default='settings.MEDIA_ROOT/logos/anonymous.jpg')
     
+    kana_first_name = models.CharField(max_length=64, blank=True, default='')
+    kana_last_name = models.CharField(max_length=64, blank=True, default='')
+    
     def __unicode__(self):
         return '%s, %s' % (self.user.username, self.title)
 
@@ -90,6 +94,18 @@ class LikeVideo(models.Model):
     video = models.ManyToManyField(Video, blank=True, null=True)
     def __unicode__(self):
         return '%s' % self.user.username
-    
+
+class UserForm(forms.ModelForm):
+    #password = forms.CharField(widget=forms.PasswordInput)
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name', 'email')
+
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ('kana_first_name', 'kana_last_name', 'job', 'title',
+                  'interesting1', 'interesting2', 'interesting3',
+                  'school1', 'school_project', 'facephoto' )
     
     
