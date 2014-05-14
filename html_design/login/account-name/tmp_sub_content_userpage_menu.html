@@ -7,7 +7,7 @@
 			<li {% ifequal currentpage "memo"     %}class="current"{% endifequal%}{% ifequal currentpage "memo-video" %}class="current"{% endifequal%}><a href="/memo/">研究メモ</a></li>
 			<li {% ifequal currentpage "watching"    %}class="current"{% endifequal%}{% ifequal currentpage "watched" %}class="current"{% endifequal%}><a href="/watching/">ウォッチ</a></li>
 		{% else %}
-			<li {% ifequal currentpage "news"     %}class="current"{% endifequal%}><a href="/u/{{u.username}}">ニュース</a></li>
+			<!-- <li {% ifequal currentpage "news"     %}class="current"{% endifequal%}><a href="/u/{{u.username}}">ニュース</a></li> -->
 			<li {% ifequal currentpage "research" %}class="current"{% endifequal%}{% ifequal currentpage "research-video" %}class="current"{% endifequal%}><a href="/research/{{u.username}}">研究内容</a></li>
 			<li {% ifequal currentpage "memo"     %}class="current"{% endifequal%}{% ifequal currentpage "memo-video" %}class="current"{% endifequal%}><a href="/memo/{{u.username}}">研究メモ</a></li>
 			<li {% ifequal currentpage "watching"    %}class="current"{% endifequal%}{% ifequal currentpage "watched" %}class="current"{% endifequal%}><a href="/watching/{{u.username}}">ウォッチ</a></li>

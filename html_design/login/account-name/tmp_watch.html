@@ -14,7 +14,7 @@
 		<!--[if lt IE 9]><script src="http://html5shiv-printshiv.googlecode.com/svn/trunk/html5shiv-printshiv.js"></script><![endif]-->
 	</head>
 	
-	<body id="watch">
+	<body id="watch" {% ifnotequal u.username user.username %}class="other"{% endifnotequal%}>
 	
 		<!-- wrapper -->
 		<div id="wrapper">
@@ -60,7 +60,10 @@
 									{% include "login/account-name/tmp_sub_content_watch_sw_menu.html" %}
 								
 									<p class="count">計{{ user.follower.members.all | length }}名</p>
+									
+									{% ifequal u.username user.username %}
 									<p><span class="blue_btn edit_btn">編集</span></p>
+									{% endifequal %}
 								</div>
 								<!-- end left, content menu-->
 
@@ -92,7 +95,12 @@
 										<ul class="user clearfix">
 											<!-- <li><a href="../other/index.html"><img src="../../img/dummy/user1.jpg" alt="temp" width="74" height="74">中央エンジニア<span class="belong">所属</span></a></li> -->
 											{% for w in user.follower.members.all %}
-											<li><a href="/u/{{w.username}}">
+											<li>
+												{% ifnotequal u.username user.username %}
+												<span class="blue_btn mini_btn">ウォッチ</span>
+												{% endifnotequal%}
+												
+												<a href="/u/{{w.username}}">
 											{% if w.userprofile.facephoto %}
 											<img src="{{ w.userprofile.facephoto.url }}" alt="{{w.last_name}} {{w.first_name}}" width="74" height="74">{{w.last_name}} {{w.first_name}}
 											{% else %}
@@ -155,6 +163,8 @@
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 		<script type="text/javascript" src="{{STATIC_URL}}js/jquery.heightLine.js"></script>
 		<script type="text/javascript" src="{{STATIC_URL}}js/scrolltopcontrol.js"></script>
+		
+		{% ifequal u.username user.username %}
 		<script>
 			var defaultPadding = "";
 
@@ -202,5 +212,45 @@
 				
 			});
 		</script>
+		{%else%}
+		<script>
+			$(function(){
+				$(".user li").heightLine();
+				
+				var profileHeight = $(".sub_content_wrapper").outerHeight(),
+					mainHeight = $(".main_content_wrapper").outerHeight(),
+					differ = profileHeight - mainHeight,
+					profilePadding =  parseInt($(".sub_content_wrapper").css("padding-bottom")),
+					mainPadding =  parseInt($(".inne_content_wrapper").css("padding-bottom")) + 3; //border + minus margin
+
+				if(differ > 0){
+					$(".main_content_wrapper").css("padding-bottom", mainPadding + Math.abs(differ) + "px");
+				}else{
+					$(".sub_content_wrapper").css("padding-bottom", profilePadding + Math.abs(differ) + "px");
+				}
+
+				$(".watch_btn").mousedown(function(){
+					$(this).toggleClass("watch_btn_clicked");
+					var thisTxt = $(this).html();
+					if(thisTxt === "ウォッチ"){
+						$(this).html("<span>×</span>");
+					}else{
+						$(this).html("ウォッチ");
+					}
+				});
+				
+				$(".mini_btn").mousedown(function(){
+					$(this).toggleClass("mini_btn_clicked");
+					var thisTxt = $(this).html();
+					if(thisTxt === "ウォッチ"){
+						$(this).html("<span>×</span>");
+					}else{
+						$(this).html("ウォッチ");
+					}
+				});	
+			});		
+		</script>
+		
+		{% endifequal %}
 	</body>
 </html>

@@ -14,7 +14,7 @@
 		<!--[if lt IE 9]><script src="http://html5shiv-printshiv.googlecode.com/svn/trunk/html5shiv-printshiv.js"></script><![endif]-->
 	</head>
 	
-	<body id="memo">
+	<body id="memo"  {% ifnotequal u.username user.username %}class="other"{% endifnotequal%}>
 	
 		<!-- wrapper -->
 		<div id="wrapper">
@@ -61,7 +61,10 @@
 									
 									<p class="count">計 {{u.likepub.pub.all | length}} 件</p>
 									
+									{% ifequal u.username user.username %}
 									<p><span class="blue_btn edit_btn">編集</span></p>
+									{% endifequal %}
+									
 								</div>
 								<!-- end content menu-->
 
@@ -91,6 +94,10 @@
 										</div>
 										
 										<table class="table_5rows">
+											{% ifnotequal u.username user.username %}
+											<colgroup class="col_btn" span="1">
+											{% endifnotequal%}
+											
 											<colgroup class="col_icon" span="1">
 											<colgroup class="col_no" span="1">
 											<colgroup class="col_title" span="1">
@@ -100,6 +107,9 @@
 											<thead>
 												<tr>
 													<th>&nbsp;</th>
+													{% ifnotequal u.username user.username %}
+													<th>&nbsp;</th>
+													{% endifnotequal%}
 													<th>No.</th>
 													<th>タイトル</th>
 													<th>発行年月</th>
@@ -117,6 +127,9 @@
 											</tr> -->
 											{% for p in u.likepub.pub.all %}
 											<tr>
+												{% ifnotequal u.username user.username %}
+												<td class="td_center"><a href="#" class="mini_btn blue_btn">メモ</a></td>
+												{% endifnotequal%}
 												<td class="td_center">
 													{% if p.video_set.all %}
 													<img src="{{STATIC_URL}}img/icon_movie.png" alt="動画" width="13" height="13">
@@ -201,6 +214,7 @@
 					$(".sub_content_wrapper").css("padding-bottom", profilePadding + Math.abs(differ) + "px");
 				}
 				
+				{% ifequal u.username user.username %}
 				/*edit*/
 				$(".edit_btn").mousedown(function(){
 					var thisTxt = $(this).text(),
@@ -218,6 +232,30 @@
 						$(".r_list table .refferNum").show();
 					}
 				});
+				
+				{% else %}
+				
+				$(".watch_btn").mousedown(function(){
+					$(this).toggleClass("watch_btn_clicked");
+					var thisTxt = $(this).html();
+					if(thisTxt === "ウォッチ"){
+						$(this).html("<span>×</span>");
+					}else{
+						$(this).html("ウォッチ");
+					}
+				});
+				
+				$(".mini_btn").mousedown(function(){
+					$(this).toggleClass("mini_btn_clicked");
+					var thisTxt = $(this).html();
+					if(thisTxt === "メモ"){
+						$(this).html("<span>×</span>");
+					}else{
+						$(this).html("メモ");
+					}
+				});	
+				{% endifequal%}
+				
 			});
 		</script>
 	</body>

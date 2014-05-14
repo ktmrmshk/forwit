@@ -15,7 +15,7 @@
 	</head>
 	
 	<body id="top">
-	
+
 		<!-- wrapper -->
 		<div id="wrapper">
 		
@@ -160,6 +160,7 @@
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 		<script type="text/javascript" src="{{STATIC_URL}}js/jquery.heightLine.js"></script>
 		<script type="text/javascript" src="{{STATIC_URL}}js/scrolltopcontrol.js"></script>
+		{% ifequal u.username user.username %}
 		<script>
 			$(function(){
 				$(".heightline").heightLine();
@@ -179,5 +180,42 @@
 				}
 			});
 		</script>
+		{% else %}
+		<script>
+			$(function(){
+				var profileHeight = $(".sub_content_wrapper").outerHeight(),
+						mainHeight = $(".main_content_wrapper").outerHeight(),
+						differ = profileHeight - mainHeight,
+						profilePadding =  parseInt($(".sub_content_wrapper").css("padding-bottom")),
+						mainPadding =  parseInt($(".inne_content_wrapper").css("padding-bottom")) + 3; //border + minus margin
+	
+					if(differ > 0){
+						$(".main_content_wrapper").css("padding-bottom", mainPadding + Math.abs(differ) + "px");
+					}else{
+						$(".sub_content_wrapper").css("padding-bottom", profilePadding + Math.abs(differ) + "px");
+					}
+				
+				$(".watch_btn").mousedown(function(){
+					$(this).toggleClass("watch_btn_clicked");
+					var thisTxt = $(this).html();
+					if(thisTxt === "ウォッチ"){
+						$(this).html("<span>×</span>");
+					}else{
+						$(this).html("ウォッチ");
+					}
+				});
+				
+				$(".mini_btn").mousedown(function(){
+					$(this).toggleClass("mini_btn_clicked");
+					var thisTxt = $(this).html();
+					if(thisTxt === "メモ"){
+						$(this).html("<span>×</span>");
+					}else{
+						$(this).html("メモ");
+					}
+				});	
+			});
+		</script>
+		{% endifequal %}
 	</body>
 </html>

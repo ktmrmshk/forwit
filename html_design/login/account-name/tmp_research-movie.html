@@ -14,7 +14,7 @@
 		<!--[if lt IE 9]><script src="http://html5shiv-printshiv.googlecode.com/svn/trunk/html5shiv-printshiv.js"></script><![endif]-->
 	</head>
 	
-	<body id="research">
+	<body id="research"  {% ifnotequal u.username user.username %}class="other"{% endifnotequal%}>
 	
 		<!-- wrapper -->
 		<div id="wrapper">
@@ -61,7 +61,9 @@
 									
 									<p class="count">計 {{ u.video_set.all | length }} 件</p>
 									
-									<p><a class="blue_btn edit_btn" href="../edit.html">編集</a></p>
+									{% ifequal u.username user.username %}
+									<p><span class="blue_btn edit_btn">編集</span></p>
+									{% endifequal %}
 								</div>
 								<!-- end content menu-->
 
@@ -108,7 +110,11 @@
 										<ul class="movie movie_3column_narrow clearfix">
 											<!-- <li><a href="../thesis-movie.html"><dl><dt><img src="../../img/dummy/img_dummy_movie_001.jpg" alt="ロケットエンジンの燃焼試験" width="224" height="126"></dt><dd>ロケットエンジンの燃焼試験</dd></dl></a></li> -->
 											{% for v in u.video_set.all %}
+											
 											<li>
+												{% ifnotequal u.username user.username %}
+												<span class="mini_btn blue_btn">メモ</span>
+												{% endifnotequal %}
 												<a href="/pub/{{ v.pub.all.0.id }}">
 												<dl>
 													<dt><img src="http://img.youtube.com/vi/{{ v.video_id }}/0.jpg" alt="{{v.title}}" width="224" height="126">
@@ -189,6 +195,30 @@
 				}else{
 					$(".sub_content_wrapper").css("padding-bottom", profilePadding + Math.abs(differ) + "px");
 				}
+								
+								
+				{% ifnotequal u.username user.username %}
+				$(".watch_btn").mousedown(function(){
+					$(this).toggleClass("watch_btn_clicked");
+					var thisTxt = $(this).html();
+					if(thisTxt === "ウォッチ"){
+						$(this).html("<span>×</span>");
+					}else{
+						$(this).html("ウォッチ");
+					}
+				});
+				
+				$(".mini_btn").mousedown(function(){
+					$(this).toggleClass("mini_btn_clicked");
+					var thisTxt = $(this).html();
+					if(thisTxt === "メモ"){
+						$(this).html("<span>×</span>");
+					}else{
+						$(this).html("メモ");
+					}
+				});	
+				{% endifnotequal %}
+				
 			});
 		</script>
 	</body>

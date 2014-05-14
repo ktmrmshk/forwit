@@ -4,7 +4,9 @@
 	<!-- <img src="{{STATIC_URL}}img/dummy/user-main.jpg" alt="{{u.last_name}} {{u.first_name}}" width="110" height="110"> -->
 	<img src="{{ u.userprofile.facephoto.url }}" alt="{{u.last_name}} {{u.first_name}}" width="110" height="110">
 	<h1 class="account-name">{{u.last_name}} {{u.first_name}}</h1>
-	
+	{% ifnotequal u.username user.username %}
+		<button type="button" class="blue_btn watch_btn trans_btn">ウォッチ</button>
+	{% endifnotequal %}
 	<dl class="whoami">
 		<dt>所属</dt>
 		<dd>{{u.userprofile.job}}</dd>

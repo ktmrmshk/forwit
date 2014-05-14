@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 import urllib
 from news.models  import News, Publication, Video
 import cinii
@@ -172,16 +172,30 @@ def pubpage(request, pubid):
         return HttpResponse('pubid=%s is not found' % pubid )
 
 
-def my_userpage(request):    
-    return userpage(request, request.user.username)
+def my_userpage(request):
+#    return userpage(request, request.user.username)
+    if not request.user.is_authenticated():
+        return HttpResponse('Log-in is required. Please log-in')
+    try:
+#         u = User.objects.get(username__exact=username)
+        u = request.user
+        return render(request, 'login/account-name/tmp_index.html', {'u':u, 'currentpage':'news'} )
+    except:
+#         print sys.exc_info()[0]
+        return HttpResponse('username=%s was not found' % request.user.username)
+
 def userpage(request, username):
     if not request.user.is_authenticated():
         return HttpResponse('Log-in is required. Please log-in')
     try:
-        u = User.objects.get(username__exact=username)
-        return render(request, 'login/account-name/tmp_index.html', {'u':u, 'currentpage':'news'} )
+#         u = User.objects.get(username__exact=username)
+#         return render(request, 'login/account-name/tmp_index.html', {'u':u, 'currentpage':'news'} )
+        return HttpResponseRedirect('/research/%s' % username)
     except:
         return HttpResponse('username=%s was not found' % username)
+
+
+
 
 
 def my_research(request):
@@ -193,6 +207,7 @@ def research(request, username):
         u = User.objects.get(username__exact=username)
         return render(request, 'login/account-name/tmp_research.html', {'u':u, 'currentpage':'research'} )
     except:
+#         print sys.exc_info()[0]
         return HttpResponse('username=%s was not found' % username)
 
 def my_researchvideo(request):
