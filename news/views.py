@@ -233,25 +233,6 @@ def memopage(request, username):
             page = int( request.GET.get('page', '1') )
         u = User.objects.get(username__exact=username)
         puball = u.likepub.pub.all()
-#         p = Paginator(puball, 20)
-#         pager={}
-#         pager['current'] = page
-#         pager['max'] = p.num_pages
-#         #print p.num_pages
-#         path=''
-#         if username == request.user.username:
-#             path='/memo/%s/' % username
-#         else:
-#             path='/memo/'
-#         if page != 1:
-#             pager['first'] = {'num': 1, 'url': '%s?page=%d' % (path, 1) }
-#         if page != p.num_pages: # not lastpage
-#             pager['last'] = { 'num': p.num_pages, 'url':'%s?page=%d' % (path, p.num_pages) }
-#         if p.page(page).has_previous():
-#             pager['prev'] = { 'url': '%s?page=%d' % (path, page - 1) }
-#         if p.page(page).has_next():
-#             pager['next'] = { 'url': '%s?page=%d' % (path, page + 1) }
-#         pub = p.page(page).object_list
         uname=None
         if username != request.user.username:
             uname = username

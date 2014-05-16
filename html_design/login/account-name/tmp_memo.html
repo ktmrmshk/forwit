@@ -79,7 +79,12 @@
 												<h1>研究メモ</h1>
 											</div>
 
-											{% include "pagination_upper.html" %}
+											<div class="right">
+												<div class="horizontal_nav_wrapper clearfix">
+													{% include "pagination.html" %}
+												</div>
+											</div>
+											
 										</div>
 										
 										<table class="table_5rows">
@@ -136,7 +141,10 @@
 											{% endfor %}
 										</table>
 
-										{% include "pagination_bottom.html" %}
+										<div class="horizontal_nav_wrapper nav_bottom clearfix">
+											{% include "pagination.html" %}
+										</div>
+
 									</section>
 									
 								</div>
