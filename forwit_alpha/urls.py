@@ -13,7 +13,7 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
 #     url(r'^news/', 'news.views.test_news'),
-#     url(r'^search/', 'news.views.test_search'),
+     url(r'^search/', 'news.views.test_search'),
 #     url(r'^test_getpub/', 'news.views.test_getpub'),
 #     url(r'^test_upload/', 'news.test_views.upload_file'),
 #     url(r'^test_userpage/', 'news.views.test_userpage'),
