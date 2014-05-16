@@ -19,30 +19,31 @@ urlpatterns = patterns('',
 #     url(r'^test_userpage/', 'news.views.test_userpage'),
 #     url(r'^test_watch/', 'news.views.test_watch'),
 #    url(r'^news/$', 'news.views.toppage'),   
+    url(r'^test_ajax/$', 'news.test_views.test_ajax'),
     
     url(r'^$', 'news.views.toppage'),
     
     url(r'^pub/(?P<pubid>\d+)/$', 'news.views.pubpage'),
     
     url(r'^u/$', 'news.views.my_userpage'),
-    url(r'^u/(?P<username>\w+)$', 'news.views.userpage'),
+    url(r'^u/(?P<username>\w+)/$', 'news.views.userpage'),
     
     url(r'^research/$', 'news.views.my_research'),
-    url(r'^research/(?P<username>\w+)$', 'news.views.research'),
+    url(r'^research/(?P<username>\w+)/$', 'news.views.research'),
     
     url(r'^research-video/$', 'news.views.my_researchvideo'),
-    url(r'^research-video/(?P<username>\w+)$', 'news.views.researchvideo'),
+    url(r'^research-video/(?P<username>\w+)/$', 'news.views.researchvideo'),
     
     url(r'^memo/$', 'news.views.my_memopage'),
-    url(r'^memo/(?P<username>\w+)$', 'news.views.memopage'),
+    url(r'^memo/(?P<username>\w+)/$', 'news.views.memopage'),
     url(r'^memo-video/$', 'news.views.my_memovideopage'),
-    url(r'^memo-video/(?P<username>\w+)$', 'news.views.memovideopage'),
+    url(r'^memo-video/(?P<username>\w+)/$', 'news.views.memovideopage'),
     
     url(r'^watching/$', 'news.views.my_watchingpage'),
-    url(r'^watching/(?P<username>\w+)$', 'news.views.watchingpage'),
+    url(r'^watching/(?P<username>\w+)/$', 'news.views.watchingpage'),
     
     url(r'^watched/$', 'news.views.my_watchedpage'),
-    url(r'^watched/(?P<username>\w+)$', 'news.views.watchedpage'),
+    url(r'^watched/(?P<username>\w+)/$', 'news.views.watchedpage'),
     
     url(r'^login/$', 'news.views.do_login'),
     url(r'^logout/$', 'news.views.do_logout'),

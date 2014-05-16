@@ -1,0 +1,24 @@
+<div class="horizontal_nav_wrapper nav_bottom clearfix">
+		<ul class="right pagination_prev_next">
+			{% if pager.prev %}
+			<li><a class="prev" href="{{pager.prev.url}}">&lt;前</a></li>
+			{% else %}
+			<li><a class="prev" href="{{pager.prev.url}}">&lt;前</a></li>
+			{% endif %}
+			{% if pager.next %}
+			<li><a class="next" href="{{pager.next.url}}">次&gt;</a></li>
+			{% endif %}
+		</ul>
+		<ul class="right pagination">
+			{% if pager.first %}
+			<li><a href="{{pager.first.url}}">{{pager.first.num}}</a></li>
+			{% endif %}
+			
+			<li class="current"><a href="#">{{pager.current}}</a></li>
+			
+			<!-- <li><a href="#">...</a></li> -->
+			{% if pager.last %}
+			<li><a href="{{pager.last.url}}">{{pager.last.num}}</a></li>
+			{% endif %}
+		</ul>
+</div>

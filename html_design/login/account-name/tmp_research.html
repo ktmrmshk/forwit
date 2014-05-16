@@ -234,6 +234,22 @@
 					}else{
 						$(this).html("ウォッチ");
 					}
+					// test code by kitamura
+					var username = $(this).attr('title');
+					$.ajax({
+					  type: 'GET',
+					  url: '/test_ajax/',
+					  dataType: 'jsonp',
+					  jsonpCallback: 'android',
+					  success: function(json){
+					    var len = json.length;
+					    var string = "";
+					    for(var i=0; i<len; i++){
+					      string += json[i];
+					    }
+					    alert(string)
+					  }
+					});
 				});
 				
 				$(".mini_btn").mousedown(function(){

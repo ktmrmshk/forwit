@@ -59,7 +59,8 @@
 									</ul> -->
 									{% include "login/account-name/tmp_sub_content_memo_sw_menu.html" %}
 									
-									<p class="count">計 {{u.likepub.pub.all | length}} 件</p>
+									<!-- <p class="count">計 {{u.likepub.pub.all | length}} 件</p> -->
+									<p class="count">計 {{ puball | length }} 件</p>
 									
 									{% ifequal u.username user.username %}
 									<p><span class="blue_btn edit_btn">編集</span></p>
@@ -77,20 +78,8 @@
 											<div class="left">
 												<h1>研究メモ</h1>
 											</div>
-											<div class="right">
-												<div class="horizontal_nav_wrapper clearfix">
-													<ul class="right pagination_prev_next">
-														<li><a class="prev" href="#">&lt;前</a></li>
-														<li><a class="next" href="#">次&gt;</a></li>
-													</ul>
-													<ul class="right pagination">
-														<li><a href="#">1</a></li>
-														<li class="current"><a href="#">4</a></li>
-														<li><a href="#">7</a></li>
-														<li><a href="#">10</a></li>
-													</ul>
-												</div>
-											</div>
+
+											{% include "pagination_upper.html" %}
 										</div>
 										
 										<table class="table_5rows">
@@ -125,7 +114,8 @@
 												<td class="td_right">10<span>メモ</span></td>
 												<td class="refferNum td_right">11<span>回</span></td>
 											</tr> -->
-											{% for p in u.likepub.pub.all %}
+											{#{% for p in u.likepub.pub.all %}#}
+											{% for p in pub %}
 											<tr>
 												{% ifnotequal u.username user.username %}
 												<td class="td_center"><a href="#" class="mini_btn blue_btn">メモ</a></td>
@@ -146,20 +136,7 @@
 											{% endfor %}
 										</table>
 
-											
-										<div class="horizontal_nav_wrapper nav_bottom clearfix">
-											<ul class="right pagination_prev_next">
-												<li><a class="prev" href="#">&lt;前</a></li>
-												<li><a class="next" href="#">次&gt;</a></li>
-											</ul>
-											<ul class="right pagination">
-												<li><a href="#">1</a></li>
-												<li class="current"><a href="#">4</a></li>
-												<li><a href="#">7</a></li>
-												<li><a href="#">10</a></li>
-											</ul>
-										</div>
-										
+										{% include "pagination_bottom.html" %}
 									</section>
 									
 								</div>

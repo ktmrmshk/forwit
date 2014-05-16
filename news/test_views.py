@@ -28,4 +28,10 @@ def upload_file(request):
     else:
         form = UploadFileForm()
     return render(request, 'upload.html', {'form':form})
-        
+
+def test_ajax(request):
+    if request.method == 'GET':
+        callback = request.GET.get('callback', 'kitamu')
+        dat = ['apple', 'orange', 'python']
+        ret = '%s(%s)' % (callback, json.dumps(dat) )
+        return HttpResponse(ret, mimetype='application/javascript')

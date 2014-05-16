@@ -8,6 +8,9 @@ import sys
 from django.contrib.auth.models import User 
 from django.contrib.auth import logout, authenticate, login
 from news.models import UserProfileForm, UserForm
+from django.core.paginator import Paginator
+import pager
+
 # Create your views here.
 def test_news(request):
     #news = News.objects.all()
@@ -196,8 +199,6 @@ def userpage(request, username):
 
 
 
-
-
 def my_research(request):
     return research(request, request.user.username)
 def research(request, username):
@@ -227,9 +228,37 @@ def memopage(request, username):
     if not request.user.is_authenticated():
         return HttpResponse('Log-in is required. Please log-in')
     try:
+        page=1
+        if request.method == 'GET':
+            page = int( request.GET.get('page', '1') )
         u = User.objects.get(username__exact=username)
-        return render(request, 'login/account-name/tmp_memo.html', {'u':u, 'currentpage':'memo'} )
+        puball = u.likepub.pub.all()
+#         p = Paginator(puball, 20)
+#         pager={}
+#         pager['current'] = page
+#         pager['max'] = p.num_pages
+#         #print p.num_pages
+#         path=''
+#         if username == request.user.username:
+#             path='/memo/%s/' % username
+#         else:
+#             path='/memo/'
+#         if page != 1:
+#             pager['first'] = {'num': 1, 'url': '%s?page=%d' % (path, 1) }
+#         if page != p.num_pages: # not lastpage
+#             pager['last'] = { 'num': p.num_pages, 'url':'%s?page=%d' % (path, p.num_pages) }
+#         if p.page(page).has_previous():
+#             pager['prev'] = { 'url': '%s?page=%d' % (path, page - 1) }
+#         if p.page(page).has_next():
+#             pager['next'] = { 'url': '%s?page=%d' % (path, page + 1) }
+#         pub = p.page(page).object_list
+        uname=None
+        if username != request.user.username:
+            uname = username
+        pub, pg = pager.getPager(puball, page, '/memo/', username=uname)
+        return render(request, 'login/account-name/tmp_memo.html', {'u':u, 'pub':pub, 'puball':puball, 'pager':pg, 'currentpage':'memo'})
     except:
+        print sys.exc_info()#[0]
         return HttpResponse('username=%s was not found' % username)
     
 def my_memovideopage(request):
