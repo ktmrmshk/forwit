@@ -4,6 +4,7 @@ import re
 
 CINII_URL = 'http://ci.nii.ac.jp/opensearch/search?'
 LINK_PREFIX = 'http://ci.nii.ac.jp/naid/'
+APPID = '5nIg0LMJGgsg4MpFzgaF'
 
 class Publist(object):
     def __init__(self):
@@ -29,6 +30,7 @@ class Publist(object):
         self.query['format'] = self.fmt
         self.query['count'] = self.count
         self.query['start'] = self.start
+        self.query['appid'] = APPID
         
         #DEBUG
         print urllib.urlencode(self.query)

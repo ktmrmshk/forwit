@@ -13,8 +13,12 @@
 		<link rel="stylesheet" href="{{STATIC_URL}}css/searchresult.css">
 		<!--[if lt IE 9]><script src="http://html5shiv-printshiv.googlecode.com/svn/trunk/html5shiv-printshiv.js"></script><![endif]-->
 	</head>
-	
+	{% if user.is_authenticated %}
+	<body id="result" class="login">
+	{% else %}
 	<body id="result">
+	{% endif%}
+	
 	
 		<!-- wrapper -->
 		<div id="wrapper">
@@ -36,7 +40,13 @@
 				<!-- main -->
 				<main class="content_wrapper_wide">
 				
+					{% if user.is_authenticated %}
+					<section class="result main_content_wrapper">
+					{% else %}
 					<section class="main_content_wrapper">
+					{% endif%}
+					
+					
 
 						<div class="clearfix nav_header">
 							<div class="left">
@@ -86,6 +96,10 @@
 						</div>
 						
 						<table id="sResult" class="table_5rows">
+							
+							{% if user.is_authenticated %}
+							<colgroup class="col_btn" span="1">
+							{% endif %}
 							<colgroup class="col_icon" span="1">
 							<colgroup class="col_no" span="1">
 							<colgroup class="col_title" span="1">
@@ -94,6 +108,9 @@
 							<colgroup class="col_memo" span="1">
 							<thead>
 								<tr>
+									{% if user.is_authenticated %}
+									<th>&nbsp;</th>
+									{% endif %}
 									<th>&nbsp;</th>
 									<th>No.</th>
 									<th class="td_center">タイトル</th>
@@ -112,6 +129,9 @@
 							</tr> -->
 							{% for pub in publist %}
 							<tr>
+								{% if user.is_authenticated %}
+								<td><span class="mini_btn blue_btn">メモ</span></td>
+								{% endif %}
 								<td class="td_right"><img src="{{STATIC_URL}}img/icon_ronbun.png" alt="論文" width="11" height="13"></td>
 								<td>21</td>
 								<td><a href="/pub/{{ pub.id }}/{# {{ pub.link }} #}">{{ pub.title }}</a></td>
@@ -184,6 +204,28 @@
 		<script type="text/javascript" src="{{STATIC_URL}}js/jquery.heightLine.js"></script>
 		<script type="text/javascript" src="{{STATIC_URL}}js/scrolltopcontrol.js"></script>
 		<script type="text/javascript" src="{{STATIC_URL}}js/tablesorter/jquery.tablesorter.min.js"></script>
+		
+		{% if user.is_authenticated %}
+		<script>
+			$(function(){
+				/*table sort - http://tablesorter.com/docs/ - */
+				$("#sResult").tablesorter({
+					headers: { 0: { sorter: false}, 1: {sorter: false}, 3: {sorter:false} }
+				});
+				
+				/*memo*/
+				$(".mini_btn").mousedown(function(){
+					$(this).toggleClass("mini_btn_clicked");
+					if($(this).html() ==="メモ"){
+						$(this).html("<span>×</span>");
+					}else{
+						$(this).html("メモ");
+					}
+				});
+
+			})
+		</script>		
+		{% else %}
 		<script>
 			$(function(){
 				/*table sort - http://tablesorter.com/docs/ - */
@@ -192,5 +234,6 @@
 				});
 			})
 		</script>
+		{% endif %}
 	</body>
 </html>

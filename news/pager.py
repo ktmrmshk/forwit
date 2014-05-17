@@ -14,7 +14,7 @@ class Pager(object):
     
 
 def getPager(itemlist, currentpage, path, numperpage=20, username=None):
-    p = Paginator(itemlist, 20)
+    p = Paginator(itemlist, numperpage)
     pager={}
     pager['current'] = currentpage
     pager['max'] = p.num_pages
@@ -23,7 +23,7 @@ def getPager(itemlist, currentpage, path, numperpage=20, username=None):
         tmppath += '%s/' % username
     
     if currentpage != 1:
-        pager['first'] = {'num': 1, 'url': '%s?page=%d' % (tmppath, 1) }
+        pager['first'] = {'num': '1' , 'url': '%s?page=%d' % (tmppath, 1) }
     if currentpage != p.num_pages: # not lastpage
         pager['last'] = { 'num': p.num_pages, 'url':'%s?page=%d' % (tmppath, p.num_pages) }
     if p.page(currentpage).has_previous():

@@ -1,3 +1,7 @@
+{% if user.is_authenticated %}
+<a class="logo" href="/u/">
+{% else %}
 <a class="logo" href="/">
+{% endif%}
 	<img src="{{STATIC_URL}}img/logo.jpg" alt="ForWit" width="83" height="24" />
 </a>
