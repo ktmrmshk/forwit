@@ -65,7 +65,11 @@
 									<div class="fb_wrapper right">
 										<h2>外部サービスを使用してログイン</h2>
 										<button type="button" class="fb">Facebook</button>
+										<!-- <img src="{{STATIC_URL}}img/sign-in-with-twitter-gray.png" alt="twitter"> -->
+										<a href="{% url 'socialauth_begin' 'twitter' %}">Enter using Twitter</a>
 									</div>
+						               
+
 								</div>
 								
 							</section>

@@ -48,6 +48,17 @@ def test_search(request):
         # INGEST to DB!!!
         ingest_publist(publist)
         
+        #check if this user likes this pub
+        likepub = request.user.likepub.pub
+        
+        for p in publist:
+            try:
+                likepub.get(id__exact=p['id'])
+                p['mine'] = True
+            except:
+#                 print p['id'], 'not mine'
+                p['mine'] = False
+
         lastpage=(pub.cnt_ret-1)/20 + 1
         pagelist=[]
         next='t'

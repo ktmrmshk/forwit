@@ -130,10 +130,14 @@
 							{% for pub in publist %}
 							<tr>
 								{% if user.is_authenticated %}
-								<td><span class="mini_btn blue_btn">メモ</span></td>
+								    {% if pub.mine %}
+								    <td><span class="mini_btn blue_btn mini_btn_clicked"><span>&#10004;</span></span></td>
+								    {% else %}
+							     	<td><span class="mini_btn blue_btn" title="{{ pub.id }}">メモ</span></td>
+								    {% endif %}
 								{% endif %}
 								<td class="td_right"><img src="{{STATIC_URL}}img/icon_ronbun.png" alt="論文" width="11" height="13"></td>
-								<td>21</td>
+								<td>{{ forloop.counter| add:"0"}}</td>
 								<td><a href="/pub/{{ pub.id }}/{# {{ pub.link }} #}">{{ pub.title }}</a></td>
 								<td>{{pub.prism_publicationdate}}</td>
 								<td>{{ pub.likepub_set.all | length }}<span>メモ</span></td>
@@ -217,7 +221,7 @@
 				$(".mini_btn").mousedown(function(){
 					$(this).toggleClass("mini_btn_clicked");
 					if($(this).html() ==="メモ"){
-						$(this).html("<span>×</span>");
+						$(this).html("<span>&#10004;</span>");
 					}else{
 						$(this).html("メモ");
 					}

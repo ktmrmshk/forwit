@@ -10,7 +10,8 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'forwit_alpha.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
-
+    url(r'', include('social_auth.urls')),
+    
     url(r'^admin/', include(admin.site.urls)),
 #     url(r'^news/', 'news.views.test_news'),
      url(r'^search/', 'news.views.test_search'),
@@ -51,5 +52,7 @@ urlpatterns = patterns('',
     url(r'^setting/$', 'news.views.usersetting'),
     
     url(r'^memberlist/$', 'news.views.memberlist'),
+    
+    
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
