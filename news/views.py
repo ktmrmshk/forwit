@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 import urllib
 from news.models  import News, Publication, Video
-import cinii
+import cinii, cinii_rdf
 import json
 import sys
 from django.contrib.auth.models import User 
@@ -174,19 +174,33 @@ def toppage(request):
 def make_youtube_url(videoid, width=480, height=360):
     return '<iframe width="%d" height="%d" src="//www.youtube.com/embed/%s" frameborder="0" allowfullscreen></iframe>' % (width, height, videoid)
 def pubpage(request, pubid):
+    #get abstraction
+    abst=''
+    try:
+        c=cinii_rdf.CiniiRDF('http://ci.nii.ac.jp/naid/%s.rdf' % pubid)
+        abst = c.abst
+    except:
+        print sys.exc_info()
+        abst='Not Available Now'
+    if abst == '':
+        abst='Not Available Now'
+    
     try:
         pub = Publication.objects.get(id=pubid)
         #json.loads(a2.replace("u'", "'").replace("'", '"'))
         authors = json.loads(pub.authors.replace("u'", "'").replace("'", '"'))
+        for a in authors:
+            org = c.getAffiliation(a['name'])
+            a['org'] = org
         try:
             if pub.video_set.all() != []:
                 video = pub.video_set.all()[0]
                 video_url = make_youtube_url(video.video_id)
-                return render(request, 'login/tmp_thesis-movie.html', {'pub':pub, 'authors': authors, 'video_url': video_url})
+                return render(request, 'login/tmp_thesis-movie.html', {'pub':pub, 'authors': authors, 'video_url': video_url, 'abst':abst})
         except:
-            return render(request, 'tmp_thesis.html', {'pub':pub, 'authors': authors})
+            return render(request, 'tmp_thesis.html', {'pub':pub, 'authors': authors, 'abst':abst})
     except:
-        print sys.exc_info()[0], sys.exc_info()[1]
+        print sys.exc_info()
         return HttpResponse('pubid=%s is not found' % pubid )
 
 
