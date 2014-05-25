@@ -260,13 +260,68 @@
 					}else{
 						$(this).html("メモ");
 					}
+					
+					//kitamura added test code
+					
+					
+					
 				});	
 				{% endifnotequal %}
 				
 			});
-			
-
+		</script>
+		<script>
+		// using jQuery
+		function getCookie(name) {
+		    var cookieValue = null;
+		    if (document.cookie && document.cookie != '') {
+		        var cookies = document.cookie.split(';');
+		        for (var i = 0; i < cookies.length; i++) {
+		            var cookie = jQuery.trim(cookies[i]);
+		            // Does this cookie string begin with the name we want?
+		            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+		                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+		                break;
+		            }
+		        }
+		    }
+		    return cookieValue;
+        }
+        //use like this
+        var csrftoken = getCookie('csrftoken');
+        //alert( getCookie('csrftoken') );
+		function csrfSafeMethod(method) {
+             // these HTTP methods do not require CSRF protection
+		    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+		}
+		$.ajaxSetup({
+		    crossDomain: false, // obviates need for sameOrigin test
+		    beforeSend: function(xhr, settings) {
+		        if (!csrfSafeMethod(settings.type)) {
+		            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+		        }
+		    }
+		});
 		
+		$(".mini_btn").mousedown(function(){
+			$.ajax({
+	              type: 'POST',
+	              url: '/test_ajax/',
+	              dataType: 'json',
+	              success: function(json){
+
+	                var len = json.length;
+	                var string = "";
+	                for(var i=0; i<len; i++){
+	                  string += json[i];
+	                }
+	                alert(string);
+	              },
+                    error : function(xhr,errmsg,err) {
+                    alert(xhr.status + ": " + xhr.responseText+ '/ '+ errmsg + '/ ' + err);
+                    }
+	       });		
+		});
 		</script>
 	</body>
 </html>

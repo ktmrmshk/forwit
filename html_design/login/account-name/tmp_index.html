@@ -66,15 +66,11 @@
 									<section class="similer">
 										<div class="header_wrapper clearfix">
 											<h1><img src="{{STATIC_URL}}img/h_similer.png" alt="ウォッチが似ている人" width="188" height="27"></h1>
-											<a class="reload" href="">リロード</a>
+											<a class="reload similer_btn">リロード</a>
 										</div>
-										<ul class="user clearfix">
-											<li><a href="../other/index.html"><img src="../../img/dummy/user1.jpg" alt="中央エンジニア" width="74" height="74">中央エンジニア</a></li>
+										<ul class="user clearfix" id="guestbox">
+											<!-- <li><a href="../other/index.html"><img src="../../img/dummy/user1.jpg" alt="中央エンジニア" width="74" height="74">12中央エンジニア</a></li> -->
 											<li><a href="../other/index.html"><img src="../../img/dummy/user2.jpg" alt="オールプレジデント" width="74" height="74">オールプレジデント</a></li>
-											<li><a href="../other/index.html"><img src="../../img/dummy/user3.jpg" alt="京都大学" width="74" height="74">京都大学</a></li>
-											<li><a href="../other/index.html"><img src="../../img/dummy/user4.jpg" alt="清水製作所" width="74" height="74">清水製作所</a></li>
-											<li><a href="../other/index.html"><img src="../../img/dummy/user5.jpg" alt="日本大学" width="74" height="74">日本大学</a></li>
-											<li><a href="../other/index.html"><img src="../../img/dummy/user6.jpg" alt="公務員" width="74" height="74">公務員</a></li>
 										</ul>
 									</section>
 								</div>
@@ -215,7 +211,40 @@
 					}
 				});	
 			});
+
 		</script>
 		{% endifequal %}
+        <!-- for ajax -->
+        <script>
+        
+        	$(".similer_btn").mousedown( function(){
+        		//alert("pushed");
+                $.ajax({
+                    type: 'GET',
+                    url: '/get_randuser/',
+                    dataType: 'jsonp',
+                    jsonpCallback: 'callback',
+                    success: function(json){
+                    	$("#guestbox").empty();
+                        var len = json.length;
+                        for(var i=0; i < len; i++){
+                        	var ret = "";
+                        	ret += "<li>";
+                        	ret += '<a href="/u/' + json[i].username + '">';
+                        	ret += '<img src="'+ json[i].facephoto +'" alt="'+ json[i].name +'" width="74" height="74">';
+                        	//ret += json[i].name;
+                        	ret += "</a>";
+                            ret += "</li>";
+                            $("#guestbox").append(ret);
+                        }
+                    },
+                    error: function(data){
+                    	alert(data);
+                    }
+                });
+        	});
+       
+        </script>
+        
 	</body>
 </html>

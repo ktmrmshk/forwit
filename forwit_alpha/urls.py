@@ -21,6 +21,7 @@ urlpatterns = patterns('',
 #     url(r'^test_watch/', 'news.views.test_watch'),
 #    url(r'^news/$', 'news.views.toppage'),   
     url(r'^test_ajax/$', 'news.test_views.test_ajax'),
+    url(r'^get_randuser/$', 'news.test_views.ajax_get_randuser'),
     
     url(r'^$', 'news.views.toppage'),
     
@@ -52,6 +53,9 @@ urlpatterns = patterns('',
     url(r'^setting/$', 'news.views.usersetting'),
     
     url(r'^memberlist/$', 'news.views.memberlist'),
+    
+    
+    url(r'^new/$', 'news.test_views.newuser'),
     
     
 

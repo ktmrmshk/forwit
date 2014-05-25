@@ -4,7 +4,7 @@ import urllib
 from news.models  import News, Publication
 import cinii
 import json
-
+from django.contrib.auth.models import User 
 
 from django import forms
 class UploadFileForm(forms.Form):
@@ -30,8 +30,36 @@ def upload_file(request):
     return render(request, 'upload.html', {'form':form})
 
 def test_ajax(request):
+    callback='_func'
     if request.method == 'GET':
         callback = request.GET.get('callback', 'kitamu')
         dat = ['apple', 'orange', 'python']
         ret = '%s(%s)' % (callback, json.dumps(dat) )
+        print ret
         return HttpResponse(ret, mimetype='application/javascript')
+    elif request.method == 'POST':
+        print 'POST'
+        dat = ['apple', 'orange', 'python']
+        ret = '%s' % json.dumps(dat) 
+        print ret
+        return HttpResponse(ret, content_type = "application/json")
+    else:
+        return HttpResponse('error')
+    
+
+def ajax_get_randuser(request):
+    if request.method == 'GET':
+        callback = request.GET.get('callback', 'hogefoo')
+        user = User.objects.all().order_by('?')
+        ret=[]
+        for u in user:
+            tmp={}
+            tmp['username'] = u.username
+            tmp['name'] = '%s %s' % ( u.last_name, u.first_name)
+            tmp['facephoto'] = 'dummy.jpg'#u.userprofile.facephoto.url
+            ret.append(tmp)
+        retjson = '%s(%s)' % (callback, json.dumps(ret) )
+        return HttpResponse(retjson, mimetype='application/javascript')
+    
+def newuser(request):
+    return HttpResponse('thanks!')
