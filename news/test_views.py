@@ -39,7 +39,8 @@ def test_ajax(request):
         return HttpResponse(ret, mimetype='application/javascript')
     elif request.method == 'POST':
         print 'POST'
-        dat = ['apple', 'orange', 'python']
+        pubid = request.POST.get('pubid', 9876)
+        dat = {'pubid':pubid}
         ret = '%s' % json.dumps(dat) 
         print ret
         return HttpResponse(ret, content_type = "application/json")
@@ -62,4 +63,14 @@ def ajax_get_randuser(request):
         return HttpResponse(retjson, mimetype='application/javascript')
     
 def newuser(request):
+    user = request.user
+    try:
+        up = user.userprofile
+    
+        f = user.follower
+        lb = user.likepub
+        lv = user.likevideo
+    except:
+        return HttpResponse('related model does not exist')
+    
     return HttpResponse('thanks!')

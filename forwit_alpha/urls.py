@@ -14,7 +14,9 @@ urlpatterns = patterns('',
     
     url(r'^admin/', include(admin.site.urls)),
 #     url(r'^news/', 'news.views.test_news'),
-     url(r'^search/', 'news.views.test_search'),
+     #url(r'^search/', 'news.views.test_search'),
+     url(r'^search/', 'news.views.search_pub'),
+     
 #     url(r'^test_getpub/', 'news.views.test_getpub'),
 #     url(r'^test_upload/', 'news.test_views.upload_file'),
 #     url(r'^test_userpage/', 'news.views.test_userpage'),
@@ -52,11 +54,14 @@ urlpatterns = patterns('',
     
     url(r'^setting/$', 'news.views.usersetting'),
     
+    
     url(r'^memberlist/$', 'news.views.memberlist'),
     
     
-    url(r'^new/$', 'news.test_views.newuser'),
+    url(r'^new_socialuser/$', 'news.views.new_socialuser'),
+    url(r'^loggedin/$', 'news.views.loggedin'),
     
-    
+    #for ajax
+    url(r'^add_memopub/$', 'news.views.add_memopub'),
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

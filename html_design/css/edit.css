@@ -9,6 +9,13 @@ edit edit-research setting
   margin: 0 auto;
 }
 
+.form_wrapper dt{
+  font-size: 16px;
+  font-weight: bold;
+  font-family: "Times New Roman", "游明朝", YuMincho, "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "HG明朝E", "ＭＳ Ｐ明朝", "ＭＳ 明朝", serif;
+  color: navy;
+}
+
 .mini_btn {
   height: 24px;
   line-height: 24px;
@@ -72,7 +79,7 @@ main.setting label {
   display: inline-block;
 }
 main.setting .float_wrapper {
-  margin-bottom: 70px;
+  margin-bottom: 40px;
 }
 main.setting .float_wrapper .left {
   width: 100px;
@@ -262,8 +269,8 @@ main.edit_research .detail .t_info {
   padding-top: 16px;
 }
 main.edit_research label,
-main.edit_research legend {
-  font-size: 16px;
+main.edit_research legend{
+  font-size: 20px;
   font-weight: bold;
   font-family: "Times New Roman", "游明朝", YuMincho, "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "HG明朝E", "ＭＳ Ｐ明朝", "ＭＳ 明朝", serif;
   color: navy;
@@ -278,6 +285,7 @@ main.edit_research .input_wrapper input {
 }
 main.edit_research .input_wrapper button {
   display: inline-block;
+  width: 60px;
 }
 main.edit_research .add_btn {
   background: rgba(0, 0, 128, 0.4);
@@ -293,16 +301,18 @@ main.edit_research .youtube .file_wrapper {
 }
 main.edit_research .attachment .input_wrapper,
 main.edit_research .youtube .input_wrapper {
-  margin: 8px 0;
+  margin: 0 0 5px 0;
 }
+
 main.edit_research .attachment .input_wrapper label,
 main.edit_research .youtube .input_wrapper label {
   display: inline-block;
   font-family: Verdana, "游ゴシック", YuGothic, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif;
   font-weight: normal;
-  font-size: 14px;
+  font-size: 16px;
+  font-weight: bold;
   color: #333;
-  width: 60px;
+  width: 150px;
 }
 main.edit_research .youtube .reload {
   display: inline-block;
@@ -363,13 +373,113 @@ main.edit_research .youtube .help_area:after {
   margin-left: -8px;
 }
 
+/*論文編集専用CSS*/
+
+.paper_title h2{
+  line-height: 1.2;
+  border: none;
+  color: #222;
+  font-family: Verdana, "游ゴシック", YuGothic, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif;
+  font-weight: normal;
+  font-size: 18px;
+  letter-spacing:1px;
+  display: inline-block;
+  max-width: 920px;
+  height: auto;
+  min-height: 29px;
+  margin:0 0 20px 10px;
+}
+
+
+.paper_edit .left{
+  width: 480px;
+}
+
+.paper_edit .right {
+  width: 408px;
+}
+
+.paper_edit .left h3{
+  border-bottom: 1px solid navy;
+  color: navy;
+  font-family: "Times New Roman", "游明朝", YuMincho, "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "HG明朝E", "ＭＳ Ｐ明朝", "ＭＳ 明朝", serif;
+  font-weight: bold;
+  font-size: 17px;
+  height: 26px;
+  margin-bottom: 5px;
+}
+
+.paper_edit p{
+  margin-left:5px;
+  color: #222;
+  font-weight: normal;
+  font-size: 14px;
+  font-family: Verdana, "游ゴシック", YuGothic, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif;
+  line-height: 1.5;
+}
+
+.paper_edit_info {
+  font-size: 13px;
+  padding: 20px 0;
+}
+.paper_edit_info dl {
+  line-height: 2;
+}
+.paper_edit_info dt {
+  float: left;
+  display: inline-block;
+  width: 6em;
+  color: navy;
+  font-family: "Times New Roman", "游明朝", YuMincho, "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "HG明朝E", "ＭＳ Ｐ明朝", "ＭＳ 明朝", serif;
+  font-weight: bold;
+  line-height: 1.6;
+}
+.paper_edit_info dd {
+  line-height: 1.6;
+}
+.paper_edit_info dd:before {
+  content: ":";
+}
+
+.paper_edit_author table {
+  font-size: 13px;
+  width: 100%;
+}
+.paper_edit_author table th {
+  background: #DCDCDC;
+  font-size: 12px;
+}
+.paper_edit_author table .author {
+  width: 90px;
+}
+.paper_edit_author table td a {
+  font-size: 13px;
+}
+.paper_edit_author table tr:nth-child(5n) {
+  border-bottom: 1px dotted #ccc;
+}
+.paper_edit_author table tr:nth-child(5n) td {
+  padding-bottom: 1px;
+}
+.paper_edit_author table tr:nth-child(5n + 1) td {
+  padding-top: 1px;
+}
+
+
+.paper_edit_input{
+   width: 590px;
+  padding: 18px;
+  margin: 0 auto;
+}
+
+
+
 /*upload*/
 .fileUpload {
   display: inline-block;
   position: relative;
   overflow: hidden;
-  margin-right: 10px;
-  width: 80px;
+  width: 100px;
   height: 26px;
   line-height: 26px;
 }
@@ -377,6 +487,11 @@ main.edit_research .youtube .help_area:after {
   font-size: 12px;
   line-height: 26px;
 }
+
+.blue_btn.fileUpload{
+  margin-left:40px;
+}
+
 
 .upload {
   position: absolute;
@@ -407,6 +522,7 @@ height: 26px;
   width: 240px;
   margin: 0 0 0 auto;
 }
+
 #buttons button {
   float: left;
   display: block;
@@ -417,6 +533,7 @@ height: 26px;
   -moz-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
+
 #buttons button:hover {
   box-shadow: 0 0 4px #f78000;
 }
@@ -463,4 +580,68 @@ label.error:after {
 .blue_btn,
 button {
   line-height: 1;
+}
+
+
+
+
+
+/*メールとパスワードの変更について*/
+.change_mail_pw{
+  margin:50px 0 50px;
+}
+
+.change_btn{
+  width:50px;
+  height: 16px;
+  padding-top:2px;
+  font-size: 12px;
+  font-family: Verdana, "游ゴシック", YuGothic, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif;
+  vertical-align: middle;
+}
+
+.change_mail_pw dt{
+  clear: left;
+  float: left;
+  width: 130px;
+  color: navy;
+  font-family: "Times New Roman", "游明朝", YuMincho, "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "HG明朝E", "ＭＳ Ｐ明朝", "ＭＳ 明朝", serif;
+  font-weight: bold;
+  vertical-align: middle;
+}
+
+
+.mail_current dt{
+  display: inline-block;
+  font-family: Verdana, "游ゴシック", YuGothic, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif;
+  font-weight: normal;
+  font-size: 14px;
+  color: #333;
+}
+
+/*利用規約について*/
+.entry_agree {
+  width: 750px;
+  margin-top: 50px;
+  text-align: center;
+}
+
+.entry_agree_btn{
+  text-align: center;
+  margin-top: 20px;
+/*  width: 250px;*/
+}
+
+
+.entry_agree_btn input{
+  width: 17px;
+  height: 17px;
+  margin-right: 3px;
+  vertical-align : middle;
+}
+
+main.setting .entry_agree_btn label{
+  font-size: 16px;
+  width: 400px;
+  vertical-align: middle;
 }

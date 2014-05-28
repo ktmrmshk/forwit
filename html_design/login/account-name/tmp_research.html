@@ -141,7 +141,7 @@
 											{% for p in u.publication_set.all %}
 											<tr>
 												{% ifnotequal u.username user.username %}
-												<td class="td_center"><a href="#" class="mini_btn blue_btn">メモ</a></td>
+												<td class="td_center"><a class="mini_btn blue_btn" title="{{p.id}}">メモ</a></td>
 												{% endifnotequal %}
 												<td class="td_center">
 													{% if p.video_set.all %}
@@ -211,6 +211,8 @@
 		<!-- javascript -->
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 		<script type="text/javascript" src="{{STATIC_URL}}js/scrolltopcontrol.js"></script>
+		<script type="text/javascript" src="{{STATIC_URL}}js/ajax_csrf.js"></script>
+
 		<script>
 			$(function(){
 				var profileHeight = $(".sub_content_wrapper").outerHeight(),
@@ -271,51 +273,17 @@
 			});
 		</script>
 		<script>
-		// using jQuery
-		function getCookie(name) {
-		    var cookieValue = null;
-		    if (document.cookie && document.cookie != '') {
-		        var cookies = document.cookie.split(';');
-		        for (var i = 0; i < cookies.length; i++) {
-		            var cookie = jQuery.trim(cookies[i]);
-		            // Does this cookie string begin with the name we want?
-		            if (cookie.substring(0, name.length + 1) == (name + '=')) {
-		                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-		                break;
-		            }
-		        }
-		    }
-		    return cookieValue;
-        }
-        //use like this
-        var csrftoken = getCookie('csrftoken');
-        //alert( getCookie('csrftoken') );
-		function csrfSafeMethod(method) {
-             // these HTTP methods do not require CSRF protection
-		    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-		}
-		$.ajaxSetup({
-		    crossDomain: false, // obviates need for sameOrigin test
-		    beforeSend: function(xhr, settings) {
-		        if (!csrfSafeMethod(settings.type)) {
-		            xhr.setRequestHeader("X-CSRFToken", csrftoken);
-		        }
-		    }
-		});
-		
 		$(".mini_btn").mousedown(function(){
 			$.ajax({
 	              type: 'POST',
-	              url: '/test_ajax/',
+	              data: {
+	              	pubid : $(this).attr("title"),
+	              	cmd : "add"
+	              },
+	              url: '/add_memopub/',
 	              dataType: 'json',
 	              success: function(json){
-
-	                var len = json.length;
-	                var string = "";
-	                for(var i=0; i<len; i++){
-	                  string += json[i];
-	                }
-	                alert(string);
+	                alert( json['pubid'] );
 	              },
                     error : function(xhr,errmsg,err) {
                     alert(xhr.status + ": " + xhr.responseText+ '/ '+ errmsg + '/ ' + err);

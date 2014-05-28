@@ -116,7 +116,7 @@
 									<th class="td_center">タイトル</th>
 									<th>発行年月</th>
 									<th>メモ数</th>
-									<th>引用数</th>
+									<th>---</th>
 								</tr>
 							</thead>
 							<!-- <tr>
@@ -137,11 +137,11 @@
 								    {% endif %}
 								{% endif %}
 								<td class="td_right"><img src="{{STATIC_URL}}img/icon_ronbun.png" alt="論文" width="11" height="13"></td>
-								<td>{{ forloop.counter| add:"0"}}</td>
+								<td>{{ forloop.counter| add:offset}}</td>
 								<td><a href="/pub/{{ pub.id }}/{# {{ pub.link }} #}">{{ pub.title }}</a></td>
 								<td>{{pub.prism_publicationdate}}</td>
 								<td>{{ pub.likepub_set.all | length }}<span>メモ</span></td>
-								<td>11<span>回</span></td>
+								<td><!-- 11<span>回</span> --></td>
 							</tr>
 							{% endfor %}
 						</table>
@@ -206,8 +206,8 @@
 		<!-- javascript -->
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 		<script type="text/javascript" src="{{STATIC_URL}}js/jquery.heightLine.js"></script>
-		<script type="text/javascript" src="{{STATIC_URL}}js/scrolltopcontrol.js"></script>
-		<script type="text/javascript" src="{{STATIC_URL}}js/tablesorter/jquery.tablesorter.min.js"></script>
+		<!-- <script type="text/javascript" src="{{STATIC_URL}}js/scrolltopcontrol.js"></script>
+		<script type="text/javascript" src="{{STATIC_URL}}js/tablesorter/jquery.tablesorter.min.js"></script> -->
 		
 		{% if user.is_authenticated %}
 		<script>

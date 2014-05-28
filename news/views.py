@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 import urllib
-from news.models  import News, Publication, Video
+from news.models  import News, Publication, Video, UserProfile, Follower, LikePub, LikeVideo
 import cinii, cinii_rdf
 import json
 import sys
@@ -11,13 +11,74 @@ from news.models import UserProfileForm, UserForm
 from django.core.paginator import Paginator
 import pager
 
+
 # Create your views here.
 def test_news(request):
     #news = News.objects.all()
     news = News.objects.filter(published=True)
     return render(request, 'tmp_index.html', {'news': news})
 
-
+def search_pub(request):
+    if 'q' in request.GET:
+        q = request.GET['q']
+        page = int( request.GET.get('page', '1') )
+        q_for_navi = 'http://' + request.get_host()
+        q_for_navi += request.path
+        q_for_navi += '?'
+        q_for_navi += 'q=%s' % q
+        
+        start = (page-1) * 20
+        pub = cinii.Publist()
+        pub.q = q
+        pub.setparam(count=20, start=start)
+        pub.get()
+        publist = pub.parse_dat_all()
+        # INGEST to DB!!!
+        ingest_publist(publist)
+        
+        #check if this user likes this pub
+        if request.user.is_authenticated():
+            likepub = request.user.likepub.pub
+            for p in publist:
+                try:
+                    likepub.get(id__exact=p['id'])
+                    p['mine'] = True
+                except:
+#                     print p['id'], 'not mine'
+                    p['mine'] = False
+        
+        lastpage=(pub.cnt_ret-1)/20 + 1
+        pagelist=[]
+        next='t'
+        before='t'
+        if lastpage == 1:
+            assert page == lastpage
+            next='f'
+            before='f'
+        elif lastpage == 2:
+            if page == 1:
+                before = 'f'
+            else:
+                assert page == 2
+                next = 'f'
+            pagelist = [1, 2]
+        else:
+            assert lastpage > 2
+            if page == 1:
+                before='f'
+                pagelist = [1, 2, 3]
+            elif page == lastpage:
+                next = 'f'
+                pagelist = [lastpage-2, lastpage-1, lastpage]
+            else:
+                pagelist = [page-1, page, page+1]
+        
+        #print pagelist
+        offset=(page-1)*20
+        return render(request, 'tmp_search-result.html',
+                       {'cnt_ret': pub.cnt_ret, 'publist': publist, 'page': page, 'q_for_navi': q_for_navi,
+                        'pagelist' : pagelist, 'next':next, 'before':before, 'offset':offset })        
+        
 def test_search(request):
 #     if request.method == 'POST':
 #         print request.POST['q']
@@ -211,7 +272,10 @@ def my_userpage(request):
     try:
 #         u = User.objects.get(username__exact=username)
         u = request.user
-        return render(request, 'login/account-name/tmp_index.html', {'u':u, 'currentpage':'news'} )
+        news = News.objects.filter(published=True).order_by('?')[:5]
+        pub = Publication.objects.order_by('?')[:5]
+        video = Video.objects.order_by('?')[:8]
+        return render(request, 'login/account-name/tmp_index.html', {'u':u, 'currentpage':'news', 'news': news, 'pub':pub, 'video': video} )
     except:
 #         print sys.exc_info()[0]
         return HttpResponse('username=%s was not found' % request.user.username)
@@ -344,16 +408,79 @@ def usersetting(request):
             up.save()
             u.save()
             msg='saved!'
-            return render(request, 'login/tmp_setting.html', {'uf': uf, 'upf': upf, 'msg': msg})
+            return render(request, 'login/tmp_setting2.html', {'uf': uf, 'upf': upf, 'msg': msg})
         else:
             msg =  'INVAID'
-            return render(request, 'login/tmp_setting.html', {'uf': uf, 'upf': upf, 'msg': msg})
+            return render(request, 'login/tmp_setting2.html', {'uf': uf, 'upf': upf, 'msg': msg})
     uf = UserForm(instance=u)
     upf = UserProfileForm(instance=up)
-    return render(request, 'login/tmp_setting.html', {'uf': uf, 'upf': upf})
+    return render(request, 'login/tmp_setting2.html', {'uf': uf, 'upf': upf})
 
 def memberlist(request):
     alluser = User.objects.all()
     return render(request, 'login/tmp_memberlist.html', {'alluser': alluser})
 
+def loggedin(request):
+    u = request.user
+    try:
+        uf = u.userprofile
+        f = u.follower
+        lp = u.likepub
+        lv = u.likevideo
+        return redirect('/u/')
+    except:
+        return redirect('/new_socialuser/')
 
+def new_socialuser(request):
+    u = request.user
+    up = UserProfile(user=u)
+    if request.method == 'POST':
+        uf = UserForm(request.POST, instance=u)
+        upf = UserProfileForm(request.POST, instance=up)
+        if  uf.is_valid() and upf.is_valid():
+            upf.save()
+            uf.save()
+            f = Follower(user=u)
+            f.save()
+            lp = LikePub(user=u)
+            lp.save()
+            lv = LikeVideo(user=u)
+            lv.save()
+            return redirect('/u/')
+        return HttpResponse('Error happened!')
+    else:
+        uf = UserForm(instance=u)
+        upf = UserProfileForm()
+        return render(request, 'login/tmp_setting2.html', {'uf': uf, 'upf': upf})
+    
+    
+def add_memopub(request):
+    if request.method == 'POST':
+#         print 'POST'
+        pubid = request.POST.get('pubid', False)
+        cmd = request.POST.get('cmd', False)
+        assert cmd == 'add' or cmd == 'remove'
+        if pubid and cmd:
+            lp = request.user.likepub
+            pub = Publication.objects.get(id__exact=int(pubid))
+            if cmd == 'add':
+                lp.pub.add(pub)
+            elif cmd == 'remove':
+                lp.pub.remove(pub)
+            else:
+                raise Exception('cmd error', 'cmd=%s' % cmd)
+            lp.save()
+            print 'added new pub'
+        else:
+            raise
+        dat = {'ret': 'true', 'pubid':pubid}
+        ret = '%s' % json.dumps(dat) 
+#         print ret
+        return HttpResponse(ret, content_type = "application/json")
+    else:
+        dat = {'ret': 'false', 'msg': 'method error'}
+        ret = '%s' % json.dumps(dat) 
+        return HttpResponse(ret, content_type = "application/json")
+    
+
+    

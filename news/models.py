@@ -50,7 +50,7 @@ class UserProfile(models.Model):
     interesting2 = models.CharField(max_length=64, default='ResearchArea2')
     interesting3 = models.CharField(max_length=64, default='ResearchArea3')
     
-    facephoto = models.ImageField(upload_to=upload_to, blank=True, null=True, default='settings.MEDIA_ROOT/logos/anonymous.jpg')
+    facephoto = models.ImageField(upload_to=upload_to, blank=True, null=True, default='settings.MEDIA_ROOT/nobody.png')
     
     kana_first_name = models.CharField(max_length=64, blank=True, default='')
     kana_last_name = models.CharField(max_length=64, blank=True, default='')
@@ -99,7 +99,8 @@ class UserForm(forms.ModelForm):
     #password = forms.CharField(widget=forms.PasswordInput)
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'email')
+        #fields = ('first_name', 'last_name', 'email')
+        fields = ('first_name', 'last_name')
 
 class UserProfileForm(forms.ModelForm):
     class Meta:

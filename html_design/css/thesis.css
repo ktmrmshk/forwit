@@ -1,41 +1,49 @@
-/*-----------------------------
+/*---thesis
+--------------------------
 論文ページ thesis
 ------------------------------*/
 .main_content_wrapper {
   padding-top: 12px;
 }
 
-.thesis .left {
+
+.thesis .left{
   width: 480px;
 }
 .thesis .right {
   width: 408px;
 }
-.thesis .back_btn {
-  display: block;
-  width: 40px;
-  line-height: 18px;
-  height: 18px;
-  text-align: center;
-  font-size: 11px;
-  border-radius: 3px 3px 3px 3px;
-  cursor: pointer;
-  margin-bottom: 10px;
-}
+
+
 .thesis .mini_btn {
   width: 40px;
   margin-right: 5px;
 }
-.thesis h1 {
+.thesis .t_title h1 {
+  margin: 0 0 25px 10px;
   line-height: 1.2;
   border: none;
   color: #222;
-  font-weight: bold;
+  font-family: Verdana, "游ゴシック", YuGothic, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif;
+  font-weight: normal;
   font-size: 18px;
+  letter-spacing:1px;
   display: inline-block;
-  max-width: 430px;
+  max-width: 920px;
   height: auto;
   min-height: 29px;
+}
+
+.t_exposition{
+  margin-bottom:20px;
+}
+
+.t_exposition h2{
+  margin-bottom: 5px;
+}
+
+.t_exposition p{
+  margin-left: 5px;
 }
 
 .t_attachment {
@@ -49,7 +57,7 @@
 }
 .t_attachment li a {
   display: block;
-  width: 30%;
+  width: 20%;
   float: left;
   margin: 2px 0 0;
   padding: 0 0 0 10px;
@@ -63,6 +71,7 @@
 .t_info dl {
   line-height: 2;
 }
+
 .t_info dt {
   float: left;
   display: inline-block;
@@ -74,7 +83,11 @@
 }
 .t_info dd {
   line-height: 1.6;
+  padding-left:6.4em;
+  text-indent: -0.4em;
 }
+
+
 .t_info dd:before {
   content: ":";
 }
@@ -82,6 +95,7 @@
 .t_author table {
   font-size: 13px;
   width: 100%;
+  margin-top: 30px 
 }
 .t_author table th {
   font-size: 12px;
@@ -125,4 +139,70 @@
 }
 .login_wrapper .login_btn:hover {
   box-shadow: 0 0 3px #f78000;
+}
+
+
+
+/*上段のボタンエリア*/
+.top_btn_area{
+  width: 920px;
+  height: 20px;
+  margin-bottom: 15px; 
+}
+
+
+/*本人、戻るボタンのスタイル*/
+.t_mini_btn{
+  float:left;
+  font-size: 12px;
+  padding:0 7px;
+  margin-right: 5px;
+  display: inline-block;
+  text-align: center;
+  border-radius: 3px;
+  cursor: pointer;
+  border: 1px solid black;
+  text-decoration: none;
+}
+
+/*本人ボタンの色*/
+.t_mini_btn.mine{
+  background: white;
+  color: black;
+}
+
+.t_mini_btn.mine:hover{
+background: #f78000;
+border: 1px solid #f78000;
+color: #fff;
+text-decoration: none;
+}
+
+
+/*戻るボタンの色*/
+.t_mini_btn.back {
+  background: #808080;
+  color: white;
+}
+
+.t_mini_btn.back:hover{
+background: #f78000;
+border: 1px solid #f78000;z
+color: #fff;
+text-decoration: none;
+}
+
+/*編集の色*/
+.t_mini_btn.edit{
+  float: right;
+  background: white;
+  color: black;
+  text-decoration: none;
+}
+
+.t_mini_btn.edit:hover{
+background: #f78000;
+border: 1px solid #f78000;
+color: #fff;
+text-decoration: none;
 }

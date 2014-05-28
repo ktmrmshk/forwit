@@ -57,9 +57,8 @@
 									<section class="whatsnew heightline">
 										<h1><img src="{{STATIC_URL}}img/h_whatsnew.png" alt="お知らせ" width="188" height="27"></h1>
 										<ul class="list">
-											<li><a href="../other/index.html">井上さんがあなたをウォッチしました。</a></li>
-											<li><a href="../other/index.html">清水さんが論文を編集しました。</a></li>
-											<li><a href="../other/index.html">長谷川さんがあなたの論文をメモしました。</a></li>
+											<!-- <li><a href="../other/index.html">井上さんがあなたをウォッチしました。</a></li> -->
+											not available now.
 										</ul>
 									</section>
 									<!-- ウォッチが似ている人 -->
@@ -70,7 +69,7 @@
 										</div>
 										<ul class="user clearfix" id="guestbox">
 											<!-- <li><a href="../other/index.html"><img src="../../img/dummy/user1.jpg" alt="中央エンジニア" width="74" height="74">12中央エンジニア</a></li> -->
-											<li><a href="../other/index.html"><img src="../../img/dummy/user2.jpg" alt="オールプレジデント" width="74" height="74">オールプレジデント</a></li>
+											not available nows
 										</ul>
 									</section>
 								</div>
@@ -80,31 +79,24 @@
 								<div class="left">
 									<!--科学系ニュース -->
 									<section class="news heightline">
-										<h1><img src="{{STATIC_URL}}img/h_news.png" alt="科学系ニュース" width="188" height="27"></h1>
-										<ul class="list">
-											<li><a href="../../news.html">薬物をテストするための実験用人間器官 「Homo Minutus」開発プ</a></li>
-											<li><a href="../../news.html">STAPのプロトコルを追う香港の教授、その予兆をとらえる</a></li>
-											<li><a href="../../news.html">宇宙飛行士の心臓、球体に近く変形していたことが確認される</a></li>
-											<li><a href="../../news.html">STAP細胞問題の最終調査報告発表、小保方氏は不服申し立ての構え</a></li>
-											<li><a href="../../news.html">「子供の長時間のテレビ視聴は発達に悪影響」</a></li>
-										</ul>
-									</section>
+			                            <h2><img src="{{STATIC_URL}}img/h_news.png" alt="科学系ニュース" title="" width="188" height="27"></h2>
+			                            <ul class="list">
+			                                <!-- <li><a href="news.html">薬物をテストするための実験用人間器官 「Homo Minutus」開発プ</a></li> -->
+			                                {% for n in news %}
+			                                <li><a href="{{ n.source }}"> {{n.title}} </a></li>
+			                                {% endfor %}
+			                            </ul>
+			                        </section>
 									<!-- ピックアップ論文 -->
 									<section class="pickup">
-										<h1><img src="{{STATIC_URL}}img/h_pickup.png" alt="ピックアップ論文" width="188" height="27"></h1>
-										<ul class="list">
-											<li><a href="../thesis.html">上死点近傍燃料噴射による予混合型ディーゼル燃焼の排気改善</a></li>
-											<li><a href="../thesis.html">光線情報による3次元実空間の効率的記述へ向けた光線空間射影法</a></li>
-											<li><a href="../thesis.html">iPS細胞を用いた心臓病の病態解明と再生医療への応用</a></li>
-											<li><a href="../thesis.html">超電導限流器の電力系統安定度向上効果に関する考察</a></li>
-											<li><a href="../thesis.html">LHC実験 : テラスケール物理の成果と展望</a></li>
-											<li><a href="../thesis.html">上死点近傍燃料噴射による予混合型ディーゼル燃焼の排気改善</a></li>
-											<li><a href="../thesis.html">光線情報による3次元実空間の効率的記述へ向けた光線空間射影法</a></li>
-											<li><a href="../thesis.html">iPS細胞を用いた心臓病の病態解明と再生医療への応用</a></li>
-											<li><a href="../thesis.html">超電導限流器の電力系統安定度向上効果に関する考察</a></li>
-											<li><a href="../thesis.html">LHC実験 : テラスケール物理の成果と展望</a></li>	
-										</ul>
-									</section>
+			                            <h2><img src="{{STATIC_URL}}img/h_pickup.png" alt="ピックアップ論文" title="" width="188" height="27"></h2>
+			                            <ul class="list">
+			                                <!-- <li><a href="thesis.html">上死点近傍燃料噴射による予混合型ディーゼル燃焼の排気改善</a></li> -->
+			                                {% for p in pub %}
+			                                <li><a href="/pub/{{p.id}}">{{ p.title }}</a></li>
+			                                {% endfor %}
+			                            </ul>
+			                        </section>
 								</div>
 								<!-- end left -->
 								
@@ -113,17 +105,15 @@
 						
 							<!-- ピックアップ動画 -->
 							<section class="pickup_movie">
-								<h1><img src="{{STATIC_URL}}img/h_movie.png" alt="ピックアップ動画" width="188" height="27"></h1>
-								<ul class="movie movie_3column clearfix">
-									<li><a href="../thesis-movie.html"><dl><dt><img src="../../img/dummy/img_dummy_movie_001.jpg" alt="ロケットエンジンの燃焼試験" width="224" height="126"></dt><dd>ロケットエンジンの燃焼試験</dd></dl></a></li>
-									<li><a href="../thesis-movie.html"><dl><dt><img src="../../img/dummy/img_dummy_movie_002.jpg" alt="バーチャルキャラクターが実世界で動きまわる、実在感のある" width="224" height="126"></dt><dd>バーチャルキャラクターが実世界で動きまわる、実在感のある</dd></dl></a></li>
-									<li><a href="../thesis-movie.html"><dl><dt><img src="../../img/dummy/img_dummy_movie_003.jpg" alt="ヒッグス粒子の発見" width="224" height="126"></dt><dd>ヒッグス粒子の発見</dd></dl></a></li>
-									<li><a href="../thesis-movie.html"><dl><dt><img src="../../img/dummy/img_dummy_movie_004.jpg" alt="iPS細胞の今後の展望" width="224" height="126"></dt><dd>iPS細胞の今後の展望</dd></dl></a></li>
-									<li><a href="../thesis-movie.html"><dl><dt><img src="../../img/dummy/img_dummy_movie_005.jpg" alt="神経細胞の層構造が高度な情報処理を実現" width="224" height="126"></dt><dd>神経細胞の層構造が高度な情報処理を実現</dd></dl></a></li>
-									<li><a href="../thesis-movie.html"><dl><dt><img src="../../img/dummy/img_dummy_movie_006.jpg" alt="核融合における適正値について" width="224" height="126"></dt><dd>核融合における適正値について</dd></dl></a></li>
-								</ul>
-							</section>
-					
+		                        <h2><img src="{{STATIC_URL}}img/h_movie.png" alt="ピックアップ動画" title="" width="188" height="27"></h2>
+		                        <ul class="movie movie_4column clearfix">
+		                            <!-- <li><a href="thesis-movie.html"><dl><dt><img src="img/dummy/img_dummy_movie_001.jpg" alt="ロケットエンジンの燃焼試験" width="214" height="120"></dt><dd>ロケットエンジンの燃焼試験</dd></dl></a></li> -->
+		                            {% for v in video %}
+		                            <li><a href="/pub/{{ v.pub.all.0.id }}"><dl><dt><img src="http://img.youtube.com/vi/{{ v.video_id }}/0.jpg" alt="{{ v.title }}" width="214" height="120"></dt><dd>{{ v.title }}</dd></dl></a></li>
+		                            {% endfor %}
+		                        </ul>
+		                    </section>
+							
 						</main>
 						<!-- end inner_content wrapper -->
 						
