@@ -57,7 +57,11 @@
 									{% else %}
 										0
 									{% endif %}
-									件中 21〜40件を表示</p>
+									<!-- 件中 21〜40件を表示 -->
+									件中 
+									{{ offset| add:"1"}}〜{{offset | add:len_publist}}件を表示									
+									
+								</p>
 							</div>
 							<div class="right">
 								<div class="horizontal_nav_wrapper clearfix">
@@ -116,7 +120,7 @@
 									<th class="td_center">タイトル</th>
 									<th>発行年月</th>
 									<th>メモ数</th>
-									<th>---</th>
+									<th><!-- 引用数 --></th>
 								</tr>
 							</thead>
 							<!-- <tr>
@@ -131,13 +135,13 @@
 							<tr>
 								{% if user.is_authenticated %}
 								    {% if pub.mine %}
-								    <td><span class="mini_btn blue_btn mini_btn_clicked"><span>&#10004;</span></span></td>
+								    <td title="{{ pub.id }}"><span class="mini_btn blue_btn mini_btn_clicked"><span>&#10004;</span></span></td>
 								    {% else %}
-							     	<td><span class="mini_btn blue_btn" title="{{ pub.id }}">メモ</span></td>
+							     	<td title="{{ pub.id }}"><span class="mini_btn blue_btn" >メモ</span></td>
 								    {% endif %}
 								{% endif %}
-								<td class="td_right"><img src="{{STATIC_URL}}img/icon_ronbun.png" alt="論文" width="11" height="13"></td>
-								<td>{{ forloop.counter| add:offset}}</td>
+								<td class="td_right"><img　src="{{STATIC_URL}}img/icon_ronbun.png" alt="論文" width="11" height="13"></td>
+								<td >{{ forloop.counter| add:offset}}</td>
 								<td><a href="/pub/{{ pub.id }}/{# {{ pub.link }} #}">{{ pub.title }}</a></td>
 								<td>{{pub.prism_publicationdate}}</td>
 								<td>{{ pub.likepub_set.all | length }}<span>メモ</span></td>
@@ -210,22 +214,27 @@
 		<script type="text/javascript" src="{{STATIC_URL}}js/tablesorter/jquery.tablesorter.min.js"></script> -->
 		
 		{% if user.is_authenticated %}
+		<script type="text/javascript" src="{{STATIC_URL}}js/ajax_csrf.js"></script>
 		<script>
 			$(function(){
 				/*table sort - http://tablesorter.com/docs/ - */
-				$("#sResult").tablesorter({
-					headers: { 0: { sorter: false}, 1: {sorter: false}, 3: {sorter:false} }
-				});
+
 				
 				/*memo*/
 				$(".mini_btn").mousedown(function(){
-					$(this).toggleClass("mini_btn_clicked");
-					if($(this).html() ==="メモ"){
-						$(this).html("<span>&#10004;</span>");
-					}else{
-						$(this).html("メモ");
-					}
-				});
+                    $(this).toggleClass("mini_btn_clicked");
+                    var thisTxt = $(this).html();
+                    if(thisTxt === "メモ"){
+                    	edit_memopub( "add", $(this).parent().attr("title") );
+                        $(this).html("<span>&#x2713;</span>");
+                    }else{
+                        $(this).html("メモ");
+                        alert( $(this).attr("title") );
+                        edit_memopub("remove", $(this).parent().attr("title"));
+                    }
+                    
+                    //kitamura added test code
+                }); 
 
 			})
 		</script>		

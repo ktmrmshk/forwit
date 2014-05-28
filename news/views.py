@@ -76,7 +76,7 @@ def search_pub(request):
         #print pagelist
         offset=(page-1)*20
         return render(request, 'tmp_search-result.html',
-                       {'cnt_ret': pub.cnt_ret, 'publist': publist, 'page': page, 'q_for_navi': q_for_navi,
+                       {'cnt_ret': pub.cnt_ret, 'publist': publist, 'len_publist': len(publist), 'page': page, 'q_for_navi': q_for_navi,
                         'pagelist' : pagelist, 'next':next, 'before':before, 'offset':offset })        
         
 def test_search(request):
@@ -158,7 +158,7 @@ def test_search(request):
         print pagelist
         return render(request, 'tmp_search-result.html',
                        {'cnt_ret': pub.cnt_ret, 'publist': publist, 'page': page, 'q_for_navi': q_for_navi,
-                        'pagelist' : pagelist, 'next':next, 'before':before })
+                        'pagelist' : pagelist, 'len_publist': len(publist), 'next':next, 'before':before })
 
     return render(request, 'tmp_search-result.html')
 
@@ -455,31 +455,35 @@ def new_socialuser(request):
     
     
 def add_memopub(request):
-    if request.method == 'POST':
-#         print 'POST'
-        pubid = request.POST.get('pubid', False)
-        cmd = request.POST.get('cmd', False)
-        assert cmd == 'add' or cmd == 'remove'
-        if pubid and cmd:
-            lp = request.user.likepub
-            pub = Publication.objects.get(id__exact=int(pubid))
-            if cmd == 'add':
-                lp.pub.add(pub)
-            elif cmd == 'remove':
-                lp.pub.remove(pub)
+    try:
+        if request.method == 'POST':
+    #         print 'POST'
+            pubid = request.POST.get('pubid', False)
+            cmd = request.POST.get('cmd', False)
+            assert cmd == 'add' or cmd == 'remove'
+            if pubid and cmd:
+                lp = request.user.likepub
+                pub = Publication.objects.get(id__exact=int(pubid))
+                if cmd == 'add':
+                    lp.pub.add(pub)
+                elif cmd == 'remove':
+                    lp.pub.remove(pub)
+                else:
+                    raise Exception('cmd error', 'cmd=%s' % cmd)
+                lp.save()
+                print 'added new pub'
             else:
-                raise Exception('cmd error', 'cmd=%s' % cmd)
-            lp.save()
-            print 'added new pub'
+                raise Exception('cmd error2', 'cmd=%s, pubid=%s' % (cmd, pubid))
+            dat = {'ret': 'true', 'pubid':pubid}
+            ret = '%s' % json.dumps(dat) 
+    #         print ret
+            return HttpResponse(ret, content_type = "application/json")
         else:
-            raise
-        dat = {'ret': 'true', 'pubid':pubid}
+            raise Exception('cmd error', 'some error happened')
+    except:
+        dat = {'ret': 'false', 'msg': 'method error', 'info': '%s / %s' % (sys.exc_info()[0], sys.exc_info()[1])}
         ret = '%s' % json.dumps(dat) 
-#         print ret
-        return HttpResponse(ret, content_type = "application/json")
-    else:
-        dat = {'ret': 'false', 'msg': 'method error'}
-        ret = '%s' % json.dumps(dat) 
+        print ret
         return HttpResponse(ret, content_type = "application/json")
     
 

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>設定変更 | ForWit</title>
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=1000, maximum-scale=1.0, user-scalable=yes">
+
+		<link rel="shortcut icon" href="{{STATIC_URL}}img/favicon.ico" type="image/x-icon" />
+		<link href="{{STATIC_URL}}plugin/popbox/popbox.css" type="text/css" rel="stylesheet">
+		<link rel="stylesheet" href="{{STATIC_URL}}css/style.css">
+		<link rel="stylesheet" href="{{STATIC_URL}}css/edit.css">
+
+		<!--[if lt IE 9]><script src="http://html5shiv-printshiv.googlecode.com/svn/trunk/html5shiv-printshiv.js"></script><![endif]-->
+	</head>
+	
+	<body id="edit">
+	
+		<!-- wrapper -->
+		<div id="wrapper">
+		
+			<!-- container -->
+			<div id="container">
+			
+				<!-- header -->
+				<header class="clearfix">
+				    {% include "tmp_sub_content_widget_logo.html" %}
+                    <!-- search -->
+                    {% include "tmp_sub_content_widget_search.html" %}
+                    <!-- links -->
+                    {% include "tmp_sub_content_widget_headmenu.html" %}
+					
+				</header>
+				<!-- end header -->
+				
+				<!-- content_wrapper_wide -->
+				<div class="content_wrapper_wide">
+					
+					<!-- main -->
+					<main class="setting">
+					
+						<section class="main_content_wrapper_edit">
+							<h1>設定変更</h1>
+							
+							<div class="form_wrapper">
+							
+								<form id="setting-box" method="post">{% csrf_token %}
+									
+								
+									<div class="float_wrapper clearfix">
+									
+										<h2>プロフィール</h2>
+										
+										<!--left column-->
+										<div class="left">
+											<fieldset class="p_image">
+												<img src="{{STATIC_URL}}/img/dummy/nobody.png" alt="user-main" width="120" height="120"> 
+												    
+												    <!-- BEGIN: added for popup box by kitamura 20140520-->
+												    <div class='popbox'>  
+												        <button type="button" class="blue_btn mini_btn open" name="change-image">写真を変更する</button>
+												        <div class='collapse'> 
+												        	<div class='box'>
+														        <div class='arrow'></div>
+														           <div class='arrow-border'></div>
+	                                                                    <div class="input_wrapper">
+	                                                                    <label>ファイルを選ぶ</label>
+	                                                                    <input type="text" name="file" placeholder="imagefile" />
+	       
+	                                                                </div>
+														        <a href="#" class="close">close</a>
+														      </div>
+														  </div>
+												    </div>
+												    <!-- END: added for popup box by kitamura 20140520-->
+											</fieldset>
+											
+											<!-- BEGIN: added for popup box by kitamura 20140520-->
+										
+											<!-- END: added for popup box by kitamura 20140520-->
+										</div>
+										<!-- end left -->
+										
+										<!-- right column -->
+										<div class="right">	
+											<fieldset class="p_name">
+												<div>
+													<div class="input_wrapper">
+														<label>姓</label>
+														<!-- <input type="text" name="seikanji" placeholder="山田" /> -->
+														{{ uf.last_name }} {{ uf.last_name.errors }}
+													</div>
+													<div class="input_wrapper name_wrapper">
+														<label>名</label>
+														<!-- <input type="text" name="meikanji" placeholder="太郎" /> -->
+														{{ uf.first_name }} {{ uf.first_name.errors }}
+													</div>
+												</div>
+												<div>
+													<div class="input_wrapper">
+														<label>セイ</label>
+														<!-- <input type="text" name="seikana" placeholder="ヤマダ" /> -->
+														{{ upf.kana_last_name }}
+													</div>
+													<div class="input_wrapper name_wrapper">
+														<label>メイ</label>
+														<!-- <input type="text" name="meikana" placeholder="タロウ" /> -->
+														{{ upf.kana_first_name }}
+													</div>
+												</div>
+											</fieldset>
+				
+											<fieldset>
+												<div class="input_wrapper">
+													<label>所属</label>
+													<!-- <input type="text" name="shozoku" placeholder="大学、企業名など" /> -->
+													{{upf.job}}
+												</div>
+												<div class="input_wrapper">
+													<label>役職</label>
+													<!-- <input type="text" name="yakushoku" placeholder="教授、部長など（記入なしでも大丈夫です）" /> -->
+													{{ upf.title }}
+												</div>
+												<div class="input_wrapper bunya clearfix">
+													<label>分野</label>
+													<!-- <input type="text" name="bunya1" maxlength="8" placeholder="8文字以内" />
+													<input type="text" name="bunya2" maxlength="8" placeholder="8文字以内" />
+													<input type="text" name="bunya3" maxlength="8" placeholder="8文字以内" /> -->
+													{{ upf.interesting1 }}
+                                                    {{ upf.interesting2 }}
+                                                    {{ upf.interesting3 }}
+												</div>
+												<div class="input_wrapper">
+													<label>出身</label>
+													<!-- <input type="text" name="daigaku" placeholder="出身大学名" /> -->
+													{{ upf.school1 }}
+												</div>
+												<div class="input_wrapper gakubu">
+													<label class="label_gakubu"><input type="radio" name="gakubu" checked="checked">学部</label>
+													<label><input type="radio" name="gakubu">博士前期課程</label>
+													<label><input type="radio" name="gakubu">博士後期課程</label>
+													<label><input type="radio" name="gakubu">登録しない</label>
+												</div>
+												<div class="input_wrapper">
+													<label>研究室</label>
+													<!-- <input type="text" name="daigaku" placeholder="所属していた研究室やゼミ名など" />	 -->
+													{{ upf.school_project }}
+												</div>
+											</fieldset>
+
+										<dl class="change_mail_pw">
+										  {% if is_forwitaccount %}
+											<dt>メールアドレス</dt>
+												<dd><a class="blue_btn change_btn" href="change_mail.html">変更</a></dd>
+											<dt>パスワード</dt>
+												<dd><a class="blue_btn change_btn" href="change_pw.html">変更</a></dd>
+										  {% else %}
+										        <dt>メールアドレス</dt>
+                                                <dd><a class="blue_btn change_btn" href="change_mail.html">登録</a></dd>
+										  
+										  {% endif %}
+										</dl>
+										
+                                            <div class="entry_agree_btn">
+                                                <label>
+                                                    <input type="checkbox" name="entry_agree">
+                                                    <a href="../policy_user.pdf" target="_blank">利用規約</a>、
+                                                    <a href="../policy_privacy.pdf" target="_blank">個人情報保護方針</a>に同意する。
+                                                </label>
+                                            </div>
+											
+										</div>
+										<!-- end right -->
+										
+									</div>
+									<!-- end float_wrapper -->
+
+ 									<div id="buttons">
+										<div class="clearfix">
+											<button type="reset" name="reset" class="gray_btn">キャンセル</button>
+											<button type="submit" name="submit" class="blue_btn">保存する</button>
+										</div>
+									</div>
+
+								</form>
+							
+							</div>
+							<!-- end form_wrapper -->
+							
+						</section>
+						
+					</main>
+					<!-- end main -->
+					
+				</div>
+				<!-- end content_wrapper_wide -->
+			
+			</div>
+			<!-- end container -->
+		
+		</div>
+		<!-- end wrapper -->
+		
+		<!-- bottom -->
+		<div id="bottom" class="clearfix">
+		
+			<!-- footer -->
+			<footer class="clearfix">
+				<p class="link"><a href="../about.html">ForWitとは？</a><a href="../contact.html">お問い合わせ</a></p>
+				<p class="copyright">Copyright &copy; 2014 ForWit All rights reserved.</p>
+			</footer>
+			<!-- footer -->
+		
+		</div>
+		<!-- bottom -->
+		
+		<!-- javascript -->
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script type="text/javascript" src="{{STATIC_URL}}js/jquery.heightLine.js"></script>
+		<script type="text/javascript" src="{{STATIC_URL}}js/scrolltopcontrol.js"></script>
+		<script type="text/javascript" src="{{STATIC_URL}}js/validation/jquery.validate.min.js"></script>
+		<script type="text/javascript" src="{{STATIC_URL}}js/validation/messages_ja.js"></script>
+
+	
+		<!-- added link ref for popup plugin -->
+		<script src="{{STATIC_URL}}plugin/popbox/popbox.js" type="text/javascript"></script>
+
+		<script>
+			// added for popup box at the changing-profile-image-button
+	            $('.popbox').popbox({
+	                'open'          : '.open',
+	                'box'           : '.box',
+	                'arrow'         : '.arrow',
+	                'arrow-border'  : '.arrow-border',
+	                'close'         : '.close'
+	            });
+		</script>	
+
+
+
+		<script>
+			$(function () {
+			/*placeholder for IE*/
+			  var supportsInputAttribute = function (attr) {
+			    var input = document.createElement('input');
+			    return attr in input;
+			  };
+			  if (!supportsInputAttribute('placeholder')) {
+			    $('[placeholder]').each(function () {
+			      var
+			        input = $(this),
+			        placeholderText = input.attr('placeholder'),
+			        placeholderColor = '#bbb',
+			        defaultColor = input.css('color');
+			      input.
+			        focus(function () {
+			          if (input.val() === placeholderText) {
+			            input.val('').css('color', defaultColor);
+			          }
+			        }).
+			        blur(function () {
+			          if (input.val() === '') {
+			            input.val(placeholderText).css('color', placeholderColor);
+			          } else if (input.val() === placeholderText) {
+			            input.css('color', placeholderColor);
+			          }
+			        }).
+			        blur().
+			        parents('form').
+			          submit(function () {
+			            if (input.val() === placeholderText) {
+			              input.val('');
+			            }
+			          });
+			    });
+			  }
+			  
+			  /*validation*/
+			  /*jquery validate http://www.htmlhifive.com/conts/web/view/library/jquery-validate */
+			  $("#setting-box").validate({
+				  rules:{
+					  seikanji:{
+						  required:true
+					  },
+					  meikanji:{
+						  required:true
+					  },
+					  shozoku:{
+						  required:true
+					  }
+					}
+			  });
+			});
+		</script>
+	</body>
+</html>
