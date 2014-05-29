@@ -164,9 +164,9 @@ a {
   color: #222;
   text-decoration: none;
 }
-a:visited {
+/*a:visited {
   color: #aaa;
-}
+}*/
 a:hover {
   color: #f78000;
 }

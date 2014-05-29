@@ -229,11 +229,13 @@
 					$(".delete_btn").mousedown(function(){
                         edit_memopub( "remove", $(this).parent().parent().attr("title") );
                         $(this).addClass("mini_btn_clicked");
+                        $(this).parent().parent().remove();
                     });
                     $(".mine_btn").mousedown(function(){
-                        alert("pushed");
+                        //alert($(this).parent().parent().attr("title"));
+                        edit_mypub("add_mypub", $(this).parent().parent().attr("title"));
                     });
-				});s
+				});
 				
 				{% else %}
 				

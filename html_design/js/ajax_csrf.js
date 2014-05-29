@@ -92,6 +92,26 @@ function edit_watch(cmd_, username_){
 	});	
 }
 
+function edit_mypub(cmd_, pubid_){
+	$.ajax({
+		type : 'POST',
+		data : {
+			pubid : pubid_,
+			cmd : cmd_
+		},
+		url : '/handle_ajax/',
+		dataType : 'json',
+		success : function(json) {
+			alert(json['pubid']);
+		},
+		error : function(xhr, errmsg, err) {
+			//alert(xhr.status + ": " + xhr.responseText + '/ ' + errmsg + '/ ' + err);
+			alert("error");
+			console.log(xhr.status + ": " + xhr.responseText + '/ ' + errmsg + '/ ' + err);
+		}
+	});		
+}
+
 
 
 	

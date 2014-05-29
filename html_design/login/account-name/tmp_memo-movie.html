@@ -222,7 +222,7 @@
 						edit_memovideo( "remove_videomemo", $(this).parent().attr("title") );
                         $(this).html("メモ");
 						$(this).addClass("mini_btn_clicked");
-						
+						$(this).parent().remove();
 					});
 				});
 				

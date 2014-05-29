@@ -12,8 +12,15 @@
         <link rel="stylesheet" href="{{STATIC_URL}}css/style.css">
         <link rel="stylesheet" href="{{STATIC_URL}}css/edit.css">
 		<!--[if lt IE 9]><script src="http://html5shiv-printshiv.googlecode.com/svn/trunk/html5shiv-printshiv.js"></script><![endif]-->
+        <!-- javascript -->
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script type="text/javascript" src="{{STATIC_URL}}js/jquery.heightLine.js"></script>
+        <script type="text/javascript" src="{{STATIC_URL}}js/scrolltopcontrol.js"></script>
+        
+        <script type="text/javascript" src="{{STATIC_URL}}js/validation/jquery.validate.min.js"></script>
+        <script type="text/javascript" src="{{STATIC_URL}}js/validation/messages_ja.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/ajax_csrf.js"></script>
 	</head>
-	
 	<body id="edit">
 	
 		<!-- wrapper -->
@@ -113,10 +120,10 @@
 												<td>上死点近傍燃料噴射による予混合型ディーゼル燃焼の排気改善</td>
 											</tr> -->
 											{% for pub in mypub %}
-											<tr>
+											<tr title="{{ pub.id }}">
 												<td>
-													<button type="button" name="delete2" class="mini_btn gray_btn">削除</button>
-													<button type="button" name="add2" class="mini_btn blue_btn">詳細を追加</button>
+													<button type="button" name="delete2" class="mini_btn gray_btn delete2">削除</button>
+													<button type="button" name="add2" class="mini_btn blue_btn add2">詳細を追加</button>
 												</td>													
 												<td class="td_center">{{ forloop.counter }}</td>
 												<td>{{ pub.title }}</td>
@@ -166,13 +173,7 @@
 		</div>
 		<!-- bottom -->
 		
-		<!-- javascript -->
-		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-		<script type="text/javascript" src="../js/jquery.heightLine.js"></script>
-		<script type="text/javascript" src="../js/scrolltopcontrol.js"></script>
-		
-		<script type="text/javascript" src="../js/validation/jquery.validate.min.js"></script>
-		<script type="text/javascript" src="../js/validation/messages_ja.js"></script>
+
 
 		<script>
 			$(function () {
@@ -221,6 +222,12 @@
 			  $("table .blue_btn").click(function(){
 				  window.location = "edit-research.html";
 			  });
+
+            $(".delete2").mousedown(function(){
+            	//alert($(this).parent().parent().attr("title"));
+            	edit_mypub("remove_mypub", $(this).parent().parent().attr("title"));
+            	$(this).parent().parent().remove();
+            });
 
 			});
 		</script>

@@ -574,6 +574,8 @@ def handle_ajax(request):
                 ret = forwit_ajax.handle_watch(cmd, request)
             if cmd == 'add_videomemo' or cmd == 'remove_videomemo':
                 ret = forwit_ajax.handle_likevideo(cmd, request)
+            if cmd == 'add_mypub' or cmd == 'remove_mypub':
+                ret = forwit_ajax.handle_mypub(cmd, request)
             else:
                 raise Exception('cmd error', 'cmd=%s' % (cmd,))
             print ret

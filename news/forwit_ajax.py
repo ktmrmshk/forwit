@@ -26,3 +26,13 @@ def handle_likevideo(cmd, request):
         request.user.likevideo.video.remove(v)
     ret = json.dumps({'ret': 'true', 'videoid': request.POST['videoid'] })
     return ret
+
+def handle_mypub(cmd, request):
+    p = Publication.objects.get(id__exact=request.POST["pubid"])
+    if cmd == 'add_mypub':
+        p.author.add(request.user)
+    else:
+        assert cmd == 'remove_mypub'
+        p.author.remove(request.user)
+    ret = json.dumps({'ret': 'true', 'pubid': request.POST['pubid'] })
+    return ret
