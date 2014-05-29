@@ -11,6 +11,12 @@
 		<link rel="shortcut icon" href="{{STATIC_URL}}img/favicon.ico" type="image/x-icon" />
 		<link rel="stylesheet" href="{{STATIC_URL}}css/style.css">
 		<link rel="stylesheet" href="{{STATIC_URL}}css/user.css">
+		
+		<!-- javascript -->
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script type="text/javascript" src="{{STATIC_URL}}js/jquery.heightLine.js"></script>
+        <script type="text/javascript" src="{{STATIC_URL}}js/scrolltopcontrol.js"></script>
+		<script type="text/javascript" src="{{STATIC_URL}}js/ajax_csrf.js"></script>
 		<!--[if lt IE 9]><script src="http://html5shiv-printshiv.googlecode.com/svn/trunk/html5shiv-printshiv.js"></script><![endif]-->
 	</head>
 	
@@ -108,7 +114,7 @@
 													<th>タイトル</th>
 													<th>発行年月</th>
 													<th class="td_right">メモ数</th>
-													<th class="refferNum td_right">引用数</th>
+													<th class="refferNum td_right"><!-- 引用数 --></th>
 												</tr>
 											</thead>
 											<!-- <tr>
@@ -136,7 +142,7 @@
 												<td><a href="/pub/{{p.id}}">{{ p.title }}</a></td>
 												<td>{{ p.publicationdate}} </td>
 												<td class="td_right">{{ p.likepub_set.all | length }}<span>メモ</span></td>
-												<td class="refferNum td_right">12<span>回</span></td>
+												<td class="refferNum td_right"><!-- 12<span>回</span> --></td>
 											</tr>
 											{% endfor %}
 										</table>
@@ -181,10 +187,7 @@
 		</div>
 		<!-- bottom -->
 		
-		<!-- javascript -->
-		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-		<script type="text/javascript" src="{{STATIC_URL}}js/jquery.heightLine.js"></script>
-		<script type="text/javascript" src="{{STATIC_URL}}js/scrolltopcontrol.js"></script>
+
 		<script>
 			$(function(){
 				var profileHeight = $(".sub_content_wrapper").outerHeight(),
@@ -219,8 +222,12 @@
 						$(".r_list table .refferNum").show();
 					}
 					$(".delete_btn").mousedown(function(){
-                        alert("pushed");           
-                    });		
+                        edit_memopub( "remove", $(this).parent().parent().attr("title") );
+                        $(this).addClass("mini_btn_clicked");
+                    });
+                    $(".mine_btn").mousedown(function(){
+                        alert("pushed");
+                    });
 				});s
 				
 				{% else %}

@@ -11,6 +11,11 @@
 		<link rel="shortcut icon" href="{{STATIC_URL}}img/favicon.ico" type="image/x-icon" />
 		<link rel="stylesheet" href="{{STATIC_URL}}css/style.css">
 		<link rel="stylesheet" href="{{STATIC_URL}}css/user.css">
+		      <!-- javascript -->
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script type="text/javascript" src="{{STATIC_URL}}js/jquery.heightLine.js"></script>
+        <script type="text/javascript" src="{{STATIC_URL}}js/scrolltopcontrol.js"></script>
+		 <script type="text/javascript" src="{{STATIC_URL}}js/ajax_csrf.js"></script>
 		<!--[if lt IE 9]><script src="http://html5shiv-printshiv.googlecode.com/svn/trunk/html5shiv-printshiv.js"></script><![endif]-->
 	</head>
 	
@@ -95,7 +100,7 @@
 										<ul class="movie movie_3column_narrow clearfix">
 											<!-- <li><a href="../thesis-movie.html"><dl><dt><img src="../../img/dummy/img_dummy_movie_001.jpg" alt="ロケットエンジンの燃焼試験" width="224" height="126"></dt><dd>ロケットエンジンの燃焼試験</dd></dl></a></li> -->
 											{% for v in u.likevideo.video.all %}
-											<li>
+											<li TITLE="{{ v.video_id }}">
 												{% ifnotequal u.username user.username %}
 												<span class="mini_btn blue_btn">メモ</span>
 												{% endifnotequal %}												
@@ -161,10 +166,7 @@
 		</div>
 		<!-- bottom -->
 		
-		<!-- javascript -->
-		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-		<script type="text/javascript" src="{{STATIC_URL}}js/jquery.heightLine.js"></script>
-		<script type="text/javascript" src="{{STATIC_URL}}js/scrolltopcontrol.js"></script>
+
 		<script>
 			var defaultPadding = "";
 
@@ -210,6 +212,13 @@
 						$(".sub_content_wrapper").css("padding-bottom", defaultPadding + "px");
 						justifyHeight();
 					}
+					$(".delete_btn").mousedown(function(){
+						alert("pushed");
+						edit_memovideo( "remove_videomemo", $(this).parent().attr("title") );
+                        $(this).html("メモ");
+						$(this).addClass("mini_btn_clicked");
+						
+					});
 				});
 				
 				{% else %}
