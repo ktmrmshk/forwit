@@ -52,4 +52,46 @@ function edit_memopub(cmd_, pubid_) {
 	});
 }
 
+function edit_memovideo(cmd_, videoid_) {
+	$.ajax({
+		type : 'POST',
+		data : {
+			videoid : videoid_,
+			cmd : cmd_
+		},
+		url : '/handle_ajax/',
+		dataType : 'json',
+		success : function(json) {
+			alert(json['videoid']);
+		},
+		error : function(xhr, errmsg, err) {
+			//alert(xhr.status + ": " + xhr.responseText + '/ ' + errmsg + '/ ' + err);
+			alert("error");
+			console.log(xhr.status + ": " + xhr.responseText + '/ ' + errmsg + '/ ' + err);
+		}
+	});
+}
+
+function edit_watch(cmd_, username_){
+	$.ajax({
+		type : 'POST',
+		data : {
+			username : username_,
+			cmd : cmd_
+		},
+		url : '/handle_ajax/',
+		dataType : 'json',
+		success : function(json) {
+			alert(json['username']);
+		},
+		error : function(xhr, errmsg, err) {
+			//alert(xhr.status + ": " + xhr.responseText + '/ ' + errmsg + '/ ' + err);
+			alert("error");
+			console.log(xhr.status + ": " + xhr.responseText + '/ ' + errmsg + '/ ' + err);
+		}
+	});	
+}
+
+
+
 	

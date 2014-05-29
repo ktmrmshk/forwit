@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>ログイン | ForWit</title>
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=1000, maximum-scale=1.0, user-scalable=yes">
+		
+		<link rel="shortcut icon" href="{{STATIC_URL}}forwit-login0508/img/favicon.ico" type="image/x-icon" />
+		<link rel="stylesheet" href="{{STATIC_URL}}forwit-login0508/css/style.css">
+		<link rel="stylesheet" href="{{STATIC_URL}}forwit-login0508/css/login.css">
+		<!--[if lt IE 9]><script src="http://html5shiv-printshiv.googlecode.com/svn/trunk/html5shiv-printshiv.js"></script><![endif]-->
+	</head>
+	
+	<body id="login">
+	
+		<!-- wrapper -->
+		<div id="wrapper">
+		
+			<!-- container -->
+			<div id="container">
+			
+				<!-- header -->
+				<header class="clearfix">
+				
+					<!-- logo -->
+					<a class="logo" href="index.html">
+						<img src="{{STATIC_URL}}forwit-login0508/img/logo.jpg" alt="ForWit" width="83" height="24" />
+					</a>
+					
+					<!-- links -->
+					<p class="link">
+						<a href="/">TOPへ戻る</a>
+					</p>
+					
+				</header>
+				<!-- end header -->
+				
+				<!-- content_wrapper_wide -->
+				<div class="content_wrapper_wide">
+				
+					<!-- main -->
+					<main class="main_content_wrapper">
+					
+						<div class="clearfix">
+							<section id="login_wrapper" class="login">
+
+							<div class="login_line">								
+								<h1>ログイン<span>(新規の方もこちらからログインできます。）</span></h1>
+								<p>ForWitへの独自ログインサービスは近日公開する予定です。試作版は下記の外部サービスよりログインできます。</p>
+								<p>下記のサービスの中からご登録済みのサービスを選ぶとForWitへログインできるようになります。</p>
+							</div>
+									<div class="outer_wrapper">
+										<h2>外部サービスを使用してログイン</h2>
+											<div class="clearfix">
+													<a href="{% url 'socialauth_begin' 'facebook' %}"><button type="button" class="loginFacebook">&nbsp;</button></a>
+													<a href="{% url 'socialauth_begin' 'twitter' %}"><button type="button" class="loginTwitter">&nbsp;</button></a>
+													<a href="{% url 'socialauth_begin' 'google-oauth2' %}"><button type="button" class="loginGoogle">&nbsp;</button></a>
+											</div>
+									</div>
+								</div>
+								
+							</section>
+						</div>
+						
+					</main>
+					<!-- end main -->
+				
+				</div>
+				<!-- end content_wrapper_wide -->
+			
+			</div>
+			<!-- end container -->
+			
+		</div>
+		<!-- end wrapper -->
+		
+		<!-- bottom -->
+		<div id="bottom" class="clearfix">
+		
+			<!-- footer -->
+			<footer class="clearfix">
+				<p class="link"><a href="about.html">ForWitとは？</a><a href="contact.html">お問い合わせ</a></p>
+				<p class="copyright">Copyright &copy; 2014 ForWit All rights reserved.</p>
+			</footer>
+			<!-- end footer -->
+		
+		</div>
+		<!-- end bottom -->
+		
+		<!-- javascript -->
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script type="text/javascript" src="{{STATIC_URL}}js/scrolltopcontrol.js"></script>
+		<script>
+			$(function(){
+				/*placeholder for IE*/
+				var supportsInputAttribute = function (attr) {
+					var input = document.createElement('input');
+					return attr in input;
+				};
+				if (!supportsInputAttribute('placeholder')) {
+					$('[placeholder]').each(function () {
+						var
+						input = $(this),
+						placeholderText = input.attr('placeholder'),
+						placeholderColor = '#bbb',
+						defaultColor = input.css('color');
+						input.
+						focus(function () {
+							if (input.val() === placeholderText) {
+								input.val('').css('color', defaultColor);
+							}
+						}).
+						blur(function () {
+							if (input.val() === '') {
+								input.val(placeholderText).css('color', placeholderColor);
+							} else if (input.val() === placeholderText) {
+								input.css('color', placeholderColor);
+							}
+						}).
+						blur().
+						parents('form').
+						submit(function () {
+							if (input.val() === placeholderText) {
+								input.val('');
+							}
+						});
+					});
+				}
+			});
+		</script>
+	</body>
+</html>

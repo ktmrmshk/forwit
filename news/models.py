@@ -34,7 +34,12 @@ class Publication(models.Model):
         return self.title[:10]#, self.id#, self.title[:10].encode('utf-8')
 
 class PublicationDetail(models.Model):
-    pass
+    pub = models.OneToOneField(Publication)
+    description = models.TextField(max_length=4096, blank=True, default='')
+    # graph
+    # slide
+    # photo
+    
 
 def upload_to(instance, filename):
     return 'images/%s/%s' %( instance.user.id, filename)
@@ -108,5 +113,22 @@ class UserProfileForm(forms.ModelForm):
         fields = ('kana_first_name', 'kana_last_name', 'job', 'title',
                   'interesting1', 'interesting2', 'interesting3',
                   'school1', 'school_project', 'facephoto' )
-    
+
+class MyProject(models.Model):
+    user = models.OneToOneField(User)
+    description = models.TextField(max_length=4096, blank=True, default='')
+    #material = image?
+    def __unicode__(self):
+        return '%s' % self.user.username
+
+class MyProjectForm(forms.ModelForm):
+    class Meta:
+        model = MyProject
+        fields = ('description',)
+        
+class FeedbackMessage(models.Model):
+    msg = models.TextField(max_length=4096, blank=True, default='')
+    created = models.DateTimeField()#(auto_now=True)
+    user = models.ForeignKey(User, blank=True, null=True)
+    checked = models.BooleanField(default=False)
     

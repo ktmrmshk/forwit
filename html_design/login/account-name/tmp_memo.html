@@ -121,7 +121,7 @@
 											</tr> -->
 											{#{% for p in u.likepub.pub.all %}#}
 											{% for p in pub %}
-											<tr>
+											<tr title="{{p.id}}">
 												{% ifnotequal u.username user.username %}
 												<td class="td_center"><a href="#" class="mini_btn blue_btn">メモ</a></td>
 												{% endifnotequal%}
@@ -201,6 +201,8 @@
 				
 				{% ifequal u.username user.username %}
 				/*edit*/
+
+				
 				$(".edit_btn").mousedown(function(){
 					var thisTxt = $(this).text(),
 						colgroupHTML = '<colgroup class="col_mine" span="1"><colgroup class="col_delete" span="1">',
@@ -216,7 +218,10 @@
 						$(".r_list .col_delete, .r_list .col_mine, .r_list .mine, .r_list .delete").remove();
 						$(".r_list table .refferNum").show();
 					}
-				});
+					$(".delete_btn").mousedown(function(){
+                        alert("pushed");           
+                    });		
+				});s
 				
 				{% else %}
 				

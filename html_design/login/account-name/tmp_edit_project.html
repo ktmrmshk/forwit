@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>研究内容編集 | ForWit</title>
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=1000, maximum-scale=1.0, user-scalable=yes">
+		
+        <link rel="shortcut icon" href="{{STATIC_URL}}img/favicon.ico" type="image/x-icon" />
+        <link rel="stylesheet" href="{{STATIC_URL}}css/style.css">
+        <link rel="stylesheet" href="{{STATIC_URL}}css/edit.css">
+		<!--[if lt IE 9]><script src="http://html5shiv-printshiv.googlecode.com/svn/trunk/html5shiv-printshiv.js"></script><![endif]-->
+	</head>
+	
+	<body id="edit">
+	
+		<!-- wrapper -->
+		<div id="wrapper">
+		
+			<!-- container -->
+			<div id="container">
+			
+				<!-- header -->
+				<header class="clearfix">
+                    <!-- logo -->
+                    {% include "tmp_sub_content_widget_logo.html" %}
+                    <!-- search -->
+                    {% include "tmp_sub_content_widget_search.html" %}
+                    <!-- links -->
+                    {% include "tmp_sub_content_widget_headmenu.html" %}								
+				</header>
+				<!-- end header -->
+				
+				<!--content_wrapper_wide -->
+				<div class="content_wrapper_wide">
+				
+					<!-- main -->
+					<main class="edit">
+									
+						<section class="main_content_wrapper_edit">
+							<h1>研究内容編集</h1>
+							
+							<div class="form_wrapper">
+
+								<form id="edit-box" method="post">{% csrf_token %}
+							
+									<fieldset>
+										<h2>研究概要と紹介</h2>
+										<!-- <textarea name="detail" placeholder="所属していた研究室やゼミ名など"></textarea> -->
+									   {{mpf.description}} {{mpf.description.errors}}
+									
+									</fieldset>
+	
+									<fieldset>
+										<div class="input_wrapper">
+											<h2>研究補足資料</h2>
+											<button type="button" name="attach" class="mini_btn gray_btn">削除</button>
+										</div>
+										<div class="input_wrapper">
+											<label>タイトル</label>
+											<input type="text" name="filename" placeholder="タイトルを入力してください" />
+										</div>
+										<div class="input_wrapper">
+											<div class="blue_btn fileUpload">
+												<span>資料を添付</span>
+												<input type="file" name="upfile" class="upload" />
+											</div>
+											<span class="filename">選択されていません</span>
+										</div>
+									</fieldset>
+									
+									<fieldset>
+										<h2>論文編集</h2>
+										<div class="clearfix nav_header">
+											<div class="left">
+												<p>※詳細を追加するとこれまでの変更は保存されます</p>
+											</div>
+											<!-- <div class="right">
+												<div class="horizontal_nav_wrapper clearfix">
+													<ul class="right pagination_prev_next">
+														<li><a class="prev" href="#">&lt;前</a></li>
+														<li><a class="next" href="#">次&gt;</a></li>
+													</ul>
+													<ul class="right pagination">
+														<li><a href="#">1</a></li>
+														<li class="current"><a href="#">4</a></li>
+														<li><a href="#">7</a></li>
+														<li><a href="#">10</a></li>
+														<li><a href="#">13</a></li>
+													</ul>
+												</div>
+											</div> -->
+										</div>
+										<table class="table_5rows">
+											<colgroup class="col_btn" span="1">
+											<colgroup class="col_no" span="1">
+											<colgroup class="col_title" span="1">
+											<thead>
+												<tr>
+													<th>&nbsp;</th>
+													<th>No.</th>
+													<th>タイトル</th>
+												</tr>
+											</thead>
+											<!-- <tr>
+												<td>
+													<button type="button" name="delete1" class="mini_btn gray_btn">削除</button>
+													<button type="button" name="add1" class="mini_btn blue_btn">詳細を追加</button>
+												</td>
+												<td class="td_center">1</td>
+												<td>上死点近傍燃料噴射による予混合型ディーゼル燃焼の排気改善</td>
+											</tr> -->
+											{% for pub in mypub %}
+											<tr>
+												<td>
+													<button type="button" name="delete2" class="mini_btn gray_btn">削除</button>
+													<button type="button" name="add2" class="mini_btn blue_btn">詳細を追加</button>
+												</td>													
+												<td class="td_center">{{ forloop.counter }}</td>
+												<td>{{ pub.title }}</td>
+											</tr>
+											{% endfor %}
+
+										</table>
+	
+									</fieldset>
+
+									<div id="buttons">
+										<div class="clearfix">
+											<button type="reset" name="reset" class="gray_btn">キャンセル</button>
+											<button type="submit" name="submit" class="blue_btn">保存する</button>
+										</div>
+									</div>
+	
+								</form>
+
+							</div>
+							<!-- end form_wrapper -->
+							
+						</section>
+						
+					</main>
+					<!-- end main -->
+				
+				</div>
+				<!--content_wrapper_wide -->
+			
+			</div>
+			<!-- end container -->
+		
+		</div>
+		<!-- end wrapper -->
+		
+		<!-- bottom -->
+		<div id="bottom" class="clearfix">
+		
+			<!-- footer -->
+			<footer class="clearfix">
+				<p class="link"><a href="../about.html">ForWitとは？</a><a href="../contact.html">お問い合わせ</a></p>
+				<p class="copyright">Copyright &copy; 2014 ForWit All rights reserved.</p>
+			</footer>
+			<!-- footer -->
+		
+		</div>
+		<!-- bottom -->
+		
+		<!-- javascript -->
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script type="text/javascript" src="../js/jquery.heightLine.js"></script>
+		<script type="text/javascript" src="../js/scrolltopcontrol.js"></script>
+		
+		<script type="text/javascript" src="../js/validation/jquery.validate.min.js"></script>
+		<script type="text/javascript" src="../js/validation/messages_ja.js"></script>
+
+		<script>
+			$(function () {
+			/*placeholder for IE*/
+			  var supportsInputAttribute = function (attr) {
+			    var input = document.createElement('input');
+			    return attr in input;
+			  };
+			  if (!supportsInputAttribute('placeholder')) {
+			    $('[placeholder]').each(function () {
+			      var
+			        input = $(this),
+			        placeholderText = input.attr('placeholder'),
+			        placeholderColor = '#bbb',
+			        defaultColor = input.css('color');
+			      input.
+			        focus(function () {
+			          if (input.val() === placeholderText) {
+			            input.val('').css('color', defaultColor);
+			          }
+			        }).
+			        blur(function () {
+			          if (input.val() === '') {
+			            input.val(placeholderText).css('color', placeholderColor);
+			          } else if (input.val() === placeholderText) {
+			            input.css('color', placeholderColor);
+			          }
+			        }).
+			        blur().
+			        parents('form').
+			          submit(function () {
+			            if (input.val() === placeholderText) {
+			              input.val('');
+			            }
+			          });
+			    });
+			  }
+			  
+			  /*upload file*/
+			  $(".fileUpload .upload").change(function(){
+			  		var fileName = $(this).val();
+			  		$(".filename").text(fileName);
+			  })
+			  
+			  /*edit research*/
+			  $("table .blue_btn").click(function(){
+				  window.location = "edit-research.html";
+			  });
+
+			});
+		</script>
+	</body>
+</html>

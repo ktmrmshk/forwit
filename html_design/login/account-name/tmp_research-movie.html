@@ -11,6 +11,12 @@
 		<link rel="shortcut icon" href="{{STATIC_URL}}img/favicon.ico" type="image/x-icon" />
 		<link rel="stylesheet" href="{{STATIC_URL}}css/style.css">
 		<link rel="stylesheet" href="{{STATIC_URL}}css/user.css">
+		
+		<!-- javascript -->
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script type="text/javascript" src="{{STATIC_URL}}js/jquery.heightLine.js"></script>
+        <script type="text/javascript" src="{{STATIC_URL}}js/scrolltopcontrol.js"></script>
+        <script type="text/javascript" src="{{STATIC_URL}}js/ajax_csrf.js"></script>
 		<!--[if lt IE 9]><script src="http://html5shiv-printshiv.googlecode.com/svn/trunk/html5shiv-printshiv.js"></script><![endif]-->
 	</head>
 	
@@ -62,7 +68,11 @@
 									<p class="count">計 {{ u.video_set.all | length }} 件</p>
 									
 									{% ifequal u.username user.username %}
-									<p><span class="blue_btn edit_btn">編集</span></p>
+									<p>
+                                        <a href="/edit_project/">
+                                        <span class="blue_btn edit_btn">編集</span>
+                                        </a>
+                                    </p>
 									{% endifequal %}
 								</div>
 								<!-- end content menu-->
@@ -70,19 +80,8 @@
 								<div class="main_content right">
 								
 									<!-- 研究内容 -->
-									<section class="r_content">
-										<div class="r_headline clearfix">
-											<h1>研究内容</h1>
-											<a href="#">補足資料</a>
-										</div>
-										<p>ダクテッドロケットの性能向上についての研究をしており、燃料に含有するホウ素の燃焼改善を目的に二次火炎の燃焼特性を研究しています。二次火炎の発生方法と形状を観測することで、ホウ素の燃焼への影響を調査しています。</p>
-										<div class="r_attachment">
-											<dl class="clearfix">
-												<dt>補足資料</dt>
-												<dd>ダクテッドロケットの性能向上についての研究をしており、燃料に含有するホウ素の燃焼改善<a class="blue_btn mini_btn" href="#">見る</a></dd>
-											</dl>
-										</div>
-									</section>
+                                    {% include "login/account-name/tmp_sub_content_myproject.html" %}
+
 									
 									<!-- 研究詳細リスト -->
 									<section class="r_movie">
@@ -91,7 +90,7 @@
 											<div class="left">
 												<h1>動画</h1>
 											</div>
-											<div class="right">
+											<!-- <div class="right">
 												<div class="horizontal_nav_wrapper clearfix">
 													<ul class="right pagination_prev_next">
 														<li><a class="prev" href="#">&lt;前</a></li>
@@ -104,30 +103,35 @@
 														<li><a href="#">10</a></li>
 													</ul>
 												</div>
-											</div>
+											</div> -->
 										</div>
 
 										<ul class="movie movie_3column_narrow clearfix">
 											<!-- <li><a href="../thesis-movie.html"><dl><dt><img src="../../img/dummy/img_dummy_movie_001.jpg" alt="ロケットエンジンの燃焼試験" width="224" height="126"></dt><dd>ロケットエンジンの燃焼試験</dd></dl></a></li> -->
-											{% for v in u.video_set.all %}
+											{% for v in uvideo %}
 											
-											<li>
+											<li title="{{ v.video.video_id }}">
 												{% ifnotequal u.username user.username %}
-												<span class="mini_btn blue_btn">メモ</span>
+												    {% if v.in_mymemo %}
+												    <span class="mini_btn blue_btn mini_btn_clicked">&#8730;</span>
+												    {% else %}
+												    <span class="mini_btn blue_btn">メモ</span>
+												    {% endif %}
+												
 												{% endifnotequal %}
-												<a href="/pub/{{ v.pub.all.0.id }}">
+												<a href="/pub/{{ v.video.pub.all.0.id }}">
 												<dl>
-													<dt><img src="http://img.youtube.com/vi/{{ v.video_id }}/0.jpg" alt="{{v.title}}" width="224" height="126">
+													<dt><img src="http://img.youtube.com/vi/{{ v.video.video_id }}/0.jpg" alt="{{v.video.title}}" width="224" height="126">
 													</dt>
 													<dd>
-														{{v.title}}
+														{{v.video.title}}
 													</dd>
 												</dl></a>
 											</li>
 											{% endfor %}
 										</ul>
 										
-										<div class="horizontal_nav_wrapper nav_bottom clearfix">
+										<!-- <div class="horizontal_nav_wrapper nav_bottom clearfix">
 											<ul class="right pagination_prev_next">
 												<li><a class="prev" href="#">&lt;前</a></li>
 												<li><a class="next" href="#">次&gt;</a></li>
@@ -138,7 +142,7 @@
 												<li><a href="#">7</a></li>
 												<li><a href="#">10</a></li>
 											</ul>
-										</div>
+										</div> -->
 										
 									</section>
 									
@@ -176,10 +180,7 @@
 		</div>
 		<!-- bottom -->
 		
-		<!-- javascript -->
-		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-		<script type="text/javascript" src="{{STATIC_URL}}js/jquery.heightLine.js"></script>
-		<script type="text/javascript" src="{{STATIC_URL}}js/scrolltopcontrol.js"></script>
+
 		<script>
 			$(function(){
 				$(".movie li").heightLine();
@@ -198,22 +199,24 @@
 								
 								
 				{% ifnotequal u.username user.username %}
-				$(".watch_btn").mousedown(function(){
-					$(this).toggleClass("watch_btn_clicked");
-					var thisTxt = $(this).html();
-					if(thisTxt === "ウォッチ"){
-						$(this).html("<span>×</span>");
-					}else{
-						$(this).html("ウォッチ");
-					}
-				});
+				// $(".watch_btn").mousedown(function(){
+					// $(this).toggleClass("watch_btn_clicked");
+					// var thisTxt = $(this).html();
+					// if(thisTxt === "ウォッチ"){
+						// $(this).html("<span>×</span>");
+					// }else{
+						// $(this).html("ウォッチ");
+					// }
+				// });
 				
 				$(".mini_btn").mousedown(function(){
 					$(this).toggleClass("mini_btn_clicked");
 					var thisTxt = $(this).html();
 					if(thisTxt === "メモ"){
+						edit_memovideo( "add_videomemo", $(this).parent().attr("title") );
 						$(this).html("<span>&#8730;</span>");
 					}else{
+						edit_memovideo( "remove_videomemo", $(this).parent().attr("title") );
 						$(this).html("メモ");
 					}
 				});	

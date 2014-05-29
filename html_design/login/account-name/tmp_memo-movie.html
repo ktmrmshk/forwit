@@ -76,7 +76,7 @@
 											<div class="left">
 												<h1>研究メモ</h1>
 											</div>
-											<div class="right">
+											<!-- <div class="right">
 												<div class="horizontal_nav_wrapper clearfix">
 													<ul class="right pagination_prev_next">
 														<li><a class="prev" href="#">&lt;前</a></li>
@@ -89,7 +89,7 @@
 														<li><a href="#">10</a></li>
 													</ul>
 												</div>
-											</div>
+											</div> -->
 										</div>
 										
 										<ul class="movie movie_3column_narrow clearfix">
@@ -112,7 +112,7 @@
 											{% endfor %}
 										</ul>
 										
-										<div class="horizontal_nav_wrapper nav_bottom clearfix">
+										<!-- <div class="horizontal_nav_wrapper nav_bottom clearfix">
 											<ul class="right pagination_prev_next">
 												<li><a class="prev" href="#">&lt;前</a></li>
 												<li><a class="next" href="#">次&gt;</a></li>
@@ -123,7 +123,7 @@
 												<li><a href="#">7</a></li>
 												<li><a href="#">10</a></li>
 											</ul>
-										</div>
+										</div> -->
 										
 									</section>
 									
@@ -213,15 +213,15 @@
 				});
 				
 				{% else %}
-				$(".watch_btn").mousedown(function(){
-					$(this).toggleClass("watch_btn_clicked");
-					var thisTxt = $(this).html();
-					if(thisTxt === "ウォッチ"){
-						$(this).html("<span>×</span>");
-					}else{
-						$(this).html("ウォッチ");
-					}
-				});
+				// $(".watch_btn").mousedown(function(){
+					// $(this).toggleClass("watch_btn_clicked");
+					// var thisTxt = $(this).html();
+					// if(thisTxt === "ウォッチ"){
+						// $(this).html("<span>×</span>");
+					// }else{
+						// $(this).html("ウォッチ");
+					// }
+				// });
 				
 				$(".mini_btn").mousedown(function(){
 					$(this).toggleClass("mini_btn_clicked");

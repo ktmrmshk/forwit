@@ -1,0 +1,36 @@
+<!-- 研究内容 -->
+<!-- <section class="r_content">
+    <div class="r_headline clearfix">
+        <h1>研究内容</h1>
+        <a href="#">補足資料</a>
+    </div>
+    <p>ダクテッドロケットの性能向上についての研究をしており、燃料に含有するホウ素の燃焼改善を目的に二次火炎の燃焼特性を研究しています。二次火炎の発生方法と形状を観測することで、ホウ素の燃焼への影響を調査しています。</p>
+    <div class="r_attachment">
+        <dl class="clearfix">
+            <dt>補足資料</dt>
+            <dd>ダクテッドロケットの性能向上についての研究をしており、燃料に含有するホウ素の燃焼改善<a class="blue_btn mini_btn" href="#">見る</a></dd>
+        </dl>
+    </div>
+</section> -->
+<section class="r_content">
+    <div class="r_headline clearfix">
+        <h1>研究内容</h1>
+        <!-- <a href="#">補足資料</a> -->
+    </div>
+    <p>
+        {% if user.myproject.description %}
+        {{user.myproject.description}}
+        {% else %}
+        not available now
+        {% endif %}
+    </p>
+    <div class="r_attachment">
+        <dl class="clearfix">
+            <dt>補足資料</dt>
+            <dd>
+                <!-- ダクテッドロケットの性能向上についての研究をしており、燃料に含有するホウ素の燃焼改善<a class="blue_btn mini_btn" href="#">見る</a> -->
+                not available now
+            </dd>
+        </dl>
+    </div>
+</section>

@@ -11,6 +11,11 @@
 		<link rel="shortcut icon" href="{{STATIC_URL}}img/favicon.ico" type="image/x-icon" />
 		<link rel="stylesheet" href="{{STATIC_URL}}css/style.css">
 		<link rel="stylesheet" href="{{STATIC_URL}}css/user.css">
+		
+		<!-- javascript -->
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script type="text/javascript" src="{{STATIC_URL}}js/scrolltopcontrol.js"></script>
+        <script type="text/javascript" src="{{STATIC_URL}}js/ajax_csrf.js"></script>
 		<!--[if lt IE 9]><script src="http://html5shiv-printshiv.googlecode.com/svn/trunk/html5shiv-printshiv.js"></script><![endif]-->
 	</head>
 	
@@ -62,7 +67,11 @@
 									<p class="count">計 {{ u.publication_set.all | length }} 件</p>
 									
 									{% ifequal u.username user.username %}
-									<p><span class="blue_btn edit_btn">編集</span></p>
+									<p>
+										<a href="/edit_project/">
+										<span class="blue_btn edit_btn">編集</span>
+										</a>
+									</p>
 									{% endifequal %}
 								</div>
 								<!-- end content menu-->
@@ -70,19 +79,7 @@
 								<div class="main_content right">
 								
 									<!-- 研究内容 -->
-									<section class="r_content">
-										<div class="r_headline clearfix">
-											<h1>研究内容</h1>
-											<a href="#">補足資料</a>
-										</div>
-										<p>ダクテッドロケットの性能向上についての研究をしており、燃料に含有するホウ素の燃焼改善を目的に二次火炎の燃焼特性を研究しています。二次火炎の発生方法と形状を観測することで、ホウ素の燃焼への影響を調査しています。</p>
-										<div class="r_attachment">
-											<dl class="clearfix">
-												<dt>補足資料</dt>
-												<dd>ダクテッドロケットの性能向上についての研究をしており、燃料に含有するホウ素の燃焼改善<a class="blue_btn mini_btn" href="#">見る</a></dd>
-											</dl>
-										</div>
-									</section>
+                                    {% include "login/account-name/tmp_sub_content_myproject.html" %}
 									
 									<!-- 研究詳細リスト -->
 									<section class="r_list">
@@ -91,7 +88,7 @@
 											<div class="left">
 												<h1>論文</h1>
 											</div>
-											<div class="right">
+											<!-- <div class="right">
 												<div class="horizontal_nav_wrapper clearfix">
 													<ul class="right pagination_prev_next">
 														<li><a class="prev" href="#">&lt;前</a></li>
@@ -104,7 +101,7 @@
 														<li><a href="#">10</a></li>
 													</ul>
 												</div>
-											</div>
+											</div> -->
 										</div>
 
 										<table class="table_5rows">
@@ -127,7 +124,7 @@
 													<th>タイトル</th>
 													<th>発行年月</th>
 													<th class="td_right">メモ数</th>
-													<th class="td_right">引用数</th>
+													<th class="td_right"><!-- 引用数 --></th>
 												</tr>
 											</thead>
 											<!-- <tr>
@@ -138,28 +135,32 @@
 												<td class="td_right">10<span>メモ</span></td>
 												<td class="td_right">11<span>回</span></td>
 											</tr> -->
-											{% for p in u.publication_set.all %}
-											<tr>
+											{% for p in upub %}
+											<tr title="{{p.pub.id}}">
 												{% ifnotequal u.username user.username %}
-												<td class="td_center"><a class="mini_btn blue_btn" title="{{p.id}}">メモ</a></td>
+												    {% if p.in_mymemo %}
+												    <td class="td_center"><a class="mini_btn blue_btn mini_btn_clicked" title="{{p.pub.id}}">&#10004;</a></td>
+												    {% else %}
+												    <td class="td_center"><a class="mini_btn blue_btn" title="{{p.pub.id}}">メモ</a></td>
+												    {% endif%}
 												{% endifnotequal %}
 												<td class="td_center">
-													{% if p.video_set.all %}
+													{% if p.pub.video_set.all %}
 													<img src="{{STATIC_URL}}img/icon_movie.png" alt="動画" width="13" height="13">
 													{% else %}
 													<img src="{{STATIC_URL}}img/icon_ronbun.png" alt="論文" width="11" height="13">
 													{% endif %}
 												</td>												
 												<td class="td_center">{{ forloop.counter }}</td>
-												<td><a href="/pub/{{p.id}}">{{p.title}}</a></td>
-												<td>{{ p.publicationdate}}</td>
-												<td class="td_right">{{ p.likepub_set.all | length }}<span>メモ</span></td>
-												<td class="td_right">01<span>回</span></td>
+												<td><a href="/pub/{{p.pub.id}}">{{p.pub.title}}</a></td>
+												<td>{{ p.pub.publicationdate}}</td>
+												<td class="td_right">{{ p.pub.likepub_set.all | length }}<span>メモ</span></td>
+												<td class="td_right"><!-- 01<span>回</span> --></td>
 											</tr>		
 											{% endfor %}										
 										</table>
 										
-										<div class="horizontal_nav_wrapper nav_bottom clearfix">
+										<!-- <div class="horizontal_nav_wrapper nav_bottom clearfix">
 											<ul class="right pagination_prev_next">
 												<li><a class="prev" href="#">&lt;前</a></li>
 												<li><a class="next" href="#">次&gt;</a></li>
@@ -170,7 +171,7 @@
 												<li><a href="#">7</a></li>
 												<li><a href="#">10</a></li>
 											</ul>
-										</div>
+										</div> -->
 										
 									</section>
 									
@@ -208,10 +209,7 @@
 		</div>
 		<!-- bottom -->
 		
-		<!-- javascript -->
-		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-		<script type="text/javascript" src="{{STATIC_URL}}js/scrolltopcontrol.js"></script>
-		<script type="text/javascript" src="{{STATIC_URL}}js/ajax_csrf.js"></script>
+
 
 		<script>
 			$(function(){
@@ -228,38 +226,28 @@
 				}
 				
 				{% ifnotequal u.username user.username %}
-				$(".watch_btn").mousedown(function(){
-					$(this).toggleClass("watch_btn_clicked");
-					var thisTxt = $(this).html();
-					if(thisTxt === "ウォッチ"){
-						$(this).html("<span>×</span>");
-					}else{
-						$(this).html("ウォッチ");
-					}
-					// test code by kitamura
-					var username = $(this).attr('title');
-					$.ajax({
-					  type: 'GET',
-					  url: '/test_ajax/',
-					  dataType: 'jsonp',
-					  jsonpCallback: 'android',
-					  success: function(json){
-					    var len = json.length;
-					    var string = "";
-					    for(var i=0; i<len; i++){
-					      string += json[i];
-					    }
-					    alert(string)
-					  }
-					});
-				});
+				// $(".watch_btn").mousedown(function(){
+					// var username = $(this).prev().attr('title');
+					// //console.log(username);
+					// $(this).toggleClass("watch_btn_clicked");
+					// var thisTxt = $(this).html();
+					// if(thisTxt === "ウォッチ"){
+						// edit_watch("add_watch", username);
+						// $(this).html("<span>&#10004;</span>");
+					// }else{
+						// edit_watch("remove_watch", username);
+						// $(this).html("ウォッチ");
+					// }
+				// });
 				
 				$(".mini_btn").mousedown(function(){
 					$(this).toggleClass("mini_btn_clicked");
 					var thisTxt = $(this).html();
 					if(thisTxt === "メモ"){
-						$(this).html("<span>×</span>");
+						edit_memopub( "add", $(this).parent().parent().attr("title") );
+						$(this).html("<span>&#10004;</span>");
 					}else{
+						edit_memopub( "remove", $(this).parent().parent().attr("title") );
 						$(this).html("メモ");
 					}
 					
@@ -272,7 +260,7 @@
 				
 			});
 		</script>
-		<script>
+		<!-- <script>
 		$(".mini_btn").mousedown(function(){
 			$.ajax({
 	              type: 'POST',
@@ -290,6 +278,6 @@
                     }
 	       });		
 		});
-		</script>
+		</script> -->
 	</body>
 </html>

@@ -55,21 +55,69 @@ login
 .content_wrapper_wide button:hover {
   box-shadow: 0 0 3px #f78000;
 }
-.content_wrapper_wide .fb {
-  background: #315095 url(../img/fb.png) no-repeat 6px center;
-  padding: 0 0 0 28px;
-  width: 120px;
-  height: 32px;
+
+.login_line{
+  width: 924px;
+}
+
+/*外部ログイン*/
+/*facebookでログイン*/
+
+.content_wrapper_wide .loginFacebook {
+  float: left;
+  background: #FFFFFF url(../img/loginFacebook.png) no-repeat center;
+  padding: 0;
+  width: 160px;
+  height: 60px;
   line-height: 32px;
-  border: 0;
-  border-radius: 3px;
+  border: solid 1px #A9A9A9;
+  border-radius: 10px;
+  margin: 0 30px 0 192px;
+}
+.content_wrapper_wide .loginFacebook:hover {
+  background: #FDF5E6 url(../img/loginFacebook.png) no-repeat center;
+  border: solid 1px #A9A9A9;
+  box-shadow: 0 0 3px #A9A9A9;
+}
+
+
+/*twitterでログイン*/
+.content_wrapper_wide .loginTwitter {
+  float: left;
+  background: #FFFFFF url(../img/loginTwitter.png) no-repeat center;
+  padding: 0;
+  width: 160px;
+  height: 60px;
+  line-height: 32px;
+  border: solid 1px #A9A9A9;
+  border-radius: 10px;
+  margin: 0 30px 0 0px;
+}
+.content_wrapper_wide .loginTwitter:hover {
+  background: #FDF5E6 url(../img/loginTwitter.png) no-repeat center;
+  border: solid 1px #A9A9A9;
+  box-shadow: 0 0 3px #A9A9A9;
+}
+
+/*googleでログイン*/
+.content_wrapper_wide .loginGoogle {
+  float: left;
+  background: #FFFFFF url(../img/loginGoogle.png) no-repeat center;
+  padding: 0;
+  width: 160px;
+  height: 60px;
+  line-height: 32px;
+  border: solid 1px #A9A9A9;
+  border-radius: 10px;
   margin: 0 auto;
+
 }
-.content_wrapper_wide .fb:hover {
-  background: #315fc0 url(../img/fb.png) no-repeat 6px center;
-  border: 0;
-  box-shadow: 0 0 3px #315fc0;
+.content_wrapper_wide .loginGoogle:hover {
+  background: #FDF5E6 url(../img/loginGoogle.png) no-repeat center;
+  border: solid 1px #A9A9A9;
+  box-shadow: 0 0 3px #A9A9A9;
 }
+
 
 .login {
   width: 924px;
@@ -81,7 +129,7 @@ login
   /*background: #fff;*/
 }
 .login .clearfix {
-  width: 750px;
+  width: 924px;
   margin: 20px auto 0;
 }
 .login .mail_wrapper {
@@ -93,10 +141,17 @@ login
 .login .mail_wrapper input {
   width: 310px;
 }
+
+.login .outer_wrapper {
+  width: 924px;
+  padding: 18px 0;
+}
+
 .login .fb_wrapper {
   width: 280px;
   padding: 18px 0;
 }
+
 .login .check {
   display: inline-block;
   width: 100%;

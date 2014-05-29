@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 import urllib
-from news.models  import News, Publication, Video, UserProfile, Follower, LikePub, LikeVideo
+from news.models  import News, Publication, Video, UserProfile, Follower, LikePub, LikeVideo, MyProject, MyProjectForm
 import cinii, cinii_rdf
 import json
 import sys
@@ -299,7 +299,17 @@ def research(request, username):
         return HttpResponse('Log-in is required. Please log-in')
     try:
         u = User.objects.get(username__exact=username)
-        return render(request, 'login/account-name/tmp_research.html', {'u':u, 'currentpage':'research'} )
+        w = request.user.follower.members.filter(username__exact=u.username)
+        following_user=False
+        if len(w) != 0:
+            following_user=True
+        upub=[]
+        for p in u.publication_set.all():
+            if len( request.user.likepub.pub.all().filter(id=p.id) ):
+                upub.append( {'in_mymemo': True, 'pub': p})
+            else:
+                upub.append( {'in_mymemo': False, 'pub': p})
+        return render(request, 'login/account-name/tmp_research.html', {'u':u, 'following_user': following_user, 'upub':upub,'currentpage':'research'} )
     except:
 #         print sys.exc_info()[0]
         return HttpResponse('username=%s was not found' % username)
@@ -311,8 +321,24 @@ def researchvideo(request, username):
         return HttpResponse('Log-in is required. Please log-in')
     try:
         u = User.objects.get(username__exact=username)
-        return render(request, 'login/account-name/tmp_research-movie.html', {'u':u, 'currentpage':'research-video'} )
+        w = request.user.follower.members.filter(username__exact=u.username)
+        following_user=False
+        if len(w) != 0:
+            following_user=True
+        
+        uvideo=[]
+        for v in u.video_set.all():
+            print v.video_id
+            print request.user.likevideo.video.all()
+            if len( request.user.likevideo.video.all().filter(video_id__exact=v.video_id) ) != 0:
+                uvideo.append({'video':v, 'in_mymemo': True})
+            else:
+                uvideo.append({'video':v, 'in_mymemo': False})
+        print uvideo
+
+        return render(request, 'login/account-name/tmp_research-movie.html', {'u':u, 'uvideo': uvideo, 'following_user': following_user, 'currentpage':'research-video'} )
     except:
+        print sys.exc_info()
         return HttpResponse('username=%s was not found' % username)
 
 def my_memopage(request):
@@ -325,12 +351,17 @@ def memopage(request, username):
         if request.method == 'GET':
             page = int( request.GET.get('page', '1') )
         u = User.objects.get(username__exact=username)
+        w = request.user.follower.members.filter(username__exact=u.username)
+        following_user=False
+        if len(w) != 0:
+            following_user=True
+        
         puball = u.likepub.pub.all()
         uname=None
         if username != request.user.username:
             uname = username
         pub, pg = pager.getPager(puball, page, '/memo/', username=uname)
-        return render(request, 'login/account-name/tmp_memo.html', {'u':u, 'pub':pub, 'puball':puball, 'pager':pg, 'currentpage':'memo'})
+        return render(request, 'login/account-name/tmp_memo.html', {'u':u,  'following_user': following_user, 'pub':pub, 'puball':puball, 'pager':pg, 'currentpage':'memo'})
     except:
         print sys.exc_info()#[0]
         return HttpResponse('username=%s was not found' % username)
@@ -338,11 +369,23 @@ def memopage(request, username):
 def my_memovideopage(request):
     return memovideopage(request, request.user.username)
 def memovideopage(request, username):
+    print 'HELLO WORLD'
     if not request.user.is_authenticated():
         return HttpResponse('Log-in is required. Please log-in')   
     try:
         u = User.objects.get(username__exact=username)
-        return render(request, 'login/account-name/tmp_memo-movie.html', {'u':u, 'currentpage':'memo-video'} )
+        w = request.user.follower.members.filter(username__exact=u.username)
+        following_user=False
+        if len(w) != 0:
+            following_user=True
+        uvideo=[]
+        for v in u.likevideo.video.all():
+            if len( request.user.likevideo.video.all().filter(video_id__exact=v.video_id) ) != 0:
+                uvideo.append({'video':v, 'in_mymemo': True})
+            else:
+                uvideo.append({'video':v, 'in_mymemo': False})
+        print uvideo
+        return render(request, 'login/account-name/tmp_memo-movie.html', {'u':u, 'uvideo': uvideo, 'following_user': following_user, 'currentpage':'memo-video'} )
     except:
         return HttpResponse('username=%s was not found' % username)
     
@@ -353,7 +396,11 @@ def watchingpage(request, username):
         return HttpResponse('Log-in is required. Please log-in')
     try:
         u = User.objects.get(username__exact=username)
-        return render(request, 'login/account-name/tmp_watch.html', {'u':u, 'currentpage':'watching'} )
+        w = request.user.follower.members.filter(username__exact=u.username)
+        following_user=False
+        if len(w) != 0:
+            following_user=True
+        return render(request, 'login/account-name/tmp_watch.html', {'u':u, 'following_user': following_user, 'currentpage':'watching'} )
     except:
         return HttpResponse('username=%s was not found' % username)    
     return render(request, 'login/account-name/tmp_watch.html') 
@@ -365,7 +412,11 @@ def watchedpage(request, username):
         return HttpResponse('Log-in is required. Please log-in')
     try:
         u = User.objects.get(username__exact=username)
-        return render(request, 'login/account-name/tmp_watcher.html', {'u':u, 'currentpage':'watched'} )
+        w = request.user.follower.members.filter(username__exact=u.username)
+        following_user=False
+        if len(w) != 0:
+            following_user=True
+        return render(request, 'login/account-name/tmp_watcher.html', {'u':u, 'following_user': following_user, 'currentpage':'watched'} )
     except:
         return HttpResponse('username=%s was not found' % username)    
     return render(request, 'login/account-name/tmp_watcher.html') 
@@ -392,6 +443,12 @@ def do_login(request):
             else:
                 return render(request, 'forwit-login0508/login.html', {})
         return render(request, 'forwit-login0508/login.html', {})
+
+def do_social_login(request):
+    if request.user.is_authenticated():
+        return redirect('/u/')
+    else:
+        return render(request, 'forwit-login0508/login_a.html', {})
 
 def usersetting(request):
     up = request.user.userprofile
@@ -427,6 +484,7 @@ def loggedin(request):
         f = u.follower
         lp = u.likepub
         lv = u.likevideo
+        mp = u.myproject
         return redirect('/u/')
     except:
         return redirect('/new_socialuser/')
@@ -446,6 +504,8 @@ def new_socialuser(request):
             lp.save()
             lv = LikeVideo(user=u)
             lv.save()
+            mp = MyProject(user=u)
+            mp.save()
             return redirect('/u/')
         return HttpResponse('Error happened!')
     else:
@@ -454,6 +514,19 @@ def new_socialuser(request):
         return render(request, 'login/tmp_setting2.html', {'uf': uf, 'upf': upf})
     
     
+def edit_project(request):
+    u = request.user
+    mypub = Publication.objects.filter(author=u)
+    mp = u.myproject
+    if request.method == 'POST':
+        mpf = MyProjectForm(request.POST, instance=mp)
+        if mpf.is_valid():
+            mpf.save()
+            return redirect('/edit_project/') # this page
+    mpf = MyProjectForm(instance=mp)
+    return render(request, 'login/account-name/tmp_edit_project.html', {'mpf': mpf, 'mypub':mypub})
+
+#for ajax handling     
 def add_memopub(request):
     try:
         if request.method == 'POST':
@@ -485,6 +558,34 @@ def add_memopub(request):
         ret = '%s' % json.dumps(dat) 
         print ret
         return HttpResponse(ret, content_type = "application/json")
-    
 
-    
+import forwit_ajax
+import traceback
+def handle_ajax(request):
+    try:
+        if request.method == 'POST':
+            cmd = request.POST['cmd']
+            ret=''
+            if cmd == 'add_watch' or cmd== 'remove_watch':
+                ret = forwit_ajax.handle_watch(cmd, request)
+            if cmd == 'add_videomemo' or cmd == 'remove_videomemo':
+                ret = forwit_ajax.handle_likevideo(cmd, request)
+            else:
+                raise Exception('cmd error', 'cmd=%s' % (cmd,))
+            print ret
+            return HttpResponse(ret, content_type = "application/json")
+    except:
+        tbinfo = traceback.format_tb( sys.exc_info()[2] )
+        emsg =''
+        for tbi in tbinfo:
+            emsg += tbi
+            emsg +='\n'
+        dat = {'ret': 'false', 'msg': 'method error', 'info': '%s / %s \n %s' % (sys.exc_info()[0], sys.exc_info()[1], emsg)}
+        ret = '%s' % json.dumps(dat) 
+        print ret
+        return HttpResponse(ret, content_type = "application/json")
+        
+  
+        
+        
+        

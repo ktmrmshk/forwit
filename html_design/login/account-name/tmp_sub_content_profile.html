@@ -5,7 +5,31 @@
 	<img src="{{ u.userprofile.facephoto.url }}" alt="{{u.last_name}} {{u.first_name}}" width="110" height="110">
 	<h1 class="account-name">{{u.last_name}} {{u.first_name}}</h1>
 	{% ifnotequal u.username user.username %}
-		<button type="button" class="blue_btn watch_btn trans_btn" title="{{u.username}}">ウォッチ</button>
+    <span title="{{u.username}}"></span>
+        {% if following_user %}
+        <button type="button" class="blue_btn watch_btn trans_btn watch_btn_clicked">&#10004;</button>
+        {% else %}
+        <button type="button" class="blue_btn watch_btn trans_btn">ウォッチ</button>
+        {% endif %}
+        
+    <script>
+
+                $(".watch_btn").mousedown(function(){
+                    var username = $(this).prev().attr('title');
+                    //console.log(username);
+                    $(this).toggleClass("watch_btn_clicked");
+                    var thisTxt = $(this).html();
+                    if(thisTxt === "ウォッチ"){
+                        edit_watch("add_watch", username);
+                        $(this).html("<span>&#10004;</span>");
+                    }else{
+                        edit_watch("remove_watch", username);
+                        $(this).html("ウォッチ");
+                    }
+                });
+    </script>
+
+
 	{% endifnotequal %}
 	<dl class="whoami">
 		<dt>所属</dt>

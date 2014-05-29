@@ -49,7 +49,8 @@ urlpatterns = patterns('',
     url(r'^watched/$', 'news.views.my_watchedpage'),
     url(r'^watched/(?P<username>\w+)/$', 'news.views.watchedpage'),
     
-    url(r'^login/$', 'news.views.do_login'),
+    #url(r'^login/$', 'news.views.do_login'),
+    url(r'^login/$', 'news.views.do_social_login'),
     url(r'^logout/$', 'news.views.do_logout'),
     
     url(r'^setting/$', 'news.views.usersetting'),
@@ -61,7 +62,11 @@ urlpatterns = patterns('',
     url(r'^new_socialuser/$', 'news.views.new_socialuser'),
     url(r'^loggedin/$', 'news.views.loggedin'),
     
+    url(r'^edit_project/$', 'news.views.edit_project'),
+    
     #for ajax
     url(r'^add_memopub/$', 'news.views.add_memopub'),
+    url(r'^handle_ajax/$', 'news.views.handle_ajax'),
+    
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
