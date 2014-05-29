@@ -99,18 +99,23 @@
 										
 										<ul class="movie movie_3column_narrow clearfix">
 											<!-- <li><a href="../thesis-movie.html"><dl><dt><img src="../../img/dummy/img_dummy_movie_001.jpg" alt="ロケットエンジンの燃焼試験" width="224" height="126"></dt><dd>ロケットエンジンの燃焼試験</dd></dl></a></li> -->
-											{% for v in u.likevideo.video.all %}
-											<li TITLE="{{ v.video_id }}">
+											{% for v in uvideo %}
+											<li title="{{ v.video.video_id }}">
 												{% ifnotequal u.username user.username %}
-												<span class="mini_btn blue_btn">メモ</span>
+												    {% if v.in_mymemo %}
+												     <span class="mini_btn blue_btn mini_btn_clicked">&#10004;</span>
+												    {% else %}
+												     <span class="mini_btn blue_btn">メモ</span>
+												    {% endif %}
+												   
 												{% endifnotequal %}												
 												
-												<a href="/pub/{{ v.pub.all.0.id }}">
+												<a href="/pub/{{ v.video.pub.all.0.id }}">
 												<dl>
-													<dt><img src="http://img.youtube.com/vi/{{ v.video_id }}/0.jpg" alt="{{ v.title }}" width="224" height="126">
+													<dt><img src="http://img.youtube.com/vi/{{ v.video.video_id }}/0.jpg" alt="{{ v.video.title }}" width="224" height="126">
 													</dt>
 													<dd>
-														{{ v.title }}
+														{{ v.video.title }}
 													</dd>
 												</dl></a>
 											</li>
@@ -236,8 +241,10 @@
 					$(this).toggleClass("mini_btn_clicked");
 					var thisTxt = $(this).html();
 					if(thisTxt === "メモ"){
-						$(this).html("<span>×</span>");
+						edit_memovideo( "add_videomemo", $(this).parent().attr("title") );
+						$(this).html("<span>&#10004;</span>");
 					}else{
+						edit_memovideo( "remove_videomemo", $(this).parent().attr("title") );
 						$(this).html("メモ");
 					}
 				});					

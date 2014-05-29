@@ -126,22 +126,27 @@
 												<td class="refferNum td_right">11<span>回</span></td>
 											</tr> -->
 											{#{% for p in u.likepub.pub.all %}#}
-											{% for p in pub %}
-											<tr title="{{p.id}}">
+											{% for p in lpub %}
+											<tr title="{{p.pub.id}}">
 												{% ifnotequal u.username user.username %}
-												<td class="td_center"><a href="#" class="mini_btn blue_btn">メモ</a></td>
+												    {% if p.in_mymemo %}
+												    <td class="td_center"><a href="#" class="mini_btn blue_btn mini_btn_clicked">&#10004;</a></td>
+												    {% else %}
+												    <td class="td_center"><a href="#" class="mini_btn blue_btn">メモ</a></td>
+												    {% endif%}
+												
 												{% endifnotequal%}
 												<td class="td_center">
-													{% if p.video_set.all %}
+													{% if p.pub.video_set.all %}
 													<img src="{{STATIC_URL}}img/icon_movie.png" alt="動画" width="13" height="13">
 													{% else %}
 													<img src="{{STATIC_URL}}img/icon_ronbun.png" alt="論文" width="11" height="13">
 													{% endif %}
 												</td>
 												<td class="td_center">{{ forloop.counter }}</td>
-												<td><a href="/pub/{{p.id}}">{{ p.title }}</a></td>
-												<td>{{ p.publicationdate}} </td>
-												<td class="td_right">{{ p.likepub_set.all | length }}<span>メモ</span></td>
+												<td><a href="/pub/{{p.pub.id}}">{{ p.pub.title }}</a></td>
+												<td>{{ p.pub.publicationdate}} </td>
+												<td class="td_right">{{ p.pub.likepub_set.all | length }}<span>メモ</span></td>
 												<td class="refferNum td_right"><!-- 12<span>回</span> --></td>
 											</tr>
 											{% endfor %}
@@ -232,22 +237,24 @@
 				
 				{% else %}
 				
-				$(".watch_btn").mousedown(function(){
-					$(this).toggleClass("watch_btn_clicked");
-					var thisTxt = $(this).html();
-					if(thisTxt === "ウォッチ"){
-						$(this).html("<span>×</span>");
-					}else{
-						$(this).html("ウォッチ");
-					}
-				});
+				// $(".watch_btn").mousedown(function(){
+					// $(this).toggleClass("watch_btn_clicked");
+					// var thisTxt = $(this).html();
+					// if(thisTxt === "ウォッチ"){
+						// $(this).html("<span>×</span>");
+					// }else{
+						// $(this).html("ウォッチ");
+					// }
+				// });
 				
 				$(".mini_btn").mousedown(function(){
 					$(this).toggleClass("mini_btn_clicked");
 					var thisTxt = $(this).html();
 					if(thisTxt === "メモ"){
-						$(this).html("<span>×</span>");
+						edit_memopub( "add", $(this).parent().parent().attr("title") );
+						$(this).html("<span>&#10004;</span>");
 					}else{
+						edit_memopub( "remove", $(this).parent().parent().attr("title") );
 						$(this).html("メモ");
 					}
 				});	

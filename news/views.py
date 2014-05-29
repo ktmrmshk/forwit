@@ -328,8 +328,6 @@ def researchvideo(request, username):
         
         uvideo=[]
         for v in u.video_set.all():
-            print v.video_id
-            print request.user.likevideo.video.all()
             if len( request.user.likevideo.video.all().filter(video_id__exact=v.video_id) ) != 0:
                 uvideo.append({'video':v, 'in_mymemo': True})
             else:
@@ -356,12 +354,18 @@ def memopage(request, username):
         if len(w) != 0:
             following_user=True
         
-        puball = u.likepub.pub.all()
+        puball = u.likepub.pub.all()        
         uname=None
         if username != request.user.username:
             uname = username
         pub, pg = pager.getPager(puball, page, '/memo/', username=uname)
-        return render(request, 'login/account-name/tmp_memo.html', {'u':u,  'following_user': following_user, 'pub':pub, 'puball':puball, 'pager':pg, 'currentpage':'memo'})
+        lpub=[]
+        for p in pub:
+            if len( request.user.likepub.pub.filter(id__exact=p.id) ) != 0:
+                lpub.append({'in_mymemo': True, 'pub': p})
+            else:
+                lpub.append({'in_mymemo': False, 'pub': p})
+        return render(request, 'login/account-name/tmp_memo.html', {'u':u,  'following_user': following_user, 'lpub':lpub, 'puball':puball, 'pager':pg, 'currentpage':'memo'})
     except:
         print sys.exc_info()#[0]
         return HttpResponse('username=%s was not found' % username)
