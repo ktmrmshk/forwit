@@ -12,6 +12,12 @@
 		<link rel="stylesheet" href="{{STATIC_URL}}css/style.css">
 		<link rel="stylesheet" href="{{STATIC_URL}}css/user.css">
 		<!--[if lt IE 9]><script src="http://html5shiv-printshiv.googlecode.com/svn/trunk/html5shiv-printshiv.js"></script><![endif]-->
+	
+	   <!-- javascript -->
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script type="text/javascript" src="{{STATIC_URL}}js/jquery.heightLine.js"></script>
+        <script type="text/javascript" src="{{STATIC_URL}}js/scrolltopcontrol.js"></script>
+	   <script type="text/javascript" src="{{STATIC_URL}}js/ajax_csrf.js"></script>
 	</head>
 	
 	<body id="watch" {% ifnotequal u.username user.username %}class="other"{% endifnotequal%}>
@@ -60,7 +66,7 @@
 									{% include "login/account-name/tmp_sub_content_watch_sw_menu.html" %}
 								
 									<!-- <p class="count">計{{ user.follower.members.all | length }}名</p> -->
-									<p class="count">計{{ num_likepub }}名</p>
+									<p class="count">計{{ f|length}}名</p>
 									
 									{% ifequal u.username user.username %}
 									<p><span class="blue_btn edit_btn">編集</span></p>
@@ -77,7 +83,7 @@
 											<div class="left">
 												<h1>ウォッチ</h1>
 											</div>
-											<div class="right">
+											<!-- <div class="right">
 												<div class="horizontal_nav_wrapper clearfix">
 													<ul class="right pagination_prev_next">
 														<li><a class="prev" href="#">&lt;前</a></li>
@@ -90,28 +96,41 @@
 														<li><a href="#">10</a></li>
 													</ul>
 												</div>
-											</div>
+											</div> -->
 										</div>
 															
 										<ul class="user clearfix">
 											<!-- <li><a href="../other/index.html"><img src="../../img/dummy/user1.jpg" alt="temp" width="74" height="74">中央エンジニア<span class="belong">所属</span></a></li> -->
-											{% for w in user.follower.members.all %}
-											<li>
+											{% for w in f %}
+											 {% ifequal w.user user %}
+											 <li class="self"　title="{{w.user.username}}">
+											 {% else %}
+											 <li class="other"　title="{{w.user.username}}">
+											 {% endifequal %}
 												{% ifnotequal u.username user.username %}
-												<span class="blue_btn mini_btn" title="{{ w.username }}">ウォッチ</span>
+												{% ifequal w.user user %}
+												<span class="blue_btn  self" title="{{ w.user.username }}">You</span>
+												{% else %}
+												    {%if w.is_follow %}
+												    <span class="blue_btn mini_btn mini_btn_clicked other" title="{{ w.user.username }}">×</span>
+												    {% else %}
+												    <span class="blue_btn mini_btn other" title="{{ w.user.username }}">ウォッチ</span>
+												    {% endif %}
+												    
+												{% endifequal %}
 												{% endifnotequal%}
 												
-												<a href="/u/{{w.username}}">
-											{% if w.userprofile.facephoto %}
-											<img src="{{ w.userprofile.facephoto.url }}" alt="{{w.last_name}} {{w.first_name}}" width="74" height="74">{{w.last_name}} {{w.first_name}}
+												<a href="/u/{{w.user.username}}">
+											{% if w.user.userprofile.facephoto %}
+											<img src="{{ w.user.userprofile.facephoto.url }}" alt="{{w.user.last_name}} {{w.user.first_name}}" width="74" height="74">{{w.user.last_name}} {{w.user.first_name}}
 											{% else %}
-											<img src="dummy.jpg" alt="{{w.last_name}} {{w.first_name}}" width="74" height="74">{{w.last_name}} {{w.first_name}}
+											<img src="dummy.jpg" alt="{{w.user.last_name}} {{w.user.first_name}}" width="74" height="74">{{w.user.last_name}} {{w.user.first_name}}
 											{% endif %}
-											<span class="belong">{{w.userprofile.job}}</span></a></li>
+											<span class="belong">{{w.user.userprofile.job}}</span></a></li>
 											{% endfor%}
 										</ul>
 											
-										<div class="horizontal_nav_wrapper nav_bottom clearfix">
+										<!-- <div class="horizontal_nav_wrapper nav_bottom clearfix">
 											<ul class="right pagination_prev_next">
 												<li><a class="prev" href="#">&lt;前</a></li>
 												<li><a class="next" href="#">次&gt;</a></li>
@@ -122,7 +141,7 @@
 												<li><a href="#">7</a></li>
 												<li><a href="#">10</a></li>
 											</ul>
-										</div>
+										</div> -->
 										
 									</section>
 									
@@ -160,10 +179,7 @@
 		</div>
 		<!-- bottom -->
 		
-		<!-- javascript -->
-		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-		<script type="text/javascript" src="{{STATIC_URL}}js/jquery.heightLine.js"></script>
-		<script type="text/javascript" src="{{STATIC_URL}}js/scrolltopcontrol.js"></script>
+
 		
 		{% ifequal u.username user.username %}
 		<script>
@@ -209,7 +225,13 @@
 						$(".sub_content_wrapper").css("padding-bottom", defaultPadding + "px");
 						justifyHeight();
 					}
+					$(".delete_btn").mousedown(function(){
+                        //alert($(".delete_btn").parent().attr("title"));
+                        edit_watch("remove_watch", $(".delete_btn").parent().attr("title"));
+                        $(this).parent().remove();
+                     });
 				});
+
 				
 			});
 		</script>
@@ -230,22 +252,26 @@
 					$(".sub_content_wrapper").css("padding-bottom", profilePadding + Math.abs(differ) + "px");
 				}
 
-				$(".watch_btn").mousedown(function(){
-					$(this).toggleClass("watch_btn_clicked");
-					var thisTxt = $(this).html();
-					if(thisTxt === "ウォッチ"){
-						$(this).html("<span>×</span>");
-					}else{
-						$(this).html("ウォッチ");
-					}
-				});
+				// $(".watch_btn").mousedown(function(){
+					// $(this).toggleClass("watch_btn_clicked");
+					// var thisTxt = $(this).html();
+					// if(thisTxt === "ウォッチ"){
+						// $(this).html("<span>×</span>");
+					// }else{
+						// $(this).html("ウォッチ");
+					// }
+				// });
 				
 				$(".mini_btn").mousedown(function(){
 					$(this).toggleClass("mini_btn_clicked");
 					var thisTxt = $(this).html();
 					if(thisTxt === "ウォッチ"){
+						//alert( $(this).attr("title"));
+						edit_watch("add_watch", $(this).attr("title"));
 						$(this).html("<span>×</span>");
 					}else{
+						//edit_watch("remove_watch", $(this).parent().attr("title"));
+						edit_watch("remove_watch", $(this).attr("title"));
 						$(this).html("ウォッチ");
 					}
 				});	

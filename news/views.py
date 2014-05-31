@@ -388,7 +388,7 @@ def memovideopage(request, username):
                 uvideo.append({'video':v, 'in_mymemo': True})
             else:
                 uvideo.append({'video':v, 'in_mymemo': False})
-        print uvideo
+        #print uvideo
         return render(request, 'login/account-name/tmp_memo-movie.html', {'u':u, 'uvideo': uvideo, 'following_user': following_user, 'currentpage':'memo-video'} )
     except:
         return HttpResponse('username=%s was not found' % username)
@@ -401,10 +401,18 @@ def watchingpage(request, username):
     try:
         u = User.objects.get(username__exact=username)
         w = request.user.follower.members.filter(username__exact=u.username)
+        f = []
+        for m in u.follower.members.all():
+            if len( request.user.follower.members.filter(id__exact=m.id) ) != 0:
+                f.append({'is_follow':True, 'user':m})
+            else:
+                f.append({'is_follow':False, 'user':m})
+        #print 'hoge', f
+        
         following_user=False
         if len(w) != 0:
             following_user=True
-        return render(request, 'login/account-name/tmp_watch.html', {'u':u, 'following_user': following_user, 'currentpage':'watching'} )
+        return render(request, 'login/account-name/tmp_watch.html', {'u':u, 'f':f, 'following_user': following_user, 'currentpage':'watching'} )
     except:
         return HttpResponse('username=%s was not found' % username)    
     return render(request, 'login/account-name/tmp_watch.html') 
@@ -417,10 +425,11 @@ def watchedpage(request, username):
     try:
         u = User.objects.get(username__exact=username)
         w = request.user.follower.members.filter(username__exact=u.username)
+
         following_user=False
         if len(w) != 0:
             following_user=True
-        return render(request, 'login/account-name/tmp_watcher.html', {'u':u, 'following_user': following_user, 'currentpage':'watched'} )
+        return render(request, 'login/account-name/tmp_watcher.html', {'u':u, 'f':f, 'following_user': following_user, 'currentpage':'watched'} )
     except:
         return HttpResponse('username=%s was not found' % username)    
     return render(request, 'login/account-name/tmp_watcher.html') 
