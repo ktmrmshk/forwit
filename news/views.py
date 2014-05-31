@@ -424,13 +424,18 @@ def watchedpage(request, username):
         return HttpResponse('Log-in is required. Please log-in')
     try:
         u = User.objects.get(username__exact=username)
-        w = request.user.follower.members.filter(username__exact=u.username)
+        #w = request.user.follower.members.filter(username__exact=u.username)
+        f=[]
+        for m in u.followed.all():
+            if len( request.user.follower.members.filter(id__exact=m.id) ) != 0:
+                f.append({'is_follow':True, 'user':m})
+            else:
+                f.append({'is_follow':False, 'user':m})  
 
-        following_user=False
-        if len(w) != 0:
-            following_user=True
-        return render(request, 'login/account-name/tmp_watcher.html', {'u':u, 'f':f, 'following_user': following_user, 'currentpage':'watched'} )
+        print f
+        return render(request, 'login/account-name/tmp_watcher.html', {'u':u, 'f':f, 'currentpage':'watched'} )
     except:
+        print sys.exc_info()
         return HttpResponse('username=%s was not found' % username)    
     return render(request, 'login/account-name/tmp_watcher.html') 
 

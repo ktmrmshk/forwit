@@ -12,6 +12,13 @@
 		<link rel="stylesheet" href="{{STATIC_URL}}css/style.css">
 		<link rel="stylesheet" href="{{STATIC_URL}}css/user.css">
 		<!--[if lt IE 9]><script src="http://html5shiv-printshiv.googlecode.com/svn/trunk/html5shiv-printshiv.js"></script><![endif]-->
+
+        <!-- javascript -->
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script type="text/javascript" src="{{STATIC_URL}}js/jquery.heightLine.js"></script>
+        <script type="text/javascript" src="{{STATIC_URL}}js/scrolltopcontrol.js"></script>
+        <script type="text/javascript" src="{{STATIC_URL}}js/ajax_csrf.js"></script>
+
 	</head>
 	
 	<body id="watch"  {% ifnotequal u.username user.username %}class="other"{% endifnotequal%}>
@@ -64,10 +71,8 @@
 								{% include "login/account-name/tmp_sub_content_watch_sw_menu.html" %}
 								
 								
-									<p class="count">計{{ u.followed.all | length }}名</p>
-									{% ifequal u.username user.username %}
-									<p><span class="blue_btn edit_btn">編集</span></p>
-									{% endifequal %}
+									<p class="count">計{{ f | length }}名</p>
+
 								</div>
 								<!-- end left, content menu-->
 
@@ -98,19 +103,26 @@
 															
 										<ul class="user clearfix">
 											<!-- <li><a href="../other/index.html"><img src="../../img/dummy/user1.jpg" alt="temp" width="74" height="74">中央エンジニア<span class="belong">所属</span></a></li> -->
-											{% for f in u.followed.all %}
+											{% for m in f %}
 											<li>
-												{% ifnotequal u.username user.username %}
-												<span class="blue_btn mini_btn">ウォッチ</span>
-												{% endifnotequal%}
+												{% ifequal m.user.user.username user.username %}
+												<span class="blue_btn  self">you</span>
+												{% else %}
+												    {%if m.is_follow %}
+												    <span class="blue_btn mini_btn mini_btn_clicked other">x</span>
+												    {% else %}
+												    <span class="blue_btn mini_btn other">ウォッチ</span>
+												    {% endif%}
 												
-												<a href="/u/{{f.user.username}}">
-											{% if f.user.userprofile.facephoto %}
-											<img src="{{ f.user.userprofile.facephoto.url }}" alt="{{f.user.last_name}} {{f.user.first_name}}" width="74" height="74">{{f.user.last_name}} {{f.user.first_name}}
+												{% endifequal%}
+												
+												<a href="/u/{{ m.user.user.username}}">
+											{% if m.user.user.userprofile.facephoto %}
+											<img src="{{ m.user.user.userprofile.facephoto.url }}" alt="{{m.user.user.last_name}} {{m.user.user.first_name}}" width="74" height="74">{{m.user.user.last_name}} {{m.user.user.first_name}}
 											{% else %}
-											<img src="dummy.jpg" alt="{{f.user.last_name}} {{f.user.first_name}}" width="74" height="74">{{f.user.last_name}} {{f.user.first_name}}
+											<img src="dummy.jpg" alt="{{m.user.user.last_name}} {{m.user.user.first_name}}" width="74" height="74">{{m.user.user.last_name}} {{m.user.user.first_name}}
 											{% endif %}
-											<span class="belong">{{f.user.userprofile.job}}</span></a></li>
+											<span class="belong">{{m.user.user.userprofile.job}}</span></a></li>
 											{% endfor%}
 										</ul>
 											
@@ -163,98 +175,41 @@
 		</div>
 		<!-- bottom -->
 		
-		<!-- javascript -->
-		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-		<script type="text/javascript" src="{{STATIC_URL}}js/jquery.heightLine.js"></script>
-		<script type="text/javascript" src="{{STATIC_URL}}js/scrolltopcontrol.js"></script>
+
 		
-		{% ifequal u.username user.username %}
-		<script>
-			var defaultPadding = "";
 
-			$(function(){
-				$(".user li").heightLine();
-				
-				var counter = 0;	
-				function justifyHeight(){
-					var profileHeight = $(".sub_content_wrapper").outerHeight(),
-						mainHeight = $(".main_content_wrapper").outerHeight(),
-						differ = profileHeight - mainHeight,
-						profilePadding =  parseInt($(".sub_content_wrapper").css("padding-bottom")),
-						mainPadding =  parseInt($(".inne_content_wrapper").css("padding-bottom")) + 3; //border + minus margin
-	
-					if(differ > 0){
-						$(".main_content_wrapper").css("padding-bottom", mainPadding + Math.abs(differ) + "px");
-					}else{
-						$(".sub_content_wrapper").css("padding-bottom", profilePadding + Math.abs(differ) + "px");
-					}
-						
-					counter ++;
-					if(counter === 1){
-						defaultPadding = parseInt($(".sub_content_wrapper").css("padding-bottom"));
-					}
-				}
-				
-				justifyHeight();
 
-				var userHeight = $(".user li").height();
-				$(".edit_btn").mousedown(function(){
-					var thisTxt = $(this).text();
-					if(thisTxt === "編集"){
-						$(this).css("font-size", "11px").text("編集完了");
-						$(".user li").prepend('<span class="delete_btn blue_btn"><span>×</span></span>');
-						$(".user li").height(userHeight + 18 + "px");
-						justifyHeight();
-					}else{
-						$(this).css("font-size", "14px").text("編集");
-						$(".delete_btn").remove();
-						$(".user li").height(userHeight + "px");
-						$(".sub_content_wrapper").css("padding-bottom", defaultPadding + "px");
-						justifyHeight();
-					}
-				});
-				
-			});
-		</script>
-		{% else %}
-				<script>
-			$(function(){
-				$(".user li").heightLine();
-				
-				var profileHeight = $(".sub_content_wrapper").outerHeight(),
-					mainHeight = $(".main_content_wrapper").outerHeight(),
-					differ = profileHeight - mainHeight,
-					profilePadding =  parseInt($(".sub_content_wrapper").css("padding-bottom")),
-					mainPadding =  parseInt($(".inne_content_wrapper").css("padding-bottom")) + 3; //border + minus margin
+		  <script>
+            $(function(){
+                $(".user li").heightLine();
+                
+                var profileHeight = $(".sub_content_wrapper").outerHeight(),
+                    mainHeight = $(".main_content_wrapper").outerHeight(),
+                    differ = profileHeight - mainHeight,
+                    profilePadding =  parseInt($(".sub_content_wrapper").css("padding-bottom")),
+                    mainPadding =  parseInt($(".inne_content_wrapper").css("padding-bottom")) + 3; //border + minus margin
 
-				if(differ > 0){
-					$(".main_content_wrapper").css("padding-bottom", mainPadding + Math.abs(differ) + "px");
-				}else{
-					$(".sub_content_wrapper").css("padding-bottom", profilePadding + Math.abs(differ) + "px");
-				}
-
-				$(".watch_btn").mousedown(function(){
-					$(this).toggleClass("watch_btn_clicked");
-					var thisTxt = $(this).html();
-					if(thisTxt === "ウォッチ"){
-						$(this).html("<span>×</span>");
-					}else{
-						$(this).html("ウォッチ");
-					}
-				});
-				
-				$(".mini_btn").mousedown(function(){
-					$(this).toggleClass("mini_btn_clicked");
-					var thisTxt = $(this).html();
-					if(thisTxt === "ウォッチ"){
-						$(this).html("<span>×</span>");
-					}else{
-						$(this).html("ウォッチ");
-					}
-				});	
-			});		
-		</script>
+                if(differ > 0){
+                    $(".main_content_wrapper").css("padding-bottom", mainPadding + Math.abs(differ) + "px");
+                }else{
+                    $(".sub_content_wrapper").css("padding-bottom", profilePadding + Math.abs(differ) + "px");
+                }
+                
+                $(".mini_btn").mousedown(function(){
+                    $(this).toggleClass("mini_btn_clicked");
+                    var thisTxt = $(this).html();
+                    if(thisTxt === "ウォッチ"){
+                        //alert( $(this).attr("title"));
+                        edit_watch("add_watch", $(this).attr("title"));
+                        $(this).html("<span>×</span>");
+                    }else{
+                        //edit_watch("remove_watch", $(this).parent().attr("title"));
+                        edit_watch("remove_watch", $(this).attr("title"));
+                        $(this).html("ウォッチ");
+                    }
+                }); 
+            });     
+        </script>
 		
-		{% endifequal %}
 	</body>
 </html>
