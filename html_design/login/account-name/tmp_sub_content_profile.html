@@ -2,7 +2,11 @@
 <section class="sub_content_wrapper left">
 
 	<!-- <img src="{{STATIC_URL}}img/dummy/user-main.jpg" alt="{{u.last_name}} {{u.first_name}}" width="110" height="110"> -->
+	{% ifequal u.userprofile.facephoto.url "" %}
+	<img src="{{STATIC_URL}}/img/dummy/nobody.png" alt="{{u.last_name}} {{u.first_name}}" width="110" height="110">
+	{% else %}
 	<img src="{{ u.userprofile.facephoto.url }}" alt="{{u.last_name}} {{u.first_name}}" width="110" height="110">
+	{% endifequal %}
 	<h1 class="account-name">{{u.last_name}} {{u.first_name}}</h1>
 	{% ifnotequal u.username user.username %}
     <span title="{{u.username}}"></span>
