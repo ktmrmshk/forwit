@@ -8,10 +8,17 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
 		<meta name="viewport" content="target-densitydpi=device-dpi, width=1000, maximum-scale=1.0, user-scalable=yes">
 		
-		<link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon" />
-		<link rel="stylesheet" href="../css/style.css">
-		<link rel="stylesheet" href="../css/edit.css">
-		<!--[if lt IE 9]><script src="http://html5shiv-printshiv.googlecode.com/svn/trunk/html5shiv-printshiv.js"></script><![endif]-->
+		<link rel="shortcut icon" href="{{STATIC_URL}}img/favicon.ico" type="image/x-icon" />
+		<link rel="stylesheet" href="{{STATIC_URL}}css/style.css">
+		<link rel="stylesheet" href="{{STATIC_URL}}css/edit.css">		<!--[if lt IE 9]><script src="http://html5shiv-printshiv.googlecode.com/svn/trunk/html5shiv-printshiv.js"></script><![endif]-->
+	
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script type="text/javascript" src="{{STATIC_URL}}js/jquery.heightLine.js"></script>
+        <script type="text/javascript" src="{{STATIC_URL}}js/scrolltopcontrol.js"></script>
+        <script type="text/javascript" src="{{STATIC_URL}}js/ajax_csrf.js"></script>
+                <script type="text/javascript" src="{{STATIC_URL}}js/validation/jquery.validate.min.js"></script>
+        <script type="text/javascript" src="{{STATIC_URL}}js/validation/messages_ja.js"></script>
+	
 	</head>
 	
 	<body id="edit">
@@ -23,31 +30,15 @@
 			<div id="container">
 			
 				<!-- header -->
-				<header class="clearfix">
-				
-					<!-- logo -->
-					<a class="logo" href="account-name/index.html">
-						<img src="../img/logo.jpg" alt="ForWit" width="83" height="24" />
-					</a>
-					
-					<!-- search -->
-					<div class="search">
-						<form action="" id="search-box">
-							<div>
-								<input type="text" name="q" size="57" class="input" />
-								<button type="submit" name="sa" value="検索">検索</button>
-							</div>
-						</form>
-					</div>
-					
-					<!-- links -->
-					<p class="link">
-						<a href="memberlist.html">登録者一覧</a>
-						<a href="setting.html">設定変更</a>
-						<a href="../index.html">ログアウト</a>
-					</p>
-					
-				</header>
+                    <!-- logo -->
+                <header class="clearfix">
+                    <!-- logo -->
+                    {% include "tmp_sub_content_widget_logo.html" %}
+                    <!-- search -->
+                    {% include "tmp_sub_content_widget_search.html" %}
+                    <!-- links -->
+                    {% include "tmp_sub_content_widget_headmenu.html" %}
+                </header>
 				<!-- end header -->
 				
 				<!-- content_wrapper_wide -->
@@ -62,8 +53,8 @@
 
 						<h1>論文編集―タイトル</h1>
 								<!--タイトル-->
-							<div class="paper_title">
-								<h2>ロケット燃焼器のレー査体推進推進系の実証推進系の実証系の実証研究を進めていの目標として大気吸ロケット燃焼器のレー査体</h2>
+							<div class="paper_title" title="{{pub.id}}">
+								<h2>{{pub.title}}</h2>
 							</div>
 						<div class="clearfix">
 							<!-- 左より -->
@@ -71,7 +62,7 @@
 								<div class="paper_edit_main">
 									<div class="paper_edit_abst">
 										<h3>アブストラクト</h3>
-										<p>無毒で常温貯蔵可能な液体推進剤として亜酸化窒素(N_2O)/エタノールの組合せに着目し,それによる扱い易い液体推進系の実証研究を進めている.当面の目標として大気吸い込み式極超音速推進系の飛行試験に用いる加速用ロケットエンジンへの適用を目指しているが,その低温環境順応性を活かす衛星・探査機搭載推進系への応用も視</p>
+										<p>{{abst}}</p>
 									</div>									
 								</div>								
 							</div>
@@ -83,11 +74,11 @@
 								<div class="paper_edit_info">
 									<dl>
 										<dt>投稿学会</dt>
-										<dd>□□□□□□□□□□□□</dd>
+										<dd>{{pub.publisher}}/{{pub.publicationname}}</dd>
 										<dt>発行年月日</dt>
-										<dd>□□□□□□□□□□□□</dd>							
+										<dd>{{pub.publicationdate}}</dd>							
 										<dt>キーワード</dt>
-										<dd>□□□□□□□□□□□□</dd>	
+										<dd></dd>	
 									</dl>
 								</div>
 								
@@ -100,31 +91,29 @@
 												<th>所属</th>
 											</tr>
 										</thead>
-										<tr>
-											<td><a href="login/other/index.html">山田　太郎</a></td>
-											<td>□□□□□□□□□□□□</td>
-										</tr>													
-										<tr>
-											<td><a href="login/other/index.html">山村　花子</a></td>
-											<td>□□□□□□□□□□□□</td>
-										</tr>							
-										<tr>
-											<td><a href="login/other/index.html">永井　満</a></td>
-											<td>□□□□□□□□□□□□</td>
-										</tr>
+										{% for a in authors %}
+					                    <tr>
+					                        <td>{{a.name}}</td>
+					                        <td>{{a.org}}</td>
+					                    </tr>
+					                    {% endfor%}
 									</table>
 								</div>
 							</div>
 						</div>
 							<!-- end right -->
 						<div class="paper_edit_input">
+							<form method="post">{% csrf_token %}
 								<fieldset>
 									<legend>解説</legend>
 									<p>解説を入力頂くと論文ページにその内容が反映されます。</p>
-									<textarea name="exposition">無毒で常温貯蔵可能な液体推進剤として亜酸化窒素(N_2O)/エタノールの組合せに着目し,それによる扱い易い液体推進系の実証研究を進めている.当面の目標として大気吸い込み式極超音速推進系の飛行試験に用いる加速用ロケットエンジンへの適用を目指しているが,その低温環境順応性を活かす衛星・探査機搭載推進系への応用も視
-									</textarea>
+									<textarea class="description" name="exposition">{{pubdetail.description}}</textarea>
+								    <button type="submit" name="submit" class="blue_btn">保存する</button>
 								</fieldset>
 
+                                            <!-- <button type="reset" name="reset" class="gray_btn">キャンセル</button> -->
+                                            
+                                </form>
 
 								<fieldset class="attachment">
 									<legend>添付資料</legend>
@@ -143,8 +132,6 @@
 												<span class="at_filename_0 filename">選択されていません</span>
 											</div>
 										</div>
-										
-
 
 										<div id="file_1" class="file_wrapper">
 											<div class="input_wrapper">
@@ -178,6 +165,7 @@
 										</div>
 								</fieldset>
 
+                                <form class="editvideo" method="post">{% csrf_token %}
 								<fieldset class="youtube">
 									<legend>動画</legend>
 									<p>Youtubeの動画をアップロードすることができます。</p>
@@ -190,26 +178,26 @@
 
 									<div class="input_wrapper">
 										<button type="button" name="v_del_0" class="mini_btn gray_btn">削除</button>
-										<input type="text" id="uploadMovieURL_0" name="v_name_0" value='<iframe width="420" height="315" src="//www.youtube.com/embed/udbb-7TZXPs?rel=0" frameborder="0" allowfullscreen></iframe>' placeholder="Youtube動画URL" />
+										<input type="text" id="uploadMovieURL_0" name="v_name_0"  placeholder="Youtube Video ID" value="{{video.video_id}}"/>
 										<button type="button" id="uploadMovie_0" name="v_up_0" class="blue_btn mini_btn reload">更新</button>
 										<div id="youtube_area_0" class="youtube_area">ここに動画が表示されます</div>						
 									</div>
-									<button type="button" name="add_movie" class="blue_btn mini_btn add_btn">動画を追加</button>
+									<!-- <button type="button" name="add_movie" class="blue_btn mini_btn add_btn">動画を追加</button> -->
 								</fieldset>
-								
+								</form>
 								
 								<div id="buttons" class="clearfix">
 									<div class="left">
-										<div class="clearfix">
+										<!-- <div class="clearfix">
 											<button type="reset" name="reset" class="gray_btn">本人から削除</button>
-										</div>
+										</div> -->
 									</div>
-									<div class="right">
+									<!-- <div class="right">
 										<div class="clearfix">
 											<button type="reset" name="reset" class="gray_btn">キャンセル</button>
 											<button type="submit" name="submit" class="blue_btn">保存する</button>
 										</div>
-									</div>
+									</div> -->
 								</div>
 
 						</div>
@@ -243,13 +231,10 @@
 		<!-- bottom -->
 		
 		<!-- javascript -->
-		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-		<script type="text/javascript" src="../js/jquery.heightLine.js"></script>
-		<script type="text/javascript" src="../js/scrolltopcontrol.js"></script>
+
 		
 		<!-- for form validation -->
-		<script type="text/javascript" src="../js/validation/jquery.validate.min.js"></script>
-		<script type="text/javascript" src="../js/validation/messages_ja.js"></script>
+
 		<script>
 			$(function () {
 			/*placeholder for IE*/
@@ -296,16 +281,20 @@
 
 			  /*youtube*/
 			  function updateMovie(){
-			  		var movieURL = $("#uploadMovieURL_0").val();
+			  	var videoid = $("#uploadMovieURL_0").val();
+			  		var movieURL = '<iframe width="480" height="360" src="//www.youtube.com/embed/' + videoid + '?rel=0" frameborder="0" allowfullscreen></iframe>';
+			  		alert(movieURL);
 			  		/*どんなサイズを指定していても、valueは480×360に変更しています*/
 			  		movieURL = movieURL.replace(/width=\"[0-9]+\"/,'width="480"').replace(/height=\"[0-9]+\"/,'height="360"');
-			  		$("#uploadMovieURL_0").val(movieURL).submit();
+			  		$("#uploadMovieURL_0").val(videoid).submit();
 			  		
-			  		if(movieURL){
+			  		if(videoid){
 				  		$(".youtube_area").html(movieURL);
 				  	} else{
 					  	$(".youtube_area").html("ここに動画が表示されます");
 				  	}
+				  	//alert($(".paper_title").attr("title"));
+				  	edit_video("add_pubvideo", videoid, $(".paper_title").attr("title"));
 			  }
 			  
 			  updateMovie();
@@ -314,6 +303,13 @@
 				 $("#uploadMovieURL_0").submit();
 				 updateMovie();
 			  })
+			  
+			  // $(".blue_btn").mousedown(function(){  
+			     // alert( $(".description").html() + getCookie('csrftoken'));
+// 			     
+			  // });
+			  
+			  
 			  
 			  /*help*/
 			  $(".help").click(function(){$(".help_area").slideToggle();})

@@ -112,6 +112,27 @@ function edit_mypub(cmd_, pubid_){
 	});		
 }
 
+function edit_video(cmd_, videoid_, pubid_){
+	$.ajax({
+		type : 'POST',
+		data : {
+			videoid : videoid_,
+			cmd : cmd_,
+			pubid: pubid_
+		},
+		url : '/handle_ajax/',
+		dataType : 'json',
+		success : function(json) {
+			alert(json['videoid'] + ": " + json['pubid']);
+		},
+		error : function(xhr, errmsg, err) {
+			//alert(xhr.status + ": " + xhr.responseText + '/ ' + errmsg + '/ ' + err);
+			alert("error");
+			console.log(xhr.status + ": " + xhr.responseText + '/ ' + errmsg + '/ ' + err);
+		}
+	});	
+	
+}
 
 
 	

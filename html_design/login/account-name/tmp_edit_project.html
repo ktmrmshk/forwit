@@ -220,7 +220,11 @@
 			  
 			  /*edit research*/
 			  $("table .blue_btn").click(function(){
-				  window.location = "edit-research.html";
+				  //window.location = "edit-research.html";
+				  
+				  var url = "/edit_research/" + $(this).parent().parent().attr("title") + "/";
+				  alert(url);
+				  window.location = url;
 			  });
 
             $(".delete2").mousedown(function(){
@@ -228,8 +232,7 @@
             	edit_mypub("remove_mypub", $(this).parent().parent().attr("title"));
             	$(this).parent().parent().remove();
             });
-
-			});
+		});
 		</script>
 	</body>
 </html>

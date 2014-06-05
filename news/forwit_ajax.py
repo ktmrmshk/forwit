@@ -36,3 +36,28 @@ def handle_mypub(cmd, request):
         p.author.remove(request.user)
     ret = json.dumps({'ret': 'true', 'pubid': request.POST['pubid'] })
     return ret
+
+def handle_pubvideo(cmd, request):
+    p = Publication.objects.get(id__exact=request.POST["pubid"])
+    vid = request.POST["videoid"]
+    v=None
+    if len( Video.objects.filter(video_id__exact=vid) ) ==0:
+        v=Video(video_id=vid)
+        v.save()
+        v.owner.add(request.user)
+    else:
+        v= Video.objects.get(video_id__exact=vid)
+    if cmd == 'add_pubvideo':
+        v.pub.add(p)
+    else:
+        assert cmd == 'remove_pubvideo'
+        v.pub.remove(p)
+    v.save()
+   
+    
+    ret = json.dumps({'ret': 'true', 'pubid': request.POST['pubid'] , 'videoid': request.POST["videoid"]})
+    print ret
+    return ret
+    
+    
+    

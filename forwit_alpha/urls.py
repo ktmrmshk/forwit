@@ -63,6 +63,7 @@ urlpatterns = patterns('',
     url(r'^loggedin/$', 'news.views.loggedin'),
     
     url(r'^edit_project/$', 'news.views.edit_project'),
+    url(r'^edit_research/(?P<pubid>\d+)/$', 'news.views.edit_research'),
     
     #for ajax
     url(r'^add_memopub/$', 'news.views.add_memopub'),

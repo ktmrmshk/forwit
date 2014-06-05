@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 import urllib
-from news.models  import News, Publication, Video, UserProfile, Follower, LikePub, LikeVideo, MyProject, MyProjectForm
+from news.models  import *
 import cinii, cinii_rdf
 import json
 import sys
@@ -255,11 +255,12 @@ def pubpage(request, pubid):
             a['org'] = org
         try:
             if pub.video_set.all() != []:
-                video = pub.video_set.all()[0]
+                allvideo = pub.video_set.all()
+                video = allvideo[len(allvideo)-1]
                 video_url = make_youtube_url(video.video_id)
-                return render(request, 'login/tmp_thesis-movie.html', {'pub':pub, 'authors': authors, 'video_url': video_url, 'abst':abst})
+                return render(request, 'login/tmp_thesis-movie2.html', {'pub':pub, 'authors': authors, 'video_url': video_url, 'abst':abst})
         except:
-            return render(request, 'tmp_thesis.html', {'pub':pub, 'authors': authors, 'abst':abst})
+            return render(request, 'login/tmp_thesis-movie2.html', {'pub':pub, 'authors': authors, 'abst':abst})
     except:
         print sys.exc_info()
         return HttpResponse('pubid=%s is not found' % pubid )
@@ -544,6 +545,54 @@ def edit_project(request):
     mpf = MyProjectForm(instance=mp)
     return render(request, 'login/account-name/tmp_edit_project.html', {'mpf': mpf, 'mypub':mypub})
 
+def edit_research(request, pubid):
+    # check if publication-detail objects of this exists
+    pub = Publication.objects.get(id=pubid)
+    if len( PublicationDetail.objects.filter(pub=pub) ) == 0:
+        pubdetail = PublicationDetail(pub=pub)
+        pubdetail.save()
+    else:
+        pubdetail = PublicationDetail.objects.get(pub=pub)
+    
+    if request.method == 'POST':
+#         print request.POST['exposition']
+        pubdetail.description=request.POST['exposition']
+        pubdetail.save()
+    
+    
+    #get abstraction
+    abst=''
+    try:
+        c=cinii_rdf.CiniiRDF('http://ci.nii.ac.jp/naid/%s.rdf' % pubid)
+        abst = c.abst
+    except:
+        print sys.exc_info()
+        abst='Not Available Now'
+    if abst == '':
+        abst='Not Available Now'
+    
+    try:
+        
+        #json.loads(a2.replace("u'", "'").replace("'", '"'))
+        authors = json.loads(pub.authors.replace("u'", "'").replace("'", '"'))
+        for a in authors:
+            org = c.getAffiliation(a['name'])
+            a['org'] = org
+        try:
+            if pub.video_set.all() != []:
+                allvideo = pub.video_set.all()
+                video = allvideo[len(allvideo)-1]
+                video_url = make_youtube_url(video.video_id)
+                return render(request, 'login/tmp_edit-research.html', {'pub':pub, 'pubdetail':pubdetail, 'authors': authors, 'video': video,'video_url': video_url, 'abst':abst})
+        except:
+            return render(request, 'login/tmp_edit-research.html', {'pub':pub, 'pubdetail':pubdetail, 'authors': authors, 'abst':abst})
+    except:
+        print sys.exc_info()
+        return HttpResponse('pubid=%s is not found' % pubid )
+
+#     return render(request, 'login/tmp_edit-research.html', {'pub':pub})
+
+
 #for ajax handling     
 def add_memopub(request):
     try:
@@ -590,6 +639,8 @@ def handle_ajax(request):
                 ret = forwit_ajax.handle_likevideo(cmd, request)
             if cmd == 'add_mypub' or cmd == 'remove_mypub':
                 ret = forwit_ajax.handle_mypub(cmd, request)
+            if cmd == 'add_pubvideo' or cmd == 'remove_pubvideo':
+                ret = forwit_ajax.handle_pubvideo(cmd, request)
             else:
                 raise Exception('cmd error', 'cmd=%s' % (cmd,))
             print ret

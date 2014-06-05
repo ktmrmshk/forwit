@@ -36,6 +36,8 @@ class Publication(models.Model):
 class PublicationDetail(models.Model):
     pub = models.OneToOneField(Publication)
     description = models.TextField(max_length=4096, blank=True, default='')
+    def __unicode__(self):
+        return self.pub.title[:64]#, self.id#, self.title[:10].encode('utf-8')
     # graph
     # slide
     # photo

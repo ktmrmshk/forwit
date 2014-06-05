@@ -2,16 +2,15 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>{{ pub.title }}  | 論文(動画あり) | ForWit</title>
+		<title>エタノールを用いたロケットエンジンの燃焼特性 | 論文(動画あり) | ForWit</title>
 		<meta name="description" content="">
 		<meta name="keywords" content="">
 		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
 		<meta name="viewport" content="target-densitydpi=device-dpi, width=1000, maximum-scale=1.0, user-scalable=yes">
 		
-        <link rel="shortcut icon" href="{{STATIC_URL}}img/favicon.ico" type="image/x-icon" />
-        <link rel="stylesheet" href="{{STATIC_URL}}css/style.css">
-        <link rel="stylesheet" href="{{STATIC_URL}}css/thesis.css">
-        <script type="text/javascript" src="{{STATIC_URL}}js/ajax_csrf.js"></script>
+		<link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon" />
+		<link rel="stylesheet" href="../css/style.css">
+		<link rel="stylesheet" href="../css/thesis.css">
 		<!--[if lt IE 9]><script src="http://html5shiv-printshiv.googlecode.com/svn/trunk/html5shiv-printshiv.js"></script><![endif]-->
 	</head>
 	
@@ -25,15 +24,32 @@
 			
 				<!-- header -->
 				<header class="clearfix">
-
+				
+					<!-- logo -->
+					<a class="logo" href="account-name/index.html">
+						<img src="../img/logo.jpg" alt="ForWit" width="83" height="24" />
+					</a>
+					
+					<!-- search -->
+					<div class="search">
+						<form action="" id="search-box">
+							<div>
+								<input type="text" name="q" size="57" class="input" />
+								<button type="submit" name="sa" value="検索">検索</button>
+							</div>
+						</form>
+					</div>
+					
+					<!-- links -->
+					<p class="link">
+						<a href="memberlist.html">登録者一覧</a>
+						<a href="setting.html">設定変更</a>
+						<a href="../index.html">ログアウト</a>
+					</p>
 					
 				</header>
 				<!-- end header -->
-                    {% include "tmp_sub_content_widget_logo.html" %}
-                    <!-- search -->
-                    {% include "tmp_sub_content_widget_search.html" %}
-                    <!-- links -->
-                    {% include "tmp_sub_content_widget_headmenu.html" %}				
+				
 				<!--content_wrapper_wide -->
 				<div class="content_wrapper_wide">
 				
