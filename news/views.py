@@ -278,6 +278,7 @@ def my_userpage(request):
         video = Video.objects.order_by('?')[:8]
         return render(request, 'login/account-name/tmp_index.html', {'u':u, 'currentpage':'news', 'news': news, 'pub':pub, 'video': video} )
     except:
+        print sys.exc_info()
 #         print sys.exc_info()[0]
         return HttpResponse('username=%s was not found' % request.user.username)
 
