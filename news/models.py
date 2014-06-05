@@ -57,7 +57,7 @@ class UserProfile(models.Model):
     interesting2 = models.CharField(max_length=64, default='ResearchArea2')
     interesting3 = models.CharField(max_length=64, default='ResearchArea3')
     
-    facephoto = models.ImageField(upload_to=upload_to, blank=True, null=True, default='%s/img/dummy/nobody.png' % settings.STATIC_URL)
+    facephoto = models.ImageField(upload_to=upload_to, blank=True, null=True, default='')
     
     kana_first_name = models.CharField(max_length=64, blank=True, default='')
     kana_last_name = models.CharField(max_length=64, blank=True, default='')
