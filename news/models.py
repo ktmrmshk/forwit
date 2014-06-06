@@ -16,7 +16,8 @@ class News(models.Model):
         return self.title[:10]
     
 class Publication(models.Model):
-    id = models.IntegerField(primary_key=True)
+    #pid = models.IntegerField(primary_key=True)
+    id = models.CharField(max_length=128,primary_key=True)
     link = models.URLField()
     title = models.CharField(max_length=512)
     authors = models.CharField(max_length=1024)
