@@ -165,9 +165,9 @@
 										
                                             <div class="entry_agree_btn">
                                                 <label>
-                                                    <input type="checkbox" name="entry_agree">
-                                                    <a href="../policy_user.pdf" target="_blank">利用規約</a>、
-                                                    <a href="../policy_privacy.pdf" target="_blank">個人情報保護方針</a>に同意する。
+                                                    <input type="checkbox" name="entry_agree" id="agreement">
+                                                    <a href="/media/policy_user.pdf" target="_blank">利用規約</a>、
+                                                    <a href="/media/policy_privacy.pdf" target="_blank">個人情報保護方針</a>に同意する。
                                                 </label>
                                             </div>
 											
@@ -179,8 +179,8 @@
 
  									<div id="buttons">
 										<div class="clearfix">
-											<button type="reset" name="reset" class="gray_btn">キャンセル</button>
-											<button type="submit" name="submit" class="blue_btn">保存する</button>
+											<button type="reset" name="reset" class="gray_btn cancel_btn">キャンセル</button>
+											<button type="submit" name="submit" class="blue_btn submit_btn">保存する</button>
 										</div>
 									</div>
 
@@ -288,6 +288,23 @@
 						  required:true
 					  }
 					}
+			  });
+			  
+			  //checking form
+			 $('.submit_btn').click(function(e){
+			 	if( $('#agreement').prop('checked') ){
+			 		
+			 	}
+                else{
+                	alert('You have to agree to our Terms and Privacy Policy.');
+                	e.preventDefault();
+                }
+                
+              });
+			  $('.cancel_btn').click(function(){
+			  	alert('canceled');
+			  	window.location.href = '/';
+			  	history.back();
 			  });
 			});
 		</script>

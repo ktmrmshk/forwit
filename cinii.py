@@ -60,7 +60,8 @@ class Publist(object):
     def parse_dat(self, entry):
         ret = {}
         m = re.search(r'http://.+/([0-9]+)', entry.id)
-        ret['id'] = int( m.group(1) )
+        ret['id'] = str( m.group(1) )
+        #print '>> %s type=%s' % (ret['id'], type(ret['id']) )
         #ret['id'] = entry.id
         ret['link'] = entry.id
         ret['title'] = entry.get('title', 'No Title')
@@ -96,6 +97,7 @@ if __name__ == '__main__':
     def sample_main_from_web():
         pub = Publist()
         pub.setparam(u'kitamura masahiko')
+        pub.get()
         print pub.url
         # pub.loadfile('kekka.atom')
         pub.print_all()
@@ -109,8 +111,8 @@ if __name__ == '__main__':
         print pub.res[0]['id']
         return pub
     
-    pub = main_from_file('appid.atom')    
-
+    #pub = main_from_file('appid.atom')    
+    sample_main_from_web()
 # d = fp.parse('kekka.atom')
 
 # cnt=0

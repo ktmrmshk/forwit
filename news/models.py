@@ -17,7 +17,7 @@ class News(models.Model):
     
 class Publication(models.Model):
     #pid = models.IntegerField(primary_key=True)
-    id = models.CharField(max_length=128,primary_key=True)
+    pubid = models.CharField(max_length=128,primary_key=True)
     link = models.URLField()
     title = models.CharField(max_length=512)
     authors = models.CharField(max_length=1024)
@@ -63,6 +63,7 @@ class UserProfile(models.Model):
     kana_first_name = models.CharField(max_length=64, blank=True, default='')
     kana_last_name = models.CharField(max_length=64, blank=True, default='')
     
+    degree = models.CharField(max_length=64, blank=True, default='Grad') # Grad, Master, PhD
     def __unicode__(self):
         return '%s, %s' % (self.user.username, self.title)
 

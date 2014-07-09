@@ -33,6 +33,7 @@ def search_pub(request):
         pub.setparam(count=20, start=start)
         pub.get()
         publist = pub.parse_dat_all()
+        #print publist
         # INGEST to DB!!!
         ingest_publist(publist)
         
@@ -41,7 +42,7 @@ def search_pub(request):
             likepub = request.user.likepub.pub
             for p in publist:
                 try:
-                    likepub.get(id__exact=p['id'])
+                    likepub.get(pubid__exact=p['id'])
                     p['mine'] = True
                 except:
 #                     print p['id'], 'not mine'
@@ -114,7 +115,7 @@ def test_search(request):
         
         for p in publist:
             try:
-                likepub.get(id__exact=p['id'])
+                likepub.get(pubid__exact=p['id'])
                 p['mine'] = True
             except:
 #                 print p['id'], 'not mine'
@@ -164,12 +165,14 @@ def test_search(request):
 
 def ingest_publist(publist):
     for p in publist:
+        #print p
+        #print '>>', p['title'].encode('utf-8')
         try:
-            plist = Publication.objects.get(id=p['id'])
+            plist = Publication.objects.get(pubid=p['id'])
             print 'entry is already exists'
             continue
         except:
-            plist = Publication(id=p['id'])
+            plist = Publication(pubid=p['id'])
             plist.link = p['link']
             plist.title = p['title']
             plist.authors = p['authors']
@@ -247,7 +250,7 @@ def pubpage(request, pubid):
         abst='Not Available Now'
     
     try:
-        pub = Publication.objects.get(id=pubid)
+        pub = Publication.objects.get(pubid=pubid)
         #json.loads(a2.replace("u'", "'").replace("'", '"'))
         authors = json.loads(pub.authors.replace("u'", "'").replace("'", '"'))
         for a in authors:
@@ -307,7 +310,7 @@ def research(request, username):
             following_user=True
         upub=[]
         for p in u.publication_set.all():
-            if len( request.user.likepub.pub.all().filter(id=p.id) ):
+            if len( request.user.likepub.pub.all().filter(pubid=p.pubid) ):
                 upub.append( {'in_mymemo': True, 'pub': p})
             else:
                 upub.append( {'in_mymemo': False, 'pub': p})
@@ -363,7 +366,7 @@ def memopage(request, username):
         pub, pg = pager.getPager(puball, page, '/memo/', username=uname)
         lpub=[]
         for p in pub:
-            if len( request.user.likepub.pub.filter(id__exact=p.id) ) != 0:
+            if len( request.user.likepub.pub.filter(pubid__exact=p.pubid) ) != 0:
                 lpub.append({'in_mymemo': True, 'pub': p})
             else:
                 lpub.append({'in_mymemo': False, 'pub': p})
@@ -485,7 +488,8 @@ def usersetting(request):
             up.save()
             u.save()
             msg='saved!'
-            return render(request, 'login/tmp_setting2.html', {'uf': uf, 'upf': upf, 'msg': msg})
+            #return render(request, 'login/tmp_setting2.html', {'uf': uf, 'upf': upf, 'msg': msg})
+            return redirect('/')
         else:
             msg =  'INVAID'
             return render(request, 'login/tmp_setting2.html', {'uf': uf, 'upf': upf, 'msg': msg})
@@ -548,7 +552,7 @@ def edit_project(request):
 
 def edit_research(request, pubid):
     # check if publication-detail objects of this exists
-    pub = Publication.objects.get(id=pubid)
+    pub = Publication.objects.get(pubid=pubid)
     if len( PublicationDetail.objects.filter(pub=pub) ) == 0:
         pubdetail = PublicationDetail(pub=pub)
         pubdetail.save()
@@ -604,7 +608,7 @@ def add_memopub(request):
             assert cmd == 'add' or cmd == 'remove'
             if pubid and cmd:
                 lp = request.user.likepub
-                pub = Publication.objects.get(id__exact=int(pubid))
+                pub = Publication.objects.get(pubid__exact=str(pubid))
                 if cmd == 'add':
                     lp.pub.add(pub)
                 elif cmd == 'remove':

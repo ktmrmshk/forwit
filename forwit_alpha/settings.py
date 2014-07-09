@@ -59,10 +59,14 @@ WSGI_APPLICATION = 'forwit_alpha.wsgi.application'
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'mac4it',
+            'USER': 'kitamac',
+            'PASSWORD': 'kitamac123',
+            'HOST': 'kago.ktmrmshk.com',
+            'PORT': '3306',
+        }
 }
 
 # Internationalization
@@ -84,14 +88,18 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 #STATIC_URL = '/static/'
+
+
 STATIC_URL = '/html_design/'
+#STATIC_URL = ''
 STATICFILES_DIRS = (
                     os.path.join(BASE_DIR, 'html_design'),
 )
 
 TEMPLATE_DIRS = (
-                 'html_design',
-                 'news/templates',
+                 #'html_design',
+                 #'news/templates',
+                 os.path.join(BASE_DIR,  'html_design'),
 )
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

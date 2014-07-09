@@ -127,7 +127,7 @@
 											</tr> -->
 											{#{% for p in u.likepub.pub.all %}#}
 											{% for p in lpub %}
-											<tr title="{{p.pub.id}}">
+											<tr title="{{p.pub.pubid}}">
 												{% ifnotequal u.username user.username %}
 												    {% if p.in_mymemo %}
 												    <td class="td_center"><a href="#" class="mini_btn blue_btn mini_btn_clicked">&#10004;</a></td>
@@ -144,7 +144,7 @@
 													{% endif %}
 												</td>
 												<td class="td_center">{{ forloop.counter }}</td>
-												<td><a href="/pub/{{p.pub.id}}">{{ p.pub.title }}</a></td>
+												<td><a href="/pub/{{p.pub.pubid}}">{{ p.pub.title }}</a></td>
 												<td>{{ p.pub.publicationdate}} </td>
 												<td class="td_right">{{ p.pub.likepub_set.all | length }}<span>メモ</span></td>
 												<td class="refferNum td_right"><!-- 12<span>回</span> --></td>
