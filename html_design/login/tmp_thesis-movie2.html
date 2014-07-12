@@ -52,8 +52,18 @@
 									<div class="clearfix">
 									  <div class="top_btn_area">
 									  	    {%if user.is_authenticated %}
-											<span class="left mini_btn blue_btn memo" title="{{pub.pubid}}">メモ</span>
-											<span class="t_mini_btn mine mypub" title="{{user.username}}">本人</span>
+									  	        {% ifequal prop "none" %}
+											     <span class="left mini_btn blue_btn memo" title="{{pub.pubid}}">メモ</span>
+											     <span class="t_mini_btn mine mypub" title="{{user.username}}">本人</span>
+											    {% endifequal %}
+											    {% ifequal prop "memo" %}
+											    <span class="left mini_btn blue_btn memo " title="{{pub.pubid}}">&#10004;</span>
+											    <span class="t_mini_btn mine mypub" title="{{user.username}}">本人</span>
+											     {% endifequal %}
+											     {% ifequal prop "mine" %}
+										      	<span class="t_mini_btn mine editpub" title="{{user.username}}">編集</span>
+										      	 {% endifequal %}
+											
 											{%endif%}
 									  	<span class="t_mini_btn back" onClick="history.back(); return false;">戻る</span>
 										</div>
@@ -268,16 +278,35 @@
 					// }
 				// });
 				$(".memo").mousedown(function(){
-					var pubid = $(this).attr("title");
-					alert(pubid);
-					edit_memopub( "add", pubid );
-					$(this).html("<span>&#10003;</span>");
+					//alert($(this).html());
+					var thisTxt = $(this).html();
+					if(thisTxt === "メモ"){
+                        var pubid = $(this).attr("title");
+                        //alert(pubid);
+                        edit_memopub( "add", pubid );
+                        $(this).html("<span>&#10004;</span>");	
+					}else{
+                        var pubid = $(this).attr("title");
+                        //alert(pubid);
+                        edit_memopub( "remove", pubid );
+                        $(this).html("メモ");  					   
+						
+					}
+					
+
 				});
 				
+				
+				
 				$(".mypub").mousedown(function(){
-					alert($(this).attr("title") + " / " + $(".memo").attr("title"));
+					//alert($(this).attr("title") + " / " + $(".memo").attr("title"));
 					edit_mypub("add_mypub", $(".memo").attr("title"));
-					$(this).html("<span>&#10003;</span>");
+					//$(this).html("<span>&#10003;</span>");
+					window.location.href = "/edit_research/{{pub.pubid}}/";
+				});
+	           $(".editpub").mousedown(function(){
+					window.location.href = "/edit_research/{{pub.pubid}}/";
+					
 				});
 			});
 		</script>

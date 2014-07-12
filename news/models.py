@@ -63,7 +63,7 @@ class UserProfile(models.Model):
     kana_first_name = models.CharField(max_length=64, blank=True, default='')
     kana_last_name = models.CharField(max_length=64, blank=True, default='')
     
-    degree = models.CharField(max_length=64, blank=True, default='Grad') # Grad, Master, PhD
+    degree = models.CharField(max_length=64, blank=True, default='NA') # Grad, Master, PhD, NA
     def __unicode__(self):
         return '%s, %s' % (self.user.username, self.title)
 
@@ -129,10 +129,11 @@ class MyProjectForm(forms.ModelForm):
     class Meta:
         model = MyProject
         fields = ('description',)
-        
+
+from datetime import datetime
 class FeedbackMessage(models.Model):
     msg = models.TextField(max_length=4096, blank=True, default='')
-    created = models.DateTimeField()#(auto_now=True)
+    created = models.DateTimeField(default=datetime.now)#(auto_now=True)
     user = models.ForeignKey(User, blank=True, null=True)
     checked = models.BooleanField(default=False)
     

@@ -10,7 +10,7 @@ from django.contrib.auth import logout, authenticate, login
 from news.models import UserProfileForm, UserForm
 from django.core.paginator import Paginator
 import pager
-
+from datetime import datetime
 
 # Create your views here.
 def test_news(request):
@@ -238,6 +238,13 @@ def toppage(request):
 def make_youtube_url(videoid, width=480, height=360):
     return '<iframe width="%d" height="%d" src="//www.youtube.com/embed/%s" frameborder="0" allowfullscreen></iframe>' % (width, height, videoid)
 def pubpage(request, pubid):
+    prop='none'#none, memo or mine
+    if Publication.objects.filter(pubid=pubid).filter(author=request.user).count() != 0:
+        prop='mine'
+    elif request.user.likepub.pub.filter(pubid=pubid).count() != 0:
+        prop='memo'
+    
+    
     #get abstraction
     abst=''
     try:
@@ -261,9 +268,9 @@ def pubpage(request, pubid):
                 allvideo = pub.video_set.all()
                 video = allvideo[len(allvideo)-1]
                 video_url = make_youtube_url(video.video_id)
-                return render(request, 'login/tmp_thesis-movie2.html', {'pub':pub, 'authors': authors, 'video_url': video_url, 'abst':abst})
+                return render(request, 'login/tmp_thesis-movie2.html', {'pub':pub, 'authors': authors, 'video_url': video_url, 'abst':abst, 'prop':prop})
         except:
-            return render(request, 'login/tmp_thesis-movie2.html', {'pub':pub, 'authors': authors, 'abst':abst})
+            return render(request, 'login/tmp_thesis-movie2.html', {'pub':pub, 'authors': authors, 'abst':abst, 'prop':prop})
     except:
         print sys.exc_info()
         return HttpResponse('pubid=%s is not found' % pubid )
@@ -473,6 +480,16 @@ def do_social_login(request):
     else:
         return render(request, 'forwit-login0508/login_a.html', {})
 
+
+from django import forms
+class ImageUploadForm(forms.Form):
+    image = forms.ImageField()
+    #get from request.FILE
+def handle_uploaded_file(f, filename):
+    with open('%s' % filename, 'wb+') as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)
+
 def usersetting(request):
     up = request.user.userprofile
     u = request.user
@@ -484,7 +501,16 @@ def usersetting(request):
 #             u.last_name = uf.cleaned_data['last_name']
 #             up.kana_first_name = upf.cleaned_data['kana_first_name']
 #             up.kana_last_name = upf.cleaned_data['kana_last_name']
-#             
+            print request.POST['grade']
+            up.degree = request.POST['grade']
+            
+            imageform = ImageUploadForm(request.POST, request.FILES)
+            print 'checking pics', request.FILES
+            if imageform.is_valid():
+                print 'saving pics'
+                up.facephoto = imageform.cleaned_data['image']
+            else:
+                print imageform.errors
             up.save()
             u.save()
             msg='saved!'
@@ -495,11 +521,15 @@ def usersetting(request):
             return render(request, 'login/tmp_setting2.html', {'uf': uf, 'upf': upf, 'msg': msg})
     uf = UserForm(instance=u)
     upf = UserProfileForm(instance=up)
-    return render(request, 'login/tmp_setting2.html', {'uf': uf, 'upf': upf})
+    return render(request, 'login/tmp_setting2.html', {'u': u,'uf': uf, 'upf': upf})
 
 def memberlist(request):
     alluser = User.objects.all()
     return render(request, 'login/tmp_memberlist.html', {'alluser': alluser})
+
+def movielist(request):
+    video = Video.objects.all()
+    return render(request, 'login/tmp_movielist.html', {'video': video})
 
 def loggedin(request):
     u = request.user
@@ -563,6 +593,7 @@ def edit_research(request, pubid):
 #         print request.POST['exposition']
         pubdetail.description=request.POST['exposition']
         pubdetail.save()
+        return redirect('/pub/%s/' % pubid)
     
     
     #get abstraction
@@ -577,7 +608,6 @@ def edit_research(request, pubid):
         abst='Not Available Now'
     
     try:
-        
         #json.loads(a2.replace("u'", "'").replace("'", '"'))
         authors = json.loads(pub.authors.replace("u'", "'").replace("'", '"'))
         for a in authors:
@@ -597,6 +627,22 @@ def edit_research(request, pubid):
 
 #     return render(request, 'login/tmp_edit-research.html', {'pub':pub})
 
+def feedback(request):
+
+    u = request.user
+    up = UserProfile(user=u)
+    if request.method == 'POST':
+        if request.POST['feedback'] != '':
+            fb = FeedbackMessage()
+            fb.created = datetime.now()
+            fb.msg = request.POST['feedback']
+            fb.user = request.user
+            fb.save()
+            return render(request, 'login/account-name/tmp_feedback-thanks.html',{'u': u,})
+    #else
+    return render(request, 'login/account-name/tmp_feedback.html',{'u': u,})
+
+
 
 #for ajax handling     
 def add_memopub(request):
@@ -611,12 +657,14 @@ def add_memopub(request):
                 pub = Publication.objects.get(pubid__exact=str(pubid))
                 if cmd == 'add':
                     lp.pub.add(pub)
+                    print 'added new pub'
                 elif cmd == 'remove':
                     lp.pub.remove(pub)
+                    print 'remove pub'
                 else:
                     raise Exception('cmd error', 'cmd=%s' % cmd)
                 lp.save()
-                print 'added new pub'
+                
             else:
                 raise Exception('cmd error2', 'cmd=%s, pubid=%s' % (cmd, pubid))
             dat = {'ret': 'true', 'pubid':pubid}

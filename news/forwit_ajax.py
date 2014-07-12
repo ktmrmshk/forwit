@@ -28,7 +28,7 @@ def handle_likevideo(cmd, request):
     return ret
 
 def handle_mypub(cmd, request):
-    p = Publication.objects.get(id__exact=request.POST["pubid"])
+    p = Publication.objects.get(pubid__exact=request.POST["pubid"])
     if cmd == 'add_mypub':
         p.author.add(request.user)
     else:
@@ -38,7 +38,7 @@ def handle_mypub(cmd, request):
     return ret
 
 def handle_pubvideo(cmd, request):
-    p = Publication.objects.get(id__exact=request.POST["pubid"])
+    p = Publication.objects.get(pubid__exact=request.POST["pubid"])
     vid = request.POST["videoid"]
     v=None
     if len( Video.objects.filter(video_id__exact=vid) ) ==0:

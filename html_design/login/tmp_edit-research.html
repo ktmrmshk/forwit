@@ -103,17 +103,17 @@
 						</div>
 							<!-- end right -->
 						<div class="paper_edit_input">
-							<form method="post">{% csrf_token %}
+							<form method="post" action="">{% csrf_token %}
 								<fieldset>
 									<legend>解説</legend>
 									<p>解説を入力頂くと論文ページにその内容が反映されます。</p>
 									<textarea class="description" name="exposition">{{pubdetail.description}}</textarea>
-								    <button type="submit" name="submit" class="blue_btn">保存する</button>
+								    
 								</fieldset>
 
                                             <!-- <button type="reset" name="reset" class="gray_btn">キャンセル</button> -->
                                             
-                                </form>
+                                
 
 								<fieldset class="attachment">
 									<legend>添付資料</legend>
@@ -163,9 +163,13 @@
 												<span class="at_filename_0 filename">選択されていません</span>
 											</div>
 										</div>
-								</fieldset>
-
-                                <form class="editvideo" method="post">{% csrf_token %}
+								
+								    </fieldset>
+						
+                                
+                                
+                                
+                                <!-- <form class="editvideo" method="post">{% csrf_token %} -->
 								<fieldset class="youtube">
 									<legend>動画</legend>
 									<p>Youtubeの動画をアップロードすることができます。</p>
@@ -184,7 +188,7 @@
 									</div>
 									<!-- <button type="button" name="add_movie" class="blue_btn mini_btn add_btn">動画を追加</button> -->
 								</fieldset>
-								</form>
+								
 								
 								<div id="buttons" class="clearfix">
 									<div class="left">
@@ -192,13 +196,14 @@
 											<button type="reset" name="reset" class="gray_btn">本人から削除</button>
 										</div> -->
 									</div>
-									<!-- <div class="right">
+									<div class="right">
 										<div class="clearfix">
-											<button type="reset" name="reset" class="gray_btn">キャンセル</button>
+											<!-- <button type="reset" name="reset" class="gray_btn">キャンセル</button> -->
 											<button type="submit" name="submit" class="blue_btn">保存する</button>
 										</div>
-									</div> -->
+									</div>
 								</div>
+								</form>
 
 						</div>
 						</section>
@@ -280,7 +285,7 @@
 			  function updateMovie(){
 			  	var videoid = $("#uploadMovieURL_0").val();
 			  		var movieURL = '<iframe width="480" height="360" src="//www.youtube.com/embed/' + videoid + '?rel=0" frameborder="0" allowfullscreen></iframe>';
-			  		alert(movieURL);
+			  		//alert(movieURL);
 			  		/*どんなサイズを指定していても、valueは480×360に変更しています*/
 			  		movieURL = movieURL.replace(/width=\"[0-9]+\"/,'width="480"').replace(/height=\"[0-9]+\"/,'height="360"');
 			  		$("#uploadMovieURL_0").val(videoid).submit();

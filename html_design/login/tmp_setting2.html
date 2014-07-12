@@ -46,7 +46,7 @@
 							
 							<div class="form_wrapper">
 							
-								<form id="setting-box" method="post">{% csrf_token %}
+								<form id="setting-box" method="post" enctype="multipart/form-data">{% csrf_token %}
 									
 								
 									<div class="float_wrapper clearfix">
@@ -56,10 +56,11 @@
 										<!--left column-->
 										<div class="left">
 											<fieldset class="p_image">
-												<img src="{{STATIC_URL}}/img/dummy/nobody.png" alt="user-main" width="120" height="120"> 
+												<!-- <img src="{{STATIC_URL}}/img/dummy/nobody.png" alt="user-main" width="120" height="120">  -->
+												<img src="{{ user.userprofile.facephoto.url }}" alt="{{user.last_name}} {{user.first_name}}" width="110" height="110">
 												    
 												    <!-- BEGIN: added for popup box by kitamura 20140520-->
-												    <div class='popbox'>  
+												    <!-- <div class='popbox'>  
 												        <button type="button" class="blue_btn mini_btn open" name="change-image">写真を変更する</button>
 												        <div class='collapse'> 
 												        	<div class='box'>
@@ -73,7 +74,7 @@
 														        <a href="#" class="close">close</a>
 														      </div>
 														  </div>
-												    </div>
+												    </div> -->
 												    <!-- END: added for popup box by kitamura 20140520-->
 											</fieldset>
 											
@@ -138,16 +139,24 @@
 													{{ upf.school1 }}
 												</div>
 												<div class="input_wrapper gakubu">
-													<label class="label_gakubu"><input type="radio" name="gakubu" checked="checked">学部</label>
-													<label><input type="radio" name="gakubu">博士前期課程</label>
-													<label><input type="radio" name="gakubu">博士後期課程</label>
-													<label><input type="radio" name="gakubu">登録しない</label>
+													<label class="label_gakubu"><input type="radio" name="grade" value="Grad" id="Grad">学部</label>
+													<label><input type="radio" name="grade" value="Master" id="Master">博士前期課程</label>
+													<label><input type="radio" name="grade" value="PhD" id="PhD">博士後期課程</label>
+													<label><input type="radio" name="grade" value="NA" id="NA">登録しない</label>
 												</div>
 												<div class="input_wrapper">
 													<label>研究室</label>
 													<!-- <input type="text" name="daigaku" placeholder="所属していた研究室やゼミ名など" />	 -->
 													{{ upf.school_project }}
 												</div>
+												 <div class="input_wrapper">
+												 	
+		                                            <div class="blue_btn fileUpload">
+		                                                <span>写真を変更</span>
+		                                                <input type="file" name="image" class="upload" />
+		                                            </div>
+		                                            <span class="filename">選択されていません</span>
+		                                        </div>
 											</fieldset>
 
 										<dl class="change_mail_pw">
@@ -156,13 +165,15 @@
 												<dd><a class="blue_btn change_btn" href="change_mail.html">変更</a></dd>
 											<dt>パスワード</dt>
 												<dd><a class="blue_btn change_btn" href="change_pw.html">変更</a></dd>
-										  {% else %}
+										  
 										        <dt>メールアドレス</dt>
                                                 <dd><a class="blue_btn change_btn" href="change_mail.html">登録</a></dd>
-										  
+										  {% else %}
 										  {% endif %}
+										
 										</dl>
 										
+										{% if is_init %}
                                             <div class="entry_agree_btn">
                                                 <label>
                                                     <input type="checkbox" name="entry_agree" id="agreement">
@@ -170,7 +181,7 @@
                                                     <a href="/media/policy_privacy.pdf" target="_blank">個人情報保護方針</a>に同意する。
                                                 </label>
                                             </div>
-											
+										{% endif %}
 										</div>
 										<!-- end right -->
 										
@@ -179,7 +190,7 @@
 
  									<div id="buttons">
 										<div class="clearfix">
-											<button type="reset" name="reset" class="gray_btn cancel_btn">キャンセル</button>
+											<!-- <button type="reset" name="reset" class="gray_btn cancel_btn">キャンセル</button> -->
 											<button type="submit" name="submit" class="blue_btn submit_btn">保存する</button>
 										</div>
 									</div>
@@ -292,6 +303,7 @@
 			  
 			  //checking form
 			 $('.submit_btn').click(function(e){
+			 	{% if is_init %}
 			 	if( $('#agreement').prop('checked') ){
 			 		
 			 	}
@@ -299,13 +311,34 @@
                 	alert('You have to agree to our Terms and Privacy Policy.');
                 	e.preventDefault();
                 }
-                
+                {% endif %}
               });
 			  $('.cancel_btn').click(function(){
 			  	alert('canceled');
 			  	window.location.href = '/';
 			  	history.back();
 			  });
+			  
+			  //photo upload form
+			 $(".fileUpload .upload").change(function(){
+			        var fileName = $(this).val();
+			        $(".filename").text(fileName);
+			 });
+			 
+			 //checkbox
+			 var degree="{{ user.userprofile.degree }}";
+			 if(degree == "Grad"){
+			     $("#Grad").attr( {checked: "checked"} );
+			 }
+			 else if (degree=="Master"){
+			     $("#Master").attr( {checked: "checked"} );
+			 }
+			 else if (degree=="PhD"){
+			     $("#PhD").attr( {checked: "checked"} );
+			 }
+			 else{
+			 	$("#NA").attr( {checked: "checked"} );
+			 }
 			});
 		</script>
 	</body>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>ご意見ありがとうございます | ForWit</title>
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+		<meta name="viewport" content="target-densitydpi=device-dpi, width=1000, maximum-scale=1.0, user-scalable=yes">
+		
+        <link rel="shortcut icon" href="{{STATIC_URL}}img/favicon.ico" type="image/x-icon" />
+        <link rel="stylesheet" href="{{STATIC_URL}}css/style.css">
+        <link rel="stylesheet" href="{{STATIC_URL}}css/user.css">
+		<!--[if lt IE 9]><script src="http://html5shiv-printshiv.googlecode.com/svn/trunk/html5shiv-printshiv.js"></script><![endif]-->
+	</head>
+	
+	<body id="top">
+	
+		<!-- wrapper -->
+		<div id="wrapper">
+		
+			<!-- container -->
+			<div id="container">
+			
+				<!-- header -->
+				<header class="clearfix">
+				
+                    <!-- logo -->
+                    {% include "tmp_sub_content_widget_logo.html" %}
+                    <!-- search -->
+                    {% include "tmp_sub_content_widget_search.html" %}
+                    <!-- links -->
+                    {% include "tmp_sub_content_widget_headmenu.html" %}                
+
+					
+				</header>
+				<!-- end header -->
+				
+				<!-- content_wrapper -->
+				<div class="content_wrapper clearfix">
+				
+					<!-- sub_content (profile) -->
+                    {% include "login/account-name/tmp_sub_content_profile.html" %}
+					<!-- end sub content (profile) -->
+					
+					<!-- main content -->
+					<div class="main_content_wrapper right">
+					
+						<!-- menu -->
+                        {% include "login/account-name/tmp_sub_content_userpage_menu.html" %}
+						
+						<!-- main -->
+						<main class="inner_content_wrapper">	
+												
+							<div class="clearfix">
+							
+
+								<!-- フィードバック -->
+								<h2>ご意見を頂き誠にありがとうございます</h2>
+								<div class="feedback_line">
+									<p>今回頂いた貴重なご意見を参考にさせて頂き、ForWitの改善に努めて行きます。</p>
+									<p>今後ともよろしくお願い致します。</p>
+								</div>
+
+							</div>
+							<!-- end clearfix -->
+					
+						</main>
+						<!-- end inner_content wrapper -->
+						
+					</div>
+					<!-- end main_content -->
+
+				</div>
+				<!-- end content_wrapper -->
+
+			</div>
+			<!-- end container -->
+		
+		</div>
+		<!-- end wrapper -->
+		
+		<!-- bottom -->
+		<div id="bottom" class="clearfix">
+		
+			<!-- footer -->
+{% include "tmp_sub_content_widget_footer.html" %}
+			<!-- footer -->
+		
+		</div>
+		<!-- bottom -->
+		
+		<!-- javascript -->
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script type="text/javascript" src="{{STATIC_URL}}js/jquery.heightLine.js"></script>
+        <script type="text/javascript" src="{{STATIC_URL}}js/scrolltopcontrol.js"></script>
+		<script>
+			$(function(){
+				$(".heightline").heightLine();
+				$(".movie li").heightLine();
+				$(".user li").heightLine();
+				
+				var profileHeight = $(".sub_content_wrapper").outerHeight(),
+					mainHeight = $(".main_content_wrapper").outerHeight(),
+					differ = profileHeight - mainHeight,
+					profilePadding =  parseInt($(".sub_content_wrapper").css("padding-bottom")),
+					mainPadding =  parseInt($(".inne_content_wrapper").css("padding-bottom")) + 3; //border + minus margin
+
+				if(differ > 0){
+					$(".main_content_wrapper").css("padding-bottom", mainPadding + Math.abs(differ) + "px");
+				}else{
+					$(".sub_content_wrapper").css("padding-bottom", profilePadding + Math.abs(differ) + "px");
+				}
+				
+			});
+		</script>
+	</body>
+</html>

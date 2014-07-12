@@ -57,7 +57,7 @@ urlpatterns = patterns('',
     
     
     url(r'^memberlist/$', 'news.views.memberlist'),
-    
+    url(r'^movielist/$', 'news.views.movielist'),
     
     url(r'^new_socialuser/$', 'news.views.new_socialuser'),
     url(r'^loggedin/$', 'news.views.loggedin'),
@@ -65,9 +65,13 @@ urlpatterns = patterns('',
     url(r'^edit_project/$', 'news.views.edit_project'),
     url(r'^edit_research/(?P<pubid>\d+)/$', 'news.views.edit_research'),
     
+    url(r'^feedback/$', 'news.views.feedback'),
+    
+    
     #for ajax
     url(r'^add_memopub/$', 'news.views.add_memopub'),
     url(r'^handle_ajax/$', 'news.views.handle_ajax'),
+    
     
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

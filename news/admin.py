@@ -1,5 +1,5 @@
 from django.contrib import admin
-from news.models import News, Publication, UserProfile, Follower, Video, LikePub, LikeVideo, MyProject, PublicationDetail
+from news.models import *
 # Register your models here.
 
 admin.site.register(News)
@@ -11,3 +11,4 @@ admin.site.register(LikePub)
 admin.site.register(LikeVideo)
 admin.site.register(MyProject)
 admin.site.register(PublicationDetail)
+admin.site.register(FeedbackMessage)

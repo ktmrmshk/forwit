@@ -223,10 +223,10 @@
                     var thisTxt = $(this).html();
                     if(thisTxt === "メモ"){
                     	edit_memopub( "add", $(this).parent().attr("title") );
-                        $(this).html("<span>&#x2713;</span>");
+                        $(this).html("<span>&#10004;</span>");
                     }else{
                         $(this).html("メモ");
-                        alert( $(this).attr("title") );
+                        //alert( $(this).attr("title") );
                         edit_memopub("remove", $(this).parent().attr("title"));
                     }
                     
