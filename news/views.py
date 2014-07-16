@@ -239,10 +239,11 @@ def make_youtube_url(videoid, width=480, height=360):
     return '<iframe width="%d" height="%d" src="//www.youtube.com/embed/%s" frameborder="0" allowfullscreen></iframe>' % (width, height, videoid)
 def pubpage(request, pubid):
     prop='none'#none, memo or mine
-    if Publication.objects.filter(pubid=pubid).filter(author=request.user).count() != 0:
-        prop='mine'
-    elif request.user.likepub.pub.filter(pubid=pubid).count() != 0:
-        prop='memo'
+    if request.user.is_authenticated():
+        if Publication.objects.filter(pubid=pubid).filter(author=request.user).count() != 0:
+            prop='mine'
+        elif request.user.likepub.pub.filter(pubid=pubid).count() != 0:
+            prop='memo'
     
     
     #get abstraction
@@ -524,7 +525,10 @@ def usersetting(request):
     return render(request, 'login/tmp_setting2.html', {'u': u,'uf': uf, 'upf': upf})
 
 def memberlist(request):
-    alluser = User.objects.all()
+    #alluser = User.objects.all()
+    alluser=[]
+    for up in UserProfile.objects.all():
+        alluser.append(up.user)
     return render(request, 'login/tmp_memberlist.html', {'alluser': alluser})
 
 def movielist(request):
@@ -565,7 +569,7 @@ def new_socialuser(request):
     else:
         uf = UserForm(instance=u)
         upf = UserProfileForm()
-        return render(request, 'login/tmp_setting2.html', {'uf': uf, 'upf': upf})
+        return render(request, 'login/tmp_setting2.html', {'uf': uf, 'upf': upf, 'agreement':'yes'})
     
     
 def edit_project(request):

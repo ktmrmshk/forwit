@@ -12,7 +12,7 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
     url(r'', include('social_auth.urls')),
     
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^fwadmin/', include(admin.site.urls)),
 #     url(r'^news/', 'news.views.test_news'),
      #url(r'^search/', 'news.views.test_search'),
      url(r'^search/', 'news.views.search_pub'),

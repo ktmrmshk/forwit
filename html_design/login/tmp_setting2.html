@@ -28,10 +28,12 @@
 				<header class="clearfix">
 				    {% include "tmp_sub_content_widget_logo.html" %}
                     <!-- search -->
+                    {% if agreement %}
+                    {% else %}
                     {% include "tmp_sub_content_widget_search.html" %}
                     <!-- links -->
                     {% include "tmp_sub_content_widget_headmenu.html" %}
-					
+					{% endif %}
 				</header>
 				<!-- end header -->
 				
@@ -42,7 +44,12 @@
 					<main class="setting">
 					
 						<section class="main_content_wrapper_edit">
+							{% if agreement %}
+							<h1>Registration</h1>
+							{% else %}
 							<h1>設定変更</h1>
+							{% endif %}
+							
 							
 							<div class="form_wrapper">
 							
@@ -173,7 +180,7 @@
 										
 										</dl>
 										
-										{% if is_init %}
+										{% if agreement %}
                                             <div class="entry_agree_btn">
                                                 <label>
                                                     <input type="checkbox" name="entry_agree" id="agreement">
@@ -303,7 +310,7 @@
 			  
 			  //checking form
 			 $('.submit_btn').click(function(e){
-			 	{% if is_init %}
+			 	{% if agreement %}
 			 	if( $('#agreement').prop('checked') ){
 			 		
 			 	}
