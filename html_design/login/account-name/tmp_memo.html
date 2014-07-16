@@ -82,7 +82,7 @@
 									
 										<div class="clearfix nav_header">
 											<div class="left">
-												<h1>研究メモ</h1>
+												<h1>研究メモ(論文)</h1>
 											</div>
 
 											<div class="right">
@@ -103,7 +103,7 @@
 											<colgroup class="col_title" span="1">
 											<colgroup class="col_date" span="1">
 											<colgroup class="col_memo" span="1">
-											<colgroup class="col_quote" span="1">
+											<!-- <colgroup class="col_quote" span="1"> -->
 											<thead>
 												<tr>
 													<th>&nbsp;</th>
@@ -111,10 +111,10 @@
 													<th>&nbsp;</th>
 													{% endifnotequal%}
 													<th>No.</th>
-													<th>タイトル</th>
-													<th>発行年月</th>
+													<th class="td_center">タイトル</th>
+													<th class="td_right">発行年月</th>
 													<th class="td_right">メモ数</th>
-													<th class="refferNum td_right"><!-- 引用数 --></th>
+													<!-- <th class="refferNum td_right"></th> -->
 												</tr>
 											</thead>
 											<!-- <tr>
@@ -145,9 +145,9 @@
 												</td>
 												<td class="td_center">{{ forloop.counter }}</td>
 												<td><a href="/pub/{{p.pub.pubid}}">{{ p.pub.title }}</a></td>
-												<td>{{ p.pub.publicationdate}} </td>
+												<td class="td_right">{{ p.pub.publicationdate}} </td>
 												<td class="td_right">{{ p.pub.likepub_set.all | length }}<span>メモ</span></td>
-												<td class="refferNum td_right"><!-- 12<span>回</span> --></td>
+												<!-- <td class="refferNum td_right"><!-- 12<span>回</span></td> -->
 											</tr>
 											{% endfor %}
 										</table>

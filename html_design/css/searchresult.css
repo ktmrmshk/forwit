@@ -7,31 +7,58 @@
   /*js sort table*/
 }
 #sResult .col_icon {
-  width: 3.5%;
+  width: 4%;
+}
+#sResult .col_dott {
+  width: 0.5%;
 }
 #sResult .col_no {
-  width: 5%;
+  width: 3%;
 }
 #sResult .col_date {
-  width: 10%;
+  width: 9%;
 }
 #sResult .col_memo,
 #sResult .col_quote {
+  width: 7%;
+}
+
+}
+#sResult .col_space{
   width: 8%;
 }
+
 #sResult .col_btn {
-  width: 8%;
+  width: 5%;
 }
-#sResult td {
+#sResult th {
+  text-align: right;
+}
+
+#sResult th.center{
   text-align: center;
+}
+
+#sResult td {
+  text-align: right;
 }
 #sResult td a {
   display: block;
   text-align: left;
+  margin-left: 0px;
 }
 #sResult .td_right {
   text-align: right;
 }
+
+#sResult .td_center {
+  text-align: center;
+}
+
+#sResult .td_left {
+  text-align: left;
+}
+
 #sResult .gray_btn {
   padding: 0.1em 0.5em;
   background: #ddd;
@@ -60,5 +87,5 @@
 /*ログイン時の検索結果----------------------*/
 /*table----------------------*/
 .login #sResult .col_icon {
-  width: 2%;
+  width: 3%;
 }

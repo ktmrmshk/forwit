@@ -113,7 +113,7 @@
 											<colgroup class="col_title" span="1">
 											<colgroup class="col_date" span="1">
 											<colgroup class="col_memo" span="1">
-											<colgroup class="col_quote" span="1">
+											<!-- <colgroup class="col_quote" span="1"> -->
 											<thead>
 												<tr>
 													<th>&nbsp;</th>
@@ -121,10 +121,10 @@
 													<th>&nbsp;</th>
 													{% endifnotequal%}
 													<th>No.</th>
-													<th>タイトル</th>
-													<th>発行年月</th>
+													<th class="td_center">タイトル</th>
+													<th class="td_right">発行年月</th>
 													<th class="td_right">メモ数</th>
-													<th class="td_right"><!-- 引用数 --></th>
+													<!-- <th class="td_right"><!-- 引用数 </th> -->
 												</tr>
 											</thead>
 											<!-- <tr>
@@ -141,7 +141,7 @@
 												    {% if p.in_mymemo %}
 												    <td class="td_center"><a class="mini_btn blue_btn mini_btn_clicked" title="{{p.pub.pubid}}">&#10004;</a></td>
 												    {% else %}
-												    <td class="td_center"><a class="mini_btn blue_btn" title="{{p.pub.pubid}}">メモ</a></td>
+												    <td class="td_right"><a class="mini_btn blue_btn" title="{{p.pub.pubid}}">メモ</a></td>
 												    {% endif%}
 												{% endifnotequal %}
 												<td class="td_center">
@@ -153,9 +153,9 @@
 												</td>												
 												<td class="td_center">{{ forloop.counter }}</td>
 												<td><a href="/pub/{{p.pub.pubid}}">{{p.pub.title}}</a></td>
-												<td>{{ p.pub.publicationdate}}</td>
+												<td class="td_right">{{ p.pub.publicationdate}}</td>
 												<td class="td_right">{{ p.pub.likepub_set.all | length }}<span>メモ</span></td>
-												<td class="td_right"><!-- 01<span>回</span> --></td>
+												<!-- <td class="td_right"></td> -->
 											</tr>		
 											{% endfor %}										
 										</table>
