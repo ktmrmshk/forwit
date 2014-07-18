@@ -3,11 +3,24 @@
 
 	<!-- <img src="{{STATIC_URL}}img/dummy/user-main.jpg" alt="{{u.last_name}} {{u.first_name}}" width="110" height="110"> -->
 	{% ifequal u.userprofile.facephoto.url "" %}
-	<img src="{{STATIC_URL}}/img/dummy/nobody.png" alt="{{u.last_name}} {{u.first_name}}" width="110" height="110">
+	   {% ifequal u.userprofile.last_name "" %}
+	   <img src="{{STATIC_URL}}/img/dummy/nobody.png" alt="{{u.last_name}} {{u.first_name}}" width="110" height="110">
+	   {% else %}
+	   <img src="{{STATIC_URL}}/img/dummy/nobody.png" alt="{{u.userprofile.last_name}} {{u.userprofile.first_name}}" width="110" height="110">
+	   {% endifequal %}
 	{% else %}
-	<img src="{{ u.userprofile.facephoto.url }}" alt="{{u.last_name}} {{u.first_name}}" width="110" height="110">
+	   {% ifequal u.userprofile.last_name "" %}
+    	<img src="{{ u.userprofile.facephoto.url }}" alt="{{u.last_name}} {{u.first_name}}" width="110" height="110">
+	   {% else %}
+	   <img src="{{ u.userprofile.facephoto.url }}" alt="{{u..userprofile.last_name}} {{u.userprofile.first_name}}" width="110" height="110">
+	   {% endifequal %}
 	{% endifequal %}
+	
+	{% ifequal u.userprofile.last_name "" %}
 	<h1 class="account-name">{{u.last_name}} {{u.first_name}}</h1>
+	{% else %}
+	<h1 class="account-name">{{u.userprofile.last_name}} {{u.userprofile.first_name}}</h1>
+	{% endifequal %}
 	{% ifnotequal u.username user.username %}
     <span title="{{u.username}}"></span>
         {% if following_user %}
@@ -48,7 +61,7 @@
 		<dt>出身</dt>
 		<dd>{{u.userprofile.school1}}<br />
 			{{u.userprofile.school_dept}}<br />
-			{{u.userprofile.qualification}}<br />
+			
 			{{u.userprofile.school_project}}</dd>
 	</dl>
 	

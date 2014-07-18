@@ -1,3 +1,4 @@
+function kita(){ alert("kita");}
 
 // using jQuery
 function getCookie(name) {
@@ -113,6 +114,8 @@ function edit_mypub(cmd_, pubid_){
 }
 
 function edit_video(cmd_, videoid_, pubid_){
+	alert("hoge");
+	alert(cmd_ + "\n" + videoid_ + "\n" + pubid_);
 	$.ajax({
 		type : 'POST',
 		data : {
@@ -123,7 +126,7 @@ function edit_video(cmd_, videoid_, pubid_){
 		url : '/handle_ajax/',
 		dataType : 'json',
 		success : function(json) {
-			//alert(json['videoid'] + ": " + json['pubid']);
+			alert(json['videoid'] + ": " + json['pubid']);
 		},
 		error : function(xhr, errmsg, err) {
 			//alert(xhr.status + ": " + xhr.responseText + '/ ' + errmsg + '/ ' + err);

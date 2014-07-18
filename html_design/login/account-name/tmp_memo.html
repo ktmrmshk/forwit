@@ -211,7 +211,7 @@
 				$(".edit_btn").mousedown(function(){
 					var thisTxt = $(this).text(),
 						colgroupHTML = '<colgroup class="col_mine" span="1"><colgroup class="col_delete" span="1">',
-						tdHTML = '<td class="mine"><span class="mini_btn mine_btn">本人</span></td><td class="delete"><span class="blue_btn mini_btn delete_btn"><span>×</span></span></td>';
+						tdHTML = '<td class="mine"><!--<span class="mini_btn mine_btn">本人</span>--></td><td class="delete"><span class="blue_btn mini_btn delete_btn"><span>×</span></span></td>';
 					if(thisTxt === "編集"){
 						$(this).css("font-size", "11px").text("編集完了");
 						$(".r_list table").prepend(colgroupHTML);

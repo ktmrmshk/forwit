@@ -63,6 +63,9 @@ class UserProfile(models.Model):
     kana_first_name = models.CharField(max_length=64, blank=True, default='')
     kana_last_name = models.CharField(max_length=64, blank=True, default='')
     
+    first_name = models.CharField(max_length=64, blank=True, default='')
+    last_name = models.CharField(max_length=64, blank=True, default='')
+    
     degree = models.CharField(max_length=64, blank=True, default='NA') # Grad, Master, PhD, NA
     def __unicode__(self):
         return '%s, %s' % (self.user.username, self.title)
@@ -116,7 +119,7 @@ class UserProfileForm(forms.ModelForm):
         model = UserProfile
         fields = ('kana_first_name', 'kana_last_name', 'job', 'title',
                   'interesting1', 'interesting2', 'interesting3',
-                  'school1', 'school_project', 'facephoto' )
+                  'school1', 'school_project', 'facephoto', 'first_name', 'last_name' )
 
 class MyProject(models.Model):
     user = models.OneToOneField(User)

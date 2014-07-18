@@ -597,6 +597,9 @@ def edit_research(request, pubid):
 #         print request.POST['exposition']
         pubdetail.description=request.POST['exposition']
         pubdetail.save()
+        pub.author.add(request.user)
+        
+        pub.save()
         return redirect('/pub/%s/' % pubid)
     
     
