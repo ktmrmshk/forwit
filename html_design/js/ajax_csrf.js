@@ -114,8 +114,8 @@ function edit_mypub(cmd_, pubid_){
 }
 
 function edit_video(cmd_, videoid_, pubid_){
-	alert("hoge");
-	alert(cmd_ + "\n" + videoid_ + "\n" + pubid_);
+	
+	alert("hoge" + cmd_ + "\n" + videoid_ + "\n" + pubid_);
 	$.ajax({
 		type : 'POST',
 		data : {
@@ -137,5 +137,7 @@ function edit_video(cmd_, videoid_, pubid_){
 	
 }
 
-
+function kita(){
+	alert("hello kita");
+}
 	

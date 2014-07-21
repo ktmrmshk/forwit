@@ -90,7 +90,7 @@
 								<ul class="clearfix">
 									<!-- <li><a href="thesis-movie.html"><dl><dt><img src="../img/dummy/video1.jpg" alt="" width="224" height="126"></dt><dd>ロケットエンジンの燃焼試験</dd></dl></a></li> -->
 									{% for v in video %}
-									<li><a href="/pub/{{ v.pub.all.0.id }}"><dl><dt><img src="http://img.youtube.com/vi/{{ v.video_id }}/0.jpg" alt="{{ v.title }}" width="214" height="120"></dt><dd>{{v.title}}</dd></dl></a></li>
+									<li><a href="/pub/{{ v.pub.all.0.pubid }}"><dl><dt><img src="http://img.youtube.com/vi/{{ v.video_id }}/0.jpg" alt="{{ v.title }}" width="214" height="120"></dt><dd>{{v.title}}</dd></dl></a></li>
 									{% endfor %}
 								</ul>
 							</div>

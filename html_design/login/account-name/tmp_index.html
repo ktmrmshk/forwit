@@ -114,7 +114,7 @@
 		                        <ul class="movie movie_4column clearfix">
 		                            <!-- <li><a href="thesis-movie.html"><dl><dt><img src="img/dummy/img_dummy_movie_001.jpg" alt="ロケットエンジンの燃焼試験" width="214" height="120"></dt><dd>ロケットエンジンの燃焼試験</dd></dl></a></li> -->
 		                            {% for v in video %}
-		                            <li><a href="/pub/{{ v.pub.all.0.id }}"><dl><dt><img src="http://img.youtube.com/vi/{{ v.video_id }}/0.jpg" alt="{{ v.title }}" width="214" height="120"></dt><dd>{{ v.title }}</dd></dl></a></li>
+		                            <li><a href="/pub/{{ v.pub.all.0.pubid }}"><dl><dt><img src="http://img.youtube.com/vi/{{ v.video_id }}/0.jpg" alt="{{ v.title }}" width="214" height="120"></dt><dd>{{ v.title }}</dd></dl></a></li>
 		                            {% endfor %}
 		                        </ul>
 		                    </section>
@@ -148,9 +148,11 @@
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 		<script type="text/javascript" src="{{STATIC_URL}}js/jquery.heightLine.js"></script>
 		<script type="text/javascript" src="{{STATIC_URL}}js/scrolltopcontrol.js"></script>
+		<script type="text/javascript" src="{{STATIC_URL}}js/ajax_csrf.js"></script>
 		{% ifequal u.username user.username %}
 		<script>
 			$(function(){
+				
 				$(".heightline").heightLine();
 				$(".movie li").heightLine();
 				$(".user li").heightLine();
