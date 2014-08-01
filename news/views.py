@@ -227,7 +227,8 @@ def test_watch(request):
 def toppage(request):
     #news = News.objects.all()
     
-    news = News.objects.filter(published=True).order_by('?')[:5]
+    #news = News.objects.filter(published=True).order_by('?')[:5]
+    news = News.objects.filter(published=True)[:5]
     pub = Publication.objects.order_by('?')[:5]
     video = Video.objects.order_by('?')[:8]
     if request.user.is_authenticated():
@@ -284,7 +285,7 @@ def my_userpage(request):
     try:
 #         u = User.objects.get(username__exact=username)
         u = request.user
-        news = News.objects.filter(published=True).order_by('?')[:5]
+        news = News.objects.filter(published=True)[:5]
         pub = Publication.objects.order_by('?')[:5]
         video = Video.objects.order_by('?')[:8]
         return render(request, 'login/account-name/tmp_index.html', {'u':u, 'currentpage':'news', 'news': news, 'pub':pub, 'video': video} )
